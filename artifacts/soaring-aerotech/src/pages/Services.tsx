@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Zap, Map, Ruler, Tractor, Sun, Factory, HardHat, ChevronRight } from "lucide-react";
+import { Zap, Map, Tractor, Sun, Factory, HardHat, ChevronRight, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 
@@ -16,7 +16,7 @@ export default function Services() {
     },
     {
       id: "construction",
-      icon: <HardHat className="w-10 h-10 text-secondary" />,
+      icon: <HardHat className="w-10 h-10 text-primary" />,
       title: "Construction Monitoring",
       problem: "Lack of real-time project visibility leads to delays and budget overruns.",
       solution: "Weekly aerial progress reports, volumetric measurements, and BIM comparisons.",
@@ -25,7 +25,7 @@ export default function Services() {
     },
     {
       id: "agriculture",
-      icon: <Tractor className="w-10 h-10 text-green-500" />,
+      icon: <Tractor className="w-10 h-10 text-primary" />,
       title: "Precision Agriculture",
       problem: "Inefficient resource distribution and late detection of crop disease.",
       solution: "Multispectral imaging for crop health analysis and variable rate spraying.",
@@ -34,7 +34,7 @@ export default function Services() {
     },
     {
       id: "solar",
-      icon: <Sun className="w-10 h-10 text-accent" />,
+      icon: <Sun className="w-10 h-10 text-primary" />,
       title: "Solar Inspection",
       problem: "Manual inspection of large solar parks is incredibly slow and misses subtle cell defects.",
       solution: "Automated thermal drone flights to instantly identify hotspots and diode failures.",
@@ -43,7 +43,7 @@ export default function Services() {
     },
     {
       id: "infrastructure",
-      icon: <Factory className="w-10 h-10 text-purple-400" />,
+      icon: <Factory className="w-10 h-10 text-primary" />,
       title: "Infrastructure Inspection",
       problem: "Inspecting bridges, towers, and chimneys requires scaffolding or rope access, risking lives.",
       solution: "High-zoom visual and thermal inspection from safe distances.",
@@ -55,8 +55,7 @@ export default function Services() {
   return (
     <main className="min-h-screen pt-20">
       {/* Hero Section */}
-      <section className="py-20 md:py-32 bg-card relative overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_left,_var(--tw-gradient-stops))] from-primary/10 via-transparent to-transparent" />
+      <section className="py-28 bg-[#0D1B2A] relative overflow-hidden">
         <div className="container mx-auto px-4 md:px-6 relative z-10 text-center">
           <motion.h1 
             initial={{ opacity: 0, y: 20 }}
@@ -64,13 +63,13 @@ export default function Services() {
             className="text-4xl md:text-6xl font-black text-white mb-6"
           >
             Drone Solutions for <br className="hidden md:block"/>
-            <span className="text-primary text-glow">Modern Industries</span>
+            <span className="text-primary">Modern Industries</span>
           </motion.h1>
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="text-xl text-muted-foreground max-w-3xl mx-auto"
+            className="text-xl text-white/70 max-w-3xl mx-auto"
           >
             We deploy enterprise-grade UAVs to capture critical data, mitigate risks, and dramatically improve operational efficiency across sectors.
           </motion.p>
@@ -78,7 +77,7 @@ export default function Services() {
       </section>
 
       {/* Services List */}
-      <section className="py-24 bg-background">
+      <section className="py-24 bg-[#F5F4F0]">
         <div className="container mx-auto px-4 md:px-6">
           <div className="space-y-16">
             {services.map((service, i) => (
@@ -88,43 +87,39 @@ export default function Services() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.1 }}
-                className="bg-card border border-white/5 rounded-3xl p-8 md:p-12 hover:border-primary/30 transition-colors"
+                className="left-accent-card bg-white p-8 md:p-12 shadow-sm"
               >
                 <div className="flex flex-col lg:flex-row gap-12">
                   <div className="lg:w-1/3">
-                    <div className="mb-6 p-4 bg-background inline-block rounded-2xl border border-white/5">
+                    <div className="mb-6 inline-block">
                       {service.icon}
                     </div>
-                    <h2 className="text-3xl font-bold text-white mb-4">{service.title}</h2>
+                    <h2 className="text-3xl font-bold text-foreground mb-4">{service.title}</h2>
                     <div className="mt-8">
-                      <div className="text-sm font-mono text-primary mb-2">TECHNOLOGY USED</div>
-                      <div className="text-white font-medium">{service.tech}</div>
+                      <div className="text-sm font-mono text-primary mb-2 uppercase font-bold">Technology Used</div>
+                      <div className="text-foreground/80 font-medium">{service.tech}</div>
                     </div>
                   </div>
                   
                   <div className="lg:w-2/3 grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div className="space-y-6">
                       <div>
-                        <h4 className="text-lg font-bold text-red-400 mb-2 flex items-center gap-2">
-                          <Zap className="w-4 h-4" /> The Problem
-                        </h4>
+                        <div className="section-label mb-2">THE PROBLEM</div>
                         <p className="text-muted-foreground">{service.problem}</p>
                       </div>
                       <div>
-                        <h4 className="text-lg font-bold text-primary mb-2 flex items-center gap-2">
-                          <ShieldCheck className="w-4 h-4" /> Our Solution
-                        </h4>
+                        <div className="section-label mb-2 mt-6 text-primary">OUR SOLUTION</div>
                         <p className="text-muted-foreground">{service.solution}</p>
                       </div>
                     </div>
                     
-                    <div className="bg-background rounded-2xl p-6 border border-white/5">
-                      <h4 className="text-lg font-bold text-white mb-4">Key Benefits</h4>
+                    <div className="bg-[#F5F4F0] rounded-2xl p-6 border border-border">
+                      <h4 className="text-lg font-bold text-foreground mb-4">Key Benefits</h4>
                       <ul className="space-y-4">
                         {service.benefits.map((benefit, j) => (
                           <li key={j} className="flex items-start gap-3">
-                            <ChevronRight className="w-5 h-5 text-secondary shrink-0" />
-                            <span className="text-gray-300">{benefit}</span>
+                            <ChevronRight className="w-5 h-5 text-primary shrink-0" />
+                            <span className="text-foreground/80">{benefit}</span>
                           </li>
                         ))}
                       </ul>
@@ -143,14 +138,14 @@ export default function Services() {
       </section>
 
       {/* CTA */}
-      <section className="py-24 bg-card border-t border-border text-center">
+      <section className="py-24 bg-white border-t border-border text-center">
         <div className="container mx-auto px-4 md:px-6">
-          <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">Need a Custom Solution?</h2>
+          <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-6">Need a Custom Solution?</h2>
           <p className="text-xl text-muted-foreground mb-10 max-w-2xl mx-auto">
             Our engineering team can design custom UAV workflows tailored to your specific industrial requirements.
           </p>
           <Link href="/contact">
-            <Button size="lg" className="rounded-full h-14 px-8 text-base font-semibold shadow-[0_0_20px_rgba(0,102,255,0.4)]">
+            <Button size="lg" className="rounded-full h-14 px-8 text-base font-semibold">
               Consult an Expert
             </Button>
           </Link>
@@ -158,8 +153,4 @@ export default function Services() {
       </section>
     </main>
   );
-}
-
-function ShieldCheck(props: any) {
-  return <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10" /><path d="m9 12 2 2 4-4" /></svg>;
 }

@@ -7,16 +7,16 @@ export default function Home() {
   return (
     <main className="min-h-screen">
       {/* 1. Hero */}
-      <section className="relative h-screen min-h-[600px] flex items-center pt-20 overflow-hidden">
+      <section className="relative h-screen min-h-[640px] flex items-center pt-24 overflow-hidden bg-[#0D1B2A]">
         <div className="absolute inset-0 z-0">
           <img 
             src="/images/hero-bg.png" 
             alt="Cinematic aerial drone shot over Indian landscape" 
-            className="w-full h-full object-cover object-center opacity-60 mix-blend-overlay"
+            className="w-full h-full object-cover object-center opacity-30 mix-blend-overlay"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-background/30" />
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-primary/10 via-transparent to-transparent" />
         </div>
+        
+        <div className="absolute bottom-0 left-0 right-0 h-24 bg-[#F5F4F0] z-10" style={{clipPath: 'polygon(0 100%, 100% 100%, 100% 0)'}} />
 
         <div className="container mx-auto px-4 md:px-6 relative z-10">
           <div className="max-w-4xl">
@@ -24,10 +24,9 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary font-mono text-sm mb-6"
+              className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary font-mono text-sm mb-6 uppercase"
             >
-              <Activity className="w-4 h-4" />
-              <span>INDIA'S PREMIER DRONE ECOSYSTEM</span>
+              INDIA'S DRONE ECOSYSTEM
             </motion.div>
             
             <motion.h1 
@@ -37,16 +36,16 @@ export default function Home() {
               className="text-5xl md:text-7xl font-black text-white leading-[1.1] mb-6 tracking-tight"
             >
               Building the Future of <br className="hidden md:block"/>
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary text-glow">Drone Technology</span> in India
+              <span className="text-primary">Drone Technology</span>
             </motion.h1>
             
             <motion.p 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-lg md:text-xl text-gray-300 mb-10 max-w-2xl font-light leading-relaxed"
+              className="text-lg md:text-xl text-white/70 mb-10 max-w-2xl font-light leading-relaxed"
             >
-              DGCA Certified Drone Training <span className="text-primary mx-2">|</span> Survey & Mapping <span className="text-primary mx-2">|</span> Industrial Inspection <span className="text-primary mx-2">|</span> Drone Innovation
+              DGCA Certified Drone Training <span className="text-primary mx-2">•</span> Survey & Mapping <span className="text-primary mx-2">•</span> Industrial Inspection <span className="text-primary mx-2">•</span> Drone Innovation
             </motion.p>
             
             <motion.div 
@@ -56,13 +55,13 @@ export default function Home() {
               className="flex flex-col sm:flex-row gap-4"
             >
               <Link href="/training">
-                <Button size="lg" className="w-full sm:w-auto text-base h-14 px-8 rounded-full shadow-[0_0_20px_rgba(0,102,255,0.4)] hover:shadow-[0_0_30px_rgba(0,102,255,0.6)] transition-all group" data-testid="btn-hero-training">
+                <Button size="lg" className="w-full sm:w-auto text-base h-14 px-8 rounded-full transition-all group" data-testid="btn-hero-training">
                   Explore Training Programs
                   <ChevronRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
                 </Button>
               </Link>
               <Link href="/contact">
-                <Button size="lg" variant="outline" className="w-full sm:w-auto text-base h-14 px-8 rounded-full border-white/20 hover:bg-white/5 hover:text-white transition-all" data-testid="btn-hero-consult">
+                <Button size="lg" variant="outline" className="w-full sm:w-auto text-base h-14 px-8 rounded-full border-white/20 text-white hover:bg-white/10 transition-all" data-testid="btn-hero-consult">
                   Request Consultation
                 </Button>
               </Link>
@@ -72,18 +71,25 @@ export default function Home() {
       </section>
 
       {/* 2. Trust Bar */}
-      <section className="py-12 border-b border-border bg-card/50">
+      <section className="py-16 bg-white border-b border-border">
         <div className="container mx-auto px-4 md:px-6">
-          <p className="text-center text-sm font-mono text-muted-foreground mb-8">
-            RECOGNIZED AND TRUSTED BY INDUSTRY, INSTITUTIONS, AND INNOVATION ECOSYSTEMS
-          </p>
-          <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-70 grayscale hover:grayscale-0 transition-all duration-500">
-            {/* Simulated Logos - Text based for now, standard practice when real assets aren't provided */}
-            <div className="flex items-center gap-2 font-bold text-xl"><ShieldCheck className="w-8 h-8"/> DGCA</div>
-            <div className="flex items-center gap-2 font-bold text-xl text-orange-500">Startup India</div>
-            <div className="flex items-center gap-2 font-bold text-xl">MSME</div>
-            <div className="flex items-center gap-2 font-bold text-xl text-blue-400">AIC Prestige</div>
-            <div className="flex items-center gap-2 font-bold text-xl">Academic Partners</div>
+          <div className="section-label justify-center">RECOGNIZED BY</div>
+          <div className="flex flex-wrap justify-center items-center gap-4">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-border text-sm font-medium text-foreground/80">
+              <ShieldCheck className="w-5 h-5" /> DGCA
+            </div>
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-border text-sm font-medium text-foreground/80">
+               Startup India
+            </div>
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-border text-sm font-medium text-foreground/80">
+               MSME
+            </div>
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-border text-sm font-medium text-foreground/80">
+               AIC Prestige
+            </div>
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-border text-sm font-medium text-foreground/80">
+               Academic Partners
+            </div>
           </div>
         </div>
       </section>
@@ -91,13 +97,13 @@ export default function Home() {
       {/* 3. Numbers That Matter */}
       <section className="py-24 bg-background">
         <div className="container mx-auto px-4 md:px-6">
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+          <div className="section-label">BY THE NUMBERS</div>
+          <div className="flex flex-wrap items-center justify-center divide-x divide-border">
             {[
               { num: "500+", label: "Students Trained" },
               { num: "100+", label: "Drone Missions" },
               { num: "20+", label: "Industry Collabs" },
               { num: "10+", label: "Colleges Partnered" },
-              { num: "5+", label: "Drone Applications" },
             ].map((stat, i) => (
               <motion.div 
                 key={i}
@@ -105,11 +111,10 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.1 }}
-                className="p-6 rounded-2xl bg-card border border-white/5 text-center relative overflow-hidden group"
+                className="px-8 md:px-12 text-center"
               >
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                <h3 className="text-4xl md:text-5xl font-black text-white mb-2 font-mono">{stat.num}</h3>
-                <p className="text-muted-foreground text-sm font-medium uppercase tracking-wider">{stat.label}</p>
+                <h3 className="text-5xl md:text-6xl font-black text-foreground font-mono">{stat.num}</h3>
+                <p className="text-sm text-muted-foreground mt-2 uppercase tracking-wider">{stat.label}</p>
               </motion.div>
             ))}
           </div>
@@ -117,11 +122,11 @@ export default function Home() {
       </section>
 
       {/* 4. What We Do */}
-      <section className="py-24 bg-card">
+      <section className="py-24 bg-white">
         <div className="container mx-auto px-4 md:px-6">
           <div className="mb-16">
-            <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">Core Competencies</h2>
-            <div className="w-20 h-1 bg-primary rounded-full" />
+            <div className="section-label">CORE SERVICES</div>
+            <h2 className="text-3xl md:text-5xl font-bold text-foreground">What We Do</h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -129,25 +134,25 @@ export default function Home() {
               {
                 title: "Drone Pilot Training",
                 desc: "Become a DGCA Certified pilot with comprehensive theoretical knowledge and rigorous hands-on flying experience.",
-                icon: <Navigation className="w-8 h-8 text-primary" />,
+                icon: <Navigation className="w-8 h-8 text-foreground" />,
                 link: "/training"
               },
               {
                 title: "Survey & Mapping",
                 desc: "Accurate aerial data collection, 3D modeling, and topographic mapping for infrastructure, mining, and agriculture.",
-                icon: <Target className="w-8 h-8 text-secondary" />,
+                icon: <Target className="w-8 h-8 text-foreground" />,
                 link: "/services"
               },
               {
                 title: "Industrial Inspection",
                 desc: "High-resolution infrastructure and asset monitoring for powerlines, solar farms, bridges, and cellular towers.",
-                icon: <Zap className="w-8 h-8 text-accent" />,
+                icon: <Zap className="w-8 h-8 text-foreground" />,
                 link: "/services"
               },
               {
                 title: "Drone Innovation Lab",
                 desc: "Research, development & emerging applications exploring the frontiers of autonomous flight and AI integration.",
-                icon: <Activity className="w-8 h-8 text-purple-400" />,
+                icon: <Activity className="w-8 h-8 text-foreground" />,
                 link: "/innovation-lab"
               }
             ].map((service, i) => (
@@ -157,14 +162,15 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.1 }}
-                className="p-8 rounded-3xl bg-background border border-border hover:border-primary/50 transition-colors group relative overflow-hidden"
+                className="left-accent-card bg-white p-8 shadow-sm hover:shadow-md transition-shadow relative"
               >
-                <div className="mb-6 p-4 bg-card inline-block rounded-2xl group-hover:scale-110 transition-transform">
+                <div className="absolute top-6 right-8 text-5xl font-black text-border">0{i+1}</div>
+                <div className="mb-6 inline-block">
                   {service.icon}
                 </div>
-                <h3 className="text-2xl font-bold text-white mb-4">{service.title}</h3>
+                <h3 className="text-2xl font-bold text-foreground mb-4 pr-12">{service.title}</h3>
                 <p className="text-muted-foreground mb-8 text-lg">{service.desc}</p>
-                <Link href={service.link} className="inline-flex items-center text-primary font-semibold hover:text-white transition-colors" data-testid={`link-service-${i}`}>
+                <Link href={service.link} className="inline-flex items-center text-primary font-semibold transition-colors" data-testid={`link-service-${i}`}>
                   Explore <ArrowRight className="w-4 h-4 ml-2" />
                 </Link>
               </motion.div>
@@ -173,18 +179,16 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 5. Why Choose Soaring Aerotech */}
-      <section className="py-24 bg-background border-y border-border">
+      {/* 5. Why Choose Us */}
+      <section className="py-24 bg-background">
         <div className="container mx-auto px-4 md:px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <div className="section-label">OUR EDGE</div>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
             <div>
-              <h2 className="text-3xl md:text-5xl font-bold text-white mb-8 leading-tight">
+              <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-8 leading-tight">
                 Why India's Top Enterprises Choose Us
               </h2>
-              <p className="text-lg text-muted-foreground mb-8">
-                We bridge the gap between theoretical knowledge and real-world application, delivering solutions and training that meet the highest industrial standards.
-              </p>
-              <ul className="space-y-6">
+              <ul className="space-y-0">
                 {[
                   "DGCA-aligned rigorous training standards",
                   "Instructors are active industry experts",
@@ -192,25 +196,18 @@ export default function Home() {
                   "Exposure to real-world industrial projects",
                   "Dedicated career-focused placement assistance"
                 ].map((point, i) => (
-                  <li key={i} className="flex items-start gap-4">
-                    <div className="mt-1 bg-primary/20 p-1 rounded-full">
-                      <CheckCircle2 className="w-5 h-5 text-primary" />
-                    </div>
-                    <span className="text-lg text-gray-200">{point}</span>
+                  <li key={i} className="flex items-start gap-6 border-t border-border pt-6 mt-0">
+                    <span className="text-muted-foreground font-mono font-bold mt-1">0{i+1}</span>
+                    <span className="text-lg text-foreground font-medium pb-6">{point}</span>
                   </li>
                 ))}
               </ul>
             </div>
-            <div className="relative aspect-square rounded-full bg-card border border-white/5 flex items-center justify-center p-12">
-               <div className="absolute inset-0 border border-primary/20 rounded-full animate-[spin_10s_linear_infinite]" />
-               <div className="absolute inset-8 border border-secondary/20 rounded-full animate-[spin_15s_linear_infinite_reverse]" />
-               <img src="/images/hero-bg.png" className="w-full h-full object-cover rounded-full mix-blend-luminosity opacity-50" alt="" />
-               <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="text-center">
-                    <Rocket className="w-16 h-16 text-primary mx-auto mb-4" />
-                    <div className="text-2xl font-bold font-mono">SOARING</div>
-                    <div className="text-primary font-mono tracking-[0.2em]">AEROTECH</div>
-                  </div>
+            <div className="bg-white p-8 rounded-2xl shadow-sm border border-border flex items-center justify-center relative overflow-hidden">
+               <div className="text-center z-10 relative">
+                  <Rocket className="w-16 h-16 text-primary mx-auto mb-6" />
+                  <div className="text-3xl font-bold font-mono text-foreground mb-2">SOARING</div>
+                  <div className="text-primary font-mono tracking-[0.2em] text-lg">AEROTECH</div>
                </div>
             </div>
           </div>
@@ -218,25 +215,16 @@ export default function Home() {
       </section>
 
       {/* 6. Featured Projects */}
-      <section className="py-24 bg-card">
+      <section className="py-24 bg-white">
         <div className="container mx-auto px-4 md:px-6">
-          <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
-            <div>
-              <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">Mission Archives</h2>
-              <div className="w-20 h-1 bg-primary rounded-full" />
-            </div>
-            <Link href="/projects">
-              <Button variant="outline" className="rounded-full" data-testid="btn-all-projects">
-                View All Projects <ArrowUpRight className="w-4 h-4 ml-2" />
-              </Button>
-            </Link>
-          </div>
+          <div className="section-label">MISSION ARCHIVES</div>
+          <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-16">Featured Projects</h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
-              { title: "Highway Survey & Mapping", img: "/images/project-road.png", desc: "Topographic survey for 50km highway corridor reducing time by 60%." },
-              { title: "Precision Agriculture", img: "/images/project-agri.png", desc: "Multispectral crop health analysis for 500-acre commercial farm." },
-              { title: "Solar Plant Inspection", img: "/images/project-solar.png", desc: "Thermal inspection detecting faulty cells across 100MW solar park." },
+              { title: "Highway Survey & Mapping", img: "/images/project-road.png", metric: "60% faster" },
+              { title: "Precision Agriculture", img: "/images/project-agri.png", metric: "18% yield increase" },
+              { title: "Solar Plant Inspection", img: "/images/project-solar.png", metric: "450+ faults found" },
             ].map((project, i) => (
               <motion.div 
                 key={i}
@@ -244,48 +232,71 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.1 }}
-                className="group rounded-3xl overflow-hidden bg-background border border-border hover:border-primary/50 transition-colors"
+                className="group flex flex-col"
               >
-                <div className="aspect-video overflow-hidden relative">
-                  <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors z-10" />
+                <div className="aspect-[4/3] overflow-hidden rounded-2xl mb-6 relative">
                   <img src={project.img} alt={project.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                  <div className="absolute bottom-4 left-4 text-white text-sm font-bold bg-white/20 backdrop-blur-md px-3 py-1 rounded-full">
+                    {project.metric}
+                  </div>
                 </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-bold text-white mb-2">{project.title}</h3>
-                  <p className="text-muted-foreground mb-6 text-sm">{project.desc}</p>
-                  <Button variant="link" className="p-0 h-auto text-primary hover:text-white" data-testid={`btn-case-study-${i}`}>
-                    View Case Study <ArrowRight className="w-4 h-4 ml-2" />
-                  </Button>
-                </div>
+                <h3 className="text-xl font-bold text-foreground mb-3">{project.title}</h3>
+                <Button variant="link" className="p-0 h-auto text-primary justify-start" data-testid={`btn-case-study-${i}`}>
+                  View Case Study <ArrowRight className="w-4 h-4 ml-2" />
+                </Button>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* 10. CTA Section */}
-      <section className="py-32 relative overflow-hidden bg-background border-t border-border">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-3xl h-64 bg-primary/20 blur-[120px] rounded-full pointer-events-none" />
-        
-        <div className="container mx-auto px-4 md:px-6 relative z-10 text-center">
-          <h2 className="text-4xl md:text-6xl font-black text-white mb-6 tracking-tight">
-            Ready to Start Your <br/>
-            <span className="text-primary text-glow">Drone Journey?</span>
-          </h2>
-          <p className="text-xl text-muted-foreground mb-12 max-w-2xl mx-auto">
-            Whether you want to build a career in aerospace or need enterprise drone solutions, we have the expertise to elevate your goals.
-          </p>
-          <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <Link href="/training">
-              <Button size="lg" className="w-full sm:w-auto h-14 px-8 rounded-full text-base font-semibold shadow-[0_0_20px_rgba(0,102,255,0.4)]" data-testid="btn-cta-enroll">
-                Enroll Now
-              </Button>
-            </Link>
-            <Link href="/contact">
-              <Button size="lg" variant="outline" className="w-full sm:w-auto h-14 px-8 rounded-full text-base font-semibold border-white/20 hover:bg-white/5" data-testid="btn-cta-talk">
-                Talk to Expert
-              </Button>
-            </Link>
+      {/* 7. Student Testimonials */}
+      <section className="py-24 bg-background border-t border-border">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="section-label">WHAT STUDENTS SAY</div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
+            {[
+              { name: "Rahul Verma", role: "Commercial Drone Pilot", text: "The hands-on flight hours and expert instructors gave me the confidence to start my own aerial mapping business." },
+              { name: "Sneha Patil", role: "GIS Analyst", text: "Soaring Aerotech bridged the gap between my academic knowledge and what the industry actually requires." },
+              { name: "Amit Kumar", role: "Engineering Student", text: "The innovation lab provided me access to hardware and mentorship that transformed my final year project." }
+            ].map((test, i) => (
+              <div key={i} className="bg-white p-8 rounded-2xl shadow-sm border border-border">
+                <div className="text-8xl font-black text-primary leading-none h-16 opacity-50">"</div>
+                <p className="text-lg text-foreground font-medium mb-8 leading-relaxed">
+                  {test.text}
+                </p>
+                <div className="w-12 h-px bg-border mb-6" />
+                <div className="font-bold text-foreground">{test.name}</div>
+                <div className="text-sm text-muted-foreground">{test.role}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 8. CTA Section */}
+      <section className="py-24 bg-white border-t-4 border-primary">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <h2 className="text-4xl md:text-5xl font-black text-foreground mb-6 tracking-tight">
+                Ready to Start Your Drone Journey?
+              </h2>
+            </div>
+            <div className="flex flex-col sm:flex-row gap-4 lg:justify-end">
+              <Link href="/training">
+                <Button size="lg" className="w-full sm:w-auto h-14 px-8 rounded-full text-base font-semibold" data-testid="btn-cta-enroll">
+                  Enroll Now
+                </Button>
+              </Link>
+              <Link href="/contact">
+                <Button size="lg" variant="outline" className="w-full sm:w-auto h-14 px-8 rounded-full text-base font-semibold border-border text-foreground hover:bg-muted" data-testid="btn-cta-talk">
+                  Talk to Expert
+                </Button>
+              </Link>
+            </div>
           </div>
         </div>
       </section>

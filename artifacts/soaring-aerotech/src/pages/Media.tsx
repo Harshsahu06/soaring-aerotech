@@ -13,28 +13,27 @@ export default function Media() {
 
   return (
     <main className="min-h-screen pt-20">
-      <section className="py-20 md:py-32 bg-card relative overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-primary/10 via-transparent to-transparent" />
+      <section className="py-28 bg-[#0D1B2A] relative overflow-hidden">
         <div className="container mx-auto px-4 md:px-6 relative z-10 text-center">
           <motion.h1 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             className="text-4xl md:text-6xl font-black text-white mb-6"
           >
-            Media & <span className="text-primary text-glow">Recognition</span>
+            Media & <span className="text-primary">Recognition</span>
           </motion.h1>
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="text-xl text-muted-foreground max-w-3xl mx-auto"
+            className="text-xl text-white/70 max-w-3xl mx-auto"
           >
             Our journey covered by leading publications, and the awards that validate our commitment to excellence.
           </motion.p>
         </div>
       </section>
 
-      <section className="py-24 bg-background">
+      <section className="py-24 bg-[#F5F4F0]">
         <div className="container mx-auto px-4 md:px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
             
@@ -42,7 +41,7 @@ export default function Media() {
             <div>
               <div className="flex items-center gap-3 mb-8">
                 <Newspaper className="w-8 h-8 text-primary" />
-                <h2 className="text-3xl font-bold text-white">Press Mentions</h2>
+                <h2 className="text-3xl font-bold text-foreground">Press Mentions</h2>
               </div>
               
               <div className="space-y-4">
@@ -54,7 +53,7 @@ export default function Media() {
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: i * 0.1 }}
-                    className="block p-6 rounded-2xl bg-card border border-white/5 hover:border-primary/30 transition-all group"
+                    className="block p-6 rounded-2xl bg-white border border-border shadow-sm hover:shadow-md transition-all group"
                   >
                     <div className="flex items-center justify-between mb-2">
                       <div className="flex items-center gap-3">
@@ -64,8 +63,8 @@ export default function Media() {
                       </div>
                       <ExternalLink className="w-4 h-4 text-muted-foreground group-hover:text-primary transition-colors" />
                     </div>
-                    <h3 className="text-lg font-bold text-white mb-2 group-hover:text-primary transition-colors">{item.title}</h3>
-                    <p className="text-sm text-muted-foreground font-mono">{item.date}</p>
+                    <h3 className="text-lg font-bold text-foreground mb-2 group-hover:text-primary transition-colors">{item.title}</h3>
+                    <p className="text-sm text-muted-foreground font-mono bg-background inline-block px-2 py-1 rounded">{item.date}</p>
                   </motion.a>
                 ))}
               </div>
@@ -74,8 +73,8 @@ export default function Media() {
             {/* Awards */}
             <div>
               <div className="flex items-center gap-3 mb-8">
-                <Trophy className="w-8 h-8 text-accent" />
-                <h2 className="text-3xl font-bold text-white">Awards & Recognition</h2>
+                <Trophy className="w-8 h-8 text-primary" />
+                <h2 className="text-3xl font-bold text-foreground">Awards & Recognition</h2>
               </div>
               
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -91,10 +90,10 @@ export default function Media() {
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: i * 0.1 }}
-                    className="p-6 rounded-2xl bg-card border border-white/5 text-center flex flex-col items-center justify-center min-h-[160px]"
+                    className="p-6 rounded-2xl bg-white shadow-sm border border-border flex flex-col items-start min-h-[160px]"
                   >
-                    <Trophy className="w-8 h-8 text-accent/50 mb-4" />
-                    <p className="text-white font-medium">{award}</p>
+                    <div className="bg-primary/10 text-primary text-xs font-bold px-3 py-1 rounded-full mb-4">AWARD</div>
+                    <p className="text-foreground font-medium">{award}</p>
                   </motion.div>
                 ))}
               </div>
