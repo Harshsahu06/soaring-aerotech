@@ -10,7 +10,7 @@ const links = [
   { name: "Projects", href: "/projects" },
   { name: "Industries", href: "/industries" },
   { name: "Media", href: "/media" },
-  { name: "Blog", href: "/blog" },
+  // { name: "Blog", href: "/blog" },
 ];
 
 export function Navbar() {

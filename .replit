@@ -2,7 +2,9 @@ modules = ["nodejs-20", "web", "bash"]
 
 [deployment]
 router = "application"
-deploymentTarget = "autoscale"
+deploymentTarget = "static"
+build = ["pnpm", "--filter", "@workspace/soaring-aerotech", "run", "build"]
+publicDir = "artifacts/soaring-aerotech/dist"
 
 [deployment.postBuild]
 args = ["pnpm", "store", "prune"]
