@@ -1,16 +1,28 @@
 import { motion } from "framer-motion";
 import { Link } from "wouter";
-import { ArrowRight, BarChart3, Clock, IndianRupee } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export default function Projects() {
   const projects = [
     {
-      title: "NH-47 Highway Expansion Survey",
-      category: "Road Survey",
+      title: "Industrial Facility Drone Surveillance",
+      category: "Surveillance & Security",
       img: "/images/project-road.png",
-      challenge: "A 50km stretch required accurate topographic data for road widening, but heavy traffic made traditional surveying hazardous and slow.",
-      solution: "Deployed fixed-wing VTOL drones equipped with PPK GNSS modules to capture high-resolution imagery without disrupting traffic.",
+      challenge: "A large industrial facility required continuous security monitoring across a wide perimeter, but deploying adequate ground-based security was cost-prohibitive and left significant blind spots.",
+      solution: "Deployed a fleet of surveillance drones on automated patrol routes, providing 24/7 aerial monitoring with live feeds transmitted to the facility's security command center.",
+      results: [
+        { label: "Coverage", value: "Full Perimeter" },
+        { label: "Mode", value: "24/7 Operations" },
+        { label: "Security Cost", value: "↓ 40%" }
+      ]
+    },
+    {
+      title: "Highway Corridor Survey & Mapping",
+      category: "Survey & Mapping",
+      img: "/images/project-road.png",
+      challenge: "A major road expansion project required accurate topographic data across a 50km stretch, but heavy traffic made traditional surveying hazardous and time-consuming.",
+      solution: "Deployed fixed-wing VTOL drones with PPK GNSS modules to capture high-resolution imagery, producing centimeter-accurate orthomosaics and elevation models without disrupting traffic.",
       results: [
         { label: "Time Saved", value: "65%" },
         { label: "Cost Reduced", value: "40%" },
@@ -18,11 +30,11 @@ export default function Projects() {
       ]
     },
     {
-      title: "Vidarbha Precision Agriculture Initiative",
+      title: "Precision Agriculture — Cotton Farms",
       category: "Agriculture Mapping",
       img: "/images/project-agri.png",
-      challenge: "A 1000-acre cotton farm faced unexplained yield drops. Manual soil and crop inspection was physically impossible at scale.",
-      solution: "Conducted weekly multispectral drone flights to generate NDVI maps, identifying exact zones of water stress and pest infestation.",
+      challenge: "A large cotton farm in Madhya Pradesh faced unexplained yield drops. Manual field inspection across 1000+ acres was physically impossible at the required scale and frequency.",
+      solution: "Weekly multispectral drone flights generating NDVI and NDWI maps identified exact zones of water stress, soil variation, and early-stage pest infestation — enabling targeted intervention.",
       results: [
         { label: "Yield Increase", value: "18%" },
         { label: "Chemicals Saved", value: "30%" },
@@ -30,39 +42,39 @@ export default function Projects() {
       ]
     },
     {
-      title: "Bhadla Solar Park Thermal Audit",
+      title: "Solar Plant Thermal Inspection",
       category: "Solar Inspection",
       img: "/images/project-solar.png",
-      challenge: "Manual inspection of a 200MW solar section was taking months, allowing faulty panels to cause significant energy loss.",
-      solution: "Automated thermal drone mapping identified defective cells, string failures, and soiling issues with precise GPS coordinates.",
+      challenge: "Manual inspection of a 200MW solar section was taking months, allowing faulty panels to continue generating energy losses without being identified or repaired.",
+      solution: "Automated thermal drone mapping covered the entire installation in two days — identifying hotspots, string failures, diode faults, and soiling with precise GPS coordinates for repair teams.",
       results: [
         { label: "Faults Found", value: "450+" },
-        { label: "Inspection Time", value: "-80%" },
-        { label: "ROI", value: "3 Months" }
+        { label: "Inspection Time", value: "↓ 80%" },
+        { label: "ROI Recovery", value: "3 Months" }
       ]
     },
     {
-      title: "Metro Rail Pillar Inspection",
-      category: "Construction Monitoring",
+      title: "High-Altitude UAV Development & Testing",
+      category: "UAV Manufacturing",
       img: "/images/project-construction.png",
-      challenge: "Inspecting high concrete pillars over active urban areas required expensive scaffolding and traffic diversions.",
-      solution: "High-resolution drone photography captured millimeter-level detail of concrete integrity without ground disruption.",
+      challenge: "Developing UAVs capable of reliable operation at high altitudes requires extensive field testing in low-pressure, low-temperature conditions that are difficult and expensive to simulate.",
+      solution: "Soaring Aerotech's R&D team conducted high-altitude drone testing missions, validating airframe performance, motor efficiency, and electronics reliability for future defense and surveillance applications.",
       results: [
-        { label: "Risk Reduction", value: "99%" },
-        { label: "Cost Saved", value: "Rs 5L+" },
-        { label: "Uptime", value: "100%" }
+        { label: "Altitude Tested", value: "High-Altitude" },
+        { label: "Application", value: "Defense Grade" },
+        { label: "Status", value: "Ongoing R&D" }
       ]
     },
     {
-      title: "High-Voltage Powerline Audit",
-      category: "Powerline Inspection",
+      title: "Infrastructure Tower Inspection",
+      category: "Infrastructure Inspection",
       img: "/images/project-powerline.png",
-      challenge: "Routine inspection of 132kV transmission lines in mountainous terrain was dangerous for climbing crews.",
-      solution: "Drones with high-zoom payloads flew parallel to the lines, detecting insulator damage and vegetation encroachment safely.",
+      challenge: "Routine inspection of telecom and power transmission towers in mountainous terrain was dangerous for climbing crews and required expensive access equipment.",
+      solution: "High-zoom payload drones flew systematic inspection routes along tower structures, detecting corrosion, loose hardware, and insulator damage from safe distances with GPS-tagged photographic evidence.",
       results: [
-        { label: "Speed", value: "5x Faster" },
+        { label: "Speed", value: "5× Faster" },
         { label: "Safety", value: "Zero Incidents" },
-        { label: "Data Points", value: "10k+" }
+        { label: "Data Points", value: "10,000+" }
       ]
     }
   ];
@@ -84,7 +96,7 @@ export default function Projects() {
             transition={{ delay: 0.1 }}
             className="text-xl text-white/70 max-w-3xl mx-auto"
           >
-            Real-world challenges. Cutting-edge UAV solutions. Measurable industrial impact. Explore our case studies.
+            Real deployments. Measurable impact. From industrial surveillance and agricultural mapping to high-altitude UAV development — our field results speak for themselves.
           </motion.p>
         </div>
       </section>
@@ -139,7 +151,7 @@ export default function Projects() {
         <div className="container mx-auto px-4 md:px-6">
           <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-6">Have a Complex Project?</h2>
           <p className="text-xl text-muted-foreground mb-10 max-w-2xl mx-auto">
-            Contact our project engineering team to discuss how drones can solve your specific industrial challenges.
+            Whether it's surveillance, mapping, inspection, or a custom UAV solution — contact our team to discuss how we can deploy drones for your specific challenge.
           </p>
           <Link href="/contact">
             <Button size="lg" className="rounded-full h-14 px-8 text-base font-semibold">

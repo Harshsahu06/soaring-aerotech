@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Link } from "wouter";
-import { Lightbulb, Cpu, Code, Users2, Trophy } from "lucide-react";
+import { Lightbulb, Cpu, Code, Shield, Zap, Crosshair } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export default function InnovationLab() {
@@ -14,7 +14,7 @@ export default function InnovationLab() {
             className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary font-mono text-sm mb-6 uppercase"
           >
             <Lightbulb className="w-4 h-4" />
-            <span>RESEARCH & DEVELOPMENT</span>
+            <span>UAV R&D · MANUFACTURING · DEFENSE</span>
           </motion.div>
           <motion.h1 
             initial={{ opacity: 0, y: 20 }}
@@ -30,19 +30,52 @@ export default function InnovationLab() {
             transition={{ delay: 0.2 }}
             className="text-xl text-white/70 max-w-3xl mx-auto"
           >
-            Where theoretical concepts become flyable reality. Pushing the boundaries of autonomous flight, AI integration, and custom payload engineering.
+            Where India's next generation of UAVs are designed, built, and tested. Indigenous drone development spanning FPV systems, surveillance UAVs, defense drones, and high-altitude reconnaissance platforms.
           </motion.p>
         </div>
       </section>
 
+      {/* Core R&D Areas */}
       <section className="py-24 bg-white">
         <div className="container mx-auto px-4 md:px-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-24">
+          <div className="mb-16">
+            <div className="section-label">DEVELOPMENT VERTICALS</div>
+            <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-4">What We Build</h2>
+            <p className="text-lg text-muted-foreground max-w-2xl">Soaring Aerotech is advancing beyond training and services into indigenous UAV manufacturing — building drones for commercial, industrial, and defense applications.</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
-              { title: "Hardware Prototyping", icon: <Cpu className="w-6 h-6" />, desc: "Custom frame design, 3D printing, and flight controller integration." },
-              { title: "Software & AI", icon: <Code className="w-6 h-6" />, desc: "Computer vision, edge computing, and autonomous mission planning algorithms." },
-              { title: "Student Hackathons", icon: <Users2 className="w-6 h-6" />, desc: "24-hour intense problem-solving events for aspiring aerospace engineers." },
-              { title: "Industry R&D", icon: <Trophy className="w-6 h-6" />, desc: "Collaborative research projects solving specific enterprise pain points." }
+              { 
+                title: "FPV Drone Development", 
+                icon: <Zap className="w-6 h-6" />, 
+                desc: "Custom first-person-view drones engineered for agility and precision. Designed for inspection, racing, and tactical applications requiring high-speed maneuverability." 
+              },
+              { 
+                title: "Surveillance UAVs", 
+                icon: <Shield className="w-6 h-6" />, 
+                desc: "Long-endurance surveillance drones with high-resolution and thermal imaging payloads. Deployed for industrial facility monitoring, perimeter security, and area reconnaissance." 
+              },
+              { 
+                title: "Defense & Reconnaissance Drones", 
+                icon: <Crosshair className="w-6 h-6" />, 
+                desc: "Indigenous defense-grade UAVs for surveillance and reconnaissance missions. Engineered for durability, reliability, and operation in demanding field conditions." 
+              },
+              { 
+                title: "High-Altitude Drone Testing", 
+                icon: <Lightbulb className="w-6 h-6" />, 
+                desc: "Active R&D and field testing of UAVs at high altitudes — validating performance of airframes, motors, and electronics in low-pressure, low-temperature environments." 
+              },
+              { 
+                title: "Custom Payload Engineering", 
+                icon: <Cpu className="w-6 h-6" />, 
+                desc: "Design and integration of specialized sensors, cameras, and mission-specific hardware onto custom drone platforms for unique operational requirements." 
+              },
+              { 
+                title: "Software & Autonomous Systems", 
+                icon: <Code className="w-6 h-6" />, 
+                desc: "Mission planning software, computer vision algorithms, and autonomous flight systems that enable drones to operate intelligently without constant human control." 
+              }
             ].map((item, i) => (
               <motion.div 
                 key={i}
@@ -50,58 +83,84 @@ export default function InnovationLab() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className="left-accent-card bg-white p-6 shadow-sm"
+                className="left-accent-card bg-white p-6 shadow-sm border border-border"
               >
                 <div className="bg-primary/10 p-3 rounded-lg w-fit text-primary mb-4">{item.icon}</div>
                 <h3 className="text-lg font-bold text-foreground mb-2">{item.title}</h3>
-                <p className="text-sm text-muted-foreground">{item.desc}</p>
+                <p className="text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
+      {/* Positioning */}
       <section className="py-24 bg-[#F5F4F0] border-t border-border">
         <div className="container mx-auto px-4 md:px-6">
-          <div className="text-center mb-12">
-            <div className="section-label justify-center">GALLERY</div>
-            <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-4">Inside the Lab</h2>
-          </div>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div>
+              <div className="section-label">WHY THIS MATTERS</div>
+              <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-8">Beyond Training: Building India's Drone Future</h2>
+              <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
+                India's drone policy reforms have created a massive opportunity for indigenous UAV manufacturing. The government's Production Linked Incentive (PLI) scheme for drones and the push for import substitution make this the right moment to build domestic capacity.
+              </p>
+              <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
+                Soaring Aerotech's R&D activities position us at the intersection of training, services, and manufacturing — creating a self-sustaining drone ecosystem where our trained pilots fly our own manufactured drones on commercial and defense contracts.
+              </p>
+              <ul className="space-y-0">
+                {[
+                  "Recent high-altitude drone testing completed successfully",
+                  "FPV and surveillance drone prototypes in development",
+                  "Defense drone engineering for specialized applications",
+                  "Open to collaboration with colleges and research institutions",
+                  "AIC Prestige incubated — supported R&D infrastructure"
+                ].map((point, i) => (
+                  <li key={i} className="flex items-start gap-6 border-t border-border pt-6 mt-0">
+                    <span className="text-primary font-mono font-bold mt-1">0{i+1}</span>
+                    <span className="text-foreground font-medium pb-6">{point}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[
-              { title: "Prototyping Bay" },
-              { title: "National Hackathon 2024" },
-              { title: "Autonomous Indoor Testing" },
-            ].map((img, i) => (
-              <motion.div 
-                key={i}
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="rounded-2xl overflow-hidden aspect-[4/3] relative bg-white border border-border flex items-center justify-center"
-              >
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent z-10" />
-                <span className="text-muted-foreground/30 font-mono text-sm">IMAGE PLACEHOLDER</span>
-                <div className="absolute bottom-6 left-6 text-lg font-bold text-white z-20">{img.title}</div>
-              </motion.div>
-            ))}
+            <div className="grid grid-cols-1 gap-6">
+              <div className="bg-white rounded-2xl p-8 border border-border shadow-sm">
+                <div className="text-sm font-mono text-primary mb-3 uppercase font-bold">Lab Gallery</div>
+                {[
+                  { title: "Prototyping Bay" },
+                  { title: "High-Altitude Field Testing" },
+                  { title: "Defense Drone Assembly" },
+                ].map((img, i) => (
+                  <div key={i} className="rounded-xl overflow-hidden aspect-[16/7] relative bg-[#F5F4F0] border border-border flex items-center justify-center mb-4 last:mb-0">
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent z-10" />
+                    <span className="text-muted-foreground/30 font-mono text-xs">IMAGE PLACEHOLDER</span>
+                    <div className="absolute bottom-3 left-4 text-sm font-bold text-white z-20">{img.title}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
       <section className="py-24 bg-white border-t border-border text-center">
         <div className="container mx-auto px-4 md:px-6">
-          <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-6">Partner With Our Lab</h2>
+          <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-6">Collaborate With Our R&D Team</h2>
           <p className="text-xl text-muted-foreground mb-10 max-w-2xl mx-auto">
-            Are you a college looking to set up a Center of Excellence? Or an enterprise needing custom R&D?
+            Looking to set up a drone Centre of Excellence at your college? Need custom UAV engineering for a defense or industrial project? Let's talk.
           </p>
-          <Link href="/contact">
-            <Button size="lg" className="rounded-full h-14 px-8 text-base font-semibold">
-              Discuss Collaboration
-            </Button>
-          </Link>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link href="/contact">
+              <Button size="lg" className="rounded-full h-14 px-8 text-base font-semibold">
+                Discuss Collaboration
+              </Button>
+            </Link>
+            <Link href="/training">
+              <Button size="lg" variant="outline" className="rounded-full h-14 px-8 text-base font-semibold">
+                View Training Programs
+              </Button>
+            </Link>
+          </div>
         </div>
       </section>
     </main>

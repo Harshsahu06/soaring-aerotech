@@ -1,55 +1,65 @@
 import { motion } from "framer-motion";
-import { Zap, Map, Tractor, Sun, Factory, HardHat, ChevronRight, ShieldCheck } from "lucide-react";
+import { Zap, Map, Tractor, Eye, Factory, HardHat, ChevronRight, Shield, Radio } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 
 export default function Services() {
   const services = [
     {
-      id: "survey",
-      icon: <Map className="w-10 h-10 text-primary" />,
-      title: "Survey & Mapping",
-      problem: "Traditional surveying is slow, labor-intensive, and often dangerous in difficult terrain.",
-      solution: "Rapid aerial data collection producing high-resolution orthomosaics and 3D models.",
-      benefits: ["Up to 80% faster data collection", "Millimeter-level accuracy with RTK/PPK", "Zero human risk in hazardous areas"],
-      tech: "DJI Matrice 350 RTK, Pix4D, LiDAR Sensors"
+      id: "surveillance",
+      icon: <Eye className="w-10 h-10 text-primary" />,
+      title: "Aerial Surveillance & Security Monitoring",
+      problem: "Ground-based security systems have blind spots, high manpower costs, and slow response times for large perimeters.",
+      solution: "Autonomous drone patrols providing 360° aerial surveillance with real-time video feeds, thermal detection, and alert systems.",
+      benefits: ["24/7 perimeter monitoring with minimal manpower", "Thermal imaging for night and low-visibility operations", "Real-time alert integration with command centers"],
+      tech: "FPV Patrol Drones, Thermal Cameras, Live Feed Transmission",
+      tag: "RECENTLY DEPLOYED"
     },
     {
-      id: "construction",
-      icon: <HardHat className="w-10 h-10 text-primary" />,
-      title: "Construction Monitoring",
-      problem: "Lack of real-time project visibility leads to delays and budget overruns.",
-      solution: "Weekly aerial progress reports, volumetric measurements, and BIM comparisons.",
-      benefits: ["Accurate stockpile volume calculations", "Visual evidence for stakeholders", "Early detection of design deviations"],
-      tech: "DJI Mavic 3 Enterprise, DroneDeploy"
+      id: "inspection",
+      icon: <Factory className="w-10 h-10 text-primary" />,
+      title: "Industrial Site Monitoring & Asset Inspection",
+      problem: "Inspecting large industrial facilities, factories, and critical infrastructure manually is expensive, time-consuming, and risky.",
+      solution: "Scheduled drone inspections using high-resolution and thermal cameras to monitor assets, detect faults, and generate detailed reports.",
+      benefits: ["Eliminate scaffolding and rope access costs", "Detect micro-cracks, corrosion, and thermal anomalies", "Reduce inspection time by up to 80%"],
+      tech: "High-Zoom Payloads, Thermal Imaging, Automated Reporting"
+    },
+    {
+      id: "survey",
+      icon: <Map className="w-10 h-10 text-primary" />,
+      title: "Survey, Mapping & 3D Modeling",
+      problem: "Traditional surveying is slow, labor-intensive, and often unsafe in difficult or restricted terrain.",
+      solution: "Rapid aerial data collection producing high-resolution orthomosaics, topographic maps, and 3D digital elevation models.",
+      benefits: ["Up to 80% faster data collection vs traditional methods", "Millimeter-level accuracy with RTK/PPK GNSS", "Zero human risk in hazardous or remote areas"],
+      tech: "RTK/PPK Drones, Pix4D, LiDAR Sensors, GIS Integration"
     },
     {
       id: "agriculture",
       icon: <Tractor className="w-10 h-10 text-primary" />,
-      title: "Precision Agriculture",
-      problem: "Inefficient resource distribution and late detection of crop disease.",
-      solution: "Multispectral imaging for crop health analysis and variable rate spraying.",
-      benefits: ["Optimize fertilizer and water usage", "Identify plant stress before visual symptoms", "Increase overall crop yield"],
-      tech: "DJI Agras Series, Multispectral Sensors"
-    },
-    {
-      id: "solar",
-      icon: <Sun className="w-10 h-10 text-primary" />,
-      title: "Solar Inspection",
-      problem: "Manual inspection of large solar parks is incredibly slow and misses subtle cell defects.",
-      solution: "Automated thermal drone flights to instantly identify hotspots and diode failures.",
-      benefits: ["Inspect MWs of panels in hours, not weeks", "Precise GPS tagging of faulty panels", "Prevent significant energy loss"],
-      tech: "Zenmuse H20T Thermal Camera, FLIR Analysis"
+      title: "Precision Agriculture & Crop Monitoring",
+      problem: "Inefficient fertilizer and water distribution, late detection of crop disease, and lack of field-level data.",
+      solution: "Multispectral drone imaging for NDVI-based crop health analysis, water stress mapping, and precision spraying operations.",
+      benefits: ["Identify plant stress before visible symptoms appear", "Optimize fertilizer, pesticide, and water usage", "Scalable from small farms to 10,000+ acre operations"],
+      tech: "DJI Agras Series, Multispectral Sensors, NDVI Analysis"
     },
     {
       id: "infrastructure",
-      icon: <Factory className="w-10 h-10 text-primary" />,
-      title: "Infrastructure Inspection",
-      problem: "Inspecting bridges, towers, and chimneys requires scaffolding or rope access, risking lives.",
-      solution: "High-zoom visual and thermal inspection from safe distances.",
-      benefits: ["Eliminate scaffolding costs", "Zero operational downtime required", "Detect micro-cracks and corrosion"],
-      tech: "Zenmuse H20N, High-Zoom Payloads"
-    }
+      icon: <HardHat className="w-10 h-10 text-primary" />,
+      title: "Infrastructure & Construction Monitoring",
+      problem: "Inspecting bridges, towers, and construction sites requires scaffolding or dangerous manual access.",
+      solution: "High-resolution drone photography and thermal imaging capturing structural details from safe distances, with progress reporting.",
+      benefits: ["Accurate volumetric measurements and stockpile analysis", "Visual evidence for project stakeholders", "Early detection of structural deviations and defects"],
+      tech: "DJI Enterprise Series, DroneDeploy, BIM Integration"
+    },
+    {
+      id: "daas",
+      icon: <Radio className="w-10 h-10 text-primary" />,
+      title: "Drone-as-a-Service (DaaS)",
+      problem: "Organizations — especially government and defense — need drone capabilities but lack in-house operators and equipment.",
+      solution: "We deploy, operate, and maintain complete drone fleets on-site, providing turnkey aerial data and surveillance solutions.",
+      benefits: ["No upfront hardware or training investment needed", "Dedicated Soaring Aerotech operators on-site", "Scalable from one-time missions to ongoing contracts"],
+      tech: "Custom Fleet Configuration, On-Site Operations, Data Reporting"
+    },
   ];
 
   return (
@@ -63,7 +73,7 @@ export default function Services() {
             className="text-4xl md:text-6xl font-black text-white mb-6"
           >
             Drone Solutions for <br className="hidden md:block"/>
-            <span className="text-primary">Modern Industries</span>
+            <span className="text-primary">Every Industry</span>
           </motion.h1>
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
@@ -71,7 +81,7 @@ export default function Services() {
             transition={{ delay: 0.1 }}
             className="text-xl text-white/70 max-w-3xl mx-auto"
           >
-            We deploy enterprise-grade UAVs to capture critical data, mitigate risks, and dramatically improve operational efficiency across sectors.
+            From aerial surveillance and industrial inspection to precision agriculture and Drone-as-a-Service — we deploy proven UAV solutions that deliver measurable results.
           </motion.p>
         </div>
       </section>
@@ -91,9 +101,12 @@ export default function Services() {
               >
                 <div className="flex flex-col lg:flex-row gap-12">
                   <div className="lg:w-1/3">
-                    <div className="mb-6 inline-block">
+                    <div className="mb-4 inline-block">
                       {service.icon}
                     </div>
+                    {service.tag && (
+                      <div className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary font-mono text-xs font-bold mb-4">{service.tag}</div>
+                    )}
                     <h2 className="text-3xl font-bold text-foreground mb-4">{service.title}</h2>
                     <div className="mt-8">
                       <div className="text-sm font-mono text-primary mb-2 uppercase font-bold">Technology Used</div>
@@ -140,9 +153,9 @@ export default function Services() {
       {/* CTA */}
       <section className="py-24 bg-white border-t border-border text-center">
         <div className="container mx-auto px-4 md:px-6">
-          <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-6">Need a Custom Solution?</h2>
+          <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-6">Need a Custom Drone Solution?</h2>
           <p className="text-xl text-muted-foreground mb-10 max-w-2xl mx-auto">
-            Our engineering team can design custom UAV workflows tailored to your specific industrial requirements.
+            Our engineering team can design custom UAV workflows, deploy surveillance fleets, or develop specialized drones for your requirements.
           </p>
           <Link href="/contact">
             <Button size="lg" className="rounded-full h-14 px-8 text-base font-semibold">
