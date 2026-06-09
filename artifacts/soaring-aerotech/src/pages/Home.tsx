@@ -1,8 +1,53 @@
 import { Link } from "wouter";
 import { motion, useInView } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
-import { ChevronRight, ArrowRight, ShieldCheck, GraduationCap, Wrench, Lightbulb, Factory, ArrowDown } from "lucide-react";
+import { ChevronRight, ArrowRight, ShieldCheck, GraduationCap, Wrench, Lightbulb, Factory, ArrowDown, Play } from "lucide-react";
 import { Button } from "@/components/ui/button";
+
+const galleryRow1 = [
+  { src: "https://images.unsplash.com/photo-1508614589041-895b88991e3e?w=480&h=320&fit=crop", label: "Drone Operations" },
+  { src: "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=480&h=320&fit=crop", label: "Aerial Survey" },
+  { src: "https://images.unsplash.com/photo-1473968512647-3e447244af8f?w=480&h=320&fit=crop", label: "Field Training" },
+  { src: "https://images.unsplash.com/photo-1571701374025-3eb9abc53de2?w=480&h=320&fit=crop", label: "Precision Mapping" },
+  { src: "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=480&h=320&fit=crop", label: "Manufacturing" },
+  { src: "https://images.unsplash.com/photo-1534120247760-c44c3e4a62f1?w=480&h=320&fit=crop", label: "Aerial Imaging" },
+];
+
+const galleryRow2 = [
+  { src: "https://images.unsplash.com/photo-1601979031925-424e53b6caaa?w=480&h=320&fit=crop", label: "DGCA Training" },
+  { src: "https://images.unsplash.com/photo-1512697230323-60e3f54dcc30?w=480&h=320&fit=crop", label: "Solar Inspection" },
+  { src: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=480&h=320&fit=crop", label: "R&D Lab" },
+  { src: "https://images.unsplash.com/photo-1586861635167-e5223aadc9fe?w=480&h=320&fit=crop", label: "UAV Build" },
+  { src: "https://images.unsplash.com/photo-1567359781514-3b964e2b04d6?w=480&h=320&fit=crop", label: "Agriculture Mission" },
+  { src: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=480&h=320&fit=crop", label: "Infrastructure" },
+];
+
+function Marquee({ items, reverse = false }: { items: typeof galleryRow1; reverse?: boolean }) {
+  const doubled = [...items, ...items];
+  return (
+    <div className="overflow-hidden">
+      <motion.div
+        animate={{ x: reverse ? ["-50%", "0%"] : ["0%", "-50%"] }}
+        transition={{ duration: 35, ease: "linear", repeat: Infinity }}
+        className="flex gap-4 w-max"
+      >
+        {doubled.map((img, i) => (
+          <div key={i} className="relative w-72 h-48 rounded-2xl overflow-hidden shrink-0 group">
+            <img
+              src={img.src}
+              alt={img.label}
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+            />
+            <div className="absolute inset-0 bg-[#0D1B2A]/0 group-hover:bg-[#0D1B2A]/40 transition-colors duration-300" />
+            <div className="absolute bottom-3 left-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <span className="text-white text-xs font-semibold font-mono bg-black/40 backdrop-blur-sm px-2.5 py-1 rounded-full">{img.label}</span>
+            </div>
+          </div>
+        ))}
+      </motion.div>
+    </div>
+  );
+}
 
 function Counter({ target, suffix = "" }: { target: number; suffix?: string }) {
   const [count, setCount] = useState(0);
@@ -230,6 +275,71 @@ export default function Home() {
                 {c}
               </motion.span>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Gallery marquee ──────────────────────── */}
+      <section className="py-20 bg-white overflow-hidden">
+        <div className="container mx-auto px-4 md:px-6 mb-10">
+          <div className="flex items-end justify-between">
+            <div>
+              <div className="section-label">GALLERY</div>
+              <h2 className="font-display text-4xl md:text-5xl text-foreground">In Action</h2>
+            </div>
+            <Link href="/media" className="text-sm font-semibold text-primary hover:underline hidden md:block">View all →</Link>
+          </div>
+        </div>
+        <div className="space-y-4">
+          <Marquee items={galleryRow1} />
+          <Marquee items={galleryRow2} reverse />
+        </div>
+      </section>
+
+      {/* ── Video highlight ───────────────────────── */}
+      <section className="py-20 bg-[#F5F4F0] border-y border-border">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+            <div>
+              <div className="section-label">VIDEOS</div>
+              <h2 className="font-display text-3xl md:text-4xl text-foreground mb-4">See Us Fly</h2>
+              <p className="text-muted-foreground text-sm mb-6">Watch our pilots, drone operations, manufacturing floor walkthroughs, and live mission footage.</p>
+              <div className="space-y-3">
+                {[
+                  "DGCA RPC Training — Batch Demo Flight",
+                  "50,000 Sq Ft Manufacturing Walkthrough",
+                  "Disaster UAV — R&D Preview",
+                ].map((title, i) => (
+                  <motion.div key={i} initial={{ opacity: 0, x: -12 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className="flex items-center gap-3 p-4 bg-white rounded-xl border border-border hover:border-foreground/20 transition-colors cursor-pointer group">
+                    <div className="w-9 h-9 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center shrink-0 group-hover:bg-primary/20 transition-colors">
+                      <Play className="w-3.5 h-3.5 text-primary fill-primary" />
+                    </div>
+                    <span className="text-sm font-semibold text-foreground">{title}</span>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+            {/* Featured video embed placeholder */}
+            <motion.div initial={{ opacity: 0, scale: 0.97 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ delay: 0.15 }} className="relative rounded-2xl overflow-hidden aspect-video bg-[#0D1B2A] border border-border shadow-lg group cursor-pointer">
+              <img
+                src="https://images.unsplash.com/photo-1508614589041-895b88991e3e?w=800&h=450&fit=crop"
+                alt="Featured video"
+                className="w-full h-full object-cover opacity-60 group-hover:opacity-70 transition-opacity duration-500"
+              />
+              {/* Play button */}
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="w-16 h-16 rounded-full bg-white/15 border-2 border-white/40 backdrop-blur-sm flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                  <Play className="w-6 h-6 text-white fill-white ml-1" />
+                </div>
+              </div>
+              {/* Label */}
+              <div className="absolute bottom-4 left-4 right-4">
+                <div className="inline-flex items-center gap-2 bg-black/50 backdrop-blur-sm text-white text-xs font-semibold px-3 py-1.5 rounded-full">
+                  <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+                  Soaring Aerotech — Drone Ecosystem Overview
+                </div>
+              </div>
+            </motion.div>
           </div>
         </div>
       </section>
