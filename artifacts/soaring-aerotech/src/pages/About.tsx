@@ -34,10 +34,10 @@ export default function About() {
               <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" /> Central India · Drone Ecosystem
             </motion.div>
             <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="font-display text-5xl md:text-7xl text-white leading-tight mb-6">
-              Not a Training<br />Institute.<br /><span className="text-primary">An Ecosystem.</span>
+              Central India's<br />Complete<br /><span className="text-primary">Drone Company.</span>
             </motion.h1>
             <motion.p initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.18 }} className="text-white/45 text-lg max-w-lg">
-              Training · Services · R&D · UAV Manufacturing — Central India's complete drone value chain.
+              Training the pilots. Flying the missions. Researching the future. Manufacturing the machines. All from Madhya Pradesh.
             </motion.p>
           </div>
         </div>
