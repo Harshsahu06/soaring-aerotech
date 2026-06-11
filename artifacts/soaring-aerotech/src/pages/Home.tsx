@@ -250,40 +250,31 @@ export default function Home() {
       </section>
 
       {/* ── 4 Pillars ────────────────────────────── */}
-      <section className="py-24 bg-[#F5F5F5]">
+      <section className="py-20 bg-white border-b border-border">
         <div className="container mx-auto px-4 md:px-6">
-          <div className="mb-14">
-            <div className="section-label">WHAT WE DO</div>
-            <h2 className="font-display text-4xl md:text-5xl text-foreground mb-3">Four Pillars of Excellence</h2>
-            <p className="text-muted-foreground text-base max-w-xl">A complete drone ecosystem — from training India's next generation of pilots to building defence-grade UAVs in our 50,000 sq ft facility.</p>
+          <div className="flex items-end justify-between mb-12">
+            <div>
+              <div className="section-label">WHAT WE DO</div>
+              <h2 className="font-display text-4xl md:text-5xl text-foreground mb-2">Four Pillars of Excellence</h2>
+              <p className="text-muted-foreground text-sm max-w-lg">A complete drone ecosystem — training, services, R&D, and manufacturing under one roof.</p>
+            </div>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {pillars.map((s, i) => (
               <motion.div key={i} initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}
-                className="group relative overflow-hidden rounded-3xl border border-border bg-white hover:shadow-xl transition-all duration-500 hover:-translate-y-1"
+                className="group relative overflow-hidden rounded-2xl cursor-pointer aspect-[3/4]"
               >
-                <div className="relative h-52 overflow-hidden">
-                  <img src={s.img} alt={s.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#111111]/85 via-[#111111]/20 to-transparent" />
-                  <div className="absolute top-4 left-4">
-                    <span className="text-xs font-bold font-mono text-primary bg-[#111111]/70 border border-primary/30 backdrop-blur-sm px-3 py-1.5 rounded-full">{s.tag}</span>
-                  </div>
-                  <div className="absolute bottom-4 left-4 flex items-center gap-2 text-white">
-                    <div className="w-9 h-9 rounded-full bg-primary/20 border border-primary/30 flex items-center justify-center text-primary">{s.icon}</div>
-                    <h3 className="font-display text-xl text-white">{s.title}</h3>
-                  </div>
+                <img src={s.img} alt={s.title} className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/92 via-black/35 to-black/10" />
+                <div className="absolute top-4 left-4">
+                  <span className="bg-primary text-white text-[10px] font-bold uppercase tracking-wide px-2.5 py-1 rounded">{s.tag}</span>
                 </div>
-                <div className="p-6">
-                  <p className="text-muted-foreground text-sm leading-relaxed mb-5">{s.desc}</p>
-                  <div className="grid grid-cols-2 gap-2 mb-5">
-                    {s.points.map((pt, j) => (
-                      <div key={j} className="flex items-center gap-2 text-xs text-foreground/70 font-medium">
-                        <span className="w-1.5 h-1.5 rounded-full bg-primary shrink-0" />{pt}
-                      </div>
-                    ))}
-                  </div>
-                  <Link href={s.link} className="inline-flex items-center gap-2 text-primary text-sm font-bold group/link">
-                    Learn more <ArrowRight className="w-4 h-4 group-hover/link:translate-x-1 transition-transform" />
+                <div className="absolute bottom-0 left-0 right-0 p-5">
+                  <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-primary mb-3">{s.icon}</div>
+                  <h3 className="font-display text-xl text-white leading-tight mb-2">{s.title}</h3>
+                  <p className="text-white/50 text-xs leading-relaxed mb-3 line-clamp-2">{s.desc}</p>
+                  <Link href={s.link} className="inline-flex items-center gap-1.5 text-white/70 text-sm hover:text-white transition-colors">
+                    Learn more <ArrowRight className="w-3.5 h-3.5" />
                   </Link>
                 </div>
               </motion.div>

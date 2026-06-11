@@ -218,38 +218,36 @@ export default function Training() {
       </section>
 
       {/* ── Other programs ────────────────────────── */}
-      <section className="py-20 bg-[#F5F5F5] border-b border-border">
+      <section className="py-20 bg-white border-b border-border">
         <div className="container mx-auto px-4 md:px-6">
-          <div className="mb-10">
-            <div className="section-label">MORE PROGRAMS</div>
-            <h2 className="font-display text-3xl md:text-4xl text-foreground">Skill Development Courses</h2>
+          <div className="flex items-end justify-between mb-10">
+            <div>
+              <div className="section-label">MORE PROGRAMS</div>
+              <h2 className="font-display text-3xl md:text-4xl text-foreground">Skill Development Courses</h2>
+            </div>
+            <button onClick={() => document.getElementById("enroll")?.scrollIntoView({ behavior: "smooth" })} className="hidden md:inline-flex items-center gap-2 text-primary font-bold text-sm">
+              Enquire Now <ChevronRight className="w-4 h-4" />
+            </button>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {programs.map((p, i) => (
               <motion.div key={i} initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.07 }}
-                className="group relative overflow-hidden rounded-2xl border border-border bg-white shadow-sm hover:shadow-xl transition-all duration-500 hover:-translate-y-1 flex flex-col"
+                className="group relative overflow-hidden rounded-2xl cursor-pointer aspect-[3/4]"
+                onClick={() => document.getElementById("enroll")?.scrollIntoView({ behavior: "smooth" })}
               >
-                <div className="relative h-40 overflow-hidden">
-                  <img src={p.img} alt={p.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#111111]/80 via-[#111111]/20 to-transparent" />
-                  <div className="absolute top-3 right-3">
-                    <span className="text-[10px] font-bold font-mono text-primary/90 bg-black/40 backdrop-blur-sm border border-primary/20 px-2 py-0.5 rounded-full">{p.tag}</span>
-                  </div>
-                  <div className="absolute bottom-3 left-3 text-foreground/60">{p.icon}</div>
+                <img src={p.img} alt={p.title} className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-black/10" />
+                <div className="absolute top-4 left-4">
+                  <span className="bg-primary text-white text-[10px] font-bold uppercase tracking-wide px-2.5 py-1 rounded">{p.tag}</span>
                 </div>
-                <div className="p-5 flex flex-col flex-1">
-                  <h3 className="font-display text-base text-foreground leading-tight mb-1">{p.title}</h3>
-                  <div className="flex items-center gap-1.5 text-muted-foreground text-xs mb-3"><Clock className="w-3 h-3" />{p.duration}</div>
-                  <ul className="space-y-1 flex-1">
-                    {p.topics.slice(0, 4).map((t, j) => (
-                      <li key={j} className="flex items-center gap-1.5 text-xs text-foreground/60">
-                        <CheckCircle className="w-3 h-3 text-primary shrink-0" />{t}
-                      </li>
-                    ))}
-                  </ul>
-                  <button className="mt-4 text-primary text-xs font-bold font-mono flex items-center gap-1" onClick={() => document.getElementById("enroll")?.scrollIntoView({ behavior: "smooth" })}>
-                    ENQUIRE <ChevronRight className="w-3 h-3" />
-                  </button>
+                <div className="absolute bottom-0 left-0 right-0 p-5">
+                  <div className="flex items-center gap-1.5 text-white/50 text-[10px] font-mono uppercase tracking-wider mb-2">
+                    <Clock className="w-3 h-3" />{p.duration}
+                  </div>
+                  <h3 className="font-display text-lg text-white leading-tight mb-3">{p.title}</h3>
+                  <div className="flex items-center gap-1.5 text-white/60 text-sm">
+                    Learn more <ChevronRight className="w-3.5 h-3.5" />
+                  </div>
                 </div>
               </motion.div>
             ))}

@@ -106,37 +106,39 @@ export default function Services() {
         </div>
       </section>
 
-      {/* ── Service cards with images ─────────────── */}
-      <section className="py-24 bg-[#F5F5F5]">
+      {/* ── Service cards ─────────────────────────── */}
+      <section className="py-20 bg-white border-b border-border">
         <div className="container mx-auto px-4 md:px-6">
-          <div className="mb-12">
-            <div className="section-label">OUR SERVICES</div>
-            <h2 className="font-display text-3xl md:text-4xl text-foreground">Specialized Solutions</h2>
+          <div className="flex items-end justify-between mb-10">
+            <div>
+              <div className="section-label">OUR SERVICES</div>
+              <h2 className="font-display text-3xl md:text-4xl text-foreground">Specialized Solutions</h2>
+            </div>
+            <Link href="/contact" className="hidden md:inline-flex items-center gap-2 text-primary font-bold text-sm">
+              Get a Quote <ArrowRight className="w-4 h-4" />
+            </Link>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {services.map((s, i) => (
               <motion.div key={i} initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.06 }}
-                className="group relative overflow-hidden rounded-2xl border border-border bg-white shadow-sm hover:shadow-xl transition-all duration-500 hover:-translate-y-1 flex flex-col"
+                className="group relative overflow-hidden rounded-2xl cursor-pointer aspect-[3/4]"
               >
-                <div className="relative h-44 overflow-hidden">
-                  <img src={s.img} alt={s.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#111111]/80 via-[#111111]/20 to-transparent" />
-                  <div className="absolute top-3 right-3 bg-primary/90 text-white text-[10px] font-bold font-mono px-2.5 py-1 rounded-full backdrop-blur-sm">
-                    {s.stat}
-                  </div>
-                  <div className="absolute bottom-3 left-3 text-primary/80">{s.icon}</div>
+                <img src={s.img} alt={s.title} className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/92 via-black/35 to-black/10" />
+                <div className="absolute top-4 left-4">
+                  <span className="bg-primary text-white text-[10px] font-bold uppercase tracking-wide px-2.5 py-1 rounded">{s.stat}</span>
                 </div>
-                <div className="p-5 flex flex-col flex-1">
-                  <h3 className="font-display text-base text-foreground leading-tight mb-3">{s.title}</h3>
-                  <ul className="space-y-1.5 mb-4 flex-1">
+                <div className="absolute bottom-0 left-0 right-0 p-5">
+                  <h3 className="font-display text-lg text-white leading-tight mb-3">{s.title}</h3>
+                  <ul className="space-y-1 mb-4">
                     {s.bullets.map((b, j) => (
-                      <li key={j} className="flex items-start gap-2 text-xs text-muted-foreground">
-                        <span className="w-1 h-1 rounded-full bg-primary mt-1.5 shrink-0" />{b}
+                      <li key={j} className="flex items-center gap-1.5 text-white/50 text-xs">
+                        <span className="w-1 h-1 rounded-full bg-primary shrink-0" />{b}
                       </li>
                     ))}
                   </ul>
-                  <Link href={`/contact?service=${s.id}`} className="inline-flex items-center gap-1.5 text-primary text-xs font-bold mt-auto">
-                    Get Quote <ArrowRight className="w-3 h-3" />
+                  <Link href={`/contact?service=${s.id}`} className="inline-flex items-center gap-1.5 text-white/70 text-sm hover:text-white transition-colors">
+                    Get Quote <ArrowRight className="w-3.5 h-3.5" />
                   </Link>
                 </div>
               </motion.div>
