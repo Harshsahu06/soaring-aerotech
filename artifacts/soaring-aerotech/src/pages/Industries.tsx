@@ -1,9 +1,11 @@
 import { motion } from "framer-motion";
+import { useState } from "react";
 import { Link } from "wouter";
-import { Tractor, Map, Factory, Eye, Building2, HardHat, Sun, Building, GraduationCap, Shield, Truck, Zap } from "lucide-react";
+import { ArrowRight, Tractor, Map, Factory, Eye, Building2, HardHat, Sun, Building, GraduationCap, Shield, Truck, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export default function Industries() {
+  const [active, setActive] = useState(0);
   const industries = [
     {
       name: "Agriculture",
@@ -117,41 +119,53 @@ export default function Industries() {
         </div>
       </section>
 
-      {/* ── Industries grid with images ───────────── */}
-      <section className="py-24 bg-[#F5F5F5]">
+      {/* ── Industries interactive list ───────────── */}
+      <section className="py-20 bg-white">
         <div className="container mx-auto px-4 md:px-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {industries.map((ind, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.05 }}
-                className="group relative overflow-hidden rounded-3xl border border-border bg-white shadow-sm hover:shadow-xl transition-all duration-500 hover:-translate-y-1 flex flex-col"
-              >
-                {/* Image */}
-                <div className="relative h-48 overflow-hidden">
-                  <img src={ind.img} alt={ind.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#111111]/80 via-[#111111]/20 to-transparent" />
-                  <div className="absolute bottom-4 left-4 flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-primary/20 border border-primary/30 flex items-center justify-center text-primary backdrop-blur-sm">
-                      {ind.icon}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+
+            {/* Left: numbered list */}
+            <div>
+              <div className="section-label">ALL INDUSTRIES</div>
+              <h2 className="font-display text-3xl md:text-4xl text-foreground mb-8">12 Sectors We Serve</h2>
+              <div className="divide-y divide-border">
+                {industries.map((ind, i) => (
+                  <button key={i} onClick={() => setActive(i)}
+                    className={`w-full flex items-center justify-between py-4 text-left transition-colors ${active === i ? "text-foreground" : "text-foreground/35 hover:text-foreground/65"}`}
+                  >
+                    <div className="flex items-center gap-5">
+                      <span className={`text-xs font-mono tabular-nums ${active === i ? "text-primary" : "text-foreground/20"}`}>{String(i + 1).padStart(2, "0")}</span>
+                      <span className={`font-display text-lg leading-tight ${active === i ? "font-semibold" : "font-normal"}`}>{ind.name}</span>
                     </div>
-                    <h3 className="font-display text-lg text-white">{ind.name}</h3>
-                  </div>
+                    <ArrowRight className={`w-4 h-4 shrink-0 transition-opacity ${active === i ? "text-primary opacity-100" : "opacity-0"}`} />
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Right: active industry card */}
+            <div className="sticky top-24">
+              <motion.div key={active} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.35 }}
+                className="relative overflow-hidden rounded-3xl aspect-[4/5]"
+              >
+                <img src={industries[active].img} alt={industries[active].name} className="absolute inset-0 w-full h-full object-cover" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/92 via-black/30 to-black/10" />
+                <div className="absolute top-5 left-5">
+                  <span className="bg-primary text-white text-[10px] font-bold uppercase tracking-wide px-2.5 py-1 rounded">Industry</span>
                 </div>
-                {/* Content */}
-                <div className="p-6 flex flex-col flex-1">
-                  <p className="text-muted-foreground text-sm leading-relaxed mb-4 flex-1">{ind.desc}</p>
+                <div className="absolute bottom-0 left-0 right-0 p-8">
+                  <div className="text-primary mb-2">{industries[active].icon}</div>
+                  <h3 className="font-display text-3xl text-white leading-tight mb-3">{industries[active].name}</h3>
+                  <p className="text-white/55 text-sm leading-relaxed mb-5">{industries[active].desc}</p>
                   <div className="flex flex-wrap gap-2">
-                    {ind.services.map((s, j) => (
-                      <span key={j} className="inline-block px-3 py-1 rounded-full bg-primary/5 text-primary text-xs font-semibold border border-primary/10">{s}</span>
+                    {industries[active].services.map((s, j) => (
+                      <span key={j} className="px-3 py-1 rounded-full bg-white/10 border border-white/15 text-white/75 text-xs">{s}</span>
                     ))}
                   </div>
                 </div>
               </motion.div>
-            ))}
+            </div>
+
           </div>
         </div>
       </section>

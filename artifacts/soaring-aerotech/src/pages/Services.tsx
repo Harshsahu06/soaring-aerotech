@@ -129,15 +129,8 @@ export default function Services() {
                   <span className="bg-primary text-white text-[10px] font-bold uppercase tracking-wide px-2.5 py-1 rounded">{s.stat}</span>
                 </div>
                 <div className="absolute bottom-0 left-0 right-0 p-5">
-                  <h3 className="font-display text-lg text-white leading-tight mb-3">{s.title}</h3>
-                  <ul className="space-y-1 mb-4">
-                    {s.bullets.map((b, j) => (
-                      <li key={j} className="flex items-center gap-1.5 text-white/50 text-xs">
-                        <span className="w-1 h-1 rounded-full bg-primary shrink-0" />{b}
-                      </li>
-                    ))}
-                  </ul>
-                  <Link href={`/contact?service=${s.id}`} className="inline-flex items-center gap-1.5 text-white/70 text-sm hover:text-white transition-colors">
+                  <h3 className="font-display text-xl text-white leading-tight mb-4">{s.title}</h3>
+                  <Link href={`/contact?service=${s.id}`} className="inline-flex items-center gap-1.5 text-white/65 text-sm hover:text-white transition-colors">
                     Get Quote <ArrowRight className="w-3.5 h-3.5" />
                   </Link>
                 </div>

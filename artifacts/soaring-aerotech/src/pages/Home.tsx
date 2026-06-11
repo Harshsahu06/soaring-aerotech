@@ -135,6 +135,68 @@ const testimonials = [
   { name: "Priya Desai", role: "GIS Analyst", text: "The mapping & GIS course gave me a career shift I didn't expect.", span: "md:col-span-2" },
 ];
 
+const homeIndustries = [
+  { label: "Agriculture & Farming", img: "https://images.unsplash.com/photo-1567359781514-3b964e2b04d6?w=800&h=1000&fit=crop" },
+  { label: "Defence & Security", img: "https://images.unsplash.com/photo-1508614589041-895b88991e3e?w=800&h=1000&fit=crop" },
+  { label: "Survey & Mapping", img: "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800&h=1000&fit=crop" },
+  { label: "Solar & Energy", img: "https://images.unsplash.com/photo-1509391366360-2e959784a276?w=800&h=1000&fit=crop" },
+  { label: "Infrastructure", img: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=800&h=1000&fit=crop" },
+  { label: "Construction", img: "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&h=1000&fit=crop" },
+  { label: "Government & Smart Cities", img: "https://images.unsplash.com/photo-1449157291145-7efd050a4d0e?w=800&h=1000&fit=crop" },
+  { label: "Power & Utilities", img: "https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=800&h=1000&fit=crop" },
+];
+
+function IndustriesSection() {
+  const [active, setActive] = useState(0);
+  return (
+    <section className="py-20 bg-white border-b border-border">
+      <div className="container mx-auto px-4 md:px-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+          {/* Left: heading + numbered list */}
+          <div>
+            <div className="section-label">WHO WE SERVE</div>
+            <h2 className="font-display text-4xl md:text-5xl text-foreground mb-8">Industries We Power</h2>
+            <div className="divide-y divide-border">
+              {homeIndustries.map((ind, i) => (
+                <button key={i} onClick={() => setActive(i)}
+                  className={`w-full flex items-center justify-between py-4 text-left transition-colors ${active === i ? "text-foreground" : "text-foreground/35 hover:text-foreground/65"}`}
+                >
+                  <div className="flex items-center gap-5">
+                    <span className={`text-xs font-mono tabular-nums ${active === i ? "text-primary" : "text-foreground/20"}`}>{String(i + 1).padStart(2, "0")}</span>
+                    <span className={`font-display text-lg leading-tight ${active === i ? "font-semibold" : "font-normal"}`}>{ind.label}</span>
+                  </div>
+                  <ArrowRight className={`w-4 h-4 shrink-0 transition-opacity ${active === i ? "text-primary opacity-100" : "opacity-0"}`} />
+                </button>
+              ))}
+            </div>
+            <div className="mt-8 pt-6 border-t border-border">
+              <Link href="/industries" className="inline-flex items-center gap-2 text-primary font-bold text-sm">
+                View All 12 Industries <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
+          </div>
+          {/* Right: active image card */}
+          <div className="sticky top-24">
+            <motion.div key={active} initial={{ opacity: 0, scale: 0.98 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.4 }}
+              className="relative overflow-hidden rounded-3xl aspect-[4/5]"
+            >
+              <img src={homeIndustries[active].img} alt={homeIndustries[active].label} className="absolute inset-0 w-full h-full object-cover" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/25 to-black/10" />
+              <div className="absolute top-5 left-5">
+                <span className="bg-primary text-white text-[10px] font-bold uppercase tracking-wide px-2.5 py-1 rounded">INDUSTRY</span>
+              </div>
+              <div className="absolute bottom-0 left-0 right-0 p-8">
+                <h3 className="font-display text-3xl text-white leading-tight">{homeIndustries[active].label}</h3>
+                <p className="text-white/50 text-sm mt-2">UAV intelligence solutions</p>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export default function Home() {
   return (
     <main className="min-h-screen">
@@ -434,38 +496,7 @@ export default function Home() {
       </section>
 
       {/* ── Industries we serve ───────────────────── */}
-      <section className="py-20 bg-white border-b border-border">
-        <div className="container mx-auto px-4 md:px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 items-start">
-            <div className="lg:col-span-1">
-              <div className="section-label">WHO WE SERVE</div>
-              <h2 className="font-display text-3xl md:text-4xl text-foreground mb-4">12 Industries We Power</h2>
-              <p className="text-muted-foreground text-sm mb-6">From government smart city projects to private defence contractors — our UAV solutions serve every major sector in India.</p>
-              <Link href="/industries"><Button variant="outline" className="rounded-full px-6 h-11 font-semibold">View All Industries <ArrowRight className="w-4 h-4 ml-2" /></Button></Link>
-            </div>
-            <div className="lg:col-span-2 grid grid-cols-2 sm:grid-cols-3 gap-3">
-              {[
-                { label: "Government & Smart Cities", img: "https://images.unsplash.com/photo-1449157291145-7efd050a4d0e?w=300&h=200&fit=crop" },
-                { label: "Agriculture & Farming", img: "https://images.unsplash.com/photo-1567359781514-3b964e2b04d6?w=300&h=200&fit=crop" },
-                { label: "Solar & Energy", img: "https://images.unsplash.com/photo-1509391366360-2e959784a276?w=300&h=200&fit=crop" },
-                { label: "Defence & Security", img: "https://images.unsplash.com/photo-1508614589041-895b88991e3e?w=300&h=200&fit=crop" },
-                { label: "Infrastructure", img: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=300&h=200&fit=crop" },
-                { label: "Construction", img: "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=300&h=200&fit=crop" },
-              ].map((c, i) => (
-                <motion.div key={i} initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ delay: i * 0.05 }}
-                  className="group relative overflow-hidden rounded-2xl aspect-[4/3] cursor-pointer"
-                >
-                  <img src={c.img} alt={c.label} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#111111]/80 via-transparent to-transparent" />
-                  <div className="absolute bottom-3 left-3 right-3">
-                    <span className="text-white text-xs font-bold leading-tight">{c.label}</span>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
+      <IndustriesSection />
 
       {/* ── Gallery marquee ──────────────────────── */}
       <section className="py-16 bg-[#F5F5F5] overflow-hidden border-b border-border">
