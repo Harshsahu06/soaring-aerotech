@@ -220,17 +220,45 @@ const stats = [
 ];
 
 const partners = [
-  { name: "NHAI", full: "National Highways Authority of India", type: "Client" },
+  {
+    name: "NHAI",
+    full: "National Highways Authority of India",
+    type: "Client",
+  },
   { name: "MPRDC", full: "MP Road Development Corporation", type: "Client" },
   { name: "MPEB", full: "MP Electricity Board", type: "Client" },
-  { name: "IIT Indore", full: "Indian Institute of Technology", type: "Academic" },
-  { name: "IIT Gandhinagar", full: "Indian Institute of Technology", type: "Academic" },
+  {
+    name: "IIT Indore",
+    full: "Indian Institute of Technology",
+    type: "Academic",
+  },
+  {
+    name: "IIT Gandhinagar",
+    full: "Indian Institute of Technology",
+    type: "Academic",
+  },
   { name: "MP Police", full: "Madhya Pradesh Police", type: "Govt." },
-  { name: "Smart City", full: "Smart Cities Mission, Govt. of India", type: "Govt." },
+  {
+    name: "Smart City",
+    full: "Smart Cities Mission, Govt. of India",
+    type: "Govt.",
+  },
   { name: "DRDO", full: "Defence R&D Organisation", type: "Defence" },
-  { name: "DGCA", full: "Directorate General of Civil Aviation", type: "Regulator" },
-  { name: "AIC Prestige", full: "Atal Incubation Centre — NITI Aayog", type: "Incubator" },
-  { name: "Startup India", full: "Govt. of India Initiative", type: "Government" },
+  {
+    name: "DGCA",
+    full: "Directorate General of Civil Aviation",
+    type: "Regulator",
+  },
+  {
+    name: "AIC Prestige",
+    full: "Atal Incubation Centre — NITI Aayog",
+    type: "Incubator",
+  },
+  {
+    name: "Startup India",
+    full: "Govt. of India Initiative",
+    type: "Government",
+  },
   { name: "MSME", full: "Ministry of MSME", type: "Government" },
 ];
 
@@ -708,38 +736,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── Manufacturing Pipeline Timeline ──────── */}
-      <section className="py-20 bg-[#111111] border-b border-white/8 overflow-hidden">
-        <div className="container mx-auto px-4 md:px-6">
-          <div className="text-center mb-14">
-            <div className="section-label justify-center" style={{ color: "rgba(255,255,255,0.3)" }}>UAV MANUFACTURING</div>
-            <h2 className="font-display text-3xl md:text-4xl text-white mb-3">From Concept to Deployment</h2>
-            <p className="text-white/40 text-sm max-w-md mx-auto">Our 50,000 sq ft facility takes every UAV from design through rigorous testing to field deployment.</p>
-          </div>
-          <div className="relative">
-            <div className="hidden md:block absolute top-10 left-[8%] right-[8%] h-px bg-white/10 z-0" />
-            <div className="grid grid-cols-2 md:grid-cols-5 gap-6 relative z-10">
-              {[
-                { n: "01", step: "Design", desc: "CAD modelling, payload specs, mission profile", icon: "✏️" },
-                { n: "02", step: "Prototype", desc: "Rapid prototyping & structural validation", icon: "🔧" },
-                { n: "03", step: "Assembly", desc: "Component integration in cleanroom environment", icon: "🏭" },
-                { n: "04", step: "Testing", desc: "Flight trials, payload testing, DGCA compliance", icon: "🛩️" },
-                { n: "05", step: "Deployment", desc: "Client handover, pilot training, field support", icon: "🚀" },
-              ].map((s, i) => (
-                <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className="flex flex-col items-center text-center group">
-                  <div className="w-20 h-20 rounded-full bg-white/5 border border-white/10 group-hover:border-primary group-hover:bg-primary/10 transition-all flex flex-col items-center justify-center mb-4">
-                    <span className="text-2xl">{s.icon}</span>
-                  </div>
-                  <div className="text-[10px] font-mono text-primary/70 tracking-widest mb-1">{s.n}</div>
-                  <div className="font-display font-bold text-white text-sm mb-1">{s.step}</div>
-                  <p className="text-white/35 text-xs leading-relaxed">{s.desc}</p>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* ── Manufacturing Showcase ────────────────── */}
       <section className="py-20 bg-white border-y border-border overflow-hidden">
         <div className="container mx-auto px-4 md:px-6">
@@ -819,7 +815,6 @@ export default function Home() {
                 className="w-full h-80 object-cover rounded-3xl"
               />
               <div className="absolute inset-0 rounded-3xl ring-1 ring-inset ring-white/10" />
-              
             </div>
             <div>
               <div
@@ -893,7 +888,10 @@ export default function Home() {
                 Real Missions. Real Impact.
               </h2>
             </div>
-            <Link href="/projects" className="hidden md:inline-flex items-center gap-2 text-primary font-bold text-sm">
+            <Link
+              href="/projects"
+              className="hidden md:inline-flex items-center gap-2 text-primary font-bold text-sm"
+            >
               All Projects <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
@@ -908,7 +906,11 @@ export default function Home() {
                 className="group relative overflow-hidden rounded-2xl border border-border hover:shadow-xl transition-all hover:-translate-y-1"
               >
                 <div className="relative h-52 overflow-hidden">
-                  <img src={p.img} alt={p.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                  <img
+                    src={p.img}
+                    alt={p.title}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                  />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#111111]/90 via-[#111111]/30 to-transparent" />
                   <div className="absolute top-4 left-4">
                     <span className="text-[10px] font-bold font-mono text-primary bg-black/50 backdrop-blur-sm border border-primary/20 px-2.5 py-1 rounded-full">
@@ -916,7 +918,9 @@ export default function Home() {
                     </span>
                   </div>
                   <div className="absolute bottom-0 left-0 right-0 p-4">
-                    <h3 className="font-display text-base text-white leading-tight mb-1">{p.title}</h3>
+                    <h3 className="font-display text-base text-white leading-tight mb-1">
+                      {p.title}
+                    </h3>
                     <div className="flex items-center gap-1.5 text-primary text-xs font-semibold">
                       <span className="w-1 h-1 rounded-full bg-primary" />
                       {p.result}
@@ -928,7 +932,12 @@ export default function Home() {
           </div>
           <div className="text-center mt-8">
             <Link href="/projects">
-              <Button variant="outline" className="rounded-full px-8 h-12 font-bold">View All Case Studies</Button>
+              <Button
+                variant="outline"
+                className="rounded-full px-8 h-12 font-bold"
+              >
+                View All Case Studies
+              </Button>
             </Link>
           </div>
         </div>
@@ -938,12 +947,15 @@ export default function Home() {
       <section className="py-20 bg-[#F5F5F5] border-b border-border">
         <div className="container mx-auto px-4 md:px-6">
           <div className="text-center mb-12">
-            <div className="section-label justify-center">CLIENTS & COLLABORATIONS</div>
+            <div className="section-label justify-center">
+              CLIENTS & COLLABORATIONS
+            </div>
             <h2 className="font-display text-3xl md:text-4xl text-foreground mb-3">
               Trusted by Government, Defence & Academia
             </h2>
             <p className="text-muted-foreground text-sm max-w-md mx-auto">
-              From national highway authorities to IITs — India's most important organisations fly with Soaring Aerotech.
+              From national highway authorities to IITs — India's most important
+              organisations fly with Soaring Aerotech.
             </p>
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
@@ -962,8 +974,12 @@ export default function Home() {
                   </span>
                 </div>
                 <div className="text-center">
-                  <div className="text-[10px] font-bold text-foreground/65 leading-snug">{p.full}</div>
-                  <div className="text-[9px] font-mono text-primary/60 uppercase tracking-widest mt-0.5">{p.type}</div>
+                  <div className="text-[10px] font-bold text-foreground/65 leading-snug">
+                    {p.full}
+                  </div>
+                  <div className="text-[9px] font-mono text-primary/60 uppercase tracking-widest mt-0.5">
+                    {p.type}
+                  </div>
                 </div>
               </motion.div>
             ))}
@@ -1097,16 +1113,43 @@ export default function Home() {
                 In the News
               </h2>
             </div>
-            <Link href="/media" className="hidden md:inline-flex items-center gap-2 text-primary font-bold text-sm">
+            <Link
+              href="/media"
+              className="hidden md:inline-flex items-center gap-2 text-primary font-bold text-sm"
+            >
               View all <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {[
-              { outlet: "City Bhaskar", type: "Print Media", headline: "Indore startup training India's drone pilots with DGCA approval", icon: <Newspaper className="w-5 h-5" /> },
-              { outlet: "Yash Bharat", type: "News Channel", headline: "Soaring Aerotech — Central India's drone technology pioneer", icon: <Tv className="w-5 h-5" /> },
-              { outlet: "Dainik Bhaskar", type: "Print Media", headline: "Drone Didi: Women trained as professional drone pilots in MP", icon: <Newspaper className="w-5 h-5" /> },
-              { outlet: "TV Coverage", type: "Television", headline: "Defence-grade UAV manufacturing facility launched in Indore", icon: <Tv className="w-5 h-5" /> },
+              {
+                outlet: "City Bhaskar",
+                type: "Print Media",
+                headline:
+                  "Indore startup training India's drone pilots with DGCA approval",
+                icon: <Newspaper className="w-5 h-5" />,
+              },
+              {
+                outlet: "Yash Bharat",
+                type: "News Channel",
+                headline:
+                  "Soaring Aerotech — Central India's drone technology pioneer",
+                icon: <Tv className="w-5 h-5" />,
+              },
+              {
+                outlet: "Dainik Bhaskar",
+                type: "Print Media",
+                headline:
+                  "Drone Didi: Women trained as professional drone pilots in MP",
+                icon: <Newspaper className="w-5 h-5" />,
+              },
+              {
+                outlet: "TV Coverage",
+                type: "Television",
+                headline:
+                  "Defence-grade UAV manufacturing facility launched in Indore",
+                icon: <Tv className="w-5 h-5" />,
+              },
             ].map((m, i) => (
               <motion.div
                 key={i}
@@ -1121,11 +1164,17 @@ export default function Home() {
                     {m.icon}
                   </div>
                   <div>
-                    <div className="font-bold text-sm text-foreground">{m.outlet}</div>
-                    <div className="text-[10px] font-mono text-primary/60 uppercase tracking-widest">{m.type}</div>
+                    <div className="font-bold text-sm text-foreground">
+                      {m.outlet}
+                    </div>
+                    <div className="text-[10px] font-mono text-primary/60 uppercase tracking-widest">
+                      {m.type}
+                    </div>
                   </div>
                 </div>
-                <p className="text-sm text-foreground/65 leading-relaxed italic">"{m.headline}"</p>
+                <p className="text-sm text-foreground/65 leading-relaxed italic">
+                  "{m.headline}"
+                </p>
               </motion.div>
             ))}
           </div>

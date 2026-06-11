@@ -140,9 +140,7 @@ export default function About() {
               <p className="text-muted-foreground leading-relaxed mb-6">
                 Operating from a 50,000 sq ft facility in Madhya Pradesh, we serve government bodies, defence organisations, agriculture firms, solar companies, and infrastructure builders — delivering precision aerial intelligence and purpose-built UAVs.
               </p>
-              <Link href="/contact">
-                <Button className="rounded-full px-8 h-12 font-bold">Work With Us <ArrowRight className="w-4 h-4 ml-2" /></Button>
-              </Link>
+              
             </div>
             <div className="relative">
               <img
