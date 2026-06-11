@@ -97,25 +97,17 @@ export default function Industries() {
     <main className="min-h-screen pt-20">
 
       {/* ── Hero ─────────────────────────────────── */}
-      <section className="relative min-h-[60vh] flex items-center overflow-hidden bg-[#111111]">
-        <div className="absolute inset-0">
-          <img
-            src="https://images.unsplash.com/photo-1449157291145-7efd050a4d0e?w=1600&h=900&fit=crop"
-            alt=""
-            className="w-full h-full object-cover opacity-55"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#111111] via-[#111111]/85 to-[#111111]/40" />
-        </div>
-        <div className="container mx-auto px-4 md:px-6 relative z-10 py-24 text-center">
-          <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary font-mono text-xs mb-6 uppercase tracking-widest">
-            <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" /> 12 Industries · Pan India
+      <section className="bg-[#F5F5F5] border-b border-border py-14">
+        <div className="container mx-auto px-4 md:px-6">
+          <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}>
+            <div className="section-label">12 INDUSTRIES · PAN INDIA</div>
+            <h1 className="font-display text-4xl md:text-5xl text-foreground leading-tight mb-4">
+              Industries We <span className="text-primary">Serve</span>
+            </h1>
+            <p className="text-muted-foreground text-base max-w-2xl">
+              Soaring Aerotech delivers UAV intelligence and certified pilots across every major industry in India — from agriculture and defence to logistics and smart cities.
+            </p>
           </motion.div>
-          <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="font-display text-5xl md:text-7xl text-white mb-5 leading-tight">
-            Industries We <span className="text-primary">Serve</span>
-          </motion.h1>
-          <motion.p initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.18 }} className="text-white/50 text-lg max-w-2xl mx-auto">
-            Soaring Aerotech delivers UAV intelligence and certified pilots across every major industry in India — from agriculture and defence to logistics and smart cities.
-          </motion.p>
         </div>
       </section>
 

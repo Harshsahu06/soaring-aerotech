@@ -33,46 +33,42 @@ export default function Training() {
     <main className="min-h-screen pt-20">
 
       {/* ── Hero ─────────────────────────────────── */}
-      <section className="relative min-h-[70vh] flex items-center overflow-hidden bg-[#111111]">
-        <div className="absolute inset-0">
-          <img
-            src="https://images.unsplash.com/photo-1473968512647-3e447244af8f?w=1600&h=900&fit=crop"
-            alt=""
-            className="w-full h-full object-cover opacity-55"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#111111] via-[#111111]/80 to-transparent" />
-        </div>
-        <div className="container mx-auto px-4 md:px-6 relative z-10 py-24">
-          <div className="max-w-2xl">
-            <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary font-mono text-xs mb-6 uppercase tracking-widest">
-              <ShieldCheck className="w-3.5 h-3.5" /> DGCA Approved RPTO · Indore, MP
-            </motion.div>
-            <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="font-display text-5xl md:text-7xl text-white leading-tight mb-5">
-              DGCA Drone Training<br /><span className="text-primary">Get Certified.</span>
-            </motion.h1>
-            <motion.p initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.18 }} className="text-white/50 text-lg mb-8 max-w-lg">
-              Small Category · Rotorcraft · VLOS — 5-day program, RPC valid for 10 years. India's premier DGCA-approved RPTO.
-            </motion.p>
-            <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.26 }} className="flex flex-wrap gap-3">
-              <Button size="lg" className="rounded-full h-13 px-8 text-base font-bold" onClick={() => document.getElementById("enroll")?.scrollIntoView({ behavior: "smooth" })}>
-                Apply Now <ChevronRight className="w-4 h-4 ml-1" />
-              </Button>
-              <a href="tel:+917869918736">
-                <Button size="lg" variant="outline" className="rounded-full h-13 px-8 text-base font-semibold border-white/20 text-white hover:bg-white/10">
-                  <Phone className="w-4 h-4 mr-2" /> +91 78699 18736
+      <section className="bg-[#F5F5F5] border-b border-border py-14">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="grid lg:grid-cols-2 gap-10 items-center">
+            <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}>
+              <div className="section-label">DGCA APPROVED RPTO · INDORE, MP</div>
+              <h1 className="font-display text-4xl md:text-5xl text-foreground leading-tight mb-4">
+                DGCA Drone Training<br /><span className="text-primary">Get Certified.</span>
+              </h1>
+              <p className="text-muted-foreground text-base mb-6 max-w-lg">
+                Small Category · Rotorcraft · VLOS — 5-day program, RPC valid for 10 years. India's premier DGCA-approved RPTO.
+              </p>
+              <div className="flex flex-wrap gap-3 mb-6">
+                <Button size="lg" className="rounded-full h-12 px-7 font-bold" onClick={() => document.getElementById("enroll")?.scrollIntoView({ behavior: "smooth" })}>
+                  Apply Now <ChevronRight className="w-4 h-4 ml-1" />
                 </Button>
-              </a>
+                <a href="tel:+917869918736">
+                  <Button size="lg" variant="outline" className="rounded-full h-12 px-7 font-semibold border-border text-foreground hover:bg-white">
+                    <Phone className="w-4 h-4 mr-2" /> +91 78699 18736
+                  </Button>
+                </a>
+              </div>
+              <div className="flex gap-6">
+                {[{ v: "500+", l: "Pilots Certified" }, { v: "10 Yrs", l: "RPC Validity" }, { v: "5 Days", l: "Duration" }].map((s, i) => (
+                  <div key={i}>
+                    <div className="font-display text-2xl text-foreground font-black">{s.v}</div>
+                    <div className="text-muted-foreground text-xs">{s.l}</div>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+            <motion.div initial={{ opacity: 0, scale: 0.97 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.1 }}
+              className="relative overflow-hidden rounded-2xl aspect-[4/3] hidden lg:block"
+            >
+              <img src="https://images.unsplash.com/photo-1473968512647-3e447244af8f?w=800&h=600&fit=crop" alt="Drone pilot training" className="w-full h-full object-cover" />
             </motion.div>
           </div>
-        </div>
-        {/* Floating stats */}
-        <div className="absolute bottom-8 right-8 hidden lg:flex gap-4">
-          {[{ v: "500+", l: "Pilots Certified" }, { v: "10yr", l: "RPC Validity" }, { v: "5 Days", l: "Duration" }].map((s, i) => (
-            <div key={i} className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl px-5 py-4 text-center">
-              <div className="font-display text-2xl text-white font-black">{s.v}</div>
-              <div className="text-white/45 text-xs mt-0.5">{s.l}</div>
-            </div>
-          ))}
         </div>
       </section>
 
@@ -81,7 +77,7 @@ export default function Training() {
         <div className="container mx-auto px-4 md:px-6">
           <div className="section-label">DGCA CERTIFIED PROGRAM</div>
           <h2 className="font-display text-3xl md:text-4xl text-foreground mb-8">Remote Pilot Certificate (RPC)</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-3xl mb-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-10">
             {/* Small Class */}
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="rounded-2xl border-2 border-primary overflow-hidden shadow-sm">
               <div className="relative h-40 overflow-hidden">
@@ -126,7 +122,7 @@ export default function Training() {
           </div>
 
           {/* Quick facts */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 max-w-3xl">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
             {[
               { icon: <Clock className="w-4 h-4 text-primary" />, label: "Duration", value: "5 Days Total" },
               { icon: <MapPin className="w-4 h-4 text-primary" />, label: "Location", value: "Indore City, SAPL" },
@@ -149,7 +145,7 @@ export default function Training() {
       <section className="py-20 bg-[#F5F5F5] border-b border-border">
         <div className="container mx-auto px-4 md:px-6">
           <div className="section-label mb-8">COURSE STRUCTURE</div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-3xl">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="bg-white border border-border rounded-2xl overflow-hidden">
               <div className="relative h-44 overflow-hidden">
                 <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&h=300&fit=crop" alt="Theory Classes" className="w-full h-full object-cover" />
@@ -284,7 +280,7 @@ export default function Training() {
       {/* ── Eligibility & Docs ───────────────────── */}
       <section className="py-20 bg-[#F5F5F5] border-b border-border">
         <div className="container mx-auto px-4 md:px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 max-w-4xl">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
             <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="bg-white rounded-2xl border border-border p-7">
               <div className="section-label mb-5">ELIGIBILITY</div>
               <div className="space-y-4">

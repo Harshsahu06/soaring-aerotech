@@ -3,52 +3,62 @@ import { Newspaper, Trophy, ExternalLink, Award } from "lucide-react";
 
 const achievements = [
   {
-    caption: "Successfully contributed to the Drone Didi Initiative, promoting women empowerment through drone technology training.",
+    caption:
+      "Successfully contributed to the Drone Didi Initiative, promoting women empowerment through drone technology training.",
     img: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&h=500&fit=crop",
     label: "Drone Didi Initiative",
   },
   {
-    caption: "Recognized in leading newspapers such as City Bhaskar, Yash Bharat, and other regional media platforms for innovative drone technology initiatives.",
+    caption:
+      "Recognized in leading newspapers such as City Bhaskar, Yash Bharat, and other regional media platforms for innovative drone technology initiatives.",
     img: "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800&h=500&fit=crop",
     label: "Media Coverage",
   },
   {
-    caption: "Conducted drone awareness and skill development programs focused on creating employment and entrepreneurship opportunities.",
+    caption:
+      "Conducted drone awareness and skill development programs focused on creating employment and entrepreneurship opportunities.",
     img: "https://images.unsplash.com/photo-1560179707-f14e90ef3623?w=800&h=500&fit=crop",
     label: "Skill Development",
   },
   {
-    caption: "Actively supporting women empowerment through drone pilot training and certification programs.",
+    caption:
+      "Actively supporting women empowerment through drone pilot training and certification programs.",
     img: "https://images.unsplash.com/photo-1573496799515-eebbb63814f2?w=800&h=500&fit=crop",
     label: "Women Empowerment",
   },
   {
-    caption: "Featured for contributions towards advancing drone technology adoption across various sectors.",
+    caption:
+      "Featured for contributions towards advancing drone technology adoption across various sectors.",
     img: "https://images.unsplash.com/photo-1508614589041-895b88991e3e?w=800&h=500&fit=crop",
     label: "Technology Adoption",
   },
   {
-    caption: "Promoting drone-based solutions for infrastructure monitoring, surveying, agriculture, and industrial applications.",
+    caption:
+      "Promoting drone-based solutions for infrastructure monitoring, surveying, agriculture, and industrial applications.",
     img: "https://images.unsplash.com/photo-1567359781514-3b964e2b04d6?w=800&h=500&fit=crop",
     label: "Industry Applications",
   },
   {
-    caption: "Working towards building a skilled workforce for India's rapidly growing drone ecosystem.",
+    caption:
+      "Working towards building a skilled workforce for India's rapidly growing drone ecosystem.",
     img: "https://images.unsplash.com/photo-1473968512647-3e447244af8f?w=800&h=500&fit=crop",
     label: "Workforce Development",
   },
   {
-    caption: "Recognized for industry-academia collaboration in drone research, training, and innovation.",
+    caption:
+      "Recognized for industry-academia collaboration in drone research, training, and innovation.",
     img: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&h=500&fit=crop",
     label: "Industry-Academia",
   },
   {
-    caption: "Contributing to the development of next-generation UAV technologies through research and practical implementation.",
+    caption:
+      "Contributing to the development of next-generation UAV technologies through research and practical implementation.",
     img: "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=800&h=500&fit=crop",
     label: "R&D Innovation",
   },
   {
-    caption: "Supporting government and industry initiatives through drone-based training and technology solutions.",
+    caption:
+      "Supporting government and industry initiatives through drone-based training and technology solutions.",
     img: "https://images.unsplash.com/photo-1449157291145-7efd050a4d0e?w=800&h=500&fit=crop",
     label: "Government Partnerships",
   },
@@ -56,17 +66,59 @@ const achievements = [
 
 export default function Media() {
   const mediaMentions = [
-    { source: "Tech Crunch India", type: "Article", title: "Soaring Aerotech pioneers automated thermal inspections for solar parks.", date: "Nov 2024", img: "https://images.unsplash.com/photo-1509391366360-2e959784a276?w=400&h=260&fit=crop" },
-    { source: "Aviation Week", type: "Interview", title: "Interview with CEO on the future of DGCA certified drone training in India.", date: "Oct 2024", img: "https://images.unsplash.com/photo-1473968512647-3e447244af8f?w=400&h=260&fit=crop" },
-    { source: "Startup India", type: "Recognition", title: "Recognized as Top 50 Aerospace Startups to watch in 2024.", date: "Aug 2024", img: "https://images.unsplash.com/photo-1534120247760-c44c3e4a62f1?w=400&h=260&fit=crop" },
-    { source: "The Economic Times", type: "Feature", title: "How drones are transforming Indian agriculture yields.", date: "Jul 2024", img: "https://images.unsplash.com/photo-1567359781514-3b964e2b04d6?w=400&h=260&fit=crop" },
+    {
+      source: "Tech Crunch India",
+      type: "Article",
+      title:
+        "Soaring Aerotech pioneers automated thermal inspections for solar parks.",
+      date: "Nov 2024",
+      img: "https://images.unsplash.com/photo-1509391366360-2e959784a276?w=400&h=260&fit=crop",
+    },
+    {
+      source: "Aviation Week",
+      type: "Interview",
+      title:
+        "Interview with CEO on the future of DGCA certified drone training in India.",
+      date: "Oct 2024",
+      img: "https://images.unsplash.com/photo-1473968512647-3e447244af8f?w=400&h=260&fit=crop",
+    },
+    {
+      source: "Startup India",
+      type: "Recognition",
+      title: "Recognized as Top 50 Aerospace Startups to watch in 2024.",
+      date: "Aug 2024",
+      img: "https://images.unsplash.com/photo-1534120247760-c44c3e4a62f1?w=400&h=260&fit=crop",
+    },
+    {
+      source: "The Economic Times",
+      type: "Feature",
+      title: "How drones are transforming Indian agriculture yields.",
+      date: "Jul 2024",
+      img: "https://images.unsplash.com/photo-1567359781514-3b964e2b04d6?w=400&h=260&fit=crop",
+    },
   ];
 
   const awards = [
-    { title: "Best Aerospace Startup 2023", org: "State Tech Awards, Madhya Pradesh", img: "https://images.unsplash.com/photo-1508614589041-895b88991e3e?w=500&h=350&fit=crop" },
-    { title: "Excellence in Drone Education", org: "AIC Prestige, Atal Innovation Mission", img: "https://images.unsplash.com/photo-1473968512647-3e447244af8f?w=500&h=350&fit=crop" },
-    { title: "Top Innovator: Agri-Tech", org: "India Innovation Summit 2024", img: "https://images.unsplash.com/photo-1567359781514-3b964e2b04d6?w=500&h=350&fit=crop" },
-    { title: "DGCA Certified Premium Partner", org: "Directorate General of Civil Aviation", img: "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=500&h=350&fit=crop" },
+    {
+      title: "Best Aerospace Startup 2023",
+      org: "State Tech Awards, Madhya Pradesh",
+      img: "https://images.unsplash.com/photo-1508614589041-895b88991e3e?w=500&h=350&fit=crop",
+    },
+    {
+      title: "Excellence in Drone Education",
+      org: "AIC Prestige, Atal Innovation Mission",
+      img: "https://images.unsplash.com/photo-1473968512647-3e447244af8f?w=500&h=350&fit=crop",
+    },
+    {
+      title: "Top Innovator: Agri-Tech",
+      org: "India Innovation Summit 2024",
+      img: "https://images.unsplash.com/photo-1567359781514-3b964e2b04d6?w=500&h=350&fit=crop",
+    },
+    {
+      title: "DGCA Certified Premium Partner",
+      org: "Directorate General of Civil Aviation",
+      img: "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=500&h=350&fit=crop",
+    },
   ];
 
   const gallery = [
@@ -80,103 +132,18 @@ export default function Media() {
 
   return (
     <main className="min-h-screen pt-20">
-
       {/* ── Hero ─────────────────────────────────── */}
-      <section className="relative min-h-[55vh] flex items-center overflow-hidden bg-[#111111]">
-        <div className="absolute inset-0">
-          <img
-            src="https://images.unsplash.com/photo-1534120247760-c44c3e4a62f1?w=1600&h=900&fit=crop"
-            alt=""
-            className="w-full h-full object-cover opacity-55"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#111111] via-[#111111]/85 to-[#111111]/50" />
-        </div>
-        <div className="container mx-auto px-4 md:px-6 relative z-10 py-24 text-center">
-          <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary font-mono text-xs mb-6 uppercase tracking-widest">
-            <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" /> Press · Awards · Gallery
+      <section className="bg-[#F5F5F5] border-b border-border py-14">
+        <div className="container mx-auto px-4 md:px-6">
+          <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}>
+            <div className="section-label">PRESS · AWARDS · GALLERY</div>
+            <h1 className="font-display text-4xl md:text-5xl text-foreground leading-tight mb-4">
+              Media & <span className="text-primary">Recognition</span>
+            </h1>
+            <p className="text-muted-foreground text-base max-w-xl">
+              Our journey covered by leading publications, and the awards that validate our commitment to excellence.
+            </p>
           </motion.div>
-          <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="font-display text-5xl md:text-7xl text-white mb-5 leading-tight">
-            Media & <span className="text-primary">Recognition</span>
-          </motion.h1>
-          <motion.p initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.18 }} className="text-white/50 text-lg max-w-xl mx-auto">
-            Our journey covered by leading publications, and the awards that validate our commitment to excellence.
-          </motion.p>
-        </div>
-      </section>
-
-      {/* ── Press Mentions ───────────────────────── */}
-      <section className="py-20 bg-white border-b border-border">
-        <div className="container mx-auto px-4 md:px-6">
-          <div className="flex items-center gap-3 mb-10">
-            <Newspaper className="w-7 h-7 text-primary" />
-            <div>
-              <div className="section-label mb-0">PRESS MENTIONS</div>
-            </div>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-            {mediaMentions.map((item, i) => (
-              <motion.a
-                href="#"
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.08 }}
-                className="group block overflow-hidden rounded-2xl border border-border bg-[#F5F5F5] hover:shadow-lg transition-all"
-              >
-                <div className="relative h-44 overflow-hidden">
-                  <img src={item.img} alt={item.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
-                  <div className="absolute inset-0 bg-[#111111]/60" />
-                  <div className="absolute top-4 left-4 flex items-center gap-2">
-                    <span className="text-primary font-bold font-mono text-sm bg-[#111111]/70 border border-primary/30 backdrop-blur-sm px-3 py-1 rounded-full">{item.source}</span>
-                    <span className="text-white/50 text-xs bg-white/10 px-2 py-1 rounded-full">{item.type}</span>
-                  </div>
-                  <div className="absolute bottom-4 right-4">
-                    <ExternalLink className="w-5 h-5 text-white/50 group-hover:text-primary transition-colors" />
-                  </div>
-                </div>
-                <div className="p-5">
-                  <h3 className="font-display text-base text-foreground mb-3 group-hover:text-primary transition-colors leading-snug">{item.title}</h3>
-                  <span className="text-xs text-muted-foreground font-mono bg-white px-2.5 py-1 rounded-full border border-border">{item.date}</span>
-                </div>
-              </motion.a>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── Awards ───────────────────────────────── */}
-      <section className="py-20 bg-[#F5F5F5] border-b border-border">
-        <div className="container mx-auto px-4 md:px-6">
-          <div className="flex items-center gap-3 mb-10">
-            <Trophy className="w-7 h-7 text-primary" />
-            <div className="section-label mb-0">AWARDS & RECOGNITION</div>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {awards.map((award, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.08 }}
-                className="group relative overflow-hidden rounded-2xl border border-border bg-white shadow-sm hover:shadow-lg transition-all hover:-translate-y-1"
-              >
-                <div className="relative h-44 overflow-hidden">
-                  <img src={award.img} alt={award.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-70" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#111111] via-[#111111]/40 to-transparent" />
-                  <div className="absolute bottom-4 left-4">
-                    <Award className="w-7 h-7 text-primary" />
-                  </div>
-                </div>
-                <div className="p-5">
-                  <div className="bg-primary/10 text-primary text-[10px] font-bold px-2.5 py-1 rounded-full w-fit mb-3 font-mono uppercase tracking-wider">AWARD</div>
-                  <p className="font-display text-sm text-foreground leading-snug mb-1">{award.title}</p>
-                  <p className="text-xs text-muted-foreground">{award.org}</p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
         </div>
       </section>
 
@@ -185,7 +152,9 @@ export default function Media() {
         <div className="container mx-auto px-4 md:px-6">
           <div className="mb-14">
             <div className="section-label">ACHIEVEMENTS</div>
-            <h2 className="font-display text-3xl md:text-4xl text-foreground">Our Journey & Impact</h2>
+            <h2 className="font-display text-3xl md:text-4xl text-foreground">
+              Our Journey & Impact
+            </h2>
           </div>
         </div>
 
@@ -217,7 +186,9 @@ export default function Media() {
               </div>
 
               {/* Text side */}
-              <div className={`md:w-2/5 flex items-center px-8 py-10 md:py-0 bg-white ${i % 2 === 0 ? "" : ""}`}>
+              <div
+                className={`md:w-2/5 flex items-center px-8 py-10 md:py-0 bg-white ${i % 2 === 0 ? "" : ""}`}
+              >
                 <div>
                   <div className="w-8 h-px bg-primary mb-6" />
                   <p className="font-display text-lg md:text-xl text-foreground leading-relaxed">
@@ -244,14 +215,17 @@ export default function Media() {
                 transition={{ delay: i * 0.06 }}
                 className="relative overflow-hidden rounded-2xl aspect-video group cursor-pointer"
               >
-                <img src={img} alt={`Gallery ${i + 1}`} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                <img
+                  src={img}
+                  alt={`Gallery ${i + 1}`}
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                />
                 <div className="absolute inset-0 bg-[#111111]/0 group-hover:bg-[#111111]/40 transition-colors duration-300" />
               </motion.div>
             ))}
           </div>
         </div>
       </section>
-
     </main>
   );
 }

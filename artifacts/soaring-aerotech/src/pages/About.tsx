@@ -47,30 +47,27 @@ export default function About() {
     <main className="min-h-screen pt-20">
 
       {/* ── Hero ─────────────────────────────────── */}
-      <section className="relative min-h-[70vh] flex items-center overflow-hidden bg-[#111111]">
-        <div className="absolute inset-0">
-          <img
-            src="https://images.unsplash.com/photo-1508614589041-895b88991e3e?w=1600&h=900&fit=crop"
-            alt=""
-            className="w-full h-full object-cover opacity-55"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#111111] via-[#111111]/85 to-[#111111]/40" />
-        </div>
-        <div className="container mx-auto px-4 md:px-6 relative z-10 py-24">
-          <div className="max-w-2xl">
-            <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary font-mono text-xs mb-6 uppercase tracking-widest">
-              <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" /> Central India · Drone Ecosystem
+      <section className="bg-[#F5F5F5] border-b border-border py-14">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="grid lg:grid-cols-2 gap-10 items-center">
+            <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}>
+              <div className="section-label">OUR STORY</div>
+              <h1 className="font-display text-4xl md:text-5xl text-foreground leading-tight mb-4">
+                Central India's Complete<br /><span className="text-primary">Drone Company.</span>
+              </h1>
+              <p className="text-muted-foreground text-base max-w-lg mb-6">
+                Training the pilots. Flying the missions. Researching the future. Manufacturing the machines — all from Madhya Pradesh.
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {["500+ Pilots Trained", "50,000 sqft Facility", "8+ Programs", "DGCA Approved"].map((b, i) => (
+                  <span key={i} className="px-3 py-1.5 rounded-full bg-white border border-border text-foreground/60 text-xs font-medium">{b}</span>
+                ))}
+              </div>
             </motion.div>
-            <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="font-display text-5xl md:text-7xl text-white leading-tight mb-6">
-              Central India's<br />Complete<br /><span className="text-primary">Drone Company.</span>
-            </motion.h1>
-            <motion.p initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.18 }} className="text-white/55 text-lg max-w-lg mb-8">
-              Training the pilots. Flying the missions. Researching the future. Manufacturing the machines. All from Madhya Pradesh.
-            </motion.p>
-            <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.26 }} className="flex flex-wrap gap-3">
-              {["500+ Pilots Trained", "50,000 sqft Facility", "8+ Programs", "DGCA Approved"].map((b, i) => (
-                <span key={i} className="px-4 py-2 rounded-full border border-white/15 text-white/60 text-sm font-medium">{b}</span>
-              ))}
+            <motion.div initial={{ opacity: 0, scale: 0.97 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.1 }}
+              className="relative overflow-hidden rounded-2xl aspect-[4/3] hidden lg:block"
+            >
+              <img src="https://images.unsplash.com/photo-1508614589041-895b88991e3e?w=800&h=600&fit=crop" alt="Drone operations" className="w-full h-full object-cover" />
             </motion.div>
           </div>
         </div>
@@ -110,34 +107,29 @@ export default function About() {
         </div>
       </section>
 
-      {/* ── 4 Pillars — image cards ───────────────── */}
-      <section className="py-24 bg-[#F5F5F5]">
+      {/* ── 4 Pillars — full-bleed cards ─────────── */}
+      <section className="py-20 bg-white border-b border-border">
         <div className="container mx-auto px-4 md:px-6">
-          <div className="section-label mb-4">FOUR PILLARS</div>
-          <h2 className="font-display text-3xl md:text-4xl text-foreground mb-12">Everything We Do</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="flex items-end justify-between mb-10">
+            <div>
+              <div className="section-label">FOUR PILLARS</div>
+              <h2 className="font-display text-3xl md:text-4xl text-foreground">Everything We Do</h2>
+            </div>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {pillars.map((p, i) => (
-              <motion.div key={i} initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}
-                className="group relative overflow-hidden rounded-3xl border border-border bg-white hover:shadow-xl transition-all duration-500 hover:-translate-y-1"
+              <motion.div key={i} initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08 }}
+                className="group relative overflow-hidden rounded-2xl cursor-pointer aspect-[3/4]"
               >
-                <div className="relative h-48 overflow-hidden">
-                  <img src={p.img} alt={p.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#111111]/70 via-transparent to-transparent" />
-                  <div className="absolute top-4 left-4 flex items-center gap-2">
-                    <span className="text-xs font-bold font-mono text-primary bg-[#111111]/70 border border-primary/30 backdrop-blur-sm px-3 py-1.5 rounded-full">{p.tag}</span>
-                  </div>
-                  <div className="absolute bottom-4 left-4 text-white flex items-center gap-2">
-                    <span className="text-foreground/20 font-display text-4xl font-black leading-none text-white/20">{p.n}</span>
-                    <h3 className="font-display text-xl text-white">{p.title}</h3>
-                  </div>
+                <img src={p.img} alt={p.title} className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/92 via-black/35 to-black/10" />
+                <div className="absolute top-4 left-4">
+                  <span className="bg-primary text-white text-[10px] font-bold uppercase tracking-wide px-2.5 py-1 rounded">{p.tag}</span>
                 </div>
-                <div className="p-6">
-                  <p className="text-muted-foreground text-sm leading-relaxed mb-4">{p.desc}</p>
-                  <div className="flex flex-wrap gap-2">
-                    {p.items.map((item, j) => (
-                      <span key={j} className="px-3 py-1 rounded-full bg-[#F5F5F5] border border-border text-xs font-medium text-foreground/60">{item}</span>
-                    ))}
-                  </div>
+                <div className="absolute bottom-0 left-0 right-0 p-5">
+                  <div className="text-white/20 font-display font-black text-4xl leading-none mb-1 select-none">{p.n}</div>
+                  <h3 className="font-display text-xl text-white leading-tight mb-2">{p.title}</h3>
+                  <div className="flex items-center gap-1.5 text-white/60 text-sm">Learn more <ArrowRight className="w-3.5 h-3.5" /></div>
                 </div>
               </motion.div>
             ))}
