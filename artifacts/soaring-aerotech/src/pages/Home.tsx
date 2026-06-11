@@ -626,30 +626,31 @@ export default function Home() {
       </section>
 
       {/* ── Trust bar ────────────────────────────── */}
-      <section className="py-5 bg-white border-b border-border">
+      <section className="py-4 bg-white border-b border-border overflow-hidden">
         <div className="container mx-auto px-4 md:px-6">
-          <div className="flex flex-wrap justify-center gap-3">
+          <div className="flex flex-wrap items-center justify-center gap-x-0 gap-y-2">
             {[
-              {
-                icon: <ShieldCheck className="w-3.5 h-3.5 text-primary" />,
-                label: "DGCA Approved RPTO",
-              },
-              { label: "🚀 Startup India Recognised" },
-              { label: "🏭 MSME Registered" },
-              { label: "🎓 AIC Prestige Incubated" },
-              { label: "🏗️ 50,000 sq ft Manufacturing" },
-              { label: "📍 Indore, Central India" },
-            ].map((item, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 8 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.07 }}
-                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full border border-border text-xs font-semibold text-foreground/55 tracking-wide"
-              >
-                {item.icon}
-                {item.label}
-              </motion.div>
+              { icon: <ShieldCheck className="w-3.5 h-3.5 text-primary shrink-0" />, label: "DGCA Approved RPTO" },
+              { icon: <Award className="w-3.5 h-3.5 text-primary shrink-0" />, label: "Startup India Recognised" },
+              { icon: <Factory className="w-3.5 h-3.5 text-primary shrink-0" />, label: "MSME Registered" },
+              { icon: <GraduationCap className="w-3.5 h-3.5 text-primary shrink-0" />, label: "AIC Prestige Incubated" },
+              { icon: <Wrench className="w-3.5 h-3.5 text-primary shrink-0" />, label: "50,000 sq ft Facility" },
+              { icon: <MapPin className="w-3.5 h-3.5 text-primary shrink-0" />, label: "Indore, Madhya Pradesh" },
+            ].map((item, i, arr) => (
+              <div key={i} className="flex items-center">
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: i * 0.08 }}
+                  className="flex items-center gap-1.5 px-5 py-1"
+                >
+                  {item.icon}
+                  <span className="text-xs font-semibold text-foreground/60 tracking-wide uppercase">{item.label}</span>
+                </motion.div>
+                {i < arr.length - 1 && (
+                  <span className="text-border text-lg font-thin select-none">|</span>
+                )}
+              </div>
             ))}
           </div>
         </div>
