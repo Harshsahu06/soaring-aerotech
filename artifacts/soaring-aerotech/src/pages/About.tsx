@@ -6,6 +6,10 @@ import dgcaLogo from "@assets/image_1781205842198.png";
 import dpiitLogo from "@assets/image_1781205878085.png";
 import msmeLogo from "@assets/image_1781205894964.png";
 import aicLogo from "@assets/image_1781205912068.png";
+import photoHimanshu from "@assets/image_1781208673853.png";
+import photoManoj from "@assets/image_1781208691998.png";
+import photoLalit from "@assets/image_1781208739086.png";
+import photoAditya from "@assets/image_1781208847836.png";
 
 const pillars = [
   {
@@ -65,14 +69,27 @@ const directors = [
   {
     name: "Himanshu Jain",
     role: "Director",
-    img: "/images/team-founder.png",
+    img: photoHimanshu,
     quote: "We are not just a training institute. We are building a complete drone innovation ecosystem — from R&D to manufacturing to defence applications.",
   },
   {
-    name: "Manojkumar Deshpande",
+    name: "Dr Manojkumar Deshpande",
     role: "Director",
-    img: "/images/team-1.png",
+    img: photoManoj,
     quote: "Our 50,000 sq ft facility and active defence UAV R&D positions Soaring Aerotech as a full-cycle drone technology company.",
+  },
+];
+
+const teamMembers = [
+  {
+    name: "Mr Lalit Nagapurkar",
+    role: "Operations & R&D Engineer",
+    img: photoLalit,
+  },
+  {
+    name: "Mr Aditya Agrawal",
+    role: "Drone Instructor",
+    img: photoAditya,
   },
 ];
 
@@ -195,6 +212,38 @@ export default function About() {
                   <blockquote className="text-sm text-foreground/75 italic mb-4 leading-relaxed">"{d.quote}"</blockquote>
                   <div className="font-display font-bold text-foreground text-sm">{d.name}</div>
                   <div className="text-xs text-primary font-mono tracking-wide mt-0.5">{d.role}, SOARING AEROTECH</div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Team Members ─────────────────────────── */}
+      <section className="py-20 bg-[#F5F5F5] border-b border-border">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="section-label mb-10">OUR TEAM</div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-2xl">
+            {teamMembers.map((m, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className="group bg-white rounded-2xl overflow-hidden border border-border shadow-sm hover:shadow-md transition-shadow"
+              >
+                <div className="relative h-64 overflow-hidden bg-[#F0F0F0]">
+                  <img
+                    src={m.img}
+                    alt={m.name}
+                    className="absolute inset-0 w-full h-full object-cover object-top grayscale group-hover:grayscale-0 transition-all duration-500"
+                  />
+                </div>
+                <div className="p-5">
+                  <div className="font-display font-bold text-foreground text-base">{m.name}</div>
+                  <div className="text-xs text-primary font-mono tracking-wide mt-0.5 uppercase">{m.role}</div>
+                  <div className="text-xs text-muted-foreground mt-0.5 font-medium">Soaring Aerotech</div>
                 </div>
               </motion.div>
             ))}

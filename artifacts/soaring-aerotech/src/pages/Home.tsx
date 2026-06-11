@@ -775,12 +775,7 @@ export default function Home() {
                 className="w-full h-80 object-cover rounded-3xl"
               />
               <div className="absolute inset-0 rounded-3xl ring-1 ring-inset ring-white/10" />
-              <div className="absolute -bottom-4 -right-4 bg-primary text-white rounded-2xl p-5 shadow-xl">
-                <div className="font-display text-2xl font-black">Active</div>
-                <div className="text-sm font-semibold opacity-90">
-                  R&D Projects
-                </div>
-              </div>
+              
             </div>
             <div>
               <div
@@ -1064,7 +1059,7 @@ export default function Home() {
       </section>
 
       {/* ── CTA ──────────────────────────────────── */}
-      <section className="relative py-14 overflow-hidden">
+      <section className="relative py-24 overflow-hidden">
         <div className="absolute inset-0">
           <img
             src="https://images.unsplash.com/photo-1571701374025-3eb9abc53de2?w=1800&h=700&fit=crop"
