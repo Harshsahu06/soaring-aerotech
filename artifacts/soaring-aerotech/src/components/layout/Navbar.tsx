@@ -47,27 +47,14 @@ export function Navbar() {
           {/* Logo */}
           <Link
             href="/"
-            className="flex items-center gap-2.5"
+            className="flex items-center"
             data-testid="link-home-logo"
           >
-            <div className="w-9 h-9 rounded-lg bg-primary flex items-center justify-center shrink-0">
-              <svg
-                viewBox="0 0 24 24"
-                className="w-5 h-5 text-white fill-current"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path d="M12 2L8 8H4l4 4-2 6 6-3 6 3-2-6 4-4h-4L12 2z" />
-              </svg>
-            </div>
-            <div>
-              <div
-                className={
-                  "font-black text-base tracking-tight leading-tight transition-colors text-[#111111]"
-                }
-              >
-                SOARING <span className="text-primary">AEROTECH</span>
-              </div>
-            </div>
+            <img
+              src="/logo.png"
+              alt="Soaring Aerotech"
+              className="h-12 w-auto"
+            />
           </Link>
 
           {/* Desktop nav */}

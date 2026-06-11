@@ -9,15 +9,8 @@ export function Footer() {
           
           {/* Brand */}
           <div>
-            <Link href="/" className="flex items-center gap-2 mb-6 group" data-testid="link-footer-logo">
-              <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center shrink-0">
-                <svg viewBox="0 0 24 24" className="w-5 h-5 text-white fill-current" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M12 2L8 8H4l4 4-2 6 6-3 6 3-2-6 4-4h-4L12 2z"/>
-                </svg>
-              </div>
-              <span className="font-sans font-bold text-xl tracking-tight text-white">
-                SOARING <span className="text-primary">AEROTECH</span>
-              </span>
+            <Link href="/" className="flex items-center mb-6" data-testid="link-footer-logo">
+              <img src="/logo.png" alt="Soaring Aerotech" className="h-14 w-auto" />
             </Link>
             <p className="text-white/60 text-sm mb-6 leading-relaxed">
               India's premier drone technology ecosystem company. We build, innovate, and train the future of aerospace.
