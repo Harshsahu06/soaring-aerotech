@@ -146,7 +146,7 @@ export default function Industries() {
             {/* Right: active industry card */}
             <div className="sticky top-24">
               <motion.div key={active} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.35 }}
-                className="relative overflow-hidden rounded-3xl aspect-[4/5]"
+                className="relative overflow-hidden rounded-3xl aspect-[4/3]"
               >
                 <img src={industries[active].img} alt={industries[active].name} className="absolute inset-0 w-full h-full object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/92 via-black/30 to-black/10" />

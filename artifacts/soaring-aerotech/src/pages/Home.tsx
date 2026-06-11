@@ -178,7 +178,7 @@ function IndustriesSection() {
           {/* Right: active image card */}
           <div className="sticky top-24">
             <motion.div key={active} initial={{ opacity: 0, scale: 0.98 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.4 }}
-              className="relative overflow-hidden rounded-3xl aspect-[4/5]"
+              className="relative overflow-hidden rounded-3xl aspect-[4/3]"
             >
               <img src={homeIndustries[active].img} alt={homeIndustries[active].label} className="absolute inset-0 w-full h-full object-cover" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/25 to-black/10" />
@@ -212,10 +212,6 @@ export default function Home() {
         <div className="container mx-auto px-4 md:px-6 relative z-10 py-20">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="max-w-2xl">
-              <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/15 border border-primary/25 text-primary font-mono text-xs mb-6 uppercase tracking-widest">
-                <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" /> Central India · Drone Innovation Ecosystem
-              </motion.div>
-
               <motion.h1 initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="font-display text-6xl md:text-8xl text-white leading-[0.92] mb-6">
                 Building<br />India's Future<br /><span className="text-primary">Drone Ecosystem.</span>
               </motion.h1>
