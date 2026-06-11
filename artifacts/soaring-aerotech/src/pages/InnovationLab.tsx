@@ -24,7 +24,7 @@ export default function InnovationLab() {
     <main className="min-h-screen pt-20">
 
       {/* ── Hero ─────────────────────────────────── */}
-      <section className="py-24 bg-[#0D1B2A] relative overflow-hidden">
+      <section className="py-24 bg-[#111111] relative overflow-hidden">
         <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "radial-gradient(circle at 2px 2px,rgba(255,255,255,.8) 1px,transparent 0)", backgroundSize: "28px 28px" }} />
         <div className="container mx-auto px-4 md:px-6 relative z-10 text-center">
           <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary font-mono text-xs mb-5 uppercase tracking-widest">
@@ -51,7 +51,7 @@ export default function InnovationLab() {
             {rdProjects.map((p, i) => (
               <motion.div key={i} initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08 }} className="reveal-card relative h-56 rounded-2xl overflow-hidden cursor-pointer border border-border shadow-sm">
                 {/* Base */}
-                <div className="absolute inset-0 bg-[#F5F4F0] flex flex-col justify-between p-6">
+                <div className="absolute inset-0 bg-[#F5F5F5] flex flex-col justify-between p-6">
                   <div className="flex items-start justify-between">
                     <div className="w-11 h-11 rounded-xl bg-white border border-border flex items-center justify-center text-foreground/45">{p.icon}</div>
                     <span className="text-xs font-bold font-mono text-muted-foreground bg-white border border-border px-2.5 py-1 rounded-full">{p.status}</span>
@@ -62,7 +62,7 @@ export default function InnovationLab() {
                   </div>
                 </div>
                 {/* Reveal — uniform dark navy */}
-                <div className="reveal-overlay absolute inset-0 bg-[#0D1B2A] flex flex-col justify-between p-6">
+                <div className="reveal-overlay absolute inset-0 bg-[#111111] flex flex-col justify-between p-6">
                   <div>
                     <span className="text-xs font-bold font-mono text-primary/60 uppercase tracking-widest">{p.status}</span>
                     <h3 className="font-display text-xl text-white mt-2 mb-3">{p.title}</h3>
@@ -77,7 +77,7 @@ export default function InnovationLab() {
       </section>
 
       {/* ── Manufacturing ────────────────────────── */}
-      <section className="py-24 bg-[#0D1B2A]">
+      <section className="py-24 bg-[#111111]">
         <div className="container mx-auto px-4 md:px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
             <div>

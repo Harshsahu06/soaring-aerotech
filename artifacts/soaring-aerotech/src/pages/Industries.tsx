@@ -95,14 +95,14 @@ export default function Industries() {
     <main className="min-h-screen pt-20">
 
       {/* ── Hero ─────────────────────────────────── */}
-      <section className="relative min-h-[60vh] flex items-center overflow-hidden bg-[#0D1B2A]">
+      <section className="relative min-h-[60vh] flex items-center overflow-hidden bg-[#111111]">
         <div className="absolute inset-0">
           <img
             src="https://images.unsplash.com/photo-1449157291145-7efd050a4d0e?w=1600&h=900&fit=crop"
             alt=""
             className="w-full h-full object-cover opacity-30"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#0D1B2A] via-[#0D1B2A]/85 to-[#0D1B2A]/40" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#111111] via-[#111111]/85 to-[#111111]/40" />
         </div>
         <div className="container mx-auto px-4 md:px-6 relative z-10 py-24 text-center">
           <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary font-mono text-xs mb-6 uppercase tracking-widest">
@@ -118,7 +118,7 @@ export default function Industries() {
       </section>
 
       {/* ── Industries grid with images ───────────── */}
-      <section className="py-24 bg-[#F5F4F0]">
+      <section className="py-24 bg-[#F5F5F5]">
         <div className="container mx-auto px-4 md:px-6">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {industries.map((ind, i) => (
@@ -133,7 +133,7 @@ export default function Industries() {
                 {/* Image */}
                 <div className="relative h-48 overflow-hidden">
                   <img src={ind.img} alt={ind.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0D1B2A]/80 via-[#0D1B2A]/20 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#111111]/80 via-[#111111]/20 to-transparent" />
                   <div className="absolute bottom-4 left-4 flex items-center gap-3">
                     <div className="w-10 h-10 rounded-full bg-primary/20 border border-primary/30 flex items-center justify-center text-primary backdrop-blur-sm">
                       {ind.icon}
@@ -160,7 +160,7 @@ export default function Industries() {
       <section className="relative py-24 overflow-hidden">
         <div className="absolute inset-0">
           <img src="https://images.unsplash.com/photo-1508614589041-895b88991e3e?w=1600&h=700&fit=crop" alt="" className="w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-[#0D1B2A]/88" />
+          <div className="absolute inset-0 bg-[#111111]/88" />
         </div>
         <div className="container mx-auto px-4 md:px-6 relative z-10 text-center">
           <h2 className="font-display text-3xl md:text-5xl text-white mb-5">Your Industry Not Listed?</h2>

@@ -55,14 +55,14 @@ export default function Blog() {
     <main className="min-h-screen pt-20">
 
       {/* ── Hero ─────────────────────────────────── */}
-      <section className="relative min-h-[55vh] flex items-center overflow-hidden bg-[#0D1B2A]">
+      <section className="relative min-h-[55vh] flex items-center overflow-hidden bg-[#111111]">
         <div className="absolute inset-0">
           <img
             src="https://images.unsplash.com/photo-1508614589041-895b88991e3e?w=1600&h=900&fit=crop"
             alt=""
             className="w-full h-full object-cover opacity-25"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#0D1B2A] via-[#0D1B2A]/85 to-[#0D1B2A]/50" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#111111] via-[#111111]/85 to-[#111111]/50" />
         </div>
         <div className="container mx-auto px-4 md:px-6 relative z-10 py-24 text-center">
           <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary font-mono text-xs mb-6 uppercase tracking-widest">
@@ -77,7 +77,7 @@ export default function Blog() {
         </div>
       </section>
 
-      <section className="py-24 bg-[#F5F4F0]">
+      <section className="py-24 bg-[#F5F5F5]">
         <div className="container mx-auto px-4 md:px-6">
 
           {/* Featured post */}
@@ -89,7 +89,7 @@ export default function Blog() {
           >
             <div className="relative h-72 lg:h-auto overflow-hidden">
               <img src={featured.img} alt={featured.title} className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0D1B2A]/50 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#111111]/50 to-transparent" />
               <div className="absolute top-5 left-5">
                 <span className="bg-primary text-white text-xs font-bold px-3 py-1.5 rounded-full">{featured.category}</span>
               </div>
@@ -122,7 +122,7 @@ export default function Blog() {
               >
                 <div className="relative h-52 overflow-hidden">
                   <img src={post.img} alt={post.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0D1B2A]/50 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#111111]/50 to-transparent" />
                   <div className="absolute top-4 left-4">
                     <span className="bg-primary/90 text-white text-xs font-bold px-3 py-1 rounded-full">{post.category}</span>
                   </div>

@@ -37,7 +37,7 @@ function Marquee({ items, reverse = false }: { items: typeof galleryRow1; revers
         {doubled.map((img, i) => (
           <div key={i} className="relative w-72 h-48 rounded-2xl overflow-hidden shrink-0 group">
             <img src={img.src} alt={img.label} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
-            <div className="absolute inset-0 bg-[#0D1B2A]/0 group-hover:bg-[#0D1B2A]/40 transition-colors duration-300" />
+            <div className="absolute inset-0 bg-[#111111]/0 group-hover:bg-[#111111]/40 transition-colors duration-300" />
             <div className="absolute bottom-3 left-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
               <span className="text-white text-xs font-semibold font-mono bg-black/40 backdrop-blur-sm px-2.5 py-1 rounded-full">{img.label}</span>
             </div>
@@ -140,10 +140,10 @@ export default function Home() {
     <main className="min-h-screen">
 
       {/* ── Hero ─────────────────────────────────── */}
-      <section className="relative min-h-screen flex items-center pt-24 overflow-hidden bg-[#0D1B2A]">
+      <section className="relative min-h-screen flex items-center pt-24 overflow-hidden bg-[#111111]">
         <div className="absolute inset-0">
           <img src="https://images.unsplash.com/photo-1508614589041-895b88991e3e?w=1800&h=1000&fit=crop" alt="" className="w-full h-full object-cover opacity-30" />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#0D1B2A] via-[#0D1B2A]/85 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#111111] via-[#111111]/85 to-transparent" />
           <div className="absolute inset-0 opacity-[0.035]" style={{ backgroundImage: "linear-gradient(rgba(255,255,255,.4) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.4) 1px,transparent 1px)", backgroundSize: "60px 60px" }} />
         </div>
 
@@ -195,7 +195,7 @@ export default function Home() {
                   className="relative overflow-hidden rounded-2xl border border-white/10 group"
                 >
                   <img src={s.img} alt={s.label} className="absolute inset-0 w-full h-full object-cover opacity-25 group-hover:opacity-35 transition-opacity duration-500" />
-                  <div className="absolute inset-0 bg-[#0D1B2A]/60" />
+                  <div className="absolute inset-0 bg-[#111111]/60" />
                   <div className="relative z-10 p-6">
                     <div className="font-display text-3xl text-white mb-1">{s.val}</div>
                     <div className="text-white/80 text-sm font-semibold">{s.label}</div>
@@ -233,7 +233,7 @@ export default function Home() {
       </section>
 
       {/* ── Stats ────────────────────────────────── */}
-      <section className="bg-[#0D1B2A]">
+      <section className="bg-[#111111]">
         <div className="container mx-auto px-4 md:px-6">
           <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-y md:divide-y-0 divide-white/8">
             {stats.map((s, i) => (
@@ -250,7 +250,7 @@ export default function Home() {
       </section>
 
       {/* ── 4 Pillars ────────────────────────────── */}
-      <section className="py-24 bg-[#F5F4F0]">
+      <section className="py-24 bg-[#F5F5F5]">
         <div className="container mx-auto px-4 md:px-6">
           <div className="mb-14">
             <div className="section-label">WHAT WE DO</div>
@@ -264,9 +264,9 @@ export default function Home() {
               >
                 <div className="relative h-52 overflow-hidden">
                   <img src={s.img} alt={s.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0D1B2A]/85 via-[#0D1B2A]/20 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#111111]/85 via-[#111111]/20 to-transparent" />
                   <div className="absolute top-4 left-4">
-                    <span className="text-xs font-bold font-mono text-primary bg-[#0D1B2A]/70 border border-primary/30 backdrop-blur-sm px-3 py-1.5 rounded-full">{s.tag}</span>
+                    <span className="text-xs font-bold font-mono text-primary bg-[#111111]/70 border border-primary/30 backdrop-blur-sm px-3 py-1.5 rounded-full">{s.tag}</span>
                   </div>
                   <div className="absolute bottom-4 left-4 flex items-center gap-2 text-white">
                     <div className="w-9 h-9 rounded-full bg-primary/20 border border-primary/30 flex items-center justify-center text-primary">{s.icon}</div>
@@ -309,7 +309,7 @@ export default function Home() {
                   { label: "Custom UAVs", val: "Payload-specific builds" },
                   { label: "Intl. Collabs", val: "Global partnerships" },
                 ].map((item, i) => (
-                  <div key={i} className="bg-[#F5F4F0] rounded-xl p-4 border border-border">
+                  <div key={i} className="bg-[#F5F5F5] rounded-xl p-4 border border-border">
                     <div className="text-xs text-primary font-mono font-bold uppercase tracking-wider mb-1">{item.label}</div>
                     <div className="text-sm text-foreground font-semibold">{item.val}</div>
                   </div>
@@ -336,7 +336,7 @@ export default function Home() {
       </section>
 
       {/* ── R&D Innovation ───────────────────────── */}
-      <section className="py-20 bg-[#0D1B2A] overflow-hidden">
+      <section className="py-20 bg-[#111111] overflow-hidden">
         <div className="container mx-auto px-4 md:px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="relative">
@@ -394,7 +394,7 @@ export default function Home() {
               >
                 <div className="relative h-52 overflow-hidden">
                   <img src={p.img} alt={p.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0D1B2A]/90 via-[#0D1B2A]/30 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#111111]/90 via-[#111111]/30 to-transparent" />
                   <div className="absolute top-4 left-4">
                     <span className="text-[10px] font-bold font-mono text-primary bg-black/50 backdrop-blur-sm border border-primary/20 px-2.5 py-1 rounded-full">{p.cat}</span>
                   </div>
@@ -415,7 +415,7 @@ export default function Home() {
       </section>
 
       {/* ── Partners & Affiliations ───────────────── */}
-      <section className="py-20 bg-[#F5F4F0] border-b border-border">
+      <section className="py-20 bg-[#F5F5F5] border-b border-border">
         <div className="container mx-auto px-4 md:px-6">
           <div className="text-center mb-12">
             <div className="section-label justify-center">TRUSTED BY</div>
@@ -429,7 +429,7 @@ export default function Home() {
               <motion.div key={i} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.07 }}
                 className="group flex flex-col items-center justify-center gap-3 p-6 rounded-2xl border border-border bg-white hover:border-primary/30 hover:shadow-md transition-all cursor-default"
               >
-                <div className="w-14 h-14 rounded-xl bg-[#0D1B2A] flex items-center justify-center group-hover:bg-primary transition-colors duration-300">
+                <div className="w-14 h-14 rounded-xl bg-[#111111] flex items-center justify-center group-hover:bg-primary transition-colors duration-300">
                   <span className="text-white font-display text-xs font-black tracking-tight text-center leading-tight px-1">{p.name}</span>
                 </div>
                 <div className="text-center">
@@ -465,7 +465,7 @@ export default function Home() {
                   className="group relative overflow-hidden rounded-2xl aspect-[4/3] cursor-pointer"
                 >
                   <img src={c.img} alt={c.label} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0D1B2A]/80 via-transparent to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#111111]/80 via-transparent to-transparent" />
                   <div className="absolute bottom-3 left-3 right-3">
                     <span className="text-white text-xs font-bold leading-tight">{c.label}</span>
                   </div>
@@ -477,7 +477,7 @@ export default function Home() {
       </section>
 
       {/* ── Gallery marquee ──────────────────────── */}
-      <section className="py-16 bg-[#F5F4F0] overflow-hidden border-b border-border">
+      <section className="py-16 bg-[#F5F5F5] overflow-hidden border-b border-border">
         <div className="container mx-auto px-4 md:px-6 mb-10">
           <div className="flex items-end justify-between">
             <div>
@@ -505,11 +505,11 @@ export default function Home() {
             <div className="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-5">
               {directors.map((d, i) => (
                 <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}
-                  className="group bg-[#F5F4F0] rounded-2xl overflow-hidden border border-border hover:shadow-md transition-shadow flex flex-col"
+                  className="group bg-[#F5F5F5] rounded-2xl overflow-hidden border border-border hover:shadow-md transition-shadow flex flex-col"
                 >
                   <div className="relative h-52 overflow-hidden">
                     <img src={d.img} alt={d.name} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#0D1B2A]/70 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#111111]/70 to-transparent" />
                     <div className="absolute bottom-4 left-4">
                       <div className="font-display font-bold text-white text-base">{d.name}</div>
                       <div className="text-primary text-xs font-mono tracking-wide">{d.role}, SOARING AEROTECH</div>
@@ -527,7 +527,7 @@ export default function Home() {
       </section>
 
       {/* ── Testimonials ─────────────────────────── */}
-      <section className="py-20 bg-[#F5F4F0] border-b border-border">
+      <section className="py-20 bg-[#F5F5F5] border-b border-border">
         <div className="container mx-auto px-4 md:px-6">
           <div className="section-label mb-4">STUDENT SUCCESS</div>
           <h2 className="font-display text-3xl md:text-4xl text-foreground mb-10">What Our Pilots Say</h2>
@@ -551,7 +551,7 @@ export default function Home() {
       <section className="relative py-24 overflow-hidden">
         <div className="absolute inset-0">
           <img src="https://images.unsplash.com/photo-1571701374025-3eb9abc53de2?w=1800&h=700&fit=crop" alt="" className="w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-[#0D1B2A]/90" />
+          <div className="absolute inset-0 bg-[#111111]/90" />
         </div>
         <div className="container mx-auto px-4 md:px-6 relative z-10">
           <div className="flex flex-col md:flex-row items-center justify-between gap-8">

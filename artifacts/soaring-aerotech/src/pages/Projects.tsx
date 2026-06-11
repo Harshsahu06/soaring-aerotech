@@ -59,14 +59,14 @@ export default function Projects() {
     <main className="min-h-screen pt-20">
 
       {/* ── Hero ─────────────────────────────────── */}
-      <section className="relative min-h-[60vh] flex items-center overflow-hidden bg-[#0D1B2A]">
+      <section className="relative min-h-[60vh] flex items-center overflow-hidden bg-[#111111]">
         <div className="absolute inset-0">
           <img
             src="https://images.unsplash.com/photo-1571701374025-3eb9abc53de2?w=1600&h=900&fit=crop"
             alt=""
             className="w-full h-full object-cover opacity-30"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#0D1B2A] via-[#0D1B2A]/85 to-[#0D1B2A]/40" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#111111] via-[#111111]/85 to-[#111111]/40" />
         </div>
         <div className="container mx-auto px-4 md:px-6 relative z-10 py-24 text-center">
           <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary font-mono text-xs mb-6 uppercase tracking-widest">
@@ -82,7 +82,7 @@ export default function Projects() {
       </section>
 
       {/* ── Projects ─────────────────────────────── */}
-      <section className="py-24 bg-[#F5F4F0]">
+      <section className="py-24 bg-[#F5F5F5]">
         <div className="container mx-auto px-4 md:px-6">
           <div className="space-y-12">
             {projects.map((project, i) => (
@@ -96,7 +96,7 @@ export default function Projects() {
               >
                 <div className={`relative min-h-[320px] overflow-hidden ${i % 2 !== 0 ? 'lg:order-2' : ''}`}>
                   <img src={project.img} alt={project.title} className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0D1B2A]/60 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#111111]/60 to-transparent" />
                   <div className="absolute top-5 left-5">
                     <span className="inline-flex px-4 py-1.5 rounded-full bg-white text-foreground font-mono text-xs font-bold shadow-md">
                       {project.category.toUpperCase()}
@@ -138,7 +138,7 @@ export default function Projects() {
       <section className="relative py-24 overflow-hidden">
         <div className="absolute inset-0">
           <img src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=1600&h=700&fit=crop" alt="" className="w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-[#0D1B2A]/88" />
+          <div className="absolute inset-0 bg-[#111111]/88" />
         </div>
         <div className="container mx-auto px-4 md:px-6 relative z-10 text-center">
           <h2 className="font-display text-3xl md:text-5xl text-white mb-5">Have a Complex Project?</h2>

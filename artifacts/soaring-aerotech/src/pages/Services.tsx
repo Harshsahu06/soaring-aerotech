@@ -77,14 +77,14 @@ export default function Services() {
     <main className="min-h-screen pt-20">
 
       {/* ── Hero ─────────────────────────────────── */}
-      <section className="relative min-h-[65vh] flex items-center overflow-hidden bg-[#0D1B2A]">
+      <section className="relative min-h-[65vh] flex items-center overflow-hidden bg-[#111111]">
         <div className="absolute inset-0">
           <img
             src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=1600&h=900&fit=crop"
             alt=""
             className="w-full h-full object-cover opacity-35"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#0D1B2A] via-[#0D1B2A]/80 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#111111] via-[#111111]/80 to-transparent" />
         </div>
         <div className="container mx-auto px-4 md:px-6 relative z-10 py-24">
           <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary font-mono text-xs mb-6 uppercase tracking-widest">
@@ -107,7 +107,7 @@ export default function Services() {
       </section>
 
       {/* ── Service cards with images ─────────────── */}
-      <section className="py-24 bg-[#F5F4F0]">
+      <section className="py-24 bg-[#F5F5F5]">
         <div className="container mx-auto px-4 md:px-6">
           <div className="mb-12">
             <div className="section-label">OUR SERVICES</div>
@@ -120,7 +120,7 @@ export default function Services() {
               >
                 <div className="relative h-44 overflow-hidden">
                   <img src={s.img} alt={s.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0D1B2A]/80 via-[#0D1B2A]/20 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#111111]/80 via-[#111111]/20 to-transparent" />
                   <div className="absolute top-3 right-3 bg-primary/90 text-white text-[10px] font-bold font-mono px-2.5 py-1 rounded-full backdrop-blur-sm">
                     {s.stat}
                   </div>
@@ -160,7 +160,7 @@ export default function Services() {
                   { val: "100+", label: "Missions completed" },
                   { val: "450+", label: "Faults detected" },
                 ].map((s, i) => (
-                  <div key={i} className="bg-[#F5F4F0] rounded-xl p-4 border border-border">
+                  <div key={i} className="bg-[#F5F5F5] rounded-xl p-4 border border-border">
                     <div className="font-display text-2xl text-primary font-black">{s.val}</div>
                     <div className="text-xs text-muted-foreground mt-1">{s.label}</div>
                   </div>
@@ -176,7 +176,7 @@ export default function Services() {
       </section>
 
       {/* ── Client sectors ───────────────────────── */}
-      <section className="py-20 bg-[#F5F4F0] border-y border-border">
+      <section className="py-20 bg-[#F5F5F5] border-y border-border">
         <div className="container mx-auto px-4 md:px-6">
           <div className="section-label mb-4">CLIENT SECTORS</div>
           <h2 className="font-display text-2xl md:text-3xl text-foreground mb-8">Who We Serve</h2>
@@ -194,7 +194,7 @@ export default function Services() {
       <section className="relative py-24 overflow-hidden">
         <div className="absolute inset-0">
           <img src="https://images.unsplash.com/photo-1508614589041-895b88991e3e?w=1600&h=700&fit=crop" alt="" className="w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-[#0D1B2A]/88" />
+          <div className="absolute inset-0 bg-[#111111]/88" />
         </div>
         <div className="container mx-auto px-4 md:px-6 relative z-10 text-center">
           <h2 className="font-display text-3xl md:text-4xl text-white mb-4">Need a Custom Solution?</h2>

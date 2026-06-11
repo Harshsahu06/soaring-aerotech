@@ -29,14 +29,14 @@ export default function Media() {
     <main className="min-h-screen pt-20">
 
       {/* ── Hero ─────────────────────────────────── */}
-      <section className="relative min-h-[55vh] flex items-center overflow-hidden bg-[#0D1B2A]">
+      <section className="relative min-h-[55vh] flex items-center overflow-hidden bg-[#111111]">
         <div className="absolute inset-0">
           <img
             src="https://images.unsplash.com/photo-1534120247760-c44c3e4a62f1?w=1600&h=900&fit=crop"
             alt=""
             className="w-full h-full object-cover opacity-30"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#0D1B2A] via-[#0D1B2A]/85 to-[#0D1B2A]/50" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#111111] via-[#111111]/85 to-[#111111]/50" />
         </div>
         <div className="container mx-auto px-4 md:px-6 relative z-10 py-24 text-center">
           <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary font-mono text-xs mb-6 uppercase tracking-widest">
@@ -69,13 +69,13 @@ export default function Media() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.08 }}
-                className="group block overflow-hidden rounded-2xl border border-border bg-[#F5F4F0] hover:shadow-lg transition-all"
+                className="group block overflow-hidden rounded-2xl border border-border bg-[#F5F5F5] hover:shadow-lg transition-all"
               >
                 <div className="relative h-44 overflow-hidden">
                   <img src={item.img} alt={item.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
-                  <div className="absolute inset-0 bg-[#0D1B2A]/60" />
+                  <div className="absolute inset-0 bg-[#111111]/60" />
                   <div className="absolute top-4 left-4 flex items-center gap-2">
-                    <span className="text-primary font-bold font-mono text-sm bg-[#0D1B2A]/70 border border-primary/30 backdrop-blur-sm px-3 py-1 rounded-full">{item.source}</span>
+                    <span className="text-primary font-bold font-mono text-sm bg-[#111111]/70 border border-primary/30 backdrop-blur-sm px-3 py-1 rounded-full">{item.source}</span>
                     <span className="text-white/50 text-xs bg-white/10 px-2 py-1 rounded-full">{item.type}</span>
                   </div>
                   <div className="absolute bottom-4 right-4">
@@ -93,7 +93,7 @@ export default function Media() {
       </section>
 
       {/* ── Awards ───────────────────────────────── */}
-      <section className="py-20 bg-[#F5F4F0] border-b border-border">
+      <section className="py-20 bg-[#F5F5F5] border-b border-border">
         <div className="container mx-auto px-4 md:px-6">
           <div className="flex items-center gap-3 mb-10">
             <Trophy className="w-7 h-7 text-primary" />
@@ -111,7 +111,7 @@ export default function Media() {
               >
                 <div className="relative h-44 overflow-hidden">
                   <img src={award.img} alt={award.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-70" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0D1B2A] via-[#0D1B2A]/40 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#111111] via-[#111111]/40 to-transparent" />
                   <div className="absolute bottom-4 left-4">
                     <Award className="w-7 h-7 text-primary" />
                   </div>
@@ -142,7 +142,7 @@ export default function Media() {
                 className="relative overflow-hidden rounded-2xl aspect-video group cursor-pointer"
               >
                 <img src={img} alt={`Gallery ${i + 1}`} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
-                <div className="absolute inset-0 bg-[#0D1B2A]/0 group-hover:bg-[#0D1B2A]/40 transition-colors duration-300" />
+                <div className="absolute inset-0 bg-[#111111]/0 group-hover:bg-[#111111]/40 transition-colors duration-300" />
               </motion.div>
             ))}
           </div>

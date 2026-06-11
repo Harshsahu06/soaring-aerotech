@@ -47,14 +47,14 @@ export default function About() {
     <main className="min-h-screen pt-20">
 
       {/* ── Hero ─────────────────────────────────── */}
-      <section className="relative min-h-[70vh] flex items-center overflow-hidden bg-[#0D1B2A]">
+      <section className="relative min-h-[70vh] flex items-center overflow-hidden bg-[#111111]">
         <div className="absolute inset-0">
           <img
             src="https://images.unsplash.com/photo-1508614589041-895b88991e3e?w=1600&h=900&fit=crop"
             alt=""
             className="w-full h-full object-cover opacity-30"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#0D1B2A] via-[#0D1B2A]/85 to-[#0D1B2A]/40" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#111111] via-[#111111]/85 to-[#111111]/40" />
         </div>
         <div className="container mx-auto px-4 md:px-6 relative z-10 py-24">
           <div className="max-w-2xl">
@@ -101,7 +101,7 @@ export default function About() {
                 <div className="font-display text-3xl font-black">500+</div>
                 <div className="text-sm font-semibold opacity-90">Pilots Certified</div>
               </div>
-              <div className="absolute -top-4 -right-4 bg-[#0D1B2A] text-white rounded-2xl p-5 shadow-xl">
+              <div className="absolute -top-4 -right-4 bg-[#111111] text-white rounded-2xl p-5 shadow-xl">
                 <div className="font-display text-3xl font-black">50K</div>
                 <div className="text-sm font-semibold opacity-70">sq ft Facility</div>
               </div>
@@ -111,7 +111,7 @@ export default function About() {
       </section>
 
       {/* ── 4 Pillars — image cards ───────────────── */}
-      <section className="py-24 bg-[#F5F4F0]">
+      <section className="py-24 bg-[#F5F5F5]">
         <div className="container mx-auto px-4 md:px-6">
           <div className="section-label mb-4">FOUR PILLARS</div>
           <h2 className="font-display text-3xl md:text-4xl text-foreground mb-12">Everything We Do</h2>
@@ -122,9 +122,9 @@ export default function About() {
               >
                 <div className="relative h-48 overflow-hidden">
                   <img src={p.img} alt={p.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0D1B2A]/70 via-transparent to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#111111]/70 via-transparent to-transparent" />
                   <div className="absolute top-4 left-4 flex items-center gap-2">
-                    <span className="text-xs font-bold font-mono text-primary bg-[#0D1B2A]/70 border border-primary/30 backdrop-blur-sm px-3 py-1.5 rounded-full">{p.tag}</span>
+                    <span className="text-xs font-bold font-mono text-primary bg-[#111111]/70 border border-primary/30 backdrop-blur-sm px-3 py-1.5 rounded-full">{p.tag}</span>
                   </div>
                   <div className="absolute bottom-4 left-4 text-white flex items-center gap-2">
                     <span className="text-foreground/20 font-display text-4xl font-black leading-none text-white/20">{p.n}</span>
@@ -135,7 +135,7 @@ export default function About() {
                   <p className="text-muted-foreground text-sm leading-relaxed mb-4">{p.desc}</p>
                   <div className="flex flex-wrap gap-2">
                     {p.items.map((item, j) => (
-                      <span key={j} className="px-3 py-1 rounded-full bg-[#F5F4F0] border border-border text-xs font-medium text-foreground/60">{item}</span>
+                      <span key={j} className="px-3 py-1 rounded-full bg-[#F5F5F5] border border-border text-xs font-medium text-foreground/60">{item}</span>
                     ))}
                   </div>
                 </div>
@@ -151,7 +151,7 @@ export default function About() {
           <div className="section-label mb-10">LEADERSHIP</div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl">
             {directors.map((d, i) => (
-              <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className="group bg-[#F5F4F0] rounded-2xl overflow-hidden border border-border shadow-sm hover:shadow-md transition-shadow flex flex-col sm:flex-row">
+              <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className="group bg-[#F5F5F5] rounded-2xl overflow-hidden border border-border shadow-sm hover:shadow-md transition-shadow flex flex-col sm:flex-row">
                 <div className="w-full sm:w-36 h-48 sm:h-auto relative shrink-0 overflow-hidden">
                   <img src={d.img} alt={d.name} className="absolute inset-0 w-full h-full object-cover grayscale group-hover:scale-105 transition-transform duration-500" />
                 </div>
@@ -168,7 +168,7 @@ export default function About() {
       </section>
 
       {/* ── Credentials ──────────────────────────── */}
-      <section className="py-20 bg-[#F5F4F0]">
+      <section className="py-20 bg-[#F5F5F5]">
         <div className="container mx-auto px-4 md:px-6">
           <div className="section-label mb-8">CREDENTIALS</div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl">
@@ -187,7 +187,7 @@ export default function About() {
       <section className="relative py-24 overflow-hidden">
         <div className="absolute inset-0">
           <img src="https://images.unsplash.com/photo-1534120247760-c44c3e4a62f1?w=1600&h=700&fit=crop" alt="" className="w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-[#0D1B2A]/85" />
+          <div className="absolute inset-0 bg-[#111111]/85" />
         </div>
         <div className="container mx-auto px-4 md:px-6 relative z-10 text-center">
           <h2 className="font-display text-4xl md:text-5xl text-white mb-4">Ready to be part of India's<br /><span className="text-primary">Drone Revolution?</span></h2>

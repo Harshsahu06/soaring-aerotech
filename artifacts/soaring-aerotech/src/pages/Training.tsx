@@ -33,14 +33,14 @@ export default function Training() {
     <main className="min-h-screen pt-20">
 
       {/* ── Hero ─────────────────────────────────── */}
-      <section className="relative min-h-[70vh] flex items-center overflow-hidden bg-[#0D1B2A]">
+      <section className="relative min-h-[70vh] flex items-center overflow-hidden bg-[#111111]">
         <div className="absolute inset-0">
           <img
             src="https://images.unsplash.com/photo-1473968512647-3e447244af8f?w=1600&h=900&fit=crop"
             alt=""
             className="w-full h-full object-cover opacity-30"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#0D1B2A] via-[#0D1B2A]/80 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#111111] via-[#111111]/80 to-transparent" />
         </div>
         <div className="container mx-auto px-4 md:px-6 relative z-10 py-24">
           <div className="max-w-2xl">
@@ -86,14 +86,14 @@ export default function Training() {
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="rounded-2xl border-2 border-primary overflow-hidden shadow-sm">
               <div className="relative h-40 overflow-hidden">
                 <img src="https://images.unsplash.com/photo-1601979031925-424e53b6caaa?w=600&h=300&fit=crop" alt="Small Class" className="w-full h-full object-cover" />
-                <div className="absolute inset-0 bg-[#0D1B2A]/75" />
+                <div className="absolute inset-0 bg-[#111111]/75" />
                 <div className="absolute inset-0 p-5 flex flex-col justify-end">
                   <span className="text-xs font-bold font-mono text-primary uppercase tracking-widest mb-1">Small Category</span>
                   <h3 className="font-display text-2xl text-white">Small Class — Rotorcraft</h3>
                   <p className="text-white/40 text-xs mt-1">VLOS · Class: Small · Category: Rotorcraft</p>
                 </div>
               </div>
-              <div className="p-6 bg-[#F5F4F0]">
+              <div className="p-6 bg-[#F5F5F5]">
                 <div className="flex items-end gap-1 mb-1">
                   <span className="font-display text-4xl text-foreground">₹25,000</span>
                   <span className="text-sm text-muted-foreground mb-1">+ GST / candidate</span>
@@ -107,14 +107,14 @@ export default function Training() {
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="rounded-2xl border border-border overflow-hidden shadow-sm">
               <div className="relative h-40 overflow-hidden">
                 <img src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=600&h=300&fit=crop" alt="Multirotor" className="w-full h-full object-cover" />
-                <div className="absolute inset-0 bg-[#0D1B2A]/75" />
+                <div className="absolute inset-0 bg-[#111111]/75" />
                 <div className="absolute inset-0 p-5 flex flex-col justify-end">
                   <span className="text-xs font-bold font-mono text-white/40 uppercase tracking-widest mb-1">Advanced</span>
                   <h3 className="font-display text-2xl text-white">Multirotor — DGCA</h3>
                   <p className="text-white/40 text-xs mt-1">DGCA-Certified Multirotor Training</p>
                 </div>
               </div>
-              <div className="p-6 bg-[#F5F4F0]">
+              <div className="p-6 bg-[#F5F5F5]">
                 <div className="flex items-end gap-1 mb-1">
                   <span className="font-display text-4xl text-foreground">₹35,000</span>
                   <span className="text-sm text-muted-foreground mb-1">+ GST / candidate</span>
@@ -133,7 +133,7 @@ export default function Training() {
               { icon: <BadgeCheck className="w-4 h-4 text-primary" />, label: "RPC Validity", value: "10 Years" },
               { icon: <Calendar className="w-4 h-4 text-primary" />, label: "Eligibility", value: "18–65 yrs, 10th Pass" },
             ].map((f, i) => (
-              <div key={i} className="bg-[#F5F4F0] border border-border rounded-xl p-4 flex gap-3 items-start">
+              <div key={i} className="bg-[#F5F5F5] border border-border rounded-xl p-4 flex gap-3 items-start">
                 <div className="mt-0.5 shrink-0">{f.icon}</div>
                 <div>
                   <div className="text-xs text-muted-foreground">{f.label}</div>
@@ -146,14 +146,14 @@ export default function Training() {
       </section>
 
       {/* ── Course structure with images ─────────── */}
-      <section className="py-20 bg-[#F5F4F0] border-b border-border">
+      <section className="py-20 bg-[#F5F5F5] border-b border-border">
         <div className="container mx-auto px-4 md:px-6">
           <div className="section-label mb-8">COURSE STRUCTURE</div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-3xl">
             <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="bg-white border border-border rounded-2xl overflow-hidden">
               <div className="relative h-44 overflow-hidden">
                 <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&h=300&fit=crop" alt="Theory Classes" className="w-full h-full object-cover" />
-                <div className="absolute inset-0 bg-[#0D1B2A]/60" />
+                <div className="absolute inset-0 bg-[#111111]/60" />
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="text-center">
                     <div className="w-12 h-12 rounded-full bg-primary/20 border-2 border-primary flex items-center justify-center font-display font-bold text-white text-lg mx-auto mb-2">1</div>
@@ -175,7 +175,7 @@ export default function Training() {
             <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="bg-white border border-border rounded-2xl overflow-hidden">
               <div className="relative h-44 overflow-hidden">
                 <img src="https://images.unsplash.com/photo-1473968512647-3e447244af8f?w=600&h=300&fit=crop" alt="Practical Flying" className="w-full h-full object-cover" />
-                <div className="absolute inset-0 bg-[#0D1B2A]/60" />
+                <div className="absolute inset-0 bg-[#111111]/60" />
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="text-center">
                     <div className="w-12 h-12 rounded-full bg-primary/20 border-2 border-primary flex items-center justify-center font-display font-bold text-white text-lg mx-auto mb-2">2</div>
@@ -207,7 +207,7 @@ export default function Training() {
             <div className="grid grid-cols-1 md:grid-cols-5 gap-6 relative z-10">
               {steps.map((s, i) => (
                 <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className="flex flex-col items-center text-center">
-                  <div className="w-16 h-16 rounded-full bg-[#F5F4F0] border-2 border-border flex items-center justify-center font-display text-sm text-foreground mb-4 hover:border-primary hover:text-primary transition-colors">{s.n}</div>
+                  <div className="w-16 h-16 rounded-full bg-[#F5F5F5] border-2 border-border flex items-center justify-center font-display text-sm text-foreground mb-4 hover:border-primary hover:text-primary transition-colors">{s.n}</div>
                   <div className="font-bold text-sm text-foreground mb-1">{s.title}</div>
                   <p className="text-xs text-muted-foreground leading-relaxed">{s.desc}</p>
                 </motion.div>
@@ -218,7 +218,7 @@ export default function Training() {
       </section>
 
       {/* ── Other programs ────────────────────────── */}
-      <section className="py-20 bg-[#F5F4F0] border-b border-border">
+      <section className="py-20 bg-[#F5F5F5] border-b border-border">
         <div className="container mx-auto px-4 md:px-6">
           <div className="mb-10">
             <div className="section-label">MORE PROGRAMS</div>
@@ -231,7 +231,7 @@ export default function Training() {
               >
                 <div className="relative h-40 overflow-hidden">
                   <img src={p.img} alt={p.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0D1B2A]/80 via-[#0D1B2A]/20 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#111111]/80 via-[#111111]/20 to-transparent" />
                   <div className="absolute top-3 right-3">
                     <span className="text-[10px] font-bold font-mono text-primary/90 bg-black/40 backdrop-blur-sm border border-primary/20 px-2 py-0.5 rounded-full">{p.tag}</span>
                   </div>
@@ -274,7 +274,7 @@ export default function Training() {
               <p className="text-muted-foreground mb-6 text-sm">Custom DGCA-aligned batch programs for government bodies, defence, police, and institutions — on-site or at our Indore facility.</p>
               <div className="flex flex-wrap gap-2 mb-8">
                 {["Government", "Army & Defence", "Police Forces", "Universities", "Smart Cities", "Corporates"].map((o, i) => (
-                  <span key={i} className="px-3 py-1.5 rounded-full bg-[#F5F4F0] border border-border text-sm font-medium">{o}</span>
+                  <span key={i} className="px-3 py-1.5 rounded-full bg-[#F5F5F5] border border-border text-sm font-medium">{o}</span>
                 ))}
               </div>
               <Link href="/contact"><Button className="rounded-full px-8 h-12 font-bold">Request Corporate Proposal</Button></Link>
@@ -284,7 +284,7 @@ export default function Training() {
       </section>
 
       {/* ── Eligibility & Docs ───────────────────── */}
-      <section className="py-20 bg-[#F5F4F0] border-b border-border">
+      <section className="py-20 bg-[#F5F5F5] border-b border-border">
         <div className="container mx-auto px-4 md:px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 max-w-4xl">
             <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="bg-white rounded-2xl border border-border p-7">
@@ -311,7 +311,7 @@ export default function Training() {
               <ul className="space-y-3">
                 {docs.map((d, i) => (
                   <li key={i} className="flex items-start gap-3">
-                    <div className="w-7 h-7 rounded-lg bg-[#F5F4F0] border border-border flex items-center justify-center shrink-0 text-foreground/40 mt-0.5">{d.icon}</div>
+                    <div className="w-7 h-7 rounded-lg bg-[#F5F5F5] border border-border flex items-center justify-center shrink-0 text-foreground/40 mt-0.5">{d.icon}</div>
                     <span className="text-sm text-foreground/75 leading-snug">{d.label}</span>
                   </li>
                 ))}
@@ -335,12 +335,12 @@ export default function Training() {
               <p className="text-xs text-muted-foreground text-center mb-7">Our training coordinator will contact you within 24 hours.</p>
               <form className="space-y-4">
                 <div className="grid grid-cols-2 gap-3">
-                  <div><label className="text-xs font-semibold text-foreground block mb-1.5">Full Name</label><input type="text" className="w-full bg-[#F5F4F0] border border-border rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-primary" placeholder="Your name" /></div>
-                  <div><label className="text-xs font-semibold text-foreground block mb-1.5">Phone</label><input type="tel" className="w-full bg-[#F5F4F0] border border-border rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-primary" placeholder="+91 78699 18736" /></div>
+                  <div><label className="text-xs font-semibold text-foreground block mb-1.5">Full Name</label><input type="text" className="w-full bg-[#F5F5F5] border border-border rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-primary" placeholder="Your name" /></div>
+                  <div><label className="text-xs font-semibold text-foreground block mb-1.5">Phone</label><input type="tel" className="w-full bg-[#F5F5F5] border border-border rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-primary" placeholder="+91 78699 18736" /></div>
                 </div>
-                <div><label className="text-xs font-semibold text-foreground block mb-1.5">Email</label><input type="email" className="w-full bg-[#F5F4F0] border border-border rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-primary" placeholder="you@example.com" /></div>
+                <div><label className="text-xs font-semibold text-foreground block mb-1.5">Email</label><input type="email" className="w-full bg-[#F5F5F5] border border-border rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-primary" placeholder="you@example.com" /></div>
                 <div><label className="text-xs font-semibold text-foreground block mb-1.5">Program</label>
-                  <select className="w-full bg-[#F5F4F0] border border-border rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-primary appearance-none">
+                  <select className="w-full bg-[#F5F5F5] border border-border rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-primary appearance-none">
                     <option value="">Select a program...</option>
                     <option>RPC — Small Class Rotorcraft (₹25,000 + GST)</option>
                     <option>RPC — Multirotor DGCA Certified (₹35,000 + GST)</option>
@@ -354,7 +354,7 @@ export default function Training() {
                     <option>Corporate / Institutional Batch</option>
                   </select>
                 </div>
-                <div><label className="text-xs font-semibold text-foreground block mb-1.5">City / Location</label><input type="text" className="w-full bg-[#F5F4F0] border border-border rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-primary" placeholder="Your city" /></div>
+                <div><label className="text-xs font-semibold text-foreground block mb-1.5">City / Location</label><input type="text" className="w-full bg-[#F5F5F5] border border-border rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-primary" placeholder="Your city" /></div>
                 <Button type="submit" className="w-full h-12 rounded-xl text-base font-bold">Submit Enquiry</Button>
               </form>
               <div className="mt-6 pt-5 border-t border-border flex items-center justify-center gap-2 text-sm text-muted-foreground">

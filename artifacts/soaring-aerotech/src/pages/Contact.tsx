@@ -7,14 +7,14 @@ export default function Contact() {
     <main className="min-h-screen pt-20">
 
       {/* ── Hero ─────────────────────────────────── */}
-      <section className="relative min-h-[55vh] flex items-center overflow-hidden bg-[#0D1B2A]">
+      <section className="relative min-h-[55vh] flex items-center overflow-hidden bg-[#111111]">
         <div className="absolute inset-0">
           <img
             src="https://images.unsplash.com/photo-1573152143286-0c422b4d2175?w=1600&h=900&fit=crop"
             alt=""
             className="w-full h-full object-cover opacity-25"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#0D1B2A] via-[#0D1B2A]/85 to-[#0D1B2A]/50" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#111111] via-[#111111]/85 to-[#111111]/50" />
         </div>
         <div className="container mx-auto px-4 md:px-6 relative z-10 py-24 text-center">
           <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary font-mono text-xs mb-6 uppercase tracking-widest">
@@ -38,14 +38,14 @@ export default function Contact() {
               <div>
                 <div className="section-label mb-6">CONTACT INFORMATION</div>
                 <div className="space-y-4">
-                  <div className="flex items-start gap-4 p-6 rounded-2xl bg-[#F5F4F0] border border-border hover:border-primary/20 transition-colors">
+                  <div className="flex items-start gap-4 p-6 rounded-2xl bg-[#F5F5F5] border border-border hover:border-primary/20 transition-colors">
                     <div className="p-3 rounded-full bg-primary/10 text-primary mt-0.5 shrink-0"><MapPin className="w-5 h-5" /></div>
                     <div>
                       <h4 className="font-bold text-foreground mb-1">Headquarters</h4>
                       <p className="text-muted-foreground text-sm leading-relaxed">Tech Park, Block B, Innovation Wing<br />Indore, Madhya Pradesh<br />India 452001</p>
                     </div>
                   </div>
-                  <div className="flex items-start gap-4 p-6 rounded-2xl bg-[#F5F4F0] border border-border hover:border-primary/20 transition-colors">
+                  <div className="flex items-start gap-4 p-6 rounded-2xl bg-[#F5F5F5] border border-border hover:border-primary/20 transition-colors">
                     <div className="p-3 rounded-full bg-primary/10 text-primary mt-0.5 shrink-0"><Phone className="w-5 h-5" /></div>
                     <div>
                       <h4 className="font-bold text-foreground mb-1">Phone</h4>
@@ -53,7 +53,7 @@ export default function Contact() {
                       <p className="text-muted-foreground text-sm">+91 98765 43210</p>
                     </div>
                   </div>
-                  <div className="flex items-start gap-4 p-6 rounded-2xl bg-[#F5F4F0] border border-border hover:border-primary/20 transition-colors">
+                  <div className="flex items-start gap-4 p-6 rounded-2xl bg-[#F5F5F5] border border-border hover:border-primary/20 transition-colors">
                     <div className="p-3 rounded-full bg-primary/10 text-primary mt-0.5 shrink-0"><Mail className="w-5 h-5" /></div>
                     <div>
                       <h4 className="font-bold text-foreground mb-1">Email</h4>
@@ -71,7 +71,7 @@ export default function Contact() {
                   alt="Indore, Madhya Pradesh"
                   className="w-full h-full object-cover"
                 />
-                <div className="absolute inset-0 bg-[#0D1B2A]/50" />
+                <div className="absolute inset-0 bg-[#111111]/50" />
                 <div className="absolute inset-0 flex flex-col items-center justify-center gap-2">
                   <MapPin className="w-8 h-8 text-primary" />
                   <p className="text-white font-bold">Indore, Madhya Pradesh</p>
@@ -87,20 +87,20 @@ export default function Contact() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                   <div className="space-y-2">
                     <label className="text-sm font-semibold text-foreground">Full Name *</label>
-                    <input type="text" required className="w-full bg-[#F5F4F0] border border-border rounded-xl px-4 py-3 text-foreground focus:outline-none focus:border-primary transition-colors text-sm" placeholder="Your name" />
+                    <input type="text" required className="w-full bg-[#F5F5F5] border border-border rounded-xl px-4 py-3 text-foreground focus:outline-none focus:border-primary transition-colors text-sm" placeholder="Your name" />
                   </div>
                   <div className="space-y-2">
                     <label className="text-sm font-semibold text-foreground">Phone Number *</label>
-                    <input type="tel" required className="w-full bg-[#F5F4F0] border border-border rounded-xl px-4 py-3 text-foreground focus:outline-none focus:border-primary transition-colors text-sm" placeholder="+91 78699 18736" />
+                    <input type="tel" required className="w-full bg-[#F5F5F5] border border-border rounded-xl px-4 py-3 text-foreground focus:outline-none focus:border-primary transition-colors text-sm" placeholder="+91 78699 18736" />
                   </div>
                 </div>
                 <div className="space-y-2">
                   <label className="text-sm font-semibold text-foreground">Email Address</label>
-                  <input type="email" className="w-full bg-[#F5F4F0] border border-border rounded-xl px-4 py-3 text-foreground focus:outline-none focus:border-primary transition-colors text-sm" placeholder="you@example.com" />
+                  <input type="email" className="w-full bg-[#F5F5F5] border border-border rounded-xl px-4 py-3 text-foreground focus:outline-none focus:border-primary transition-colors text-sm" placeholder="you@example.com" />
                 </div>
                 <div className="space-y-2">
                   <label className="text-sm font-semibold text-foreground">Subject / Inquiry Type *</label>
-                  <select required className="w-full bg-[#F5F4F0] border border-border rounded-xl px-4 py-3 text-foreground focus:outline-none focus:border-primary transition-colors appearance-none text-sm">
+                  <select required className="w-full bg-[#F5F5F5] border border-border rounded-xl px-4 py-3 text-foreground focus:outline-none focus:border-primary transition-colors appearance-none text-sm">
                     <option value="">Select an option...</option>
                     <option value="training">Drone Training & Courses</option>
                     <option value="services">Enterprise Drone Services</option>
@@ -111,7 +111,7 @@ export default function Contact() {
                 </div>
                 <div className="space-y-2">
                   <label className="text-sm font-semibold text-foreground">Message *</label>
-                  <textarea required rows={5} placeholder="Tell us about your project or inquiry..." className="w-full bg-[#F5F4F0] border border-border rounded-xl px-4 py-3 text-foreground focus:outline-none focus:border-primary transition-colors resize-none text-sm"></textarea>
+                  <textarea required rows={5} placeholder="Tell us about your project or inquiry..." className="w-full bg-[#F5F5F5] border border-border rounded-xl px-4 py-3 text-foreground focus:outline-none focus:border-primary transition-colors resize-none text-sm"></textarea>
                 </div>
                 <Button type="submit" className="w-full h-13 rounded-xl text-base font-bold gap-2">
                   <Send className="w-4 h-4" /> Send Message
@@ -132,7 +132,7 @@ export default function Contact() {
       <section className="relative py-16 overflow-hidden">
         <div className="absolute inset-0">
           <img src="https://images.unsplash.com/photo-1508614589041-895b88991e3e?w=1600&h=500&fit=crop" alt="" className="w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-[#0D1B2A]/88" />
+          <div className="absolute inset-0 bg-[#111111]/88" />
         </div>
         <div className="container mx-auto px-4 md:px-6 relative z-10">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
