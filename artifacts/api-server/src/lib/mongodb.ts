@@ -13,8 +13,6 @@ export async function connectMongo() {
   await mongoose.connect(MONGODB_URI, {
     serverSelectionTimeoutMS: 8000,
     connectTimeoutMS: 8000,
-    tls: true,
-    tlsAllowInvalidCertificates: false,
   });
   logger.info("Connected to MongoDB");
 }
