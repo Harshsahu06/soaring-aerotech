@@ -3,7 +3,6 @@ import { useEffect, useRef, useState } from "react";
 import { Link } from "wouter";
 import {
   ChevronRight,
-  ShieldCheck,
   Clock,
   Map,
   Cpu,
@@ -20,6 +19,8 @@ import {
   IndianRupee,
   BadgeCheck,
   ChevronLeft,
+  CheckCircle,
+  Send,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -159,6 +160,36 @@ function CourseSlider() {
 }
 
 export default function Training() {
+  const [enrollForm, setEnrollForm] = useState({
+    name: "", phone: "", email: "", program: "DGCA RPC — Small Class (₹25,000)", message: "",
+  });
+  const [enrollStatus, setEnrollStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+
+  const handleEnrollChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    setEnrollForm((f) => ({ ...f, [e.target.name]: e.target.value }));
+  };
+
+  const handleEnrollSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setEnrollStatus("loading");
+    try {
+      const res = await fetch("/api/forms/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ type: "enrollment", ...enrollForm }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        setEnrollStatus("success");
+        setEnrollForm({ name: "", phone: "", email: "", program: "DGCA RPC — Small Class (₹25,000)", message: "" });
+      } else {
+        setEnrollStatus("error");
+      }
+    } catch {
+      setEnrollStatus("error");
+    }
+  };
+
   return (
     <main className="min-h-screen pt-20">
 
@@ -438,33 +469,62 @@ export default function Training() {
             <div className="bg-white rounded-2xl p-8 shadow-lg border-t-4 border-primary border border-border">
               <h2 className="font-display text-2xl text-foreground mb-1 text-center">Enrollment Enquiry</h2>
               <p className="text-xs text-muted-foreground text-center mb-7">Our training coordinator will contact you within 24 hours.</p>
-              <form className="space-y-4">
-                <div className="grid grid-cols-2 gap-3">
-                  <div><label className="text-xs font-semibold text-foreground block mb-1.5">Full Name</label><input type="text" className="w-full bg-[#F5F5F5] border border-border rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-primary" placeholder="Your name" /></div>
-                  <div><label className="text-xs font-semibold text-foreground block mb-1.5">Phone</label><input type="tel" className="w-full bg-[#F5F5F5] border border-border rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-primary" placeholder="+91 78699 18736" /></div>
+
+              {enrollStatus === "success" ? (
+                <div className="flex flex-col items-center justify-center py-10 text-center gap-4">
+                  <div className="w-14 h-14 rounded-full bg-green-100 flex items-center justify-center">
+                    <CheckCircle className="w-7 h-7 text-green-600" />
+                  </div>
+                  <h3 className="font-display text-xl text-foreground">Enquiry Submitted!</h3>
+                  <p className="text-muted-foreground text-sm max-w-xs">Our training coordinator will reach out within 24 hours.</p>
+                  <Button variant="outline" className="rounded-full mt-1" onClick={() => setEnrollStatus("idle")}>Submit Another</Button>
                 </div>
-                <div><label className="text-xs font-semibold text-foreground block mb-1.5">Email</label><input type="email" className="w-full bg-[#F5F5F5] border border-border rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-primary" placeholder="you@example.com" /></div>
-                <div>
-                  <label className="text-xs font-semibold text-foreground block mb-1.5">Program</label>
-                  <select className="w-full bg-[#F5F5F5] border border-border rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-primary appearance-none">
-                    <option>DGCA RPC — Small Class (₹25,000)</option>
-                    <option>DGCA Multirotor (₹35,000)</option>
-                    <option>Mapping & Surveying</option>
-                    <option>GIS & Geospatial</option>
-                    <option>Thermal & Multispectral</option>
-                    <option>AI/ML for Drones</option>
-                    <option>Precision Agriculture</option>
-                    <option>Assembly & Maintenance</option>
-                    <option>Drone Entrepreneurship</option>
-                    <option>Corporate Batch Enquiry</option>
-                  </select>
-                </div>
-                <div><label className="text-xs font-semibold text-foreground block mb-1.5">Message (optional)</label><textarea rows={3} className="w-full bg-[#F5F5F5] border border-border rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-primary resize-none" placeholder="Any specific requirements or questions..." /></div>
-                <Button type="submit" className="w-full h-12 rounded-xl font-bold">Submit Enquiry</Button>
-                <p className="text-[10px] text-muted-foreground text-center">
-                  By submitting you agree to be contacted by our training team.
-                </p>
-              </form>
+              ) : (
+                <form className="space-y-4" onSubmit={handleEnrollSubmit}>
+                  <div className="grid grid-cols-2 gap-3">
+                    <div>
+                      <label className="text-xs font-semibold text-foreground block mb-1.5">Full Name *</label>
+                      <input name="name" type="text" required value={enrollForm.name} onChange={handleEnrollChange} className="w-full bg-[#F5F5F5] border border-border rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-primary" placeholder="Your name" />
+                    </div>
+                    <div>
+                      <label className="text-xs font-semibold text-foreground block mb-1.5">Phone *</label>
+                      <input name="phone" type="tel" required value={enrollForm.phone} onChange={handleEnrollChange} className="w-full bg-[#F5F5F5] border border-border rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-primary" placeholder="+91 78699 18736" />
+                    </div>
+                  </div>
+                  <div>
+                    <label className="text-xs font-semibold text-foreground block mb-1.5">Email</label>
+                    <input name="email" type="email" value={enrollForm.email} onChange={handleEnrollChange} className="w-full bg-[#F5F5F5] border border-border rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-primary" placeholder="you@example.com" />
+                  </div>
+                  <div>
+                    <label className="text-xs font-semibold text-foreground block mb-1.5">Program</label>
+                    <select name="program" value={enrollForm.program} onChange={handleEnrollChange} className="w-full bg-[#F5F5F5] border border-border rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-primary appearance-none">
+                      <option>DGCA RPC — Small Class (₹25,000)</option>
+                      <option>DGCA Multirotor (₹35,000)</option>
+                      <option>Mapping & Surveying</option>
+                      <option>GIS & Geospatial</option>
+                      <option>Thermal & Multispectral</option>
+                      <option>AI/ML for Drones</option>
+                      <option>Precision Agriculture</option>
+                      <option>Assembly & Maintenance</option>
+                      <option>Drone Entrepreneurship</option>
+                      <option>Corporate Batch Enquiry</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label className="text-xs font-semibold text-foreground block mb-1.5">Message (optional)</label>
+                    <textarea name="message" rows={3} value={enrollForm.message} onChange={handleEnrollChange} className="w-full bg-[#F5F5F5] border border-border rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-primary resize-none" placeholder="Any specific requirements or questions..." />
+                  </div>
+                  {enrollStatus === "error" && (
+                    <p className="text-red-500 text-xs">Something went wrong. Please try again or call us directly.</p>
+                  )}
+                  <Button type="submit" disabled={enrollStatus === "loading"} className="w-full h-12 rounded-xl font-bold gap-2">
+                    {enrollStatus === "loading" ? "Submitting..." : <><Send className="w-4 h-4" /> Submit Enquiry</>}
+                  </Button>
+                  <p className="text-[10px] text-muted-foreground text-center">
+                    By submitting you agree to be contacted by our training team.
+                  </p>
+                </form>
+              )}
             </div>
           </div>
         </div>

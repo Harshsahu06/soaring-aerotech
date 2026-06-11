@@ -1,8 +1,39 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
-import { MapPin, Phone, Mail, Send, MessageCircle } from "lucide-react";
+import { MapPin, Phone, Mail, Send, MessageCircle, CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export default function Contact() {
+  const [form, setForm] = useState({
+    name: "", phone: "", email: "", subject: "", message: "",
+  });
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setStatus("loading");
+    try {
+      const res = await fetch("/api/forms/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ type: "contact", ...form }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        setStatus("success");
+        setForm({ name: "", phone: "", email: "", subject: "", message: "" });
+      } else {
+        setStatus("error");
+      }
+    } catch {
+      setStatus("error");
+    }
+  };
+
   return (
     <main className="min-h-screen pt-20">
 
@@ -63,8 +94,6 @@ export default function Contact() {
                   </div>
                 </div>
               </div>
-
-              {/* Aerial image of Indore area */}
               <div className="relative h-64 rounded-2xl overflow-hidden">
                 <img
                   src="https://images.unsplash.com/photo-1449157291145-7efd050a4d0e?w=800&h=500&fit=crop"
@@ -83,42 +112,58 @@ export default function Contact() {
             {/* Form */}
             <motion.div initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="bg-white p-8 md:p-10 rounded-3xl border border-border shadow-lg">
               <div className="section-label mb-6">SEND A MESSAGE</div>
-              <form className="space-y-5">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                  <div className="space-y-2">
-                    <label className="text-sm font-semibold text-foreground">Full Name *</label>
-                    <input type="text" required className="w-full bg-[#F5F5F5] border border-border rounded-xl px-4 py-3 text-foreground focus:outline-none focus:border-primary transition-colors text-sm" placeholder="Your name" />
+
+              {status === "success" ? (
+                <div className="flex flex-col items-center justify-center py-16 text-center gap-4">
+                  <div className="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center">
+                    <CheckCircle className="w-8 h-8 text-green-600" />
+                  </div>
+                  <h3 className="font-display text-2xl text-foreground">Message Sent!</h3>
+                  <p className="text-muted-foreground text-sm max-w-xs">We've received your message and will get back to you within 24 hours.</p>
+                  <Button variant="outline" className="rounded-full mt-2" onClick={() => setStatus("idle")}>Send Another</Button>
+                </div>
+              ) : (
+                <form className="space-y-5" onSubmit={handleSubmit}>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                    <div className="space-y-2">
+                      <label className="text-sm font-semibold text-foreground">Full Name *</label>
+                      <input name="name" type="text" required value={form.name} onChange={handleChange} className="w-full bg-[#F5F5F5] border border-border rounded-xl px-4 py-3 text-foreground focus:outline-none focus:border-primary transition-colors text-sm" placeholder="Your name" />
+                    </div>
+                    <div className="space-y-2">
+                      <label className="text-sm font-semibold text-foreground">Phone Number *</label>
+                      <input name="phone" type="tel" required value={form.phone} onChange={handleChange} className="w-full bg-[#F5F5F5] border border-border rounded-xl px-4 py-3 text-foreground focus:outline-none focus:border-primary transition-colors text-sm" placeholder="+91 78699 18736" />
+                    </div>
                   </div>
                   <div className="space-y-2">
-                    <label className="text-sm font-semibold text-foreground">Phone Number *</label>
-                    <input type="tel" required className="w-full bg-[#F5F5F5] border border-border rounded-xl px-4 py-3 text-foreground focus:outline-none focus:border-primary transition-colors text-sm" placeholder="+91 78699 18736" />
+                    <label className="text-sm font-semibold text-foreground">Email Address</label>
+                    <input name="email" type="email" value={form.email} onChange={handleChange} className="w-full bg-[#F5F5F5] border border-border rounded-xl px-4 py-3 text-foreground focus:outline-none focus:border-primary transition-colors text-sm" placeholder="you@example.com" />
                   </div>
-                </div>
-                <div className="space-y-2">
-                  <label className="text-sm font-semibold text-foreground">Email Address</label>
-                  <input type="email" className="w-full bg-[#F5F5F5] border border-border rounded-xl px-4 py-3 text-foreground focus:outline-none focus:border-primary transition-colors text-sm" placeholder="you@example.com" />
-                </div>
-                <div className="space-y-2">
-                  <label className="text-sm font-semibold text-foreground">Subject / Inquiry Type *</label>
-                  <select required className="w-full bg-[#F5F5F5] border border-border rounded-xl px-4 py-3 text-foreground focus:outline-none focus:border-primary transition-colors appearance-none text-sm">
-                    <option value="">Select an option...</option>
-                    <option value="training">Drone Training & Courses</option>
-                    <option value="services">Enterprise Drone Services</option>
-                    <option value="manufacturing">UAV Manufacturing Inquiry</option>
-                    <option value="partnership">Partnership & Research</option>
-                    <option value="other">Other Inquiry</option>
-                  </select>
-                </div>
-                <div className="space-y-2">
-                  <label className="text-sm font-semibold text-foreground">Message *</label>
-                  <textarea required rows={5} placeholder="Tell us about your project or inquiry..." className="w-full bg-[#F5F5F5] border border-border rounded-xl px-4 py-3 text-foreground focus:outline-none focus:border-primary transition-colors resize-none text-sm"></textarea>
-                </div>
-                <Button type="submit" className="w-full h-13 rounded-xl text-base font-bold gap-2">
-                  <Send className="w-4 h-4" /> Send Message
-                </Button>
-              </form>
+                  <div className="space-y-2">
+                    <label className="text-sm font-semibold text-foreground">Subject / Inquiry Type *</label>
+                    <select name="subject" required value={form.subject} onChange={handleChange} className="w-full bg-[#F5F5F5] border border-border rounded-xl px-4 py-3 text-foreground focus:outline-none focus:border-primary transition-colors appearance-none text-sm">
+                      <option value="">Select an option...</option>
+                      <option value="training">Drone Training & Courses</option>
+                      <option value="services">Enterprise Drone Services</option>
+                      <option value="manufacturing">UAV Manufacturing Inquiry</option>
+                      <option value="partnership">Partnership & Research</option>
+                      <option value="other">Other Inquiry</option>
+                    </select>
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-sm font-semibold text-foreground">Message *</label>
+                    <textarea name="message" required rows={5} value={form.message} onChange={handleChange} placeholder="Tell us about your project or inquiry..." className="w-full bg-[#F5F5F5] border border-border rounded-xl px-4 py-3 text-foreground focus:outline-none focus:border-primary transition-colors resize-none text-sm" />
+                  </div>
+                  {status === "error" && (
+                    <p className="text-red-500 text-sm">Something went wrong. Please try again or call us directly.</p>
+                  )}
+                  <Button type="submit" disabled={status === "loading"} className="w-full h-12 rounded-xl text-base font-bold gap-2">
+                    {status === "loading" ? "Sending..." : <><Send className="w-4 h-4" /> Send Message</>}
+                  </Button>
+                </form>
+              )}
+
               <div className="mt-6 pt-6 border-t border-border">
-                <a href="https://wa.me/917869918736" className="inline-flex items-center justify-center w-full h-13 rounded-xl text-base font-bold bg-[#25D366] hover:bg-[#1ebe57] text-white transition-colors gap-2">
+                <a href="https://wa.me/917869918736" className="inline-flex items-center justify-center w-full h-12 rounded-xl text-base font-bold bg-[#25D366] hover:bg-[#1ebe57] text-white transition-colors gap-2">
                   <MessageCircle className="w-5 h-5" /> Chat on WhatsApp
                 </a>
               </div>
