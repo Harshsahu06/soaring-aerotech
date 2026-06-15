@@ -532,31 +532,36 @@ export default function Home() {
 
   return (
     <main className="min-h-screen">
+      {/* ── Hero ───────  const [activeMode, setActiveMode] = useState("academy");
+  const [selectedSpec, setSelectedSpec] = useState("autopilot");
+
+  return (
+    <main className="min-h-screen">
       {/* ── Hero ─────────────────────────────────── */}
-      <section className="relative min-h-screen flex flex-col justify-center items-center pt-32 pb-20 overflow-hidden bg-[#030712] text-white">
+      <section className="relative min-h-screen flex flex-col justify-center items-center pt-32 pb-20 overflow-hidden bg-[#02040a] text-white">
         
         {/* Soft, professional background gradients */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
           {/* Central ambient glow behind the content */}
           <motion.div 
             animate={{ 
-              scale: [1, 1.1, 0.95, 1],
-              opacity: [0.3, 0.45, 0.35, 0.3]
+              scale: [1, 1.08, 0.96, 1],
+              opacity: [0.25, 0.4, 0.3, 0.25]
             }}
-            transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/20 rounded-full blur-[140px]"
+            transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-primary/10 rounded-full blur-[150px]"
           />
           <motion.div 
             animate={{ 
-              scale: [0.9, 1.05, 1, 0.9],
-              opacity: [0.2, 0.35, 0.25, 0.2]
+              scale: [0.95, 1.1, 1, 0.95],
+              opacity: [0.15, 0.3, 0.2, 0.15]
             }}
-            transition={{ duration: 15, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-            className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-cyan-500/15 rounded-full blur-[120px]"
+            transition={{ duration: 18, repeat: Infinity, ease: "easeInOut", delay: 2.5 }}
+            className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-cyan-500/10 rounded-full blur-[130px]"
           />
 
           {/* Clean CAD dot grid */}
-          <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.025)_1px,transparent_1px)] [background-size:32px_32px] opacity-80" />
+          <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.02)_1px,transparent_1px)] [background-size:32px_32px] opacity-80" />
 
           {/* Fine structural lines */}
           <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/5 to-transparent" />
@@ -572,11 +577,11 @@ export default function Home() {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-md mb-8"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/[0.03] border border-white/10 backdrop-blur-md mb-8"
           >
-            <span className="flex h-2 w-2 rounded-full bg-primary animate-pulse" />
-            <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-primary">
-              ✦ Leading Drone Technology Platform
+            <span className="flex h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
+            <span className="text-[10px] font-bold font-mono tracking-[0.25em] text-slate-300">
+              ✦ SYSTEM STATUS: NOMINAL // ONLINE
             </span>
           </motion.div>
 
@@ -585,11 +590,12 @@ export default function Home() {
             initial={{ opacity: 0, y: 25 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.1 }}
-            className="font-display text-4xl sm:text-6xl md:text-8xl lg:text-[6.5rem] leading-[1.05] mb-8 tracking-tight max-w-5xl"
+            className="font-display text-4xl sm:text-6xl md:text-8xl leading-[1.02] mb-6 tracking-tight max-w-5xl"
           >
-            Building India's Future{" "}
+            SOARING AEROTECH
+            <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-red-500 to-amber-500 font-extrabold shadow-sm">
-              Drone Ecosystem
+              AEROSPACE SYSTEM PORTAL
             </span>
           </motion.h1>
 
@@ -598,124 +604,320 @@ export default function Home() {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-slate-400 text-base sm:text-lg md:text-xl mb-10 leading-relaxed max-w-2xl font-light"
+            className="text-slate-400 text-xs sm:text-sm md:text-base mb-10 leading-relaxed max-w-2xl font-mono uppercase tracking-wider"
           >
-            From certifying India's next generation of drone pilots to manufacturing
-            defence-grade UAVs — everything under one roof in Madhya Pradesh.
+            Madhya Pradesh's premier DGCA certified drone pilot academy, defense-grade UAV manufacturing, and strategic mapping network.
           </motion.p>
 
-          {/* Actions */}
+          {/* Tactical Mode Selector Bar */}
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="flex flex-wrap items-center justify-center gap-4 mb-20"
+            className="flex flex-wrap items-center justify-center gap-2 mb-10 p-1.5 bg-white/[0.02] border border-white/5 rounded-2xl backdrop-blur-md"
           >
-            <Link href="/training">
-              <Button
-                size="lg"
-                className="h-14 px-8 rounded-full text-sm font-bold tracking-wider uppercase bg-primary hover:bg-primary/90 hover:shadow-[0_0_25px_rgba(239,68,68,0.3)] hover:-translate-y-0.5 transition-all duration-300 group"
-              >
-                Explore Programs{" "}
-                <ChevronRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
-              </Button>
-            </Link>
-            <Link href="/contact">
-              <Button
-                size="lg"
-                variant="outline"
-                className="h-14 px-8 rounded-full text-sm font-bold tracking-wider uppercase border-white/10 text-white bg-white/5 hover:bg-white/10 hover:border-white/20 hover:-translate-y-0.5 transition-all duration-300 shadow-sm"
-              >
-                Partner With Us
-              </Button>
-            </Link>
+            <button
+              onClick={() => setActiveMode("academy")}
+              className={`px-5 py-2.5 rounded-xl text-xs font-mono font-bold tracking-wider uppercase transition-all duration-300 ${
+                activeMode === "academy"
+                  ? "bg-primary text-white shadow-[0_0_15px_rgba(239,68,68,0.4)]"
+                  : "text-slate-400 hover:text-white hover:bg-white/5"
+              }`}
+            >
+              [ 01 / PILOT ACADEMY ]
+            </button>
+            <button
+              onClick={() => setActiveMode("manufacturing")}
+              className={`px-5 py-2.5 rounded-xl text-xs font-mono font-bold tracking-wider uppercase transition-all duration-300 ${
+                activeMode === "manufacturing"
+                  ? "bg-cyan-500 text-white shadow-[0_0_15px_rgba(6,182,212,0.4)]"
+                  : "text-slate-400 hover:text-white hover:bg-white/5"
+              }`}
+            >
+              [ 02 / UAV ENGINEERING ]
+            </button>
+            <button
+              onClick={() => setActiveMode("operations")}
+              className={`px-5 py-2.5 rounded-xl text-xs font-mono font-bold tracking-wider uppercase transition-all duration-300 ${
+                activeMode === "operations"
+                  ? "bg-amber-500 text-white shadow-[0_0_15px_rgba(245,158,11,0.4)]"
+                  : "text-slate-400 hover:text-white hover:bg-white/5"
+              }`}
+            >
+              [ 03 / AERIAL MISSION CONTROL ]
+            </button>
           </motion.div>
 
-          {/* Centered Showcase Element: Futuristic 3D Telemetry Console & Drone View */}
+          {/* Interactive Widescreen Control Dashboard */}
           <motion.div
-            initial={{ opacity: 0, y: 40, scale: 0.95 }}
+            key={activeMode}
+            initial={{ opacity: 0, y: 30, scale: 0.98 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ duration: 1, delay: 0.4, ease: "easeOut" }}
-            className="relative w-full max-w-5xl rounded-3xl overflow-hidden border border-white/10 bg-slate-900/40 backdrop-blur-xl shadow-[0_0_80px_rgba(0,0,0,0.8)] p-6 md:p-8 group"
+            transition={{ duration: 0.5, ease: "easeOut" }}
+            className="w-full max-w-5xl rounded-3xl overflow-hidden border border-white/10 bg-slate-950/70 backdrop-blur-xl shadow-[0_0_80px_rgba(0,0,0,0.9)] p-6 md:p-8 relative min-h-[440px] flex items-center"
           >
-            {/* Ambient inner glow */}
-            <div className="absolute inset-0 bg-gradient-to-b from-white/[0.02] to-transparent pointer-events-none" />
+            {/* Ambient inner console glow */}
+            <div className="absolute inset-0 bg-gradient-to-b from-white/[0.01] to-transparent pointer-events-none" />
 
-            {/* Layout inside showcase: left column: live drone visual; right column: telemetry specs */}
-            <div className="grid md:grid-cols-12 gap-8 items-center text-left">
+            <div className="grid md:grid-cols-12 gap-8 items-center text-left w-full">
               
-              {/* Left Column: Drone Image with scanning laser */}
-              <div className="md:col-span-7 relative rounded-2xl overflow-hidden aspect-[16/10] bg-black/40 border border-white/5">
-                <img
-                  src="https://images.unsplash.com/photo-1527977966376-1c8408f9f108?w=1200&h=800&fit=crop"
-                  alt="Sleek drone"
-                  className="w-full h-full object-cover opacity-90 group-hover:scale-102 transition-transform duration-700"
-                />
-                
-                {/* Scan Laser */}
-                <motion.div
-                  animate={{ translateY: ["0px", "280px", "0px"] }}
-                  transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-                  className="absolute left-0 right-0 h-px bg-cyan-400 shadow-[0_0_8px_#22d3ee] pointer-events-none"
-                  style={{ top: "0" }}
-                />
+              {/* Dynamic Interactive Left Panel depending on activeMode */}
+              <div className="md:col-span-7">
+                {activeMode === "academy" && (
+                  <div className="relative aspect-[16/10] bg-[#020408] rounded-2xl border border-white/5 overflow-hidden flex flex-col justify-center items-center p-6">
+                    {/* Decorative cyber grid background */}
+                    <div className="absolute inset-0 bg-[linear-gradient(to_right,#0c101b_1px,transparent_1px),linear-gradient(to_bottom,#0c101b_1px,transparent_1px)] [background-size:24px_24px]" />
+                    
+                    {/* Dynamic scan line */}
+                    <motion.div
+                      animate={{ translateY: ["0px", "240px", "0px"] }}
+                      transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
+                      className="absolute left-0 right-0 h-px bg-emerald-500/20 shadow-[0_0_10px_#10b981] pointer-events-none"
+                    />
+                    
+                    {/* Regional Grid Dots */}
+                    <svg className="w-full h-full max-h-[200px] text-slate-700 relative z-10" viewBox="0 0 300 200" fill="none">
+                      {/* Regional borders simulated */}
+                      <path d="M50 50 L120 25 L200 40 L250 80 L210 160 L120 180 L40 120 Z" stroke="rgba(255,255,255,0.03)" strokeWidth="1" strokeDasharray="3 3" />
+                      
+                      {/* Indore Training Node */}
+                      <g>
+                        <circle cx="80" cy="110" r="10" className="fill-emerald-500/10 stroke-emerald-400 stroke-1 animate-ping" />
+                        <circle cx="80" cy="110" r="4" className="fill-emerald-400" />
+                        <text x="92" y="113" fill="#cbd5e1" fontSize="9" fontFamily="monospace">INDORE_RPTO</text>
+                      </g>
+                      
+                      {/* Bhopal Training Node */}
+                      <g>
+                        <circle cx="150" cy="95" r="10" className="fill-emerald-500/10 stroke-emerald-400 stroke-1 animate-ping" style={{ animationDelay: "1s" }} />
+                        <circle cx="150" cy="95" r="4" className="fill-emerald-400" />
+                        <text x="162" y="98" fill="#cbd5e1" fontSize="9" fontFamily="monospace">BHOPAL_RPTO</text>
+                      </g>
 
-                {/* Overlaid system coordinate text */}
-                <div className="absolute top-4 left-4 bg-black/80 backdrop-blur-md px-3 py-1.5 rounded-lg border border-white/10 text-[9px] font-mono tracking-wider text-slate-300 flex items-center gap-2">
-                  <span className="h-1.5 w-1.5 rounded-full bg-red-500 animate-ping" />
-                  FEED_ID: IN_ALT_2004 // ACTIVE
-                </div>
+                      {/* Jabalpur Training Node */}
+                      <g>
+                        <circle cx="210" cy="120" r="10" className="fill-emerald-500/10 stroke-emerald-400 stroke-1 animate-ping" style={{ animationDelay: "2s" }} />
+                        <circle cx="210" cy="120" r="4" className="fill-emerald-400" />
+                        <text x="222" y="123" fill="#cbd5e1" fontSize="9" fontFamily="monospace">JABALPUR_RPTO</text>
+                      </g>
+                    </svg>
+                    <div className="absolute bottom-4 left-4 text-[9px] font-mono text-emerald-400">
+                      GPS_REF_STATIONS: OK // 3 ACTIVE TRAINING CENTERS
+                    </div>
+                  </div>
+                )}
 
-                <div className="absolute bottom-4 right-4 bg-black/80 backdrop-blur-md px-3 py-1 rounded-lg border border-white/10 text-[9px] font-mono text-cyan-400">
-                  SYS.REF: {telemetry.lat.toFixed(4)}°N {telemetry.lng.toFixed(4)}°E
-                </div>
+                {activeMode === "manufacturing" && (
+                  <div className="relative aspect-[16/10] bg-[#020408] rounded-2xl border border-white/5 overflow-hidden flex flex-col justify-center items-center p-6">
+                    {/* Decorative blueprint grids */}
+                    <div className="absolute inset-0 bg-[radial-gradient(rgba(34,211,238,0.02)_1px,transparent_1px)] [background-size:16px_16px]" />
+                    
+                    {/* Interactive Blueprint Vector Drawing */}
+                    <svg viewBox="0 0 200 200" className="w-full h-full text-slate-500 max-h-[220px] relative z-10" fill="none" stroke="currentColor" strokeWidth="0.75">
+                      {/* Frame structural vectors */}
+                      <line x1="100" y1="100" x2="50" y2="50" strokeWidth="1" stroke="rgba(255,255,255,0.15)" />
+                      <line x1="100" y1="100" x2="150" y2="50" strokeWidth="1" stroke="rgba(255,255,255,0.15)" />
+                      <line x1="100" y1="100" x2="50" y2="150" strokeWidth="1" stroke="rgba(255,255,255,0.15)" />
+                      <line x1="100" y1="100" x2="150" y2="150" strokeWidth="1" stroke="rgba(255,255,255,0.15)" />
+                      
+                      {/* Central core hub */}
+                      <circle cx="100" cy="100" r="22" fill="#030712" stroke="currentColor" strokeWidth="1.5" />
+                      <circle cx="100" cy="100" r="10" stroke="#ef4444" strokeWidth="0.5" strokeDasharray="3 2" />
+
+                      {/* Rotating Propellers simulation */}
+                      <circle cx="50" cy="50" r="18" stroke="currentColor" strokeDasharray="3 3" className="animate-[spin_6s_linear_infinite]" />
+                      <circle cx="50" cy="50" r="2" fill="currentColor" />
+                      
+                      <circle cx="150" cy="50" r="18" stroke="currentColor" strokeDasharray="3 3" className="animate-[spin_6s_linear_infinite_reverse]" />
+                      <circle cx="150" cy="50" r="2" fill="currentColor" />
+                      
+                      <circle cx="50" cy="150" r="18" stroke="currentColor" strokeDasharray="3 3" className="animate-[spin_6s_linear_infinite_reverse]" />
+                      <circle cx="50" cy="150" r="2" fill="currentColor" />
+                      
+                      <circle cx="150" cy="150" r="18" stroke="currentColor" strokeDasharray="3 3" className="animate-[spin_6s_linear_infinite]" />
+                      <circle cx="150" cy="150" r="2" fill="currentColor" />
+
+                      {/* Interactive Spec Nodes */}
+                      {/* Node 1: Autopilot */}
+                      <g className="cursor-pointer" onClick={() => setSelectedSpec("autopilot")}>
+                        <circle cx="100" cy="100" r="7" className="fill-cyan-500/20 stroke-cyan-400 stroke-1 animate-pulse" />
+                        <text x="96" y="103" fill="#22d3ee" fontSize="10" fontWeight="bold">+</text>
+                      </g>
+                      
+                      {/* Node 2: Propulsion */}
+                      <g className="cursor-pointer" onClick={() => setSelectedSpec("propulsion")}>
+                        <circle cx="150" cy="50" r="7" className="fill-cyan-500/20 stroke-cyan-400 stroke-1 animate-pulse" />
+                        <text x="146" y="53" fill="#22d3ee" fontSize="10" fontWeight="bold">+</text>
+                      </g>
+
+                      {/* Node 3: Payload */}
+                      <g className="cursor-pointer" onClick={() => setSelectedSpec("payload")}>
+                        <circle cx="100" cy="122" r="7" className="fill-cyan-500/20 stroke-cyan-400 stroke-1 animate-pulse" />
+                        <text x="96" y="125" fill="#22d3ee" fontSize="10" fontWeight="bold">+</text>
+                      </g>
+                    </svg>
+
+                    <div className="absolute bottom-4 left-4 text-[9px] font-mono text-cyan-400 flex items-center gap-1.5">
+                      <span className="h-1.5 w-1.5 rounded-full bg-cyan-400 animate-ping" />
+                      MODEL: HEXA_UAV_STRUCTURE // CLICK HOTSPOTS
+                    </div>
+                  </div>
+                )}
+
+                {activeMode === "operations" && (
+                  <div className="relative aspect-[16/10] bg-[#020408] rounded-2xl border border-white/5 overflow-hidden p-6 flex flex-col justify-between">
+                    {/* Tactical radar grids */}
+                    <div className="absolute inset-0 bg-[radial-gradient(rgba(245,158,11,0.06)_1px,transparent_1px)] [background-size:20px_20px]" />
+                    
+                    <div className="flex justify-between items-start z-10">
+                      <div className="text-[9px] font-mono text-amber-500 uppercase tracking-wider">
+                        Tactical Map Tracker
+                      </div>
+                      <div className="text-[9px] font-mono text-slate-400 flex items-center gap-1.5">
+                        <span className="h-1.5 w-1.5 rounded-full bg-amber-500 animate-ping" />
+                        SATELLITE_LINK: ESTABLISHED
+                      </div>
+                    </div>
+
+                    {/* Sweeping radar graphics */}
+                    <div className="absolute inset-0 flex items-center justify-center opacity-25 pointer-events-none">
+                      <svg className="w-[160px] h-[160px] text-amber-500" viewBox="0 0 100 100">
+                        <circle cx="50" cy="50" r="48" stroke="currentColor" strokeWidth="0.5" strokeDasharray="4 4" className="animate-[spin_50s_linear_infinite]" />
+                        <circle cx="50" cy="50" r="28" stroke="currentColor" strokeWidth="0.25" />
+                        <line x1="50" y1="2" x2="50" y2="98" stroke="currentColor" strokeWidth="0.25" />
+                        <line x1="2" y1="50" x2="98" y2="50" stroke="currentColor" strokeWidth="0.25" />
+                      </svg>
+                    </div>
+
+                    {/* Flight coordinates overlay */}
+                    <div className="z-10 bg-black/70 border border-white/10 p-3 rounded-lg backdrop-blur-md font-mono text-[9px] text-slate-300 w-[180px] space-y-1.5 shadow-xl">
+                      <div>COORD_LAT: {telemetry.lat.toFixed(4)}°N</div>
+                      <div>COORD_LNG: {telemetry.lng.toFixed(4)}°E</div>
+                      <div>CURR_ALT: {telemetry.altitude} m</div>
+                      <div>CURR_VEL: {telemetry.velocity} m/s</div>
+                    </div>
+
+                    <div className="z-10 flex justify-between items-end">
+                      <span className="text-[8px] font-mono text-amber-500/60 uppercase">ACTIVE_MISSION: SURVEY_TRACKING</span>
+                      <span className="text-[8px] font-mono text-slate-400">FLIGHT_ID: SOAR_94</span>
+                    </div>
+                  </div>
+                )}
               </div>
 
-              {/* Right Column: Dynamic Telemetry Cards */}
-              <div className="md:col-span-5 space-y-5">
-                <div className="flex items-center justify-between pb-3 border-b border-white/5">
-                  <span className="text-xs font-bold font-mono tracking-widest text-slate-400 uppercase">SYS TELEMETRY</span>
-                  <span className="text-[10px] font-mono text-emerald-400 font-bold bg-emerald-500/10 px-2 py-0.5 rounded">CONNECTIVITY_OK</span>
-                </div>
+              {/* Dynamic Right Panel depending on activeMode */}
+              <div className="md:col-span-5">
+                {activeMode === "academy" && (
+                  <div className="flex flex-col justify-between h-full space-y-6">
+                    <div>
+                      <h3 className="text-xl font-bold tracking-tight text-white mb-2 font-mono">[ DGCA TRAINING ACADEMY ]</h3>
+                      <p className="text-slate-400 text-xs leading-relaxed">
+                        Become a professional certified drone pilot. We operate top-tier DGCA-approved Remote Pilot Training Organizations (RPTO) across Madhya Pradesh.
+                      </p>
+                    </div>
 
-                {/* Telemetry Stats Grid */}
-                <div className="grid grid-cols-2 gap-4">
-                  {/* Stat 1 */}
-                  <div className="bg-white/[0.02] border border-white/5 rounded-xl p-4">
-                    <div className="text-[10px] font-mono text-slate-400 mb-1">ALTITUDE</div>
-                    <div className="text-xl font-bold font-mono text-white">{telemetry.altitude} m</div>
-                  </div>
-                  {/* Stat 2 */}
-                  <div className="bg-white/[0.02] border border-white/5 rounded-xl p-4">
-                    <div className="text-[10px] font-mono text-slate-400 mb-1">VELOCITY</div>
-                    <div className="text-xl font-bold font-mono text-cyan-400">{telemetry.velocity} m/s</div>
-                  </div>
-                  {/* Stat 3 */}
-                  <div className="bg-white/[0.02] border border-white/5 rounded-xl p-4">
-                    <div className="text-[10px] font-mono text-slate-400 mb-1">DGCA STATUS</div>
-                    <div className="text-sm font-bold text-emerald-400 mt-1">Approved RPTO</div>
-                  </div>
-                  {/* Stat 4 */}
-                  <div className="bg-white/[0.02] border border-white/5 rounded-xl p-4">
-                    <div className="text-[10px] font-mono text-slate-400 mb-1">MANUFACTURING</div>
-                    <div className="text-sm font-bold text-white mt-1">50K Sq Ft Hub</div>
-                  </div>
-                </div>
+                    <div className="space-y-4">
+                      <div className="grid grid-cols-2 gap-4">
+                        <div className="bg-white/[0.01] border border-white/5 p-4 rounded-xl">
+                          <div className="text-[9px] font-mono text-slate-400 uppercase">CERTIFIED PILOTS</div>
+                          <div className="text-2xl font-black text-emerald-400 mt-1 font-mono">1,250+</div>
+                        </div>
+                        <div className="bg-white/[0.01] border border-white/5 p-4 rounded-xl">
+                          <div className="text-[9px] font-mono text-slate-400 uppercase">EXAM SUCCESS</div>
+                          <div className="text-2xl font-black text-white mt-1 font-mono">99.4%</div>
+                        </div>
+                      </div>
 
-                {/* Live scanning progress bar */}
-                <div className="space-y-1">
-                  <div className="flex justify-between text-[10px] font-mono text-slate-400">
-                    <span>SYSTEM DIAGNOSTIC</span>
-                    <span>{Math.round(Math.min((telemetry.velocity / 25) * 100, 100))}%</span>
+                      <div className="border border-white/10 rounded-xl p-3 bg-white/[0.01] flex items-center justify-between text-xs">
+                        <span className="text-slate-400 font-mono">COURSES:</span>
+                        <span className="font-bold text-white font-mono">RPC BASIC, AGRI & MAPPING</span>
+                      </div>
+                    </div>
+
+                    <Link href="/training">
+                      <Button className="w-full bg-emerald-600 hover:bg-emerald-500 text-xs font-mono uppercase tracking-wider h-11 rounded-lg">
+                        Apply For Pilot Certification
+                      </Button>
+                    </Link>
                   </div>
-                  <div className="w-full bg-white/10 h-1.5 rounded-full overflow-hidden">
-                    <motion.div
-                      animate={{ width: `${Math.min((telemetry.velocity / 25) * 100, 100)}%` }}
-                      transition={{ ease: "easeInOut" }}
-                      className="bg-primary h-full rounded-full shadow-[0_0_8px_#ef4444]"
-                    />
+                )}
+
+                {activeMode === "manufacturing" && (
+                  <div className="flex flex-col justify-between h-full space-y-6">
+                    <div>
+                      <h3 className="text-xl font-bold tracking-tight text-white mb-2 font-mono">[ UAV ENGINEERING HUB ]</h3>
+                      <p className="text-slate-400 text-xs leading-relaxed">
+                        Aerospace-grade UAV design and assembly. We build industrial payload drone systems tailored for defense, agriculture, and high-altitude mapping.
+                      </p>
+                    </div>
+
+                    {/* Hotspot details panel */}
+                    <div className="bg-white/[0.01] border border-white/5 p-4 rounded-xl min-h-[145px] flex flex-col justify-between">
+                      <div>
+                        <div className="text-[9px] font-mono text-cyan-400 uppercase tracking-widest mb-1">SELECTED COMPONENT</div>
+                        <div className="text-base font-bold text-white mb-1.5">
+                          {selectedSpec === "autopilot" && "SA-FLIGHT AUTOPILOT V3"}
+                          {selectedSpec === "propulsion" && "T-MOTOR BRUSHLESS DRIVE F80"}
+                          {selectedSpec === "payload" && "MULTISPECTRAL SENSOR SYSTEM"}
+                        </div>
+                        <p className="text-slate-400 text-[11px] leading-relaxed">
+                          {selectedSpec === "autopilot" && "Features triple-redundant IMU processors, obstacle avoidance sensors, and RTK accuracy for centimetre positioning."}
+                          {selectedSpec === "propulsion" && "High-efficiency brushless motors with carbon fiber composite props, yielding 15kg max thrust per rotor."}
+                          {selectedSpec === "payload" && "5-band multispectral survey camera combined with optical/thermal payloads for analytical field mapping."}
+                        </p>
+                      </div>
+                      
+                      <div className="grid grid-cols-2 gap-4 pt-2.5 mt-2.5 border-t border-white/5 text-[9px] font-mono text-slate-400">
+                        <div>STATUS: <span className="text-emerald-400 font-bold">NOMINAL</span></div>
+                        <div>WEIGHT: <span className="text-white">
+                          {selectedSpec === "autopilot" && "420g"}
+                          {selectedSpec === "propulsion" && "850g/rotor"}
+                          {selectedSpec === "payload" && "1.2kg"}
+                        </span></div>
+                      </div>
+                    </div>
+
+                    <Link href="/services">
+                      <Button className="w-full bg-cyan-600 hover:bg-cyan-500 text-xs font-mono uppercase tracking-wider h-11 rounded-lg">
+                        View Technical Catalog
+                      </Button>
+                    </Link>
                   </div>
-                </div>
+                )}
+
+                {activeMode === "operations" && (
+                  <div className="flex flex-col justify-between h-full space-y-6">
+                    <div>
+                      <h3 className="text-xl font-bold tracking-tight text-white mb-2 font-mono">[ AERIAL MISSIONS ]</h3>
+                      <p className="text-slate-400 text-xs leading-relaxed">
+                        Deploy drone infrastructure for real-time field data operations. We cater to high-accuracy surveys, mapping, and crop monitoring.
+                      </p>
+                    </div>
+
+                    <div className="space-y-4">
+                      <div className="bg-white/[0.01] border border-white/5 rounded-xl p-4 space-y-2.5 text-xs font-mono">
+                        <div className="flex justify-between border-b border-white/5 pb-2">
+                          <span className="text-slate-400">ACTIVE FLEET:</span>
+                          <span className="text-white font-bold">14 active units</span>
+                        </div>
+                        <div className="flex justify-between border-b border-white/5 pb-2">
+                          <span className="text-slate-400">TOTAL SURVEYED:</span>
+                          <span className="text-white">12,500+ Hectares</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="text-slate-400">PARTNERS:</span>
+                          <span className="text-amber-400 font-bold">NHAI, MPRDC, MPEB</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <Link href="/contact">
+                      <Button className="w-full bg-amber-600 hover:bg-amber-500 text-xs font-mono uppercase tracking-wider h-11 rounded-lg">
+                        Request Mission Operations
+                      </Button>
+                    </Link>
+                  </div>
+                )}
               </div>
 
             </div>
