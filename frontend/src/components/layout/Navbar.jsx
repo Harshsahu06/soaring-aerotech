@@ -26,7 +26,7 @@ export function Navbar() {
     setMobileMenuOpen(false);
   }, [location]);
 
-  const darkPages = ["/contact", "/blog", "/innovation-lab"];
+  const darkPages = ["/", "/contact", "/blog", "/innovation-lab"];
   const isDarkPage = darkPages.includes(location);
   const isLightTheme = isScrolled || !isDarkPage;
 

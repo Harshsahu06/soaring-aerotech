@@ -511,36 +511,55 @@ function IndustriesSection() {
 }
 
 export default function Home() {
+  const [telemetry, setTelemetry] = useState({
+    altitude: 120.4,
+    velocity: 14.8,
+    lat: 22.7196,
+    lng: 75.8577,
+  });
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTelemetry((prev) => ({
+        altitude: +(prev.altitude + (Math.random() * 0.4 - 0.2)).toFixed(1),
+        velocity: +(prev.velocity + (Math.random() * 0.6 - 0.3)).toFixed(1),
+        lat: +(prev.lat + (Math.random() * 0.0002 - 0.0001)).toFixed(4),
+        lng: +(prev.lng + (Math.random() * 0.0002 - 0.0001)).toFixed(4),
+      }));
+    }, 1000);
+    return () => clearInterval(timer);
+  }, []);
+
   return (
     <main className="min-h-screen">
       {/* ── Hero ─────────────────────────────────── */}
-      <section className="relative min-h-screen flex items-center pt-24 overflow-hidden bg-[#fafafa]">
+      <section className="relative min-h-screen flex items-center pt-24 overflow-hidden bg-[#030712]">
         {/* Living Ambient Gradients (Staggered orbs drifting slowly) */}
         <motion.div 
           animate={{ 
-            x: [0, 45, -25, 0],
-            y: [0, -40, 30, 0],
-            scale: [1, 1.15, 0.9, 1]
+            x: [0, 60, -40, 0],
+            y: [0, -60, 50, 0],
+            scale: [1, 1.25, 0.85, 1]
           }}
-          transition={{ duration: 16, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-1/4 left-1/4 w-[450px] h-[450px] bg-primary/8 rounded-full blur-[130px] pointer-events-none"
+          transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-primary/15 rounded-full blur-[140px] pointer-events-none"
         />
         <motion.div 
           animate={{ 
-            x: [0, -35, 40, 0],
-            y: [0, 35, -25, 0],
-            scale: [1, 0.9, 1.1, 1]
+            x: [0, -50, 60, 0],
+            y: [0, 50, -40, 0],
+            scale: [1, 0.85, 1.2, 1]
           }}
-          transition={{ duration: 20, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-          className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-cyan-400/6 rounded-full blur-[120px] pointer-events-none"
+          transition={{ duration: 22, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+          className="absolute bottom-1/4 right-1/4 w-[450px] h-[450px] bg-cyan-500/10 rounded-full blur-[130px] pointer-events-none"
         />
         <motion.div 
           animate={{ 
-            x: [0, 25, -35, 0],
-            y: [0, 30, 35, 0],
+            x: [0, 40, -50, 0],
+            y: [0, 45, 50, 0],
           }}
-          transition={{ duration: 18, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-          className="absolute top-1/3 right-1/3 w-[350px] h-[350px] bg-rose-400/6 rounded-full blur-[110px] pointer-events-none"
+          transition={{ duration: 20, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+          className="absolute top-1/3 right-1/3 w-[400px] h-[400px] bg-purple-500/10 rounded-full blur-[120px] pointer-events-none"
         />
 
         {/* Tech Background Layout */}
@@ -549,31 +568,31 @@ export default function Home() {
           <img
             src="https://images.unsplash.com/photo-1508614589041-895b88991e3e?w=1800&h=1000&fit=crop"
             alt=""
-            className="w-full h-full object-cover opacity-[0.06] mix-blend-overlay"
+            className="w-full h-full object-cover opacity-[0.04] mix-blend-overlay"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#fafafa]/98 via-[#fafafa]/85 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#030712]/98 via-[#030712]/85 to-transparent" />
           
           {/* Clean CAD Dot Grid */}
-          <div className="absolute inset-0 bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] [background-size:28px_28px] opacity-75" />
+          <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.03)_1px,transparent_1px)] [background-size:28px_28px] opacity-75" />
 
           {/* Technical Axis Lines & Margins */}
-          <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-slate-200 to-transparent opacity-50" />
-          <div className="absolute left-8 top-16 bottom-16 w-px bg-gradient-to-b from-transparent via-slate-200 to-transparent opacity-30" />
-          <div className="absolute right-8 top-16 bottom-16 w-px bg-gradient-to-b from-transparent via-slate-200 to-transparent opacity-30" />
+          <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-50" />
+          <div className="absolute left-8 top-16 bottom-16 w-px bg-gradient-to-b from-transparent via-white/10 to-transparent opacity-30" />
+          <div className="absolute right-8 top-16 bottom-16 w-px bg-gradient-to-b from-transparent via-white/10 to-transparent opacity-30" />
 
           {/* Corner Crosshairs */}
-          <svg className="absolute left-5 top-28 w-4 h-4 text-slate-300 opacity-60" viewBox="0 0 16 16" fill="none">
+          <svg className="absolute left-5 top-28 w-4 h-4 text-white/20 opacity-60" viewBox="0 0 16 16" fill="none">
             <line x1="8" y1="0" x2="8" y2="16" stroke="currentColor" strokeWidth="0.5"/>
             <line x1="0" y1="8" x2="16" y2="8" stroke="currentColor" strokeWidth="0.5"/>
           </svg>
-          <svg className="absolute right-5 top-28 w-4 h-4 text-slate-300 opacity-60" viewBox="0 0 16 16" fill="none">
+          <svg className="absolute right-5 top-28 w-4 h-4 text-white/20 opacity-60" viewBox="0 0 16 16" fill="none">
             <line x1="8" y1="0" x2="8" y2="16" stroke="currentColor" strokeWidth="0.5"/>
             <line x1="0" y1="8" x2="16" y2="8" stroke="currentColor" strokeWidth="0.5"/>
           </svg>
           
           {/* Faint Coordinate Indicator (Top-Left margin) */}
-          <span className="absolute left-12 top-28 text-[8px] font-mono text-slate-400 opacity-40 select-none tracking-widest">
-            SYS.REF: 22°43'N 75°52'E // INDORE.HQ
+          <span className="absolute left-12 top-28 text-[8px] font-mono text-cyan-400/40 select-none tracking-widest">
+            SYS.REF: {telemetry.lat.toFixed(4)}°N {telemetry.lng.toFixed(4)}°E // LIVE.FEED
           </span>
         </div>
 
@@ -585,7 +604,7 @@ export default function Home() {
                 initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.05 }}
-                className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-primary/[0.06] border border-primary/15 backdrop-blur-md mb-6"
+                className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-md mb-6"
               >
                 <span className="flex h-2 w-2 rounded-full bg-primary animate-pulse" />
                 <span className="text-[10px] font-bold uppercase tracking-widest text-primary">
@@ -597,7 +616,7 @@ export default function Home() {
                 initial={{ opacity: 0, y: 24 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 }}
-                className="font-display text-5xl md:text-7xl lg:text-[5.5rem] text-slate-900 leading-[0.95] mb-6 tracking-tight"
+                className="font-display text-5xl md:text-7xl lg:text-[5.5rem] text-white leading-[0.95] mb-6 tracking-tight"
               >
                 Building
                 <br />
@@ -612,7 +631,7 @@ export default function Home() {
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.18 }}
-                className="text-slate-600 text-base md:text-lg mb-8 leading-relaxed max-w-lg font-medium"
+                className="text-slate-400 text-base md:text-lg mb-8 leading-relaxed max-w-lg font-medium"
               >
                 From certifying India's next generation of drone pilots to
                 manufacturing defence-grade UAVs — everything under one roof in
@@ -638,7 +657,7 @@ export default function Home() {
                   <Button
                     size="lg"
                     variant="outline"
-                    className="h-14 px-8 rounded-full text-sm font-bold tracking-wider uppercase border-slate-200 text-slate-700 bg-white hover:bg-slate-50 hover:border-slate-300 hover:text-slate-900 hover:-translate-y-0.5 transition-all duration-300 shadow-sm"
+                    className="h-14 px-8 rounded-full text-sm font-bold tracking-wider uppercase border-white/10 text-white bg-white/5 hover:bg-white/10 hover:-translate-y-0.5 transition-all duration-300 shadow-sm"
                   >
                     Partner With Us
                   </Button>
@@ -650,11 +669,11 @@ export default function Home() {
             <div className="lg:col-span-6 relative flex items-center justify-center min-h-[480px] w-full lg:h-[600px]">
               {/* Radial Glow Circles */}
               <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden">
-                <div className="absolute w-[300px] sm:w-[450px] h-[300px] sm:h-[450px] bg-primary/10 rounded-full blur-[90px] animate-pulse" />
-                <div className="absolute w-[400px] sm:w-[600px] h-[400px] sm:h-[600px] bg-red-500/5 rounded-full blur-[110px] animate-pulse delay-700" />
+                <div className="absolute w-[300px] sm:w-[450px] h-[300px] sm:h-[450px] bg-primary/15 rounded-full blur-[90px] animate-pulse" />
+                <div className="absolute w-[400px] sm:w-[600px] h-[400px] sm:h-[600px] bg-cyan-500/5 rounded-full blur-[110px] animate-pulse delay-700" />
                 
                 {/* Decorative Radar HUD lines */}
-                <svg className="absolute w-[350px] sm:w-[480px] h-[350px] sm:h-[480px] opacity-[0.15] text-primary" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg className="absolute w-[350px] sm:w-[480px] h-[350px] sm:h-[480px] opacity-[0.25] text-cyan-500" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <circle cx="100" cy="100" r="98" stroke="currentColor" strokeWidth="0.5" strokeDasharray="4 4" className="animate-[spin_120s_linear_infinite]" />
                   <circle cx="100" cy="100" r="80" stroke="currentColor" strokeWidth="0.25" />
                   <circle cx="100" cy="100" r="60" stroke="currentColor" strokeWidth="0.5" strokeDasharray="8 8" className="animate-[spin_60s_linear_infinite_reverse]" />
@@ -667,15 +686,25 @@ export default function Home() {
               <motion.div
                 animate={{ y: [0, -12, 0] }}
                 transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-                className="relative z-10 w-[260px] sm:w-[380px] aspect-square rounded-3xl overflow-hidden shadow-2xl border border-white/30 bg-white/20 backdrop-blur-md p-4 group"
+                className="relative z-10 w-[260px] sm:w-[380px] aspect-square rounded-3xl overflow-hidden shadow-[0_0_50px_rgba(0,0,0,0.8)] border border-white/20 bg-white/5 backdrop-blur-md p-4 group"
               >
                 <img
                   src="https://images.unsplash.com/photo-1527977966376-1c8408f9f108?w=800&h=800&fit=crop"
                   alt="Sleek drone in flight"
-                  className="w-full h-full object-cover rounded-2xl shadow-inner group-hover:scale-105 transition-transform duration-700"
+                  className="w-full h-full object-cover rounded-2xl group-hover:scale-105 transition-transform duration-700"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none rounded-2xl" />
-                <span className="absolute top-8 left-8 bg-black/60 text-white text-[9px] font-mono tracking-widest px-2.5 py-1 rounded-md border border-white/10 backdrop-blur-sm">
+                
+                {/* Laser Scanning Line Overlay */}
+                <motion.div
+                  animate={{ translateY: ["0px", "340px", "0px"] }}
+                  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                  className="absolute left-4 right-4 h-0.5 bg-cyan-400 shadow-[0_0_8px_#22d3ee] pointer-events-none"
+                  style={{ top: "16px" }}
+                />
+
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none rounded-2xl" />
+                <span className="absolute top-8 left-8 bg-black/80 text-white text-[9px] font-mono tracking-widest px-2.5 py-1 rounded-md border border-white/10 backdrop-blur-sm flex items-center gap-1.5">
+                  <span className="h-1.5 w-1.5 rounded-full bg-red-500 animate-ping" />
                   LIVE_FEED: ACTIVE
                 </span>
               </motion.div>
@@ -685,16 +714,19 @@ export default function Home() {
                 initial={{ opacity: 0, x: -30 }}
                 animate={{ opacity: 1, x: 0, y: [0, -6, 0] }}
                 transition={{ x: { delay: 0.4 }, y: { duration: 5, repeat: Infinity, ease: "easeInOut" } }}
-                className="absolute top-12 left-0 sm:left-4 z-20 bg-white/90 backdrop-blur-md border border-slate-200/80 rounded-2xl p-4 shadow-xl shadow-slate-100/50 max-w-[170px]"
+                className="absolute top-12 left-0 sm:left-4 z-20 bg-slate-950/80 backdrop-blur-md border border-white/10 rounded-2xl p-4 shadow-[0_10px_30px_rgba(0,0,0,0.5)] max-w-[170px]"
               >
                 <div className="flex items-center gap-2 mb-1">
-                  <div className="p-1.5 rounded-lg bg-green-50 text-green-600">
+                  <div className="p-1.5 rounded-lg bg-emerald-500/10 text-emerald-400">
                     <ShieldCheck className="w-4 h-4" />
                   </div>
                   <span className="text-[10px] font-bold font-mono tracking-wider text-slate-400">DGCA STATUS</span>
                 </div>
-                <div className="font-display text-sm font-bold text-slate-800">Approved RPTO</div>
-                <div className="text-[9px] font-medium text-slate-500 mt-0.5">RPC Certification</div>
+                <div className="font-display text-sm font-bold text-white flex items-center gap-1.5">
+                  Approved RPTO
+                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 shadow-[0_0_6px_#10b981]" />
+                </div>
+                <div className="text-[9px] font-medium text-slate-400 mt-0.5">RPC Certification</div>
               </motion.div>
 
               {/* Telemetry Card 2: Live Stats Feed */}
@@ -702,30 +734,29 @@ export default function Home() {
                 initial={{ opacity: 0, x: -30 }}
                 animate={{ opacity: 1, x: 0, y: [0, 6, 0] }}
                 transition={{ x: { delay: 0.6 }, y: { duration: 4.5, repeat: Infinity, ease: "easeInOut" } }}
-                className="absolute bottom-12 left-0 sm:left-0 z-20 bg-white/90 backdrop-blur-md border border-slate-200/80 rounded-2xl p-4 shadow-xl shadow-slate-100/50 min-w-[180px]"
+                className="absolute bottom-12 left-0 sm:left-0 z-20 bg-slate-950/80 backdrop-blur-md border border-white/10 rounded-2xl p-4 shadow-[0_10px_30px_rgba(0,0,0,0.5)] min-w-[180px]"
               >
                 <div className="flex items-center justify-between mb-2">
                   <div className="flex items-center gap-1.5">
-                    <span className="h-1.5 w-1.5 rounded-full bg-green-500 animate-pulse" />
-                    <span className="text-[9px] font-bold text-slate-500 uppercase tracking-widest font-mono">Telemetry</span>
+                    <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                    <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest font-mono">Telemetry</span>
                   </div>
-                  <span className="text-[9px] font-mono text-green-600 font-bold bg-green-50 px-1.5 py-0.5 rounded">GPS_OK</span>
+                  <span className="text-[9px] font-mono text-emerald-400 font-bold bg-emerald-500/10 px-1.5 py-0.5 rounded">GPS_OK</span>
                 </div>
                 <div className="space-y-1.5">
-                  <div className="flex justify-between text-[10px] font-mono text-slate-600">
+                  <div className="flex justify-between text-[10px] font-mono text-slate-400">
                     <span>ALTITUDE</span>
-                    <span className="font-bold text-slate-800">120.4 m</span>
+                    <span className="font-bold text-white">{telemetry.altitude} m</span>
                   </div>
-                  <div className="flex justify-between text-[10px] font-mono text-slate-600">
+                  <div className="flex justify-between text-[10px] font-mono text-slate-400">
                     <span>VELOCITY</span>
-                    <span className="font-bold text-slate-800">14.8 m/s</span>
+                    <span className="font-bold text-white">{telemetry.velocity} m/s</span>
                   </div>
-                  <div className="w-full bg-slate-150 h-1.5 rounded-full overflow-hidden mt-1">
+                  <div className="w-full bg-white/10 h-1.5 rounded-full overflow-hidden mt-1">
                     <motion.div
-                      initial={{ width: 0 }}
-                      animate={{ width: "78%" }}
-                      transition={{ duration: 1.5, ease: "easeOut" }}
-                      className="bg-primary h-full rounded-full"
+                      animate={{ width: `${Math.min((telemetry.velocity / 25) * 100, 100)}%` }}
+                      transition={{ ease: "easeInOut" }}
+                      className="bg-cyan-400 h-full rounded-full shadow-[0_0_8px_#22d3ee]"
                     />
                   </div>
                 </div>
@@ -736,16 +767,16 @@ export default function Home() {
                 initial={{ opacity: 0, x: 30 }}
                 animate={{ opacity: 1, x: 0, y: [0, 8, 0] }}
                 transition={{ x: { delay: 0.5 }, y: { duration: 5.5, repeat: Infinity, ease: "easeInOut" } }}
-                className="absolute top-6 right-0 sm:right-4 z-20 bg-white/90 backdrop-blur-md border border-slate-200/80 rounded-2xl p-4 shadow-xl shadow-slate-100/50 max-w-[170px]"
+                className="absolute top-6 right-0 sm:right-4 z-20 bg-slate-950/80 backdrop-blur-md border border-white/10 rounded-2xl p-4 shadow-[0_10px_30px_rgba(0,0,0,0.5)] max-w-[170px]"
               >
                 <div className="flex items-center gap-2 mb-1">
-                  <div className="p-1.5 rounded-lg bg-red-50 text-red-600">
+                  <div className="p-1.5 rounded-lg bg-cyan-500/10 text-cyan-400">
                     <Factory className="w-4 h-4" />
                   </div>
                   <span className="text-[10px] font-bold font-mono tracking-wider text-slate-400">FACILITY</span>
                 </div>
-                <div className="font-display text-sm font-bold text-slate-800">50K Sq Ft</div>
-                <div className="text-[9px] font-medium text-slate-500 mt-0.5">UAV Manufacturing</div>
+                <div className="font-display text-sm font-bold text-white">50K Sq Ft</div>
+                <div className="text-[9px] font-medium text-slate-400 mt-0.5">UAV Manufacturing</div>
               </motion.div>
 
               {/* Telemetry Card 4: Success Stats */}
@@ -753,16 +784,16 @@ export default function Home() {
                 initial={{ opacity: 0, x: 30 }}
                 animate={{ opacity: 1, x: 0, y: [0, -8, 0] }}
                 transition={{ x: { delay: 0.7 }, y: { duration: 4.8, repeat: Infinity, ease: "easeInOut" } }}
-                className="absolute bottom-16 right-0 sm:right-0 z-20 bg-white/90 backdrop-blur-md border border-slate-200/80 rounded-2xl p-4 shadow-xl shadow-slate-100/50 min-w-[160px]"
+                className="absolute bottom-16 right-0 sm:right-0 z-20 bg-slate-950/80 backdrop-blur-md border border-white/10 rounded-2xl p-4 shadow-[0_10px_30px_rgba(0,0,0,0.5)] min-w-[160px]"
               >
                 <div className="flex items-center gap-2 mb-1.5">
-                  <div className="p-1.5 rounded-lg bg-amber-50 text-amber-600">
+                  <div className="p-1.5 rounded-lg bg-amber-500/10 text-amber-400">
                     <Award className="w-4 h-4" />
                   </div>
                   <span className="text-[10px] font-bold font-mono tracking-wider text-slate-400">SUCCESS</span>
                 </div>
-                <div className="font-display text-lg font-black text-slate-800 tracking-tight">1000+</div>
-                <div className="text-[9px] font-semibold text-slate-500">DGCA Certified Pilots</div>
+                <div className="font-display text-lg font-black text-white tracking-tight">1000+</div>
+                <div className="text-[9px] font-semibold text-slate-400">DGCA Certified Pilots</div>
               </motion.div>
             </div>
           </div>
@@ -772,7 +803,7 @@ export default function Home() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.2 }}
-          className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10 text-slate-400/60 flex flex-col items-center"
+          className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10 text-slate-500 flex flex-col items-center"
         >
           <ArrowDown className="w-5 h-5 animate-bounce" />
         </motion.div>
