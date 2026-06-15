@@ -1,4 +1,8 @@
 import mongoose from "mongoose";
+import dns from "node:dns";
+
+// Bypass querySrv ECONNREFUSED error on local network routers/VPNs by forcing Node to use public DNS
+dns.setServers(["1.1.1.1", "8.8.8.8"]);
 
 export async function connectMongo() {
   const MONGODB_URI = process.env["MONGODB_URI"];
