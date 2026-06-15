@@ -510,6 +510,191 @@ function IndustriesSection() {
   );
 }
 
+function UAVRadarCanvas() {
+  const canvasRef = useRef(null);
+  
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    let animationId;
+    let width = canvas.width = canvas.offsetWidth;
+    let height = canvas.height = canvas.offsetHeight;
+
+    const handleResize = () => {
+      if (!canvas) return;
+      width = canvas.width = canvas.offsetWidth;
+      height = canvas.height = canvas.offsetHeight;
+    };
+    window.addEventListener("resize", handleResize);
+
+    // Mouse coordinates for interactive parallax
+    let mouse = { x: 0, y: 0, targetX: 0, targetY: 0 };
+    const handleMouseMove = (e) => {
+      const rect = canvas.getBoundingClientRect();
+      mouse.targetX = ((e.clientX - rect.left) / width) * 2 - 1;
+      mouse.targetY = ((e.clientY - rect.top) / height) * 2 - 1;
+    };
+    
+    window.addEventListener("mousemove", handleMouseMove);
+
+    // UAV Targets
+    const targets = [
+      { id: "SA-HEXA MAPPING", x: -0.25, y: -0.2, alt: 120, speed: 12.5, active: true },
+      { id: "SA-QUAD PATROL", x: 0.3, y: -0.25, alt: 85, speed: 8.2, active: true },
+      { id: "RPTO INDORE", x: -0.35, y: 0.15, alt: 150, speed: 0, active: true },
+      { id: "SA-LOGISTICS", x: 0.2, y: 0.2, alt: 210, speed: 22.4, active: true }
+    ];
+
+    let sweepAngle = 0;
+    
+    const draw = () => {
+      // Smooth interpolation for mouse movement
+      mouse.x += (mouse.targetX - mouse.x) * 0.05;
+      mouse.y += (mouse.targetY - mouse.y) * 0.05;
+
+      ctx.clearRect(0, 0, width, height);
+
+      const centerX = width / 2;
+      const centerY = height / 2;
+      const maxRadius = Math.min(width, height) * 0.38;
+
+      // Parallax shift offsets
+      const offsetX = mouse.x * 20;
+      const offsetY = mouse.y * 20;
+
+      // Draw Grid Lines
+      ctx.strokeStyle = "rgba(255, 255, 255, 0.015)";
+      ctx.lineWidth = 1;
+      const gridSize = 50;
+      for (let x = offsetX % gridSize; x < width; x += gridSize) {
+        ctx.beginPath();
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, height);
+        ctx.stroke();
+      }
+      for (let y = offsetY % gridSize; y < height; y += gridSize) {
+        ctx.beginPath();
+        ctx.moveTo(0, y);
+        ctx.lineTo(width, y);
+        ctx.stroke();
+      }
+
+      // Draw Radar Concentric Circles
+      ctx.strokeStyle = "rgba(239, 68, 68, 0.04)";
+      ctx.lineWidth = 1;
+      const circleCount = 3;
+      for (let i = 1; i <= circleCount; i++) {
+        const r = (maxRadius / circleCount) * i;
+        ctx.beginPath();
+        ctx.arc(centerX + offsetX * (i * 0.15), centerY + offsetY * (i * 0.15), r, 0, Math.PI * 2);
+        ctx.stroke();
+        
+        ctx.fillStyle = "rgba(255, 255, 255, 0.08)";
+        ctx.font = "8px 'Space Mono', monospace";
+        ctx.fillText(`${(i * 100).toFixed(0)}m`, centerX + r + offsetX * (i * 0.15) + 5, centerY + offsetY * (i * 0.15) + 3);
+      }
+
+      // Sweep angle update
+      sweepAngle = (sweepAngle + 0.007) % (Math.PI * 2);
+
+      // Draw Radar Sweep Glow
+      const sweepGrad = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, maxRadius);
+      sweepGrad.addColorStop(0, "rgba(239, 68, 68, 0.06)");
+      sweepGrad.addColorStop(1, "rgba(239, 68, 68, 0.0)");
+      
+      ctx.beginPath();
+      ctx.moveTo(centerX, centerY);
+      ctx.arc(centerX, centerY, maxRadius, sweepAngle - 0.3, sweepAngle);
+      ctx.lineTo(centerX, centerY);
+      ctx.fillStyle = sweepGrad;
+      ctx.fill();
+
+      // Sweeping line pointer
+      const sweepX = centerX + Math.cos(sweepAngle) * maxRadius;
+      const sweepY = centerY + Math.sin(sweepAngle) * maxRadius;
+      ctx.strokeStyle = "rgba(239, 68, 68, 0.25)";
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(centerX, centerY);
+      ctx.lineTo(sweepX, sweepY);
+      ctx.stroke();
+
+      // Draw UAV Targets on Radar screen
+      targets.forEach((target, index) => {
+        const tX = centerX + target.x * maxRadius + offsetX * 0.4;
+        const tY = centerY + target.y * maxRadius + offsetY * 0.4;
+
+        // Angle of target relative to sweep line
+        const targetAngle = Math.atan2(target.y * maxRadius, target.x * maxRadius);
+        let normalizedTargetAngle = targetAngle < 0 ? targetAngle + Math.PI * 2 : targetAngle;
+        
+        let angleDiff = sweepAngle - normalizedTargetAngle;
+        if (angleDiff < 0) angleDiff += Math.PI * 2;
+        
+        // Target glow effect fades as sweep moves away
+        let opacity = 0;
+        if (angleDiff < Math.PI / 2) {
+          opacity = 1 - (angleDiff / (Math.PI / 2));
+        } else {
+          opacity = 0.12;
+        }
+
+        if (opacity > 0.05) {
+          ctx.save();
+          ctx.translate(tX, tY);
+          
+          // Draw target bounding box
+          ctx.strokeStyle = `rgba(239, 68, 68, ${opacity * 0.7})`;
+          ctx.lineWidth = 1;
+          ctx.strokeRect(-4, -4, 8, 8);
+          
+          // Center blinking dot
+          const blink = Math.sin(Date.now() * 0.004 + index) > 0;
+          ctx.fillStyle = blink ? `rgba(239, 68, 68, ${opacity * 0.9})` : `rgba(239, 68, 68, ${opacity * 0.3})`;
+          ctx.fillRect(-1, -1, 2, 2);
+          
+          // Data labels
+          ctx.fillStyle = `rgba(255, 255, 255, ${opacity * 0.65})`;
+          ctx.font = "8px 'Space Mono', monospace";
+          ctx.fillText(target.id, 8, -1);
+          
+          ctx.fillStyle = `rgba(255, 255, 255, ${opacity * 0.35})`;
+          ctx.font = "7px 'Space Mono', monospace";
+          ctx.fillText(`ALT: ${target.alt}m  SPD: ${target.speed}m/s`, 8, 7);
+
+          ctx.restore();
+        }
+      });
+
+      // Outer Compass Ring
+      ctx.strokeStyle = "rgba(255, 255, 255, 0.015)";
+      ctx.beginPath();
+      ctx.arc(centerX, centerY, maxRadius + 12, 0, Math.PI * 2);
+      ctx.stroke();
+
+      animationId = requestAnimationFrame(draw);
+    };
+
+    draw();
+
+    return () => {
+      cancelAnimationFrame(animationId);
+      window.removeEventListener("resize", handleResize);
+      window.removeEventListener("mousemove", handleMouseMove);
+    };
+  }, []);
+
+  return (
+    <canvas
+      ref={canvasRef}
+      className="absolute inset-0 w-full h-full pointer-events-none z-0"
+    />
+  );
+}
+
 export default function Home() {
   const [telemetry, setTelemetry] = useState({
     altitude: 120.4,
@@ -521,412 +706,160 @@ export default function Home() {
   useEffect(() => {
     const timer = setInterval(() => {
       setTelemetry((prev) => ({
-        altitude: +(prev.altitude + (Math.random() * 0.4 - 0.2)).toFixed(1),
-        velocity: +(prev.velocity + (Math.random() * 0.6 - 0.3)).toFixed(1),
-        lat: +(prev.lat + (Math.random() * 0.0002 - 0.0001)).toFixed(4),
-        lng: +(prev.lng + (Math.random() * 0.0002 - 0.0001)).toFixed(4),
+        altitude: parseFloat((120.0 + Math.sin(Date.now() / 1500) * 4.2).toFixed(1)),
+        velocity: parseFloat((14.0 + Math.cos(Date.now() / 2000) * 1.5).toFixed(1)),
+        lat: parseFloat((22.7196 + Math.sin(Date.now() / 5000) * 0.0005).toFixed(4)),
+        lng: parseFloat((75.8577 + Math.cos(Date.now() / 6000) * 0.0005).toFixed(4)),
       }));
-    }, 1000);
+    }, 250);
     return () => clearInterval(timer);
   }, []);
 
   return (
-    <main className="min-h-screen">
-      {/* ── Hero ───────  const [activeMode, setActiveMode] = useState("academy");
-  const [selectedSpec, setSelectedSpec] = useState("autopilot");
-
-  return (
-    <main className="min-h-screen">
+    <main className="min-h-screen bg-[#030712]">
       {/* ── Hero ─────────────────────────────────── */}
-      <section className="relative min-h-screen flex flex-col justify-center items-center pt-32 pb-20 overflow-hidden bg-[#02040a] text-white">
+      <section className="relative min-h-screen flex flex-col justify-center items-center pt-32 pb-24 overflow-hidden bg-[#030712] text-white">
         
-        {/* Soft, professional background gradients */}
-        <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          {/* Central ambient glow behind the content */}
-          <motion.div 
-            animate={{ 
-              scale: [1, 1.08, 0.96, 1],
-              opacity: [0.25, 0.4, 0.3, 0.25]
-            }}
-            transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-primary/10 rounded-full blur-[150px]"
-          />
-          <motion.div 
-            animate={{ 
-              scale: [0.95, 1.1, 1, 0.95],
-              opacity: [0.15, 0.3, 0.2, 0.15]
-            }}
-            transition={{ duration: 18, repeat: Infinity, ease: "easeInOut", delay: 2.5 }}
-            className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-cyan-500/10 rounded-full blur-[130px]"
-          />
+        {/* Interactive Radar Background Canvas */}
+        <UAVRadarCanvas />
 
-          {/* Clean CAD dot grid */}
-          <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.02)_1px,transparent_1px)] [background-size:32px_32px] opacity-80" />
-
-          {/* Fine structural lines */}
-          <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/5 to-transparent" />
-          <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-white/5 to-transparent" />
-          <div className="absolute left-12 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-white/5 to-transparent" />
-          <div className="absolute right-12 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-white/5 to-transparent" />
+        {/* Ambient lighting glows */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
+          {/* Subtle grid pattern */}
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.01)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.01)_1px,transparent_1px)] [background-size:60px_60px] opacity-40" />
+          
+          {/* Radial color backlights */}
+          <div className="absolute top-1/3 left-1/4 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[140px] opacity-40" />
+          <div className="absolute top-1/4 right-1/4 w-[500px] h-[500px] bg-cyan-500/10 rounded-full blur-[140px] opacity-30" />
         </div>
 
-        <div className="container mx-auto px-4 md:px-6 relative z-10 text-center flex flex-col items-center">
+        <div className="container mx-auto px-4 md:px-6 relative z-10 text-center flex flex-col items-center max-w-6xl">
           
-          {/* Centered Pill Badge */}
+          {/* Live Operational Status Tag */}
           <motion.div
-            initial={{ opacity: 0, y: 15 }}
+            initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/[0.03] border border-white/10 backdrop-blur-md mb-8"
+            className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-white/[0.02] border border-white/8 backdrop-blur-md mb-8 hover:bg-white/[0.04] transition-colors"
           >
-            <span className="flex h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
-            <span className="text-[10px] font-bold font-mono tracking-[0.25em] text-slate-300">
-              ✦ SYSTEM STATUS: NOMINAL // ONLINE
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+            </span>
+            <span className="text-[10px] font-mono tracking-widest text-slate-300 uppercase">
+              ✦ SYSTEM STATUS: ACTIVE // GRID RESOLUTION: NOMINAL
             </span>
           </motion.div>
 
-          {/* Main Title Heading */}
+          {/* Heading */}
           <motion.h1
-            initial={{ opacity: 0, y: 25 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.1 }}
-            className="font-display text-4xl sm:text-6xl md:text-8xl leading-[1.02] mb-6 tracking-tight max-w-5xl"
+            className="font-display text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black leading-[1.05] tracking-tight max-w-5xl mb-6 text-white"
           >
-            SOARING AEROTECH
-            <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-red-500 to-amber-500 font-extrabold shadow-sm">
-              AEROSPACE SYSTEM PORTAL
+            Building the Future of{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-rose-300 to-rose-500 drop-shadow-[0_0_35px_rgba(239,68,68,0.15)]">
+              Autonomous Flight.
             </span>
           </motion.h1>
 
-          {/* Subtitle description */}
+          {/* Subtitle */}
           <motion.p
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-slate-400 text-xs sm:text-sm md:text-base mb-10 leading-relaxed max-w-2xl font-mono uppercase tracking-wider"
+            className="text-slate-400 text-sm sm:text-base md:text-lg max-w-3xl leading-relaxed mb-12 font-light"
           >
-            Madhya Pradesh's premier DGCA certified drone pilot academy, defense-grade UAV manufacturing, and strategic mapping network.
+            India's premier ecosystem for DGCA-approved drone pilot training, 
+            enterprise UAV manufacturing, and professional aerial mapping operations.
           </motion.p>
 
-          {/* Tactical Mode Selector Bar */}
+          {/* Action Buttons */}
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="flex flex-wrap items-center justify-center gap-2 mb-10 p-1.5 bg-white/[0.02] border border-white/5 rounded-2xl backdrop-blur-md"
+            className="flex flex-wrap items-center justify-center gap-4 mb-20 relative z-20"
           >
-            <button
-              onClick={() => setActiveMode("academy")}
-              className={`px-5 py-2.5 rounded-xl text-xs font-mono font-bold tracking-wider uppercase transition-all duration-300 ${
-                activeMode === "academy"
-                  ? "bg-primary text-white shadow-[0_0_15px_rgba(239,68,68,0.4)]"
-                  : "text-slate-400 hover:text-white hover:bg-white/5"
-              }`}
-            >
-              [ 01 / PILOT ACADEMY ]
-            </button>
-            <button
-              onClick={() => setActiveMode("manufacturing")}
-              className={`px-5 py-2.5 rounded-xl text-xs font-mono font-bold tracking-wider uppercase transition-all duration-300 ${
-                activeMode === "manufacturing"
-                  ? "bg-cyan-500 text-white shadow-[0_0_15px_rgba(6,182,212,0.4)]"
-                  : "text-slate-400 hover:text-white hover:bg-white/5"
-              }`}
-            >
-              [ 02 / UAV ENGINEERING ]
-            </button>
-            <button
-              onClick={() => setActiveMode("operations")}
-              className={`px-5 py-2.5 rounded-xl text-xs font-mono font-bold tracking-wider uppercase transition-all duration-300 ${
-                activeMode === "operations"
-                  ? "bg-amber-500 text-white shadow-[0_0_15px_rgba(245,158,11,0.4)]"
-                  : "text-slate-400 hover:text-white hover:bg-white/5"
-              }`}
-            >
-              [ 03 / AERIAL MISSION CONTROL ]
-            </button>
+            <Link href="/training">
+              <Button
+                size="lg"
+                className="h-12 px-8 rounded-full text-xs font-semibold uppercase tracking-wider bg-primary text-white hover:bg-primary/95 hover:shadow-[0_0_30px_rgba(239,68,68,0.35)] transition-all duration-300 group"
+              >
+                Explore Programs{" "}
+                <ChevronRight className="w-4 h-4 ml-1 group-hover:translate-x-0.5 transition-transform" />
+              </Button>
+            </Link>
+            <Link href="/contact">
+              <Button
+                size="lg"
+                variant="outline"
+                className="h-12 px-8 rounded-full text-xs font-semibold uppercase tracking-wider border-white/10 text-white bg-white/5 hover:bg-white/10 transition-all duration-300"
+              >
+                Partner With Us
+              </Button>
+            </Link>
           </motion.div>
 
-          {/* Interactive Widescreen Control Dashboard */}
+          {/* Futuristic Telemetry HUD Grid (Four Glassmorphic Stats Panels) */}
           <motion.div
-            key={activeMode}
-            initial={{ opacity: 0, y: 30, scale: 0.98 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ duration: 0.5, ease: "easeOut" }}
-            className="w-full max-w-5xl rounded-3xl overflow-hidden border border-white/10 bg-slate-950/70 backdrop-blur-xl shadow-[0_0_80px_rgba(0,0,0,0.9)] p-6 md:p-8 relative min-h-[440px] flex items-center"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, delay: 0.4 }}
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 w-full"
           >
-            {/* Ambient inner console glow */}
-            <div className="absolute inset-0 bg-gradient-to-b from-white/[0.01] to-transparent pointer-events-none" />
-
-            <div className="grid md:grid-cols-12 gap-8 items-center text-left w-full">
-              
-              {/* Dynamic Interactive Left Panel depending on activeMode */}
-              <div className="md:col-span-7">
-                {activeMode === "academy" && (
-                  <div className="relative aspect-[16/10] bg-[#020408] rounded-2xl border border-white/5 overflow-hidden flex flex-col justify-center items-center p-6">
-                    {/* Decorative cyber grid background */}
-                    <div className="absolute inset-0 bg-[linear-gradient(to_right,#0c101b_1px,transparent_1px),linear-gradient(to_bottom,#0c101b_1px,transparent_1px)] [background-size:24px_24px]" />
-                    
-                    {/* Dynamic scan line */}
-                    <motion.div
-                      animate={{ translateY: ["0px", "240px", "0px"] }}
-                      transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
-                      className="absolute left-0 right-0 h-px bg-emerald-500/20 shadow-[0_0_10px_#10b981] pointer-events-none"
-                    />
-                    
-                    {/* Regional Grid Dots */}
-                    <svg className="w-full h-full max-h-[200px] text-slate-700 relative z-10" viewBox="0 0 300 200" fill="none">
-                      {/* Regional borders simulated */}
-                      <path d="M50 50 L120 25 L200 40 L250 80 L210 160 L120 180 L40 120 Z" stroke="rgba(255,255,255,0.03)" strokeWidth="1" strokeDasharray="3 3" />
-                      
-                      {/* Indore Training Node */}
-                      <g>
-                        <circle cx="80" cy="110" r="10" className="fill-emerald-500/10 stroke-emerald-400 stroke-1 animate-ping" />
-                        <circle cx="80" cy="110" r="4" className="fill-emerald-400" />
-                        <text x="92" y="113" fill="#cbd5e1" fontSize="9" fontFamily="monospace">INDORE_RPTO</text>
-                      </g>
-                      
-                      {/* Bhopal Training Node */}
-                      <g>
-                        <circle cx="150" cy="95" r="10" className="fill-emerald-500/10 stroke-emerald-400 stroke-1 animate-ping" style={{ animationDelay: "1s" }} />
-                        <circle cx="150" cy="95" r="4" className="fill-emerald-400" />
-                        <text x="162" y="98" fill="#cbd5e1" fontSize="9" fontFamily="monospace">BHOPAL_RPTO</text>
-                      </g>
-
-                      {/* Jabalpur Training Node */}
-                      <g>
-                        <circle cx="210" cy="120" r="10" className="fill-emerald-500/10 stroke-emerald-400 stroke-1 animate-ping" style={{ animationDelay: "2s" }} />
-                        <circle cx="210" cy="120" r="4" className="fill-emerald-400" />
-                        <text x="222" y="123" fill="#cbd5e1" fontSize="9" fontFamily="monospace">JABALPUR_RPTO</text>
-                      </g>
-                    </svg>
-                    <div className="absolute bottom-4 left-4 text-[9px] font-mono text-emerald-400">
-                      GPS_REF_STATIONS: OK // 3 ACTIVE TRAINING CENTERS
-                    </div>
-                  </div>
-                )}
-
-                {activeMode === "manufacturing" && (
-                  <div className="relative aspect-[16/10] bg-[#020408] rounded-2xl border border-white/5 overflow-hidden flex flex-col justify-center items-center p-6">
-                    {/* Decorative blueprint grids */}
-                    <div className="absolute inset-0 bg-[radial-gradient(rgba(34,211,238,0.02)_1px,transparent_1px)] [background-size:16px_16px]" />
-                    
-                    {/* Interactive Blueprint Vector Drawing */}
-                    <svg viewBox="0 0 200 200" className="w-full h-full text-slate-500 max-h-[220px] relative z-10" fill="none" stroke="currentColor" strokeWidth="0.75">
-                      {/* Frame structural vectors */}
-                      <line x1="100" y1="100" x2="50" y2="50" strokeWidth="1" stroke="rgba(255,255,255,0.15)" />
-                      <line x1="100" y1="100" x2="150" y2="50" strokeWidth="1" stroke="rgba(255,255,255,0.15)" />
-                      <line x1="100" y1="100" x2="50" y2="150" strokeWidth="1" stroke="rgba(255,255,255,0.15)" />
-                      <line x1="100" y1="100" x2="150" y2="150" strokeWidth="1" stroke="rgba(255,255,255,0.15)" />
-                      
-                      {/* Central core hub */}
-                      <circle cx="100" cy="100" r="22" fill="#030712" stroke="currentColor" strokeWidth="1.5" />
-                      <circle cx="100" cy="100" r="10" stroke="#ef4444" strokeWidth="0.5" strokeDasharray="3 2" />
-
-                      {/* Rotating Propellers simulation */}
-                      <circle cx="50" cy="50" r="18" stroke="currentColor" strokeDasharray="3 3" className="animate-[spin_6s_linear_infinite]" />
-                      <circle cx="50" cy="50" r="2" fill="currentColor" />
-                      
-                      <circle cx="150" cy="50" r="18" stroke="currentColor" strokeDasharray="3 3" className="animate-[spin_6s_linear_infinite_reverse]" />
-                      <circle cx="150" cy="50" r="2" fill="currentColor" />
-                      
-                      <circle cx="50" cy="150" r="18" stroke="currentColor" strokeDasharray="3 3" className="animate-[spin_6s_linear_infinite_reverse]" />
-                      <circle cx="50" cy="150" r="2" fill="currentColor" />
-                      
-                      <circle cx="150" cy="150" r="18" stroke="currentColor" strokeDasharray="3 3" className="animate-[spin_6s_linear_infinite]" />
-                      <circle cx="150" cy="150" r="2" fill="currentColor" />
-
-                      {/* Interactive Spec Nodes */}
-                      {/* Node 1: Autopilot */}
-                      <g className="cursor-pointer" onClick={() => setSelectedSpec("autopilot")}>
-                        <circle cx="100" cy="100" r="7" className="fill-cyan-500/20 stroke-cyan-400 stroke-1 animate-pulse" />
-                        <text x="96" y="103" fill="#22d3ee" fontSize="10" fontWeight="bold">+</text>
-                      </g>
-                      
-                      {/* Node 2: Propulsion */}
-                      <g className="cursor-pointer" onClick={() => setSelectedSpec("propulsion")}>
-                        <circle cx="150" cy="50" r="7" className="fill-cyan-500/20 stroke-cyan-400 stroke-1 animate-pulse" />
-                        <text x="146" y="53" fill="#22d3ee" fontSize="10" fontWeight="bold">+</text>
-                      </g>
-
-                      {/* Node 3: Payload */}
-                      <g className="cursor-pointer" onClick={() => setSelectedSpec("payload")}>
-                        <circle cx="100" cy="122" r="7" className="fill-cyan-500/20 stroke-cyan-400 stroke-1 animate-pulse" />
-                        <text x="96" y="125" fill="#22d3ee" fontSize="10" fontWeight="bold">+</text>
-                      </g>
-                    </svg>
-
-                    <div className="absolute bottom-4 left-4 text-[9px] font-mono text-cyan-400 flex items-center gap-1.5">
-                      <span className="h-1.5 w-1.5 rounded-full bg-cyan-400 animate-ping" />
-                      MODEL: HEXA_UAV_STRUCTURE // CLICK HOTSPOTS
-                    </div>
-                  </div>
-                )}
-
-                {activeMode === "operations" && (
-                  <div className="relative aspect-[16/10] bg-[#020408] rounded-2xl border border-white/5 overflow-hidden p-6 flex flex-col justify-between">
-                    {/* Tactical radar grids */}
-                    <div className="absolute inset-0 bg-[radial-gradient(rgba(245,158,11,0.06)_1px,transparent_1px)] [background-size:20px_20px]" />
-                    
-                    <div className="flex justify-between items-start z-10">
-                      <div className="text-[9px] font-mono text-amber-500 uppercase tracking-wider">
-                        Tactical Map Tracker
-                      </div>
-                      <div className="text-[9px] font-mono text-slate-400 flex items-center gap-1.5">
-                        <span className="h-1.5 w-1.5 rounded-full bg-amber-500 animate-ping" />
-                        SATELLITE_LINK: ESTABLISHED
-                      </div>
-                    </div>
-
-                    {/* Sweeping radar graphics */}
-                    <div className="absolute inset-0 flex items-center justify-center opacity-25 pointer-events-none">
-                      <svg className="w-[160px] h-[160px] text-amber-500" viewBox="0 0 100 100">
-                        <circle cx="50" cy="50" r="48" stroke="currentColor" strokeWidth="0.5" strokeDasharray="4 4" className="animate-[spin_50s_linear_infinite]" />
-                        <circle cx="50" cy="50" r="28" stroke="currentColor" strokeWidth="0.25" />
-                        <line x1="50" y1="2" x2="50" y2="98" stroke="currentColor" strokeWidth="0.25" />
-                        <line x1="2" y1="50" x2="98" y2="50" stroke="currentColor" strokeWidth="0.25" />
-                      </svg>
-                    </div>
-
-                    {/* Flight coordinates overlay */}
-                    <div className="z-10 bg-black/70 border border-white/10 p-3 rounded-lg backdrop-blur-md font-mono text-[9px] text-slate-300 w-[180px] space-y-1.5 shadow-xl">
-                      <div>COORD_LAT: {telemetry.lat.toFixed(4)}°N</div>
-                      <div>COORD_LNG: {telemetry.lng.toFixed(4)}°E</div>
-                      <div>CURR_ALT: {telemetry.altitude} m</div>
-                      <div>CURR_VEL: {telemetry.velocity} m/s</div>
-                    </div>
-
-                    <div className="z-10 flex justify-between items-end">
-                      <span className="text-[8px] font-mono text-amber-500/60 uppercase">ACTIVE_MISSION: SURVEY_TRACKING</span>
-                      <span className="text-[8px] font-mono text-slate-400">FLIGHT_ID: SOAR_94</span>
-                    </div>
-                  </div>
-                )}
+            {/* Card 1 */}
+            <div className="group relative overflow-hidden rounded-2xl border border-white/5 bg-[#111111]/30 backdrop-blur-md p-6 text-left hover:border-primary/20 hover:bg-[#111111]/50 transition-all duration-300">
+              <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-primary/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+              <div className="flex items-center gap-3 text-primary mb-3">
+                <GraduationCap className="w-5 h-5 shrink-0" />
+                <span className="text-[9px] font-mono tracking-widest text-slate-500 uppercase">01 // ACADEMY</span>
               </div>
-
-              {/* Dynamic Right Panel depending on activeMode */}
-              <div className="md:col-span-5">
-                {activeMode === "academy" && (
-                  <div className="flex flex-col justify-between h-full space-y-6">
-                    <div>
-                      <h3 className="text-xl font-bold tracking-tight text-white mb-2 font-mono">[ DGCA TRAINING ACADEMY ]</h3>
-                      <p className="text-slate-400 text-xs leading-relaxed">
-                        Become a professional certified drone pilot. We operate top-tier DGCA-approved Remote Pilot Training Organizations (RPTO) across Madhya Pradesh.
-                      </p>
-                    </div>
-
-                    <div className="space-y-4">
-                      <div className="grid grid-cols-2 gap-4">
-                        <div className="bg-white/[0.01] border border-white/5 p-4 rounded-xl">
-                          <div className="text-[9px] font-mono text-slate-400 uppercase">CERTIFIED PILOTS</div>
-                          <div className="text-2xl font-black text-emerald-400 mt-1 font-mono">1,250+</div>
-                        </div>
-                        <div className="bg-white/[0.01] border border-white/5 p-4 rounded-xl">
-                          <div className="text-[9px] font-mono text-slate-400 uppercase">EXAM SUCCESS</div>
-                          <div className="text-2xl font-black text-white mt-1 font-mono">99.4%</div>
-                        </div>
-                      </div>
-
-                      <div className="border border-white/10 rounded-xl p-3 bg-white/[0.01] flex items-center justify-between text-xs">
-                        <span className="text-slate-400 font-mono">COURSES:</span>
-                        <span className="font-bold text-white font-mono">RPC BASIC, AGRI & MAPPING</span>
-                      </div>
-                    </div>
-
-                    <Link href="/training">
-                      <Button className="w-full bg-emerald-600 hover:bg-emerald-500 text-xs font-mono uppercase tracking-wider h-11 rounded-lg">
-                        Apply For Pilot Certification
-                      </Button>
-                    </Link>
-                  </div>
-                )}
-
-                {activeMode === "manufacturing" && (
-                  <div className="flex flex-col justify-between h-full space-y-6">
-                    <div>
-                      <h3 className="text-xl font-bold tracking-tight text-white mb-2 font-mono">[ UAV ENGINEERING HUB ]</h3>
-                      <p className="text-slate-400 text-xs leading-relaxed">
-                        Aerospace-grade UAV design and assembly. We build industrial payload drone systems tailored for defense, agriculture, and high-altitude mapping.
-                      </p>
-                    </div>
-
-                    {/* Hotspot details panel */}
-                    <div className="bg-white/[0.01] border border-white/5 p-4 rounded-xl min-h-[145px] flex flex-col justify-between">
-                      <div>
-                        <div className="text-[9px] font-mono text-cyan-400 uppercase tracking-widest mb-1">SELECTED COMPONENT</div>
-                        <div className="text-base font-bold text-white mb-1.5">
-                          {selectedSpec === "autopilot" && "SA-FLIGHT AUTOPILOT V3"}
-                          {selectedSpec === "propulsion" && "T-MOTOR BRUSHLESS DRIVE F80"}
-                          {selectedSpec === "payload" && "MULTISPECTRAL SENSOR SYSTEM"}
-                        </div>
-                        <p className="text-slate-400 text-[11px] leading-relaxed">
-                          {selectedSpec === "autopilot" && "Features triple-redundant IMU processors, obstacle avoidance sensors, and RTK accuracy for centimetre positioning."}
-                          {selectedSpec === "propulsion" && "High-efficiency brushless motors with carbon fiber composite props, yielding 15kg max thrust per rotor."}
-                          {selectedSpec === "payload" && "5-band multispectral survey camera combined with optical/thermal payloads for analytical field mapping."}
-                        </p>
-                      </div>
-                      
-                      <div className="grid grid-cols-2 gap-4 pt-2.5 mt-2.5 border-t border-white/5 text-[9px] font-mono text-slate-400">
-                        <div>STATUS: <span className="text-emerald-400 font-bold">NOMINAL</span></div>
-                        <div>WEIGHT: <span className="text-white">
-                          {selectedSpec === "autopilot" && "420g"}
-                          {selectedSpec === "propulsion" && "850g/rotor"}
-                          {selectedSpec === "payload" && "1.2kg"}
-                        </span></div>
-                      </div>
-                    </div>
-
-                    <Link href="/services">
-                      <Button className="w-full bg-cyan-600 hover:bg-cyan-500 text-xs font-mono uppercase tracking-wider h-11 rounded-lg">
-                        View Technical Catalog
-                      </Button>
-                    </Link>
-                  </div>
-                )}
-
-                {activeMode === "operations" && (
-                  <div className="flex flex-col justify-between h-full space-y-6">
-                    <div>
-                      <h3 className="text-xl font-bold tracking-tight text-white mb-2 font-mono">[ AERIAL MISSIONS ]</h3>
-                      <p className="text-slate-400 text-xs leading-relaxed">
-                        Deploy drone infrastructure for real-time field data operations. We cater to high-accuracy surveys, mapping, and crop monitoring.
-                      </p>
-                    </div>
-
-                    <div className="space-y-4">
-                      <div className="bg-white/[0.01] border border-white/5 rounded-xl p-4 space-y-2.5 text-xs font-mono">
-                        <div className="flex justify-between border-b border-white/5 pb-2">
-                          <span className="text-slate-400">ACTIVE FLEET:</span>
-                          <span className="text-white font-bold">14 active units</span>
-                        </div>
-                        <div className="flex justify-between border-b border-white/5 pb-2">
-                          <span className="text-slate-400">TOTAL SURVEYED:</span>
-                          <span className="text-white">12,500+ Hectares</span>
-                        </div>
-                        <div className="flex justify-between">
-                          <span className="text-slate-400">PARTNERS:</span>
-                          <span className="text-amber-400 font-bold">NHAI, MPRDC, MPEB</span>
-                        </div>
-                      </div>
-                    </div>
-
-                    <Link href="/contact">
-                      <Button className="w-full bg-amber-600 hover:bg-amber-500 text-xs font-mono uppercase tracking-wider h-11 rounded-lg">
-                        Request Mission Operations
-                      </Button>
-                    </Link>
-                  </div>
-                )}
-              </div>
-
+              <h3 className="text-xl font-bold font-mono text-white mb-1.5">1,250+ PILOTS</h3>
+              <p className="text-[11px] text-slate-400 leading-relaxed">DGCA-approved RPTO center certification courses. 99% exam success.</p>
             </div>
 
+            {/* Card 2 */}
+            <div className="group relative overflow-hidden rounded-2xl border border-white/5 bg-[#111111]/30 backdrop-blur-md p-6 text-left hover:border-primary/20 hover:bg-[#111111]/50 transition-all duration-300">
+              <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-primary/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+              <div className="flex items-center gap-3 text-primary mb-3">
+                <Factory className="w-5 h-5 shrink-0" />
+                <span className="text-[9px] font-mono tracking-widest text-slate-500 uppercase">02 // INDIGENOUS</span>
+              </div>
+              <h3 className="text-xl font-bold font-mono text-white mb-1.5">50K SQ. FT.</h3>
+              <p className="text-[11px] text-slate-400 leading-relaxed">State-of-the-art UAV assembly, manufacturing, & R&D facility in Indore.</p>
+            </div>
+
+            {/* Card 3 */}
+            <div className="group relative overflow-hidden rounded-2xl border border-white/5 bg-[#111111]/30 backdrop-blur-md p-6 text-left hover:border-primary/20 hover:bg-[#111111]/50 transition-all duration-300">
+              <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-primary/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+              <div className="flex items-center gap-3 text-primary mb-3">
+                <ShieldCheck className="w-5 h-5 shrink-0" />
+                <span className="text-[9px] font-mono tracking-widest text-slate-500 uppercase">03 // CERTIFIED</span>
+              </div>
+              <h3 className="text-xl font-bold font-mono text-white mb-1.5">DGCA APPROVED</h3>
+              <p className="text-[11px] text-slate-400 leading-relaxed">Compliant design, aerospace engineering parameters, defense standards.</p>
+            </div>
+
+            {/* Card 4 */}
+            <div className="group relative overflow-hidden rounded-2xl border border-white/5 bg-[#111111]/30 backdrop-blur-md p-6 text-left hover:border-primary/20 hover:bg-[#111111]/50 transition-all duration-300">
+              <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-primary/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+              <div className="flex items-center gap-3 text-primary mb-3">
+                <MapPin className="w-5 h-5 shrink-0" />
+                <span className="text-[9px] font-mono tracking-widest text-slate-500 uppercase">04 // TELEMETRY</span>
+              </div>
+              <div className="flex flex-col gap-0.5 text-white mb-1.5">
+                <div className="text-xs font-mono">ALT: <span className="text-emerald-400 font-bold">{telemetry.altitude}m</span></div>
+                <div className="text-xs font-mono">VEL: <span className="text-emerald-400 font-bold">{telemetry.velocity}m/s</span></div>
+              </div>
+              <p className="text-[10px] font-mono text-slate-500">{telemetry.lat}° N, {telemetry.lng}° E</p>
+            </div>
           </motion.div>
 
         </div>
 
-        {/* Down Indicator */}
+        {/* Down Scroll Indicator */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
