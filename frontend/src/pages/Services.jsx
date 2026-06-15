@@ -99,7 +99,7 @@ function ServiceSlider() {
   const [current, setCurrent] = useState(0);
   const [paused, setPaused] = useState(false);
   const total = services.length;
-  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const intervalRef = useRef(null);
 
   const startTimer = () => {
     intervalRef.current = setInterval(() => {
@@ -112,14 +112,14 @@ function ServiceSlider() {
     return () => { if (intervalRef.current) clearInterval(intervalRef.current); };
   }, [paused]);
 
-  const go = (dir: number) => {
+  const go = (dir) => {
     if (intervalRef.current) clearInterval(intervalRef.current);
     setCurrent((p) => (p + dir + total) % total);
     if (!paused) startTimer();
   };
 
   const getVisible = () => {
-    const indices: number[] = [];
+    const indices = [];
     for (let i = 0; i < 4; i++) {
       indices.push((current + i) % total);
     }

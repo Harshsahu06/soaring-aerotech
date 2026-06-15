@@ -15,5 +15,5 @@ export async function connectMongo() {
   });
 }
 
-export * from "./models/submission";
+export * from "./models/submission.js";
 export { mongoose };

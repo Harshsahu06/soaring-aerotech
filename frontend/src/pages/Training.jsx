@@ -53,7 +53,7 @@ function CourseSlider() {
   const [current, setCurrent] = useState(0);
   const [paused, setPaused] = useState(false);
   const total = programs.length;
-  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const intervalRef = useRef(null);
 
   const startTimer = () => {
     intervalRef.current = setInterval(() => {
@@ -66,14 +66,14 @@ function CourseSlider() {
     return () => { if (intervalRef.current) clearInterval(intervalRef.current); };
   }, [paused]);
 
-  const go = (dir: number) => {
+  const go = (dir) => {
     if (intervalRef.current) clearInterval(intervalRef.current);
     setCurrent((p) => (p + dir + total) % total);
     if (!paused) startTimer();
   };
 
   const getVisible = () => {
-    const indices: number[] = [];
+    const indices = [];
     for (let i = 0; i < 4; i++) {
       indices.push((current + i) % total);
     }
@@ -162,13 +162,13 @@ export default function Training() {
   const [enrollForm, setEnrollForm] = useState({
     name: "", phone: "", email: "", program: "DGCA RPC — Small Class (₹25,000)", message: "",
   });
-  const [enrollStatus, setEnrollStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [enrollStatus, setEnrollStatus] = useState("idle");
 
-  const handleEnrollChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleEnrollChange = (e) => {
     setEnrollForm((f) => ({ ...f, [e.target.name]: e.target.value }));
   };
 
-  const handleEnrollSubmit = async (e: React.FormEvent) => {
+  const handleEnrollSubmit = async (e) => {
     e.preventDefault();
     setEnrollStatus("loading");
     try {

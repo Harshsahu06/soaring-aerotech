@@ -3,17 +3,8 @@ import { Link } from "wouter";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-interface ProjectItem {
-  title: string;
-  category: string;
-  img: string;
-  challenge: string;
-  solution: string;
-  results?: Array<{ label: string; value: string }>;
-}
-
 export default function Projects() {
-  const projects: ProjectItem[] = [
+  const projects = [
     {
       title: "Industrial Facility Drone Surveillance",
       category: "Surveillance & Security",
@@ -49,7 +40,7 @@ export default function Projects() {
     {
       title: "High-Altitude UAV Development & Testing",
       category: "UAV Manufacturing",
-      img: "https://images.unsplash.com/photo-1534120247760-c44c3e4a62f1?w=900&h=600&fit=crop",
+      img: "https://images.unsplash.com/photo-1534120247760-c44c3e4a62f1?w=800&h=800&fit=crop",
       challenge: "Developing UAVs capable of reliable operation at high altitudes requires extensive field testing in low-pressure, low-temperature conditions that are difficult and expensive to simulate.",
       solution: "Soaring Aerotech's R&D team conducted high-altitude drone testing missions, validating airframe performance, motor efficiency, and electronics reliability for future defense and surveillance applications.",
 
@@ -105,7 +96,7 @@ export default function Projects() {
                   </div>
                   {/* Result pills on image */}
                   <div className="absolute bottom-5 left-5 flex flex-wrap gap-2">
-                    {(project.results ?? []).map((res: { label: string; value: string }, j: number) => (
+                    {(project.results ?? []).map((res, j) => (
                       <div key={j} className="bg-primary/90 backdrop-blur-sm text-white text-xs font-bold px-3 py-1.5 rounded-full">
                         {res.label}: {res.value}
                       </div>

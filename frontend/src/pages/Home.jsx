@@ -106,9 +106,6 @@ const galleryRow2 = [
 function Marquee({
   items,
   reverse = false,
-}: {
-  items: typeof galleryRow1;
-  reverse?: boolean;
 }) {
   const doubled = [...items, ...items];
   return (
@@ -141,15 +138,15 @@ function Marquee({
   );
 }
 
-function Counter({ target, suffix = "" }: { target: number; suffix?: string }) {
+function Counter({ target, suffix = "" }) {
   const [count, setCount] = useState(0);
-  const ref = useRef<HTMLDivElement>(null);
+  const ref = useRef(null);
   const inView = useInView(ref, { once: true });
   useEffect(() => {
     if (!inView) return;
     let start = 0;
     const duration = 1800;
-    const step = (timestamp: number) => {
+    const step = (timestamp) => {
       if (!start) start = timestamp;
       const progress = Math.min((timestamp - start) / duration, 1);
       const ease = 1 - Math.pow(1 - progress, 3);

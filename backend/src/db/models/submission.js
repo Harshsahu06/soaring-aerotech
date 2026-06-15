@@ -1,18 +1,6 @@
 import mongoose from "mongoose";
 
-export interface ISubmission extends mongoose.Document {
-  type: "contact" | "enrollment";
-  name: string;
-  phone: string;
-  email?: string;
-  subject?: string;
-  program?: string;
-  message?: string;
-  createdAt: Date;
-  updatedAt: Date;
-}
-
-const submissionSchema = new mongoose.Schema<ISubmission>(
+const submissionSchema = new mongoose.Schema(
   {
     type: {
       type: String,
@@ -26,9 +14,9 @@ const submissionSchema = new mongoose.Schema<ISubmission>(
     program: { type: String },
     message: { type: String },
   },
-  { timestamps: true },
+  { timestamps: true }
 );
 
 export const Submission =
   mongoose.models["Submission"] ||
-  mongoose.model<ISubmission>("Submission", submissionSchema);
+  mongoose.model("Submission", submissionSchema);

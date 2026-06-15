@@ -1,7 +1,7 @@
-import { Router, type IRouter } from "express";
-import { connectMongo, Submission } from "../db";
+import { Router } from "express";
+import { connectMongo, Submission } from "../db/index.js";
 
-const router: IRouter = Router();
+const router = Router();
 
 router.post("/submit", async (req, res) => {
   try {
