@@ -188,69 +188,103 @@ export default function About() {
         </div>
       </section>
 
-      {/* ── Directors ────────────────────────────── */}
-      <section className="py-20 bg-white border-b border-border">
+      {/* ── Leadership & Team ──────────────────────── */}
+      <section className="py-20 bg-slate-50 border-b border-border">
         <div className="container mx-auto px-4 md:px-6">
-          <div className="section-label mb-10">LEADERSHIP</div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl">
-            {directors.map((d, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="group bg-[#F5F5F5] rounded-2xl overflow-hidden border border-border shadow-sm hover:shadow-md transition-shadow flex flex-col sm:flex-row"
-              >
-                <div className="w-full sm:w-36 h-48 sm:h-auto relative shrink-0 overflow-hidden">
-                  <img src={d.img} alt={d.name} className="absolute inset-0 w-full h-full object-cover grayscale group-hover:scale-105 transition-transform duration-500" />
-                </div>
-                <div className="p-6 flex flex-col justify-center">
-                  <Award className="w-5 h-5 text-primary mb-3" />
-                  <blockquote className="text-sm text-foreground/75 italic mb-4 leading-relaxed">"{d.quote}"</blockquote>
-                  <div className="font-display font-bold text-foreground text-sm">{d.name}</div>
-                  <div className="text-xs text-primary font-mono tracking-wide mt-0.5">{d.role}, SOARING AEROTECH</div>
-                </div>
-              </motion.div>
-            ))}
+          
+          {/* Section Header */}
+          <div className="text-center max-w-2xl mx-auto mb-16">
+            <div className="section-label justify-center">PEOPLE BEHIND SOARING</div>
+            <h2 className="font-display text-4xl md:text-5xl text-foreground mb-4">
+              Leadership & Expert Team
+            </h2>
+            <p className="text-muted-foreground text-sm">
+              Meet the visionaries, R&D engineers, and certified instructors building Central India's premier drone ecosystem.
+            </p>
           </div>
-        </div>
-      </section>
 
-      {/* ── Team Members ─────────────────────────── */}
-      <section className="py-20 bg-[#F5F5F5] border-b border-border">
-        <div className="container mx-auto px-4 md:px-6">
-          <div className="section-label mb-10">OUR TEAM</div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-2xl">
-            {teamMembers.map((m, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="group bg-white rounded-2xl overflow-hidden border border-border shadow-sm hover:shadow-md transition-shadow"
-              >
-                <div className="relative h-64 overflow-hidden bg-[#F0F0F0]">
-                  <img
-                    src={m.img}
-                    alt={m.name}
-                    className="absolute inset-0 w-full h-full object-cover object-top grayscale group-hover:grayscale-0 transition-all duration-500"
-                  />
-                </div>
-                <div className="p-5">
-                  <div className="font-display font-bold text-foreground text-base">{m.name}</div>
-                  <div className="text-xs text-primary font-mono tracking-wide mt-0.5 uppercase">{m.role}</div>
-                  <div className="text-xs text-muted-foreground mt-0.5 font-medium">Soaring Aerotech</div>
-                </div>
-              </motion.div>
-            ))}
+          {/* Directors Grid */}
+          <div className="max-w-5xl mx-auto mb-16">
+            <h3 className="text-xs font-mono font-bold tracking-widest text-primary uppercase mb-6 text-center">
+              Board of Directors
+            </h3>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              {directors.map((d, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.1 }}
+                  className="group bg-white rounded-2xl overflow-hidden border border-border shadow-sm hover:shadow-md transition-all duration-300 flex flex-col sm:flex-row hover:-translate-y-1"
+                >
+                  <div className="w-full sm:w-44 h-56 sm:h-auto relative shrink-0 overflow-hidden bg-slate-100">
+                    <img
+                      src={d.img}
+                      alt={d.name}
+                      className="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500"
+                    />
+                  </div>
+                  <div className="p-6 flex flex-col justify-center flex-1">
+                    <Award className="w-5 h-5 text-primary mb-3" />
+                    <blockquote className="text-sm text-foreground/75 italic mb-4 leading-relaxed">
+                      "{d.quote}"
+                    </blockquote>
+                    <div className="font-display font-bold text-foreground text-base leading-tight">
+                      {d.name}
+                    </div>
+                    <div className="text-xs text-primary font-mono tracking-wide mt-0.5">
+                      {d.role}, SOARING AEROTECH
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
           </div>
+
+          {/* Core Team Grid */}
+          <div className="max-w-3xl mx-auto">
+            <h3 className="text-xs font-mono font-bold tracking-widest text-primary uppercase mb-6 text-center">
+              Core Engineering & Training Team
+            </h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+              {teamMembers.map((m, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.1 }}
+                  className="group bg-white rounded-2xl overflow-hidden border border-border shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1"
+                >
+                  <div className="relative h-64 overflow-hidden bg-slate-100">
+                    <img
+                      src={m.img}
+                      alt={m.name}
+                      className="absolute inset-0 w-full h-full object-cover object-top grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500"
+                    />
+                  </div>
+                  <div className="p-6">
+                    <div className="font-display font-bold text-foreground text-lg leading-tight">
+                      {m.name}
+                    </div>
+                    <div className="text-xs text-primary font-mono tracking-wide mt-1 uppercase">
+                      {m.role}
+                    </div>
+                    <div className="text-xs text-muted-foreground mt-1 font-medium">
+                      Soaring Aerotech
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+
         </div>
       </section>
 
       {/* ── Credentials with logos ───────────────── */}
-      <section className="py-20 bg-[#F5F5F5] border-b border-border">
+      <section className="py-20 bg-slate-50 border-b border-border">
         <div className="container mx-auto px-4 md:px-6">
           <div className="section-label mb-2">CREDENTIALS & AFFILIATIONS</div>
           <h2 className="font-display text-2xl md:text-3xl text-foreground mb-8">Recognised By India's Leading Bodies</h2>
@@ -264,8 +298,8 @@ export default function About() {
                 transition={{ delay: i * 0.08 }}
                 className="p-6 rounded-2xl bg-white border border-border text-center hover:border-primary/30 hover:shadow-md transition-all flex flex-col items-center gap-4"
               >
-                <div className={`w-20 h-20 rounded-xl ${c.bg} flex items-center justify-center overflow-hidden p-2 border border-border/50`}>
-                  <img src={c.logo} alt={c.title} className="w-full h-full object-contain" />
+                <div className={`w-full h-24 rounded-xl ${c.bg} flex items-center justify-center overflow-hidden p-3 border border-border/50`}>
+                  <img src={c.logo} alt={c.title} className="max-h-18 max-w-[90%] object-contain" />
                 </div>
                 <div>
                   <div className="font-bold text-sm text-foreground mb-1">{c.title}</div>

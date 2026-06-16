@@ -73,7 +73,7 @@ export default function Contact() {
                     <div className="p-3 rounded-full bg-primary/10 text-primary mt-0.5 shrink-0"><MapPin className="w-5 h-5" /></div>
                     <div>
                       <h4 className="font-bold text-foreground mb-1">Headquarters</h4>
-                      <p className="text-muted-foreground text-sm leading-relaxed">Tech Park, Block B, Innovation Wing<br />Indore, Madhya Pradesh<br />India 452001</p>
+                      <p className="text-muted-foreground text-sm leading-relaxed">AIC-Prestige Inspire Foundation<br />Prestige Vihar, Sector-D, Vijay Nagar, Scheme No 74C<br />Indore, Madhya Pradesh 452010</p>
                     </div>
                   </div>
                   <div className="flex items-start gap-4 p-6 rounded-2xl bg-[#F5F5F5] border border-border hover:border-primary/20 transition-colors">
@@ -104,7 +104,7 @@ export default function Contact() {
                 <div className="absolute inset-0 flex flex-col items-center justify-center gap-2">
                   <MapPin className="w-8 h-8 text-primary" />
                   <p className="text-white font-bold">Indore, Madhya Pradesh</p>
-                  <p className="text-white/50 text-xs font-mono">TECH PARK · BLOCK B</p>
+                  <p className="text-white/50 text-xs font-mono">AIC-PRESTIGE INSPIRE FOUNDATION</p>
                 </div>
               </div>
             </motion.div>

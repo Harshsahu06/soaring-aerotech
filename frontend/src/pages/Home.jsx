@@ -36,6 +36,7 @@ import imgDroneFieldDemo from "@/assets/drone-field-demo.jpg";
 import imgDroneDidiGroup from "@/assets/drone-didi-group.jpg";
 import imgNewsTearGas from "@/assets/news-tear-gas.png";
 import imgNewsForestSecurity from "@/assets/news-forest-security.png";
+import videoDroneDescending from "@/assets/drone_descending.mp4";
 
 const galleryRow1 = [
   {
@@ -512,7 +513,7 @@ function IndustriesSection() {
 
 function UAVRadarCanvas() {
   const canvasRef = useRef(null);
-  
+
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -537,7 +538,7 @@ function UAVRadarCanvas() {
       mouse.targetX = ((e.clientX - rect.left) / width) * 2 - 1;
       mouse.targetY = ((e.clientY - rect.top) / height) * 2 - 1;
     };
-    
+
     window.addEventListener("mousemove", handleMouseMove);
 
     // UAV Targets
@@ -549,7 +550,7 @@ function UAVRadarCanvas() {
     ];
 
     let sweepAngle = 0;
-    
+
     const draw = () => {
       // Smooth interpolation for mouse movement
       mouse.x += (mouse.targetX - mouse.x) * 0.05;
@@ -591,7 +592,7 @@ function UAVRadarCanvas() {
         ctx.beginPath();
         ctx.arc(centerX + offsetX * (i * 0.15), centerY + offsetY * (i * 0.15), r, 0, Math.PI * 2);
         ctx.stroke();
-        
+
         ctx.fillStyle = "rgba(255, 255, 255, 0.08)";
         ctx.font = "8px 'Space Mono', monospace";
         ctx.fillText(`${(i * 100).toFixed(0)}m`, centerX + r + offsetX * (i * 0.15) + 5, centerY + offsetY * (i * 0.15) + 3);
@@ -604,7 +605,7 @@ function UAVRadarCanvas() {
       const sweepGrad = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, maxRadius);
       sweepGrad.addColorStop(0, "rgba(239, 68, 68, 0.06)");
       sweepGrad.addColorStop(1, "rgba(239, 68, 68, 0.0)");
-      
+
       ctx.beginPath();
       ctx.moveTo(centerX, centerY);
       ctx.arc(centerX, centerY, maxRadius, sweepAngle - 0.3, sweepAngle);
@@ -630,10 +631,10 @@ function UAVRadarCanvas() {
         // Angle of target relative to sweep line
         const targetAngle = Math.atan2(target.y * maxRadius, target.x * maxRadius);
         let normalizedTargetAngle = targetAngle < 0 ? targetAngle + Math.PI * 2 : targetAngle;
-        
+
         let angleDiff = sweepAngle - normalizedTargetAngle;
         if (angleDiff < 0) angleDiff += Math.PI * 2;
-        
+
         // Target glow effect fades as sweep moves away
         let opacity = 0;
         if (angleDiff < Math.PI / 2) {
@@ -645,22 +646,22 @@ function UAVRadarCanvas() {
         if (opacity > 0.05) {
           ctx.save();
           ctx.translate(tX, tY);
-          
+
           // Draw target bounding box
           ctx.strokeStyle = `rgba(239, 68, 68, ${opacity * 0.7})`;
           ctx.lineWidth = 1;
           ctx.strokeRect(-4, -4, 8, 8);
-          
+
           // Center blinking dot
           const blink = Math.sin(Date.now() * 0.004 + index) > 0;
           ctx.fillStyle = blink ? `rgba(239, 68, 68, ${opacity * 0.9})` : `rgba(239, 68, 68, ${opacity * 0.3})`;
           ctx.fillRect(-1, -1, 2, 2);
-          
+
           // Data labels
           ctx.fillStyle = `rgba(255, 255, 255, ${opacity * 0.65})`;
           ctx.font = "8px 'Space Mono', monospace";
           ctx.fillText(target.id, 8, -1);
-          
+
           ctx.fillStyle = `rgba(255, 255, 255, ${opacity * 0.35})`;
           ctx.font = "7px 'Space Mono', monospace";
           ctx.fillText(`ALT: ${target.alt}m  SPD: ${target.speed}m/s`, 8, 7);
@@ -719,7 +720,20 @@ export default function Home() {
     <main className="min-h-screen bg-[#030712]">
       {/* ── Hero ─────────────────────────────────── */}
       <section className="relative min-h-screen flex flex-col justify-center items-center pt-32 pb-24 overflow-hidden bg-[#030712] text-white">
-        
+        {/* Background Video */}
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover pointer-events-none z-0 opacity-90"
+        >
+          <source src={videoDroneDescending} type="video/mp4" />
+        </video>
+
+        {/* Dark overlay to blend video with background and keep text readable */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#030712]/50 via-[#030712]/80 to-[#030712] pointer-events-none z-0" />
+
         {/* Interactive Radar Background Canvas */}
         <UAVRadarCanvas />
 
@@ -727,29 +741,16 @@ export default function Home() {
         <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
           {/* Subtle grid pattern */}
           <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.01)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.01)_1px,transparent_1px)] [background-size:60px_60px] opacity-40" />
-          
+
           {/* Radial color backlights */}
           <div className="absolute top-1/3 left-1/4 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[140px] opacity-40" />
           <div className="absolute top-1/4 right-1/4 w-[500px] h-[500px] bg-cyan-500/10 rounded-full blur-[140px] opacity-30" />
         </div>
 
         <div className="container mx-auto px-4 md:px-6 relative z-10 text-center flex flex-col items-center max-w-6xl">
-          
+
           {/* Live Operational Status Tag */}
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-white/[0.02] border border-white/8 backdrop-blur-md mb-8 hover:bg-white/[0.04] transition-colors"
-          >
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
-            </span>
-            <span className="text-[10px] font-mono tracking-widest text-slate-300 uppercase">
-              ✦ SYSTEM STATUS: ACTIVE // GRID RESOLUTION: NOMINAL
-            </span>
-          </motion.div>
+
 
           {/* Heading */}
           <motion.h1
@@ -771,7 +772,7 @@ export default function Home() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-slate-400 text-sm sm:text-base md:text-lg max-w-3xl leading-relaxed mb-12 font-light"
           >
-            India's premier ecosystem for DGCA-approved drone pilot training, 
+            India's premier ecosystem for DGCA-approved drone pilot training,
             enterprise UAV manufacturing, and professional aerial mapping operations.
           </motion.p>
 
@@ -803,59 +804,7 @@ export default function Home() {
           </motion.div>
 
           {/* Futuristic Telemetry HUD Grid (Four Glassmorphic Stats Panels) */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.4 }}
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 w-full"
-          >
-            {/* Card 1 */}
-            <div className="group relative overflow-hidden rounded-2xl border border-white/5 bg-[#111111]/30 backdrop-blur-md p-6 text-left hover:border-primary/20 hover:bg-[#111111]/50 transition-all duration-300">
-              <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-primary/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-              <div className="flex items-center gap-3 text-primary mb-3">
-                <GraduationCap className="w-5 h-5 shrink-0" />
-                <span className="text-[9px] font-mono tracking-widest text-slate-500 uppercase">01 // ACADEMY</span>
-              </div>
-              <h3 className="text-xl font-bold font-mono text-white mb-1.5">1,250+ PILOTS</h3>
-              <p className="text-[11px] text-slate-400 leading-relaxed">DGCA-approved RPTO center certification courses. 99% exam success.</p>
-            </div>
 
-            {/* Card 2 */}
-            <div className="group relative overflow-hidden rounded-2xl border border-white/5 bg-[#111111]/30 backdrop-blur-md p-6 text-left hover:border-primary/20 hover:bg-[#111111]/50 transition-all duration-300">
-              <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-primary/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-              <div className="flex items-center gap-3 text-primary mb-3">
-                <Factory className="w-5 h-5 shrink-0" />
-                <span className="text-[9px] font-mono tracking-widest text-slate-500 uppercase">02 // INDIGENOUS</span>
-              </div>
-              <h3 className="text-xl font-bold font-mono text-white mb-1.5">50K SQ. FT.</h3>
-              <p className="text-[11px] text-slate-400 leading-relaxed">State-of-the-art UAV assembly, manufacturing, & R&D facility in Indore.</p>
-            </div>
-
-            {/* Card 3 */}
-            <div className="group relative overflow-hidden rounded-2xl border border-white/5 bg-[#111111]/30 backdrop-blur-md p-6 text-left hover:border-primary/20 hover:bg-[#111111]/50 transition-all duration-300">
-              <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-primary/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-              <div className="flex items-center gap-3 text-primary mb-3">
-                <ShieldCheck className="w-5 h-5 shrink-0" />
-                <span className="text-[9px] font-mono tracking-widest text-slate-500 uppercase">03 // CERTIFIED</span>
-              </div>
-              <h3 className="text-xl font-bold font-mono text-white mb-1.5">DGCA APPROVED</h3>
-              <p className="text-[11px] text-slate-400 leading-relaxed">Compliant design, aerospace engineering parameters, defense standards.</p>
-            </div>
-
-            {/* Card 4 */}
-            <div className="group relative overflow-hidden rounded-2xl border border-white/5 bg-[#111111]/30 backdrop-blur-md p-6 text-left hover:border-primary/20 hover:bg-[#111111]/50 transition-all duration-300">
-              <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-primary/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-              <div className="flex items-center gap-3 text-primary mb-3">
-                <MapPin className="w-5 h-5 shrink-0" />
-                <span className="text-[9px] font-mono tracking-widest text-slate-500 uppercase">04 // TELEMETRY</span>
-              </div>
-              <div className="flex flex-col gap-0.5 text-white mb-1.5">
-                <div className="text-xs font-mono">ALT: <span className="text-emerald-400 font-bold">{telemetry.altitude}m</span></div>
-                <div className="text-xs font-mono">VEL: <span className="text-emerald-400 font-bold">{telemetry.velocity}m/s</span></div>
-              </div>
-              <p className="text-[10px] font-mono text-slate-500">{telemetry.lat}° N, {telemetry.lng}° E</p>
-            </div>
-          </motion.div>
 
         </div>
 
@@ -1186,7 +1135,7 @@ export default function Home() {
       </section>
 
       {/* ── Clients & Collaborations ─────────────── */}
-      <section className="py-20 bg-muted/30 border-b border-border">
+      <section className="py-20 bg-white border-b border-border">
         <div className="container mx-auto px-4 md:px-6">
           <div className="text-center mb-12">
             <div className="section-label justify-center">
@@ -1243,7 +1192,7 @@ export default function Home() {
       <IndustriesSection />
 
       {/* ── Gallery marquee ──────────────────────── */}
-      <section className="py-16 bg-muted/20 overflow-hidden border-b border-border">
+      <section className="py-16 bg-slate-50 overflow-hidden border-b border-border">
         <div className="container mx-auto px-4 md:px-6 mb-10">
           <div className="flex items-end justify-between">
             <div>
@@ -1320,7 +1269,7 @@ export default function Home() {
       </section>
 
       {/* ── Testimonials ─────────────────────────── */}
-      <section className="py-20 bg-muted/30 border-b border-border">
+      <section className="py-20 bg-slate-50 border-b border-border">
         <div className="container mx-auto px-4 md:px-6">
           <div className="section-label mb-4">STUDENT SUCCESS</div>
           <h2 className="font-display text-3xl md:text-4xl text-foreground mb-10">
@@ -1482,7 +1431,7 @@ export default function Home() {
             {[
               {
                 icon: <MapPin className="w-4 h-4 text-primary shrink-0" />,
-                text: "Tech Park, Block B, Indore, Madhya Pradesh 452001",
+                text: "AIC-Prestige Inspire Foundation, Prestige Vihar, Sector-D, Vijay Nagar, Scheme No 74C, Indore, Madhya Pradesh 452010",
               },
               {
                 icon: <Phone className="w-4 h-4 text-primary shrink-0" />,
