@@ -726,7 +726,7 @@ export default function Home() {
           loop
           muted
           playsInline
-          className="absolute inset-0 w-full h-full object-cover pointer-events-none z-0 opacity-90"
+          className="absolute inset-0 w-full h-full object-cover pointer-events-none z-0 opacity-99"
         >
           <source src={videoDroneDescending} type="video/mp4" />
         </video>
