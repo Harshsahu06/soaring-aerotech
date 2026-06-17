@@ -16,7 +16,7 @@ export function Footer() {
               India's premier drone technology ecosystem company. We build, innovate, and train the future of aerospace.
             </p>
             <div className="text-xs font-mono text-white/60">
-              DGCA Approved | Startup India | MSME Registered
+              DGCA Approved | Startup India | Registered Pvt. Ltd.
             </div>
           </div>
 
@@ -100,7 +100,7 @@ export function Footer() {
 
         <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-white/60 text-sm">
-            &copy; {new Date().getFullYear()} Soaring Aerotech. All rights reserved.
+            &copy; {new Date().getFullYear()} Soaring Aerotech Pvt. Ltd. All rights reserved.
           </p>
           <div className="text-white/60 text-sm font-mono flex items-center gap-2">
             <span className="text-primary">///</span> INITIATING TAKEOFF

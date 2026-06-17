@@ -735,7 +735,7 @@ export default function Home() {
         <div className="absolute inset-0 bg-gradient-to-b from-[#030712]/50 via-[#030712]/80 to-[#030712] pointer-events-none z-0" />
 
         {/* Interactive Radar Background Canvas */}
-        <UAVRadarCanvas />
+        {/* <UAVRadarCanvas /> */}
 
         {/* Ambient lighting glows */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
@@ -913,9 +913,7 @@ export default function Home() {
                   </span>
                 </div>
                 <div className="absolute bottom-0 left-0 right-0 p-5">
-                  <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-primary mb-3">
-                    {s.icon}
-                  </div>
+
                   <h3 className="font-display text-xl text-white leading-tight mb-2">
                     {s.title}
                   </h3>
@@ -1243,7 +1241,7 @@ export default function Home() {
                     <img
                       src={d.img}
                       alt={d.name}
-                      className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105"
+                      className="w-full h-full object-cover transition-all duration-500 group-hover:scale-105"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#111111]/70 to-transparent" />
                     <div className="absolute bottom-4 left-4">
@@ -1251,7 +1249,7 @@ export default function Home() {
                         {d.name}
                       </div>
                       <div className="text-primary text-xs font-mono tracking-wide">
-                        {d.role}, SOARING AEROTECH
+                        {d.role}, SOARING AEROTECH PVT. LTD.
                       </div>
                     </div>
                   </div>

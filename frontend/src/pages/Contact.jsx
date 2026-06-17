@@ -35,7 +35,7 @@ export default function Contact() {
   };
 
   return (
-    <main className="min-h-screen pt-20">
+    <main className="min-h-screen">
 
       {/* ── Hero ─────────────────────────────────── */}
       <section className="relative min-h-[55vh] flex items-center overflow-hidden bg-[#111111]">

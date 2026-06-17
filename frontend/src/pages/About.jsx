@@ -1,40 +1,44 @@
 import { motion } from "framer-motion";
 import { Link } from "wouter";
-import { Award, ArrowRight, GraduationCap, Wrench, Lightbulb, Factory } from "lucide-react";
+import { Award, ArrowRight, GraduationCap, Wrench, Lightbulb, Factory, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import dgcaLogo from "@/assets/dgca-logo.png";
 import dpiitLogo from "@/assets/dpiit-logo.png";
-import msmeLogo from "@/assets/msme-logo.png";
 import aicLogo from "@/assets/aic-logo.png";
 import photoHimanshu from "@/assets/himanshu.png";
 import photoManoj from "@/assets/manoj.png";
 import photoLalit from "@/assets/lalit.png";
 import photoAditya from "@/assets/aditya.png";
+import photoAbhishek from "@/assets/abhishek.png";
 
 const pillars = [
   {
-    n: "01", tag: "TRAIN", icon: <GraduationCap className="w-6 h-6" />, title: "Skill Development",
+    n: "01", tag: "TRAIN", icon: <GraduationCap className="w-6 h-6" />, title: "RPTO Training",
     items: ["DGCA RPTO", "8 Programs", "RPC Certification", "Corporate Training"],
     img: "https://images.unsplash.com/photo-1473968512647-3e447244af8f?w=700&h=460&fit=crop",
     desc: "India's most comprehensive DGCA-approved pilot training ecosystem, producing certified drone operators for every sector.",
+    link: "/training"
   },
   {
     n: "02", tag: "SOLVE", icon: <Wrench className="w-6 h-6" />, title: "Drone Services",
     items: ["Survey & Mapping", "AI Surveillance", "Solar Inspection", "Custom Solutions"],
     img: "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=700&h=460&fit=crop",
     desc: "End-to-end aerial intelligence solutions deployed across government, energy, agriculture, and defence sectors.",
+    link: "/services"
   },
   {
     n: "03", tag: "INNOVATE", icon: <Lightbulb className="w-6 h-6" />, title: "R&D",
     items: ["Disaster UAVs", "Tethered Drones", "AI/ML Systems", "Payload Dev"],
     img: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=700&h=460&fit=crop",
     desc: "Active research into disaster-response UAVs, AI/ML drone systems, and advanced payload engineering for next-gen applications.",
+    link: "/innovation-lab"
   },
   {
     n: "04", tag: "BUILD", icon: <Factory className="w-6 h-6" />, title: "Manufacturing",
     items: ["50,000 sq ft", "Defence Drones", "Logistics UAVs", "Intl. Collabs"],
     img: "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=700&h=460&fit=crop",
     desc: "50,000 sq ft state-of-the-art facility producing indigenous UAVs for defence, logistics, and commercial applications.",
+    link: "/innovation-lab"
   },
 ];
 
@@ -52,10 +56,15 @@ const creds = [
     bg: "bg-white",
   },
   {
-    logo: msmeLogo,
-    title: "MSME Registered",
-    desc: "Ministry of Micro, Small & Medium Enterprises",
-    bg: "bg-[#3a8fc7]",
+    logo: (
+      <div className="flex flex-col items-center justify-center text-primary">
+        <ShieldCheck className="w-12 h-12" />
+        <span className="text-[10px] font-mono font-bold tracking-wider mt-1 text-foreground/80">PVT. LTD.</span>
+      </div>
+    ),
+    title: "Incorporated Pvt. Ltd.",
+    desc: "Registered under the Ministry of Corporate Affairs, Govt. of India",
+    bg: "bg-white",
   },
   {
     logo: aicLogo,
@@ -90,6 +99,11 @@ const teamMembers = [
     name: "Mr Aditya Agrawal",
     role: "Drone Instructor",
     img: photoAditya,
+  },
+  {
+    name: "Mr Abhishek Chourasiya",
+    role: "Remote Pilot",
+    img: photoAbhishek,
   },
 ];
 
@@ -164,25 +178,26 @@ export default function About() {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {pillars.map((p, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.08 }}
-                className="group relative overflow-hidden rounded-2xl cursor-pointer aspect-[3/4]"
-              >
-                <img src={p.img} alt={p.title} className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/92 via-black/35 to-black/10" />
-                <div className="absolute top-4 left-4">
-                  <span className="bg-primary text-white text-[10px] font-bold uppercase tracking-wide px-2.5 py-1 rounded">{p.tag}</span>
-                </div>
-                <div className="absolute bottom-0 left-0 right-0 p-5">
-                  <div className="text-white/20 font-display font-black text-4xl leading-none mb-1 select-none">{p.n}</div>
-                  <h3 className="font-display text-xl text-white leading-tight mb-2">{p.title}</h3>
-                  <div className="flex items-center gap-1.5 text-white/60 text-sm">Learn more <ArrowRight className="w-3.5 h-3.5" /></div>
-                </div>
-              </motion.div>
+              <Link key={i} href={p.link}>
+                <motion.div
+                  initial={{ opacity: 0, y: 24 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.08 }}
+                  className="group relative overflow-hidden rounded-2xl cursor-pointer aspect-[3/4]"
+                >
+                  <img src={p.img} alt={p.title} className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/92 via-black/35 to-black/10" />
+                  <div className="absolute top-4 left-4">
+                    <span className="bg-primary text-white text-[10px] font-bold uppercase tracking-wide px-2.5 py-1 rounded">{p.tag}</span>
+                  </div>
+                  <div className="absolute bottom-0 left-0 right-0 p-5">
+                    <div className="text-white/20 font-display font-black text-4xl leading-none mb-1 select-none">{p.n}</div>
+                    <h3 className="font-display text-xl text-white leading-tight mb-2">{p.title}</h3>
+                    <div className="flex items-center gap-1.5 text-white/60 text-sm">Learn more <ArrowRight className="w-3.5 h-3.5" /></div>
+                  </div>
+                </motion.div>
+              </Link>
             ))}
           </div>
         </div>
@@ -191,7 +206,7 @@ export default function About() {
       {/* ── Leadership & Team ──────────────────────── */}
       <section className="py-20 bg-slate-50 border-b border-border">
         <div className="container mx-auto px-4 md:px-6">
-          
+
           {/* Section Header */}
           <div className="text-center max-w-2xl mx-auto mb-16">
             <div className="section-label justify-center">PEOPLE BEHIND SOARING</div>
@@ -222,7 +237,7 @@ export default function About() {
                     <img
                       src={d.img}
                       alt={d.name}
-                      className="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500"
+                      className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-all duration-500"
                     />
                   </div>
                   <div className="p-6 flex flex-col justify-center flex-1">
@@ -234,7 +249,7 @@ export default function About() {
                       {d.name}
                     </div>
                     <div className="text-xs text-primary font-mono tracking-wide mt-0.5">
-                      {d.role}, SOARING AEROTECH
+                      {d.role}, SOARING AEROTECH PVT. LTD.
                     </div>
                   </div>
                 </motion.div>
@@ -243,11 +258,11 @@ export default function About() {
           </div>
 
           {/* Core Team Grid */}
-          <div className="max-w-3xl mx-auto">
+          <div className="max-w-5xl mx-auto">
             <h3 className="text-xs font-mono font-bold tracking-widest text-primary uppercase mb-6 text-center">
               Core Engineering & Training Team
             </h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
               {teamMembers.map((m, i) => (
                 <motion.div
                   key={i}
@@ -261,7 +276,7 @@ export default function About() {
                     <img
                       src={m.img}
                       alt={m.name}
-                      className="absolute inset-0 w-full h-full object-cover object-top grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500"
+                      className="absolute inset-0 w-full h-full object-cover object-top group-hover:scale-105 transition-all duration-500"
                     />
                   </div>
                   <div className="p-6">
@@ -272,7 +287,7 @@ export default function About() {
                       {m.role}
                     </div>
                     <div className="text-xs text-muted-foreground mt-1 font-medium">
-                      Soaring Aerotech
+                      Soaring Aerotech Pvt. Ltd.
                     </div>
                   </div>
                 </motion.div>
@@ -299,7 +314,11 @@ export default function About() {
                 className="p-6 rounded-2xl bg-white border border-border text-center hover:border-primary/30 hover:shadow-md transition-all flex flex-col items-center gap-4"
               >
                 <div className={`w-full h-24 rounded-xl ${c.bg} flex items-center justify-center overflow-hidden p-3 border border-border/50`}>
-                  <img src={c.logo} alt={c.title} className="max-h-18 max-w-[90%] object-contain" />
+                  {typeof c.logo === "string" ? (
+                    <img src={c.logo} alt={c.title} className="max-h-18 max-w-[90%] object-contain" />
+                  ) : (
+                    c.logo
+                  )}
                 </div>
                 <div>
                   <div className="font-bold text-sm text-foreground mb-1">{c.title}</div>

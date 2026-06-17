@@ -21,7 +21,7 @@ const manufacturing = [
 
 export default function InnovationLab() {
   return (
-    <main className="min-h-screen pt-20">
+    <main className="min-h-screen">
 
       {/* ── Hero ─────────────────────────────────── */}
       <section className="py-24 bg-[#111111] relative overflow-hidden">
