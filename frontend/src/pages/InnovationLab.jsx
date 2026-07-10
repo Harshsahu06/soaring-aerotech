@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Link } from "wouter";
+import SEO from "@/components/SEO";
 import { Lightbulb, Cpu, Brain, Zap, Anchor, Shield, Crosshair, Truck, Factory } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -22,6 +23,11 @@ const manufacturing = [
 export default function InnovationLab() {
   return (
     <main className="min-h-screen">
+      <SEO 
+        title="Innovation Lab & UAV Manufacturing"
+        description="Explore Soaring Aerotech's 50,000 sq ft drone manufacturing facility. Learn about our active R&D streams in disaster UAVs, tethered drones, AI/ML swarms, and custom payloads."
+        keywords="drone manufacturing facility India, UAV R&D, tethered drones, custom payload design, drone swarm research, defense drone manufacturer"
+      />
 
       {/* ── Hero ─────────────────────────────────── */}
       <section className="py-24 bg-[#111111] relative overflow-hidden">
@@ -47,9 +53,9 @@ export default function InnovationLab() {
             <h2 className="font-display text-3xl md:text-4xl text-foreground">6 Research Projects</h2>
             <p className="text-muted-foreground mt-2 text-sm">Hover each card to learn more</p>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          <div className="flex sm:grid overflow-x-auto sm:overflow-x-visible snap-x snap-mandatory scrollbar-none -mx-4 px-4 sm:mx-0 sm:px-0 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {rdProjects.map((p, i) => (
-              <motion.div key={i} initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08 }} className="reveal-card relative h-56 rounded-2xl overflow-hidden cursor-pointer border border-border shadow-sm">
+              <div key={i} className="reveal-card relative h-56 rounded-2xl overflow-hidden cursor-pointer border border-border shadow-sm shrink-0 w-[80vw] max-w-[320px] sm:w-auto sm:max-w-none snap-center">
                 {/* Base */}
                 <div className="absolute inset-0 bg-[#F5F5F5] flex flex-col justify-between p-6">
                   <div className="flex items-start justify-between">
@@ -70,7 +76,7 @@ export default function InnovationLab() {
                   </div>
                   <Link href="/contact" className="text-primary text-sm font-bold">Collaborate →</Link>
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>

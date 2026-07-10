@@ -1,49 +1,51 @@
 import { motion } from "framer-motion";
 import { Link } from "wouter";
+import SEO from "@/components/SEO";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+
+import imgSurveillance from "@/assets/surveillance-project.jpg";
+import imgHighway from "@/assets/highway-project.jpg";
+import imgAgriculture from "@/assets/agriculture-project.jpg";
+import imgSolar from "@/assets/solar-project.jpg";
+import imgSimulationLab from "@/assets/simulation-lab-project.jpg";
 
 export default function Projects() {
   const projects = [
     {
       title: "Industrial Facility Drone Surveillance",
       category: "Surveillance & Security",
-      img: "https://images.unsplash.com/photo-1508614589041-895b88991e3e?w=900&h=600&fit=crop",
+      img: imgSurveillance,
       challenge: "A large industrial facility required continuous security monitoring across a wide perimeter, but deploying adequate ground-based security was cost-prohibitive and left significant blind spots.",
       solution: "Deployed a fleet of surveillance drones on automated patrol routes, providing 24/7 aerial monitoring with live feeds transmitted to the facility's security command center.",
-
     },
     {
       title: "Highway Corridor Survey & Mapping",
       category: "Survey & Mapping",
-      img: "https://images.unsplash.com/photo-1449157291145-7efd050a4d0e?w=900&h=600&fit=crop",
+      img: imgHighway,
       challenge: "A major road expansion project required accurate topographic data across a 50km stretch, but heavy traffic made traditional surveying hazardous and time-consuming.",
       solution: "Deployed fixed-wing VTOL drones with PPK GNSS modules to capture high-resolution imagery, producing centimeter-accurate orthomosaics and elevation models without disrupting traffic.",
-
     },
     {
       title: "Precision Agriculture — Cotton Farms",
       category: "Agriculture Mapping",
-      img: "https://images.unsplash.com/photo-1567359781514-3b964e2b04d6?w=900&h=600&fit=crop",
+      img: imgAgriculture,
       challenge: "A large cotton farm in Madhya Pradesh faced unexplained yield drops. Manual field inspection across 1000+ acres was physically impossible at the required scale and frequency.",
       solution: "Weekly multispectral drone flights generating NDVI and NDWI maps identified exact zones of water stress, soil variation, and early-stage pest infestation — enabling targeted intervention.",
-
     },
     {
       title: "Solar Plant Thermal Inspection",
       category: "Solar Inspection",
-      img: "https://images.unsplash.com/photo-1509391366360-2e959784a276?w=900&h=600&fit=crop",
+      img: imgSolar,
       challenge: "Manual inspection of a 200MW solar section was taking months, allowing faulty panels to continue generating energy losses without being identified or repaired.",
       solution: "Automated thermal drone mapping covered the entire installation in two days — identifying hotspots, string failures, diode faults, and soiling with precise GPS coordinates for repair teams.",
-
     },
     {
       title: "High-Altitude UAV Development & Testing",
       category: "UAV Manufacturing",
-      img: "https://images.unsplash.com/photo-1534120247760-c44c3e4a62f1?w=800&h=800&fit=crop",
+      img: imgSimulationLab,
       challenge: "Developing UAVs capable of reliable operation at high altitudes requires extensive field testing in low-pressure, low-temperature conditions that are difficult and expensive to simulate.",
       solution: "Soaring Aerotech's R&D team conducted high-altitude drone testing missions, validating airframe performance, motor efficiency, and electronics reliability for future defense and surveillance applications.",
-
     },
     {
       title: "Infrastructure Tower Inspection",
@@ -57,6 +59,11 @@ export default function Projects() {
 
   return (
     <main className="min-h-screen pt-20">
+      <SEO 
+        title="Case Studies & Projects"
+        description="Explore Soaring Aerotech's real-world UAV deployments and projects. Read about our highway mapping surveys, solar inspections, surveillance operations, and drone agriculture missions."
+        keywords="UAV case studies, drone projects, highway survey results, solar panel thermal scans, drone security deployments"
+      />
 
       {/* ── Hero ─────────────────────────────────── */}
       <section className="bg-[#F5F5F5] border-b border-border py-14">

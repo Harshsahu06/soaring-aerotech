@@ -43,14 +43,19 @@ export function Navbar() {
           {/* Logo */}
           <Link
             href="/"
-            className="flex items-center transition-transform active:scale-95"
+            className="flex items-center gap-3 transition-transform active:scale-95"
             data-testid="link-home-logo"
           >
             <img
               src="/logo.png"
               alt="Soaring Aerotech"
-              className="h-11 w-auto"
+              className="h-10 w-auto"
             />
+            <span className={`font-display text-[15px] sm:text-base font-bold tracking-tight transition-colors ${
+              isLightTheme ? "text-[#0A0D14]" : "text-white"
+            }`}>
+              Soaring Aerotech Pvt. Ltd.
+            </span>
           </Link>
 
           {/* Desktop Nav */}

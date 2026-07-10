@@ -1,6 +1,7 @@
 import { Link } from "wouter";
 import { motion, useInView } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
+import SEO from "@/components/SEO";
 import {
   ChevronRight,
   ArrowRight,
@@ -18,7 +19,7 @@ import {
   Tv,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import photoHimanshu from "@/assets/himanshu.png";
+import photoHimanshu from "@/assets/himanshu.jpeg";
 import photoManoj from "@/assets/manoj.png";
 import logoNhai from "@/assets/nhai-logo.png";
 import logoMprdc from "@/assets/mprdc-logo.png";
@@ -27,7 +28,6 @@ import logoIitIndore from "@/assets/iit-indore-logo.png";
 import logoIitGandhinagar from "@/assets/iit-gandhinagar-logo.png";
 import logoDgca from "@/assets/dgca-logo.png";
 import logoDpiit from "@/assets/dpiit-logo.png";
-import logoMsme from "@/assets/msme-logo.png";
 import logoAic from "@/assets/aic-logo.png";
 
 // New Gallery Image Imports
@@ -38,69 +38,96 @@ import imgNewsTearGas from "@/assets/news-tear-gas.png";
 import imgNewsForestSecurity from "@/assets/news-forest-security.png";
 import videoDroneDescending from "@/assets/drone_descending.mp4";
 
+import imgSurveillance from "@/assets/surveillance-project.jpg";
+import imgHighway from "@/assets/highway-project.jpg";
+import imgAgriculture from "@/assets/agriculture-project.jpg";
+import imgSolar from "@/assets/solar-project.jpg";
+import imgSimulationLab from "@/assets/simulation-lab-project.jpg";
+import imgDidiInitiative from "@/assets/didi-initiative.jpg";
+import imgPilotAwareness from "@/assets/pilot-awareness.jpg";
+import imgWomenEmpowerment from "@/assets/women-empowerment.jpg";
+import imgSkilledWorkforce from "@/assets/skilled-workforce.jpg";
+import imgExhibitionBooth from "@/assets/exhibition-booth.jpg";
+import imgStudentTraining from "@/assets/student-training.jpg";
+import imgSimulatorTraining2 from "@/assets/simulator-training-2.jpg";
+import imgFieldTraining3 from "@/assets/field-training-3.jpg";
+import imgPoliceTraining from "@/assets/police-training.jpg";
+import imgDroneSolutions from "@/assets/drone-solutions.jpg";
+import imgRdInnovation from "@/assets/rd-innovation.jpg";
+import imgTechAdoption from "@/assets/tech-adoption.jpg";
+import imgIndustryAgriculture from "@/assets/industry-agriculture.jpg";
+import imgIndustryDefence from "@/assets/industry-defence.jpg";
+import imgIndustrySurvey from "@/assets/industry-survey-construction.jpg";
+import imgInnovationLab from "@/assets/innovation-lab.jpg";
+import imgIndustryConstruction from "@/assets/industry-construction.jpg";
+import imgIndustryGovt from "@/assets/industry-govt.jpg";
+import imgIndustryEducation from "@/assets/industry-education.jpg";
+import imgIndustryLogistics from "@/assets/industry-logistics.jpg";
+
+
 const galleryRow1 = [
   {
     src: imgNflTraining,
     label: "NFL Corporate Training",
   },
   {
-    src: "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=480&h=320&fit=crop",
-    label: "Aerial Survey",
+    src: imgHighway,
+    label: "Highway Survey Ops",
   },
   {
     src: imgDroneFieldDemo,
     label: "Field Demonstration",
   },
   {
-    src: "https://images.unsplash.com/photo-1579829366561-207feb2ee402?w=480&h=320&fit=crop",
-    label: "Precision Mapping",
+    src: imgAgriculture,
+    label: "Precision Agriculture",
   },
   {
-    src: "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=480&h=320&fit=crop",
-    label: "Manufacturing",
+    src: imgExhibitionBooth,
+    label: "National Exhibition Booth",
   },
   {
     src: imgNewsTearGas,
     label: "Media: Patrika News",
   },
   {
-    src: "https://images.unsplash.com/photo-1534120247760-c44c3e4a62f1?w=480&h=320&fit=crop",
-    label: "Aerial Imaging",
+    src: imgStudentTraining,
+    label: "Student Training Session",
   },
 ];
 
 const galleryRow2 = [
   {
-    src: "https://images.unsplash.com/photo-1601979031925-424e53b6caaa?w=480&h=320&fit=crop",
-    label: "DGCA Training",
+    src: imgSkilledWorkforce,
+    label: "DGCA Certified Pilots",
   },
   {
     src: imgDroneDidiGroup,
     label: "Drone Didi Program",
   },
   {
-    src: "https://images.unsplash.com/photo-1509391366360-2e959784a276?w=480&h=320&fit=crop",
-    label: "Solar Inspection",
+    src: imgSolar,
+    label: "Solar Plant Inspection",
   },
   {
-    src: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=480&h=320&fit=crop",
-    label: "R&D Lab",
+    src: imgSimulationLab,
+    label: "UAV R&D Simulation Lab",
   },
   {
     src: imgNewsForestSecurity,
     label: "Media: Forest Security",
   },
   {
-    src: "https://images.unsplash.com/photo-1586861635167-e5223aadc9fe?w=480&h=320&fit=crop",
-    label: "UAV Build",
+    src: imgSimulatorTraining2,
+    label: "Simulator Training Room",
   },
   {
-    src: "https://images.unsplash.com/photo-1567359781514-3b964e2b04d6?w=480&h=320&fit=crop",
-    label: "Agriculture Mission",
+    src: imgFieldTraining3,
+    label: "Field Training",
   },
   {
-    src: "https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=480&h=320&fit=crop",
-    label: "Tower Inspection",
+    src: imgPoliceTraining,
+    label: "Police & Security Training",
   },
 ];
 
@@ -176,7 +203,7 @@ const pillars = [
       "RPC Certification",
       "Corporate Batches",
     ],
-    img: "https://images.unsplash.com/photo-1473968512647-3e447244af8f?w=700&h=460&fit=crop",
+    img: imgStudentTraining,
     link: "/training",
   },
   {
@@ -190,7 +217,7 @@ const pillars = [
       "Solar Inspection",
       "Agricultural Missions",
     ],
-    img: "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=700&h=460&fit=crop",
+    img: imgDroneSolutions,
     link: "/services",
   },
   {
@@ -204,7 +231,7 @@ const pillars = [
       "Tethered Drones",
       "Quantum Research",
     ],
-    img: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=700&h=460&fit=crop",
+    img: imgRdInnovation,
     link: "/innovation-lab",
   },
   {
@@ -218,13 +245,13 @@ const pillars = [
       "Logistics UAVs",
       "International Collabs",
     ],
-    img: "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=700&h=460&fit=crop",
+    img: imgTechAdoption,
     link: "/about",
   },
 ];
 
 const stats = [
-  { target: 1000, suffix: "+", label: "Pilots Trained", sub: "DGCA Certified" },
+  { target: 100, suffix: "+", label: "Pilots Trained", sub: "DGCA Certified" },
   {
     target: 50,
     suffix: "K sqft",
@@ -232,17 +259,12 @@ const stats = [
     sub: "State-of-the-Art Facility",
   },
   {
-    target: 100,
+    target: 1000,
     suffix: "+",
-    label: "Drone Missions",
-    sub: "Completed Projects",
+    label: "Missions Completed",
+    sub: "Pan India Deployments",
   },
-  {
-    target: 20,
-    suffix: "+",
-    label: "Industry Partners",
-    sub: "Govt · Defence · Enterprise",
-  },
+  { target: 25, suffix: "+", label: "States Covered", sub: "National Footprint" },
 ];
 
 const partners = [
@@ -309,12 +331,6 @@ const partners = [
     type: "Government",
     logo: logoDpiit,
   },
-  {
-    name: "MSME",
-    full: "Ministry of MSME",
-    type: "Government",
-    logo: logoMsme,
-  },
 ];
 
 const projects = [
@@ -322,31 +338,31 @@ const projects = [
     cat: "NHAI · SURVEY & MAPPING",
     title: "NHAI Highway Corridor Mapping",
     result: "200+ km mapped with ±2cm accuracy",
-    img: "https://images.unsplash.com/photo-1449157291145-7efd050a4d0e?w=600&h=400&fit=crop",
+    img: imgHighway,
   },
   {
     cat: "MPRDC · ROAD SURVEY",
     title: "MPRDC State Highway Survey",
     result: "GIS-ready outputs delivered on schedule",
-    img: "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=600&h=400&fit=crop",
+    img: imgHighway,
   },
   {
     cat: "MPEB · INSPECTION",
     title: "MPEB Power Grid Inspection",
     result: "Fault detection without line shutdown",
-    img: "https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=600&h=400&fit=crop",
+    img: imgSolar,
   },
   {
     cat: "GOVT. INITIATIVE",
     title: "Drone Didi — Women Pilot Program",
     result: "Rural women trained & deployed",
-    img: "https://images.unsplash.com/photo-1567359781514-3b964e2b04d6?w=600&h=400&fit=crop",
+    img: imgDidiInitiative,
   },
   {
     cat: "SMART CITY · SURVEY",
     title: "Smart City Urban Survey",
     result: "3D city model for urban planning",
-    img: "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=600&h=400&fit=crop",
+    img: imgSurveillance,
   },
 ];
 
@@ -397,15 +413,15 @@ const testimonials = [
 const homeIndustries = [
   {
     label: "Agriculture & Farming",
-    img: "https://images.unsplash.com/photo-1567359781514-3b964e2b04d6?w=800&h=1000&fit=crop",
+    img: imgIndustryAgriculture,
   },
   {
     label: "Defence & Security",
-    img: "https://images.unsplash.com/photo-1508614589041-895b88991e3e?w=800&h=1000&fit=crop",
+    img: imgIndustryDefence,
   },
   {
     label: "Survey & Mapping",
-    img: "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800&h=1000&fit=crop",
+    img: imgIndustrySurvey,
   },
   {
     label: "Solar & Energy",
@@ -417,11 +433,11 @@ const homeIndustries = [
   },
   {
     label: "Construction",
-    img: "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&h=1000&fit=crop",
+    img: imgIndustryConstruction,
   },
   {
     label: "Government & Smart Cities",
-    img: "https://images.unsplash.com/photo-1449157291145-7efd050a4d0e?w=800&h=1000&fit=crop",
+    img: imgIndustryGovt,
   },
   {
     label: "Power & Utilities",
@@ -718,6 +734,11 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-[#030712]">
+      <SEO
+        title="Home"
+        description="Soaring Aerotech Pvt. Ltd. is India's leading DGCA-approved drone technology ecosystem, specializing in drone pilot training, aerospace manufacturing, and commercial UAV services."
+        keywords="drone pilot training, DGCA approved, UAV services, drone manufacturer, agricultural drone, power grid inspection, highway mapping, Central India drone training"
+      />
       {/* ── Hero ─────────────────────────────────── */}
       <section className="relative min-h-screen flex flex-col justify-center items-center pt-32 pb-24 overflow-hidden bg-[#030712] text-white">
         {/* Background Video */}
@@ -831,7 +852,6 @@ export default function Home() {
               {[
                 "DGCA Approved RPTO",
                 "Startup India Recognised",
-                "MSME Registered",
                 "AIC Prestige Incubated",
                 "50,000 sq ft Facility",
                 "Indore, Madhya Pradesh",
@@ -891,15 +911,11 @@ export default function Home() {
               </p>
             </div>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="flex sm:grid overflow-x-auto sm:overflow-x-visible snap-x snap-mandatory scrollbar-none -mx-4 px-4 sm:mx-0 sm:px-0 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {pillars.map((s, i) => (
-              <motion.div
+              <div
                 key={i}
-                initial={{ opacity: 0, y: 28 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="group relative overflow-hidden rounded-2xl cursor-pointer aspect-[3/4]"
+                className="group relative overflow-hidden rounded-2xl cursor-pointer aspect-[3/4] shrink-0 w-[80vw] max-w-[320px] sm:w-auto sm:max-w-none snap-center"
               >
                 <img
                   src={s.img}
@@ -927,14 +943,14 @@ export default function Home() {
                     Learn more <ArrowRight className="w-3.5 h-3.5" />
                   </Link>
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
       {/* ── Manufacturing Showcase ────────────────── */}
-      <section className="py-20 bg-white border-y border-border overflow-hidden">
+      {/* <section className="py-20 bg-white border-y border-border overflow-hidden">
         <div className="container mx-auto px-4 md:px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
@@ -999,7 +1015,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* ── R&D Innovation ───────────────────────── */}
       <section className="py-20 bg-[#111111] overflow-hidden">
@@ -1007,7 +1023,7 @@ export default function Home() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="relative">
               <img
-                src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=700&h=500&fit=crop"
+                src={imgInnovationLab}
                 alt="R&D Lab"
                 className="w-full h-80 object-cover rounded-3xl"
               />
@@ -1092,15 +1108,11 @@ export default function Home() {
               All Projects <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          <div className="flex sm:grid overflow-x-auto sm:overflow-x-visible snap-x snap-mandatory scrollbar-none -mx-4 px-4 sm:mx-0 sm:px-0 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {projects.map((p, i) => (
-              <motion.div
+              <div
                 key={i}
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.08 }}
-                className="group relative overflow-hidden rounded-2xl border border-border hover:shadow-xl transition-all hover:-translate-y-1"
+                className="group relative overflow-hidden rounded-2xl border border-border hover:shadow-xl transition-all hover:-translate-y-1 shrink-0 w-[80vw] max-w-[320px] sm:w-auto sm:max-w-none snap-center"
               >
                 <div className="relative h-52 overflow-hidden">
                   <img
@@ -1116,7 +1128,7 @@ export default function Home() {
                     </h3>
                   </div>
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
           <div className="text-center mt-8">
@@ -1227,7 +1239,7 @@ export default function Home() {
                 industry, and the future of autonomous systems.
               </p>
             </div>
-            <div className="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-10">
+            <div className="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 lg:gap-20">
               {directors.map((d, i) => (
                 <motion.div
                   key={i}
@@ -1235,9 +1247,9 @@ export default function Home() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.1 }}
-                  className="group bg-muted/40 rounded-3xl overflow-hidden border border-border hover:shadow-lg transition-all duration-300 flex flex-col hover:-translate-y-1"
+                  className="group bg-muted/40 rounded-3xl overflow-hidden border border-border hover:shadow-lg transition-all duration-300 flex flex-col hover:-translate-y-1 w-full max-w-[320px] mx-auto md:ml-auto md:mr-0"
                 >
-                  <div className="relative h-52 overflow-hidden">
+                  <div className="relative h-64 overflow-hidden">
                     <img
                       src={d.img}
                       alt={d.name}
@@ -1253,12 +1265,7 @@ export default function Home() {
                       </div>
                     </div>
                   </div>
-                  <div className="p-5 flex-1">
-                    <Quote className="w-5 h-5 text-primary mb-3 opacity-60" />
-                    <p className="text-sm text-foreground/70 italic leading-relaxed">
-                      "{d.quote}"
-                    </p>
-                  </div>
+
                 </motion.div>
               ))}
             </div>
@@ -1273,15 +1280,11 @@ export default function Home() {
           <h2 className="font-display text-3xl md:text-4xl text-foreground mb-10">
             What Our Pilots Say
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+          <div className="flex md:grid overflow-x-auto md:overflow-x-visible snap-x snap-mandatory scrollbar-none -mx-4 px-4 md:mx-0 md:px-0 md:grid-cols-3 gap-5">
             {testimonials.map((t, i) => (
-              <motion.div
+              <div
                 key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className={`${t.span} bg-white rounded-2xl p-7 border border-border relative overflow-hidden group hover:border-foreground/20 transition-colors hover:shadow-md`}
+                className={`${t.span} bg-white rounded-2xl p-7 border border-border relative overflow-hidden group hover:border-foreground/20 transition-colors hover:shadow-md shrink-0 w-[80vw] max-w-[320px] md:w-auto md:max-w-none snap-center`}
               >
                 <div className="absolute top-4 right-6 font-display text-7xl text-foreground/5 leading-none select-none">
                   "
@@ -1296,7 +1299,7 @@ export default function Home() {
                 <div className="text-xs text-muted-foreground mt-1">
                   {t.role}
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
@@ -1319,7 +1322,7 @@ export default function Home() {
               View all <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="flex sm:grid overflow-x-auto sm:overflow-x-visible snap-x snap-mandatory scrollbar-none -mx-4 px-4 sm:mx-0 sm:px-0 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {[
               {
                 outlet: "City Bhaskar",
@@ -1350,13 +1353,9 @@ export default function Home() {
                 icon: <Tv className="w-5 h-5" />,
               },
             ].map((m, i) => (
-              <motion.div
+              <div
                 key={i}
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.08 }}
-                className="group p-6 rounded-2xl border border-border/85 bg-muted/40 hover:border-primary/30 hover:bg-white hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+                className="group p-6 rounded-2xl border border-border/85 bg-muted/40 hover:border-primary/30 hover:bg-white hover:shadow-xl transition-all duration-300 hover:-translate-y-1 shrink-0 w-[80vw] max-w-[320px] sm:w-auto sm:max-w-none snap-center"
               >
                 <div className="flex items-center gap-3 mb-4">
                   <div className="w-10 h-10 rounded-xl bg-[#111111] group-hover:bg-primary transition-colors flex items-center justify-center text-white shrink-0">
@@ -1374,7 +1373,7 @@ export default function Home() {
                 <p className="text-sm text-foreground/65 leading-relaxed italic">
                   "{m.headline}"
                 </p>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
@@ -1401,7 +1400,7 @@ export default function Home() {
                 Revolution?
               </h2>
               <p className="text-white/40 text-sm max-w-sm">
-                1000+ certified pilots. 100+ missions. Defence-grade
+                1000+ certified pilots. 1000+ missions. Defence-grade
                 manufacturing. All from Central India.
               </p>
             </div>
@@ -1437,7 +1436,7 @@ export default function Home() {
               },
               {
                 icon: <ShieldCheck className="w-4 h-4 text-primary shrink-0" />,
-                text: "DGCA Approved RPTO · Startup India · MSME Registered · AIC Prestige",
+                text: "DGCA Approved RPTO · Startup India · AIC Prestige",
               },
             ].map((item, i) => (
               <div

@@ -1,42 +1,51 @@
 import { motion } from "framer-motion";
 import { Link } from "wouter";
+import SEO from "@/components/SEO";
 import { Award, ArrowRight, GraduationCap, Wrench, Lightbulb, Factory, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import dgcaLogo from "@/assets/dgca-logo.png";
 import dpiitLogo from "@/assets/dpiit-logo.png";
 import aicLogo from "@/assets/aic-logo.png";
-import photoHimanshu from "@/assets/himanshu.png";
+import photoHimanshu from "@/assets/himanshu.jpeg";
 import photoManoj from "@/assets/manoj.png";
 import photoLalit from "@/assets/lalit.png";
 import photoAditya from "@/assets/aditya.png";
 import photoAbhishek from "@/assets/abhishek.png";
+import photoVaibhav from "@/assets/team-vaibhav.png";
+import imgStudentTraining from "@/assets/student-training.jpg";
+import imgDroneSolutions from "@/assets/drone-solutions.jpg";
+import imgRdInnovation from "@/assets/rd-innovation.jpg";
+import imgTechAdoption from "@/assets/tech-adoption.jpg";
+import imgExhibitionBooth from "@/assets/exhibition-booth.jpg";
+import imgDroneFieldDemo from "@/assets/drone-field-demo.jpg";
+import imgAboutHeroTeam from "@/assets/about-hero-team.jpg";
 
 const pillars = [
   {
     n: "01", tag: "TRAIN", icon: <GraduationCap className="w-6 h-6" />, title: "RPTO Training",
     items: ["DGCA RPTO", "8 Programs", "RPC Certification", "Corporate Training"],
-    img: "https://images.unsplash.com/photo-1473968512647-3e447244af8f?w=700&h=460&fit=crop",
+    img: imgStudentTraining,
     desc: "India's most comprehensive DGCA-approved pilot training ecosystem, producing certified drone operators for every sector.",
     link: "/training"
   },
   {
     n: "02", tag: "SOLVE", icon: <Wrench className="w-6 h-6" />, title: "Drone Services",
     items: ["Survey & Mapping", "AI Surveillance", "Solar Inspection", "Custom Solutions"],
-    img: "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=700&h=460&fit=crop",
+    img: imgDroneSolutions,
     desc: "End-to-end aerial intelligence solutions deployed across government, energy, agriculture, and defence sectors.",
     link: "/services"
   },
   {
     n: "03", tag: "INNOVATE", icon: <Lightbulb className="w-6 h-6" />, title: "R&D",
     items: ["Disaster UAVs", "Tethered Drones", "AI/ML Systems", "Payload Dev"],
-    img: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=700&h=460&fit=crop",
+    img: imgRdInnovation,
     desc: "Active research into disaster-response UAVs, AI/ML drone systems, and advanced payload engineering for next-gen applications.",
     link: "/innovation-lab"
   },
   {
     n: "04", tag: "BUILD", icon: <Factory className="w-6 h-6" />, title: "Manufacturing",
     items: ["50,000 sq ft", "Defence Drones", "Logistics UAVs", "Intl. Collabs"],
-    img: "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=700&h=460&fit=crop",
+    img: imgTechAdoption,
     desc: "50,000 sq ft state-of-the-art facility producing indigenous UAVs for defence, logistics, and commercial applications.",
     link: "/innovation-lab"
   },
@@ -76,13 +85,13 @@ const creds = [
 
 const directors = [
   {
-    name: "Himanshu Jain",
+    name: "Mr. Himanshu Jain",
     role: "Director",
     img: photoHimanshu,
     quote: "We are not just a training institute. We are building a complete drone innovation ecosystem — from R&D to manufacturing to defence applications.",
   },
   {
-    name: "Dr Manojkumar Deshpande",
+    name: "Dr. Manojkumar Deshpande",
     role: "Director",
     img: photoManoj,
     quote: "Our 50,000 sq ft facility and active defence UAV R&D positions Soaring Aerotech as a full-cycle drone technology company.",
@@ -91,25 +100,36 @@ const directors = [
 
 const teamMembers = [
   {
-    name: "Mr Lalit Nagapurkar",
-    role: "Operations & R&D Engineer",
+    name: "Mr. Lalit Nagapurkar",
+    role: "Drone Instructor",
     img: photoLalit,
   },
   {
-    name: "Mr Aditya Agrawal",
-    role: "Drone Instructor",
+    name: "Mr. Aditya Agrawal",
+    role: "Drone Instructor & Accountable Manager",
     img: photoAditya,
   },
   {
-    name: "Mr Abhishek Chourasiya",
+    name: "Mr. Vaibhav Sawarkar",
+    role: "Business Development Executive",
+    img: photoVaibhav,
+  },
+  {
+    name: "Mr. Abhishek Chourasiya",
     role: "Remote Pilot",
     img: photoAbhishek,
   },
+
 ];
 
 export default function About() {
   return (
     <main className="min-h-screen pt-20">
+      <SEO
+        title="About Us"
+        description="Learn more about Soaring Aerotech Pvt. Ltd., Central India's complete drone ecosystem. From DGCA training to commercial UAV services and advanced defence manufacturing."
+        keywords="about Soaring Aerotech, drone startup Indore, Himanshu Jain, Manojkumar Deshpande, UAV team, RPTO Madhya Pradesh, drone developers"
+      />
 
       {/* ── Hero ─────────────────────────────────── */}
       <section className="bg-[#F5F5F5] border-b border-border py-14">
@@ -124,7 +144,7 @@ export default function About() {
                 Training the pilots. Flying the missions. Researching the future. Manufacturing the machines — all from Madhya Pradesh.
               </p>
               <div className="flex flex-wrap gap-2">
-                {["500+ Pilots Trained", "50,000 sqft Facility", "8+ Programs", "DGCA Approved"].map((b, i) => (
+                {["100+ Pilots Trained", "50,000 sqft Facility", "8+ Programs", "DGCA Approved"].map((b, i) => (
                   <span key={i} className="px-3 py-1.5 rounded-full bg-white border border-border text-foreground/60 text-xs font-medium">{b}</span>
                 ))}
               </div>
@@ -135,7 +155,7 @@ export default function About() {
               transition={{ delay: 0.1 }}
               className="relative overflow-hidden rounded-2xl aspect-[4/3] hidden lg:block"
             >
-              <img src="https://images.unsplash.com/photo-1508614589041-895b88991e3e?w=800&h=600&fit=crop" alt="Drone operations" className="w-full h-full object-cover" />
+              <img src={imgAboutHeroTeam} alt="Drone operations" className="w-full h-full object-cover" />
             </motion.div>
           </div>
         </div>
@@ -158,7 +178,7 @@ export default function About() {
             </div>
             <div className="relative">
               <img
-                src="https://images.unsplash.com/photo-1571701374025-3eb9abc53de2?w=700&h=500&fit=crop"
+                src={imgDroneFieldDemo}
                 alt="Drone operations"
                 className="w-full h-80 object-cover rounded-3xl shadow-xl"
               />
@@ -176,15 +196,11 @@ export default function About() {
               <h2 className="font-display text-3xl md:text-4xl text-foreground">Everything We Do</h2>
             </div>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="flex sm:grid overflow-x-auto sm:overflow-x-visible snap-x snap-mandatory scrollbar-none -mx-4 px-4 sm:mx-0 sm:px-0 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {pillars.map((p, i) => (
-              <Link key={i} href={p.link}>
-                <motion.div
-                  initial={{ opacity: 0, y: 24 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.08 }}
-                  className="group relative overflow-hidden rounded-2xl cursor-pointer aspect-[3/4]"
+              <Link key={i} href={p.link} className="block shrink-0 w-[80vw] max-w-[320px] sm:w-auto sm:max-w-none snap-center">
+                <div
+                  className="group relative overflow-hidden rounded-2xl cursor-pointer aspect-[3/4] w-full"
                 >
                   <img src={p.img} alt={p.title} className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/92 via-black/35 to-black/10" />
@@ -196,7 +212,7 @@ export default function About() {
                     <h3 className="font-display text-xl text-white leading-tight mb-2">{p.title}</h3>
                     <div className="flex items-center gap-1.5 text-white/60 text-sm">Learn more <ArrowRight className="w-3.5 h-3.5" /></div>
                   </div>
-                </motion.div>
+                </div>
               </Link>
             ))}
           </div>
@@ -262,15 +278,11 @@ export default function About() {
             <h3 className="text-xs font-mono font-bold tracking-widest text-primary uppercase mb-6 text-center">
               Core Engineering & Training Team
             </h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="flex sm:grid overflow-x-auto sm:overflow-x-visible snap-x snap-mandatory scrollbar-none -mx-4 px-4 sm:mx-0 sm:px-0 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {teamMembers.map((m, i) => (
-                <motion.div
+                <div
                   key={i}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.1 }}
-                  className="group bg-white rounded-2xl overflow-hidden border border-border shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1"
+                  className="group bg-white rounded-2xl overflow-hidden border border-border shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1 shrink-0 w-[75vw] max-w-[300px] sm:w-auto sm:max-w-none snap-center"
                 >
                   <div className="relative h-64 overflow-hidden bg-slate-100">
                     <img
@@ -290,7 +302,7 @@ export default function About() {
                       Soaring Aerotech Pvt. Ltd.
                     </div>
                   </div>
-                </motion.div>
+                </div>
               ))}
             </div>
           </div>

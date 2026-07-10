@@ -1,8 +1,16 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { Link } from "wouter";
+import SEO from "@/components/SEO";
 import { ArrowRight, Tractor, Map, Factory, Eye, Building2, HardHat, Sun, Building, GraduationCap, Shield, Truck, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import imgIndustryAgriculture from "@/assets/industry-agriculture.jpg";
+import imgIndustryDefence from "@/assets/industry-defence.jpg";
+import imgIndustrySurvey from "@/assets/industry-survey-construction.jpg";
+import imgIndustryConstruction from "@/assets/industry-construction.jpg";
+import imgIndustryGovt from "@/assets/industry-govt.jpg";
+import imgIndustryEducation from "@/assets/industry-education.jpg";
+import imgIndustryLogistics from "@/assets/industry-logistics.jpg";
 
 export default function Industries() {
   const [active, setActive] = useState(0);
@@ -10,14 +18,14 @@ export default function Industries() {
     {
       name: "Agriculture",
       icon: <Tractor className="w-7 h-7" />,
-      img: "https://images.unsplash.com/photo-1567359781514-3b964e2b04d6?w=600&h=400&fit=crop",
+      img: imgIndustryAgriculture,
       desc: "Crop health monitoring using multispectral NDVI analysis, precision spraying, yield estimation, and irrigation planning for farms of any scale.",
       services: ["Crop Health Mapping", "Precision Spraying", "Yield Estimation"],
     },
     {
       name: "Survey & Mapping",
       icon: <Map className="w-7 h-7" />,
-      img: "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=600&h=400&fit=crop",
+      img: imgIndustrySurvey,
       desc: "High-accuracy topographic surveys, orthomosaic maps, 3D models, and volumetric analysis for land developers, NHAI, and infrastructure projects.",
       services: ["Topographic Surveys", "3D Modeling", "Land Record Mapping"],
     },
@@ -45,7 +53,7 @@ export default function Industries() {
     {
       name: "Construction",
       icon: <HardHat className="w-7 h-7" />,
-      img: "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=600&h=400&fit=crop",
+      img: imgIndustryConstruction,
       desc: "Site mapping, weekly progress tracking, stockpile volumetrics, and BIM comparison for large-scale construction and real estate development projects.",
       services: ["Progress Tracking", "Stockpile Analysis", "BIM Integration"],
     },
@@ -59,28 +67,28 @@ export default function Industries() {
     {
       name: "Government & Smart Cities",
       icon: <Building className="w-7 h-7" />,
-      img: "https://images.unsplash.com/photo-1449157291145-7efd050a4d0e?w=600&h=400&fit=crop",
+      img: imgIndustryGovt,
       desc: "Land record digitization, urban planning data, disaster assessment, boundary surveys, and compliance monitoring for municipal and state authorities.",
       services: ["Land Surveys", "Disaster Response", "Urban Planning"],
     },
     {
       name: "Education & Research",
       icon: <GraduationCap className="w-7 h-7" />,
-      img: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&h=400&fit=crop",
+      img: imgIndustryEducation,
       desc: "Academic partnerships providing institutions and universities with drone labs, DGCA training curricula, and hands-on aerospace engineering programs.",
       services: ["Campus Drone Labs", "DGCA Curriculum", "Research Projects"],
     },
     {
       name: "Defense & Security Forces",
       icon: <Shield className="w-7 h-7" />,
-      img: "https://images.unsplash.com/photo-1586861635167-e5223aadc9fe?w=600&h=400&fit=crop",
+      img: imgIndustryDefence,
       desc: "Surveillance and reconnaissance UAVs, FPV drones, specialized defense drone training for police and military, and custom defense payload development.",
       services: ["Surveillance UAVs", "Defense Training", "Custom Payloads"],
     },
     {
       name: "Logistics & Delivery",
       icon: <Truck className="w-7 h-7" />,
-      img: "https://images.unsplash.com/photo-1534120247760-c44c3e4a62f1?w=600&h=400&fit=crop",
+      img: imgIndustryLogistics,
       desc: "Proof-of-concept drone delivery systems, last-mile logistics studies, and cargo drone solutions for remote and inaccessible locations.",
       services: ["Last-Mile Delivery", "Remote Logistics", "Cargo Drones"],
     },
@@ -95,6 +103,11 @@ export default function Industries() {
 
   return (
     <main className="min-h-screen pt-20">
+      <SEO
+        title="Industries We Serve"
+        description="Soaring Aerotech provides drone services across 12 major sectors in India, including Agriculture, Solar Energy, Power Utilities, Construction, Smart Cities, and Defense."
+        keywords="drones in agriculture, drones in solar, drone mapping construction, defense UAVs India, telecom tower drone inspections"
+      />
 
       {/* ── Hero ─────────────────────────────────── */}
       <section className="bg-[#F5F5F5] border-b border-border py-14">
@@ -146,7 +159,7 @@ export default function Industries() {
                   <span className="bg-primary text-white text-[10px] font-bold uppercase tracking-wide px-2.5 py-1 rounded">Industry</span>
                 </div>
                 <div className="absolute bottom-0 left-0 right-0 p-8">
-                  <div className="text-primary mb-2">{industries[active].icon}</div>
+
                   <h3 className="font-display text-3xl text-white leading-tight mb-3">{industries[active].name}</h3>
                   <p className="text-white/55 text-sm leading-relaxed mb-5">{industries[active].desc}</p>
                   <div className="flex flex-wrap gap-2">

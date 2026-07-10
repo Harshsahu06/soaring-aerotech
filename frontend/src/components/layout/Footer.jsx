@@ -1,12 +1,12 @@
 import { Link } from "wouter";
-import { Facebook, Twitter, Instagram, LinkedinIcon, MapPin, Phone, Mail } from "lucide-react";
+import { Facebook, Instagram, LinkedinIcon, MapPin, Phone, Mail } from "lucide-react";
 
 export function Footer() {
   return (
     <footer className="bg-[#111111] pt-16 pb-8">
       <div className="container mx-auto px-4 md:px-6">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
-          
+
           {/* Brand */}
           <div>
             <Link href="/" className="flex items-center mb-6" data-testid="link-footer-logo">
@@ -73,25 +73,25 @@ export function Footer() {
               </li>
               <li className="flex items-center gap-3 text-white/60 text-sm">
                 <Phone className="w-5 h-5 text-primary shrink-0" />
-                <span>+91 98765 43210</span>
+                <a href="tel:+917869918736" className="hover:text-primary transition-colors">+91 78699 18736</a>
               </li>
-              <li className="flex items-center gap-3 text-white/60 text-sm">
-                <Mail className="w-5 h-5 text-primary shrink-0" />
-                <span>hello@soaringaerotech.com</span>
+              <li className="flex items-start gap-3 text-white/60 text-sm">
+                <Mail className="w-5 h-5 text-primary shrink-0 mt-0.5" />
+                <div className="flex flex-col gap-0.5">
+                  <a href="mailto:info@soaringaerotech.com" className="hover:text-primary transition-colors">info@soaringaerotech.com</a>
+                  <a href="mailto:business@soaringaerotech.com" className="hover:text-primary transition-colors">business@soaringaerotech.com</a>
+                </div>
               </li>
             </ul>
 
             <div className="flex items-center gap-4 mt-8">
-              <a href="#" className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white/60 hover:text-primary hover:border-primary transition-all">
+              <a href="https://www.facebook.com/profile.php?id=61554855101815&sk=about_places" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white/60 hover:text-primary hover:border-primary transition-all">
                 <Facebook className="w-4 h-4" />
               </a>
-              <a href="#" className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white/60 hover:text-primary hover:border-primary transition-all">
-                <Twitter className="w-4 h-4" />
-              </a>
-              <a href="#" className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white/60 hover:text-primary hover:border-primary transition-all">
+              <a href="https://www.instagram.com/soaring_aerotech" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white/60 hover:text-primary hover:border-primary transition-all">
                 <Instagram className="w-4 h-4" />
               </a>
-              <a href="#" className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white/60 hover:text-primary hover:border-primary transition-all">
+              <a href="https://www.linkedin.com/company/soaring-aerotech/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white/60 hover:text-primary hover:border-primary transition-all">
                 <LinkedinIcon className="w-4 h-4" />
               </a>
             </div>
@@ -102,9 +102,7 @@ export function Footer() {
           <p className="text-white/60 text-sm">
             &copy; {new Date().getFullYear()} Soaring Aerotech Pvt. Ltd. All rights reserved.
           </p>
-          <div className="text-white/60 text-sm font-mono flex items-center gap-2">
-            <span className="text-primary">///</span> INITIATING TAKEOFF
-          </div>
+
         </div>
       </div>
     </footer>

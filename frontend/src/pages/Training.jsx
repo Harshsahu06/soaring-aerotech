@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { Link } from "wouter";
+import SEO from "@/components/SEO";
 import {
   ChevronRight,
   Clock,
@@ -23,15 +24,29 @@ import {
   Send,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import imgField1 from "@/assets/training-field-1.jpg";
+import imgField2 from "@/assets/training-field-2.jpg";
+import imgSimulator from "@/assets/training-simulator.jpg";
+import imgGroup1 from "@/assets/training-group-1.jpg";
+import imgGroup2 from "@/assets/training-group-2.jpg";
+
+// Local asset imports for skill development courses
+import imgHighway from "@/assets/highway-project.jpg";
+import imgDroneFieldDemo from "@/assets/drone-field-demo.jpg";
+import imgSolar from "@/assets/solar-project.jpg";
+import imgSimulationLab from "@/assets/simulation-lab-project.jpg";
+import imgAgriculture from "@/assets/agriculture-project.jpg";
+import imgTechAdoption from "@/assets/tech-adoption.jpg";
+import imgExhibitionBooth from "@/assets/exhibition-booth.jpg";
 
 const programs = [
-  { tag: "SKILL COURSE", title: "Mapping & Surveying", icon: <Map className="w-7 h-7" />, duration: "3–5 Days", img: "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=400&h=260&fit=crop", topics: ["Aerial Land Survey", "2D/3D Mapping", "RTK/PPK GNSS", "Pix4D / DroneDeploy", "Client Deliverables", "GIS Outputs"] },
-  { tag: "SKILL COURSE", title: "GIS & Geospatial", icon: <Target className="w-7 h-7" />, duration: "3–5 Days", img: "https://images.unsplash.com/photo-1571701374025-3eb9abc53de2?w=400&h=260&fit=crop", topics: ["GIS Fundamentals", "Land Record Mapping", "Urban Planning", "ArcGIS / QGIS", "Spatial Analysis", "Gov Applications"] },
-  { tag: "SKILL COURSE", title: "Thermal & Multispectral", icon: <Cpu className="w-7 h-7" />, duration: "3–4 Days", img: "https://images.unsplash.com/photo-1509391366360-2e959784a276?w=400&h=260&fit=crop", topics: ["Thermal Camera Ops", "NDVI / NDWI", "Solar Inspection", "Power Line Audit", "Crop Imaging", "Report Generation"] },
-  { tag: "ADVANCED", title: "AI/ML for Drones", icon: <Brain className="w-7 h-7" />, duration: "5–7 Days", img: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=400&h=260&fit=crop", topics: ["Computer Vision", "Object Detection", "Autonomous Flight", "Edge Computing", "Mission AI", "Surveillance AI"] },
-  { tag: "SKILL COURSE", title: "Precision Agriculture", icon: <Tractor className="w-7 h-7" />, duration: "3–4 Days", img: "https://images.unsplash.com/photo-1567359781514-3b964e2b04d6?w=400&h=260&fit=crop", topics: ["Crop Health Mapping", "Precision Spraying", "Irrigation Analysis", "Yield Estimation", "NDVI Reports", "Farm Ops"] },
-  { tag: "SKILL COURSE", title: "Assembly & Maintenance", icon: <Wrench className="w-7 h-7" />, duration: "3–5 Days", img: "https://images.unsplash.com/photo-1586861635167-e5223aadc9fe?w=400&h=260&fit=crop", topics: ["Frame Assembly", "Flight Controller", "ESC Calibration", "Battery Management", "Pre-flight Checks", "Field Repair"] },
-  { tag: "ENTREPRENEURSHIP", title: "Drone Entrepreneurship", icon: <TrendingUp className="w-7 h-7" />, duration: "2–3 Days", img: "https://images.unsplash.com/photo-1473968512647-3e447244af8f?w=400&h=260&fit=crop", topics: ["DGCA Compliance", "Business Models", "Client Acquisition", "Pricing", "Government Tenders", "Scaling"] },
+  { tag: "SKILL COURSE", title: "Mapping & Surveying", icon: <Map className="w-7 h-7" />, duration: "3–5 Days", img: imgHighway, topics: ["Aerial Land Survey", "2D/3D Mapping", "RTK/PPK GNSS", "Pix4D / DroneDeploy", "Client Deliverables", "GIS Outputs"] },
+  { tag: "SKILL COURSE", title: "GIS & Geospatial", icon: <Target className="w-7 h-7" />, duration: "3–5 Days", img: imgDroneFieldDemo, topics: ["GIS Fundamentals", "Land Record Mapping", "Urban Planning", "ArcGIS / QGIS", "Spatial Analysis", "Gov Applications"] },
+  { tag: "SKILL COURSE", title: "Thermal & Multispectral", icon: <Cpu className="w-7 h-7" />, duration: "3–4 Days", img: imgSolar, topics: ["Thermal Camera Ops", "NDVI / NDWI", "Solar Inspection", "Power Line Audit", "Crop Imaging", "Report Generation"] },
+  { tag: "ADVANCED", title: "AI/ML for Drones", icon: <Brain className="w-7 h-7" />, duration: "5–7 Days", img: imgSimulationLab, topics: ["Computer Vision", "Object Detection", "Autonomous Flight", "Edge Computing", "Mission AI", "Surveillance AI"] },
+  { tag: "SKILL COURSE", title: "Precision Agriculture", icon: <Tractor className="w-7 h-7" />, duration: "3–4 Days", img: imgAgriculture, topics: ["Crop Health Mapping", "Precision Spraying", "Irrigation Analysis", "Yield Estimation", "NDVI Reports", "Farm Ops"] },
+  { tag: "SKILL COURSE", title: "Assembly & Maintenance", icon: <Wrench className="w-7 h-7" />, duration: "3–5 Days", img: imgTechAdoption, topics: ["Frame Assembly", "Flight Controller", "ESC Calibration", "Battery Management", "Pre-flight Checks", "Field Repair"] },
+  { tag: "ENTREPRENEURSHIP", title: "Drone Entrepreneurship", icon: <TrendingUp className="w-7 h-7" />, duration: "2–3 Days", img: imgExhibitionBooth, topics: ["DGCA Compliance", "Business Models", "Client Acquisition", "Pricing", "Government Tenders", "Scaling"] },
 ];
 
 const steps = [
@@ -39,12 +54,12 @@ const steps = [
   { n: "02", title: "Theory Classes", desc: "2 days — online or offline, UAS training summary provided" },
   { n: "03", title: "Theory Test", desc: "Conducted after ground school session" },
   { n: "04", title: "Simulator & Assembly", desc: "3 days at flying site — Indore City SAPL" },
-  { n: "05", title: "RPC Issued", desc: "10-year certificate issued by Soaring Aerotech" },
+  { n: "05", title: "RPC Issued", desc: "Upto 10-year certificate issued by Soaring Aerotech" },
 ];
 
 const docs = [
   { icon: <FileText className="w-4 h-4" />, label: "Aadhar / Voter Card / Driving Licence / Passport (Original)" },
-  { icon: <FileText className="w-4 h-4" />, label: "10th Certificate or Marksheet (Copy)" },
+  { icon: <FileText className="w-4 h-4" />, label: "10th Certificate or ITI Equivalent (Copy)" },
   { icon: <FileText className="w-4 h-4" />, label: "Medical Certificate of Fitness — from certified MBBS Doctor" },
   { icon: <User className="w-4 h-4" />, label: "4 Passport-sized photos (white background)" },
 ];
@@ -81,77 +96,112 @@ function CourseSlider() {
   };
 
   return (
-    <div
-      className="relative"
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
-    >
-      <div className="overflow-hidden">
-        <motion.div
-          key={current}
-          initial={{ opacity: 0, x: 40 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.45, ease: "easeOut" }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"
-        >
-          {getVisible().map((idx) => {
-            const p = programs[idx];
-            return (
-              <div
-                key={idx}
-                className="group relative overflow-hidden rounded-2xl cursor-pointer aspect-[3/4]"
-                onClick={() => document.getElementById("enroll")?.scrollIntoView({ behavior: "smooth" })}
-              >
-                <img
-                  src={p.img}
-                  alt={p.title}
-                  className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-black/10" />
-                <div className="absolute top-4 left-4">
-                  <span className="bg-primary text-white text-[10px] font-bold uppercase tracking-wide px-2.5 py-1 rounded">
-                    {p.tag}
-                  </span>
-                </div>
-                <div className="absolute bottom-0 left-0 right-0 p-5">
-                  <div className="flex items-center gap-1.5 text-white/50 text-[10px] font-mono uppercase tracking-wider mb-2">
-                    <Clock className="w-3 h-3" />{p.duration}
-                  </div>
-                  <h3 className="font-display text-lg text-white leading-tight mb-3">{p.title}</h3>
-                  <div className="flex items-center gap-1.5 text-white/60 text-sm">
-                    Learn more <ChevronRight className="w-3.5 h-3.5" />
-                  </div>
-                </div>
+    <div>
+      {/* Mobile Horizontal Scroll View */}
+      <div className="sm:hidden flex overflow-x-auto snap-x snap-mandatory scrollbar-none gap-4 pb-4 -mx-4 px-4">
+        {programs.map((p, idx) => (
+          <div
+            key={idx}
+            className="group relative overflow-hidden rounded-2xl cursor-pointer aspect-[3/4] shrink-0 w-[80vw] max-w-[320px] snap-center"
+            onClick={() => document.getElementById("enroll")?.scrollIntoView({ behavior: "smooth" })}
+          >
+            <img
+              src={p.img}
+              alt={p.title}
+              className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-black/10" />
+            <div className="absolute top-4 left-4">
+              <span className="bg-primary text-white text-[10px] font-bold uppercase tracking-wide px-2.5 py-1 rounded">
+                {p.tag}
+              </span>
+            </div>
+            <div className="absolute bottom-0 left-0 right-0 p-5">
+              <div className="flex items-center gap-1.5 text-white/50 text-[10px] font-mono uppercase tracking-wider mb-2">
+                <Clock className="w-3 h-3" />{p.duration}
               </div>
-            );
-          })}
-        </motion.div>
+              <h3 className="font-display text-lg text-white leading-tight mb-3">{p.title}</h3>
+              <div className="flex items-center gap-1.5 text-white/60 text-sm">
+                Learn more <ChevronRight className="w-3.5 h-3.5" />
+              </div>
+            </div>
+          </div>
+        ))}
       </div>
 
-      <div className="flex items-center justify-between mt-6">
-        <div className="flex gap-1.5">
-          {programs.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => setCurrent(i)}
-              className={`h-1.5 rounded-full transition-all duration-300 ${i === current ? "w-6 bg-primary" : "w-1.5 bg-border hover:bg-foreground/20"
-                }`}
-            />
-          ))}
+      {/* Desktop Slider View */}
+      <div
+        className="hidden sm:block relative"
+        onMouseEnter={() => setPaused(true)}
+        onMouseLeave={() => setPaused(false)}
+      >
+        <div className="overflow-hidden">
+          <motion.div
+            key={current}
+            initial={{ opacity: 0, x: 40 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.45, ease: "easeOut" }}
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"
+          >
+            {getVisible().map((idx) => {
+              const p = programs[idx];
+              return (
+                <div
+                  key={idx}
+                  className="group relative overflow-hidden rounded-2xl cursor-pointer aspect-[3/4]"
+                  onClick={() => document.getElementById("enroll")?.scrollIntoView({ behavior: "smooth" })}
+                >
+                  <img
+                    src={p.img}
+                    alt={p.title}
+                    className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-black/10" />
+                  <div className="absolute top-4 left-4">
+                    <span className="bg-primary text-white text-[10px] font-bold uppercase tracking-wide px-2.5 py-1 rounded">
+                      {p.tag}
+                    </span>
+                  </div>
+                  <div className="absolute bottom-0 left-0 right-0 p-5">
+                    <div className="flex items-center gap-1.5 text-white/50 text-[10px] font-mono uppercase tracking-wider mb-2">
+                      <Clock className="w-3 h-3" />{p.duration}
+                    </div>
+                    <h3 className="font-display text-lg text-white leading-tight mb-3">{p.title}</h3>
+                    <div className="flex items-center gap-1.5 text-white/60 text-sm">
+                      Learn more <ChevronRight className="w-3.5 h-3.5" />
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </motion.div>
         </div>
-        <div className="flex gap-2">
-          <button
-            onClick={() => go(-1)}
-            className="w-9 h-9 rounded-full border border-border flex items-center justify-center hover:border-primary hover:text-primary transition-colors"
-          >
-            <ChevronLeft className="w-4 h-4" />
-          </button>
-          <button
-            onClick={() => go(1)}
-            className="w-9 h-9 rounded-full border border-border flex items-center justify-center hover:border-primary hover:text-primary transition-colors"
-          >
-            <ChevronRight className="w-4 h-4" />
-          </button>
+
+        <div className="flex items-center justify-between mt-6">
+          <div className="flex gap-1.5">
+            {programs.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setCurrent(i)}
+                className={`h-1.5 rounded-full transition-all duration-300 ${i === current ? "w-6 bg-primary" : "w-1.5 bg-border hover:bg-foreground/20"
+                  }`}
+              />
+            ))}
+          </div>
+          <div className="flex gap-2">
+            <button
+              onClick={() => go(-1)}
+              className="w-9 h-9 rounded-full border border-border flex items-center justify-center hover:border-primary hover:text-primary transition-colors"
+            >
+              <ChevronLeft className="w-4 h-4" />
+            </button>
+            <button
+              onClick={() => go(1)}
+              className="w-9 h-9 rounded-full border border-border flex items-center justify-center hover:border-primary hover:text-primary transition-colors"
+            >
+              <ChevronRight className="w-4 h-4" />
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -160,7 +210,7 @@ function CourseSlider() {
 
 export default function Training() {
   const [enrollForm, setEnrollForm] = useState({
-    name: "", phone: "", email: "", program: "DGCA RPC — Small Class (₹25,000)", message: "",
+    name: "", phone: "", email: "", program: "DGCA RPC — Small Class (₹20,000)", message: "",
   });
   const [enrollStatus, setEnrollStatus] = useState("idle");
 
@@ -191,6 +241,11 @@ export default function Training() {
 
   return (
     <main className="min-h-screen pt-20">
+      <SEO
+        title="DGCA Drone Training & Certification"
+        description="Become a certified drone pilot in India. Join Soaring Aerotech's DGCA-approved RPTO in Indore. 5-day professional pilot training, RPC valid upto 10 years, and advanced skill courses."
+        keywords="DGCA drone training, remote pilot certificate, RPTO Indore, drone license India, drone mapping course, drone pilot salary India, multirotor certification"
+      />
 
       {/* ── Hero ─────────────────────────────────── */}
       <section className="bg-[#F5F5F5] border-b border-border py-14">
@@ -201,9 +256,38 @@ export default function Training() {
               <h1 className="font-display text-4xl md:text-5xl text-foreground leading-tight mb-4">
                 DGCA Drone Training<br /><span className="text-primary">Get Certified.</span>
               </h1>
-              <p className="text-muted-foreground text-base mb-6 max-w-lg">
-                Small Category · Rotorcraft · VLOS — 5-day program, RPC valid for 10 years. India's premier DGCA-approved RPTO.
-              </p>
+              <ul className="space-y-2.5 mb-6 max-w-lg text-muted-foreground text-base">
+                <li className="flex items-center gap-2.5">
+                  <CheckCircle className="w-4 h-4 text-primary shrink-0" />
+                  <span>Small & Medium Class</span>
+                </li>
+                <li className="flex items-center gap-2.5">
+                  <CheckCircle className="w-4 h-4 text-primary shrink-0" />
+                  <span>Category - Rotorcraft</span>
+                </li>
+                <li className="flex items-center gap-2.5">
+                  <CheckCircle className="w-4 h-4 text-primary shrink-0" />
+                  <span>Condition - VLOS</span>
+                </li>
+                <li className="flex items-center gap-2.5">
+                  <CheckCircle className="w-4 h-4 text-primary shrink-0" />
+                  <span className="font-semibold text-foreground">India's first DGCA-approved RPTO.</span>
+                </li>
+              </ul>
+
+              {/* DGCA Authorization Callout Box */}
+              <div className="mb-6 bg-white border-l-4 border-primary rounded-r-xl p-4 shadow-sm max-w-lg border border-border border-y-border border-r-border">
+                <div className="flex items-center gap-3">
+                  <BadgeCheck className="w-5 h-5 text-primary shrink-0" />
+                  <div>
+                    <div className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground">DGCA Authorization Details</div>
+                    <div className="text-sm md:text-base font-bold text-foreground">
+                      RPTO Authorisation Number: <span className="text-primary font-mono font-bold">40/2023</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
               <div className="flex flex-wrap gap-3 mb-6">
                 <Button size="lg" className="rounded-full h-12 px-7 font-bold" onClick={() => document.getElementById("enroll")?.scrollIntoView({ behavior: "smooth" })}>
                   Apply Now <ChevronRight className="w-4 h-4 ml-1" />
@@ -215,7 +299,7 @@ export default function Training() {
                 </a>
               </div>
               <div className="flex gap-6">
-                {[{ v: "500+", l: "Pilots Certified" }, { v: "10 Yrs", l: "RPC Validity" }, { v: "5 Days", l: "Duration" }].map((s, i) => (
+                {[{ v: "Upto 10 Yrs", l: "RPC Validity" }, { v: "5-7 Days", l: "Duration" }].map((s, i) => (
                   <div key={i}>
                     <div className="font-display text-2xl text-foreground font-black">{s.v}</div>
                     <div className="text-muted-foreground text-xs">{s.l}</div>
@@ -229,7 +313,7 @@ export default function Training() {
               transition={{ delay: 0.1 }}
               className="relative overflow-hidden rounded-2xl aspect-[4/3] hidden lg:block"
             >
-              <img src="https://images.unsplash.com/photo-1473968512647-3e447244af8f?w=800&h=600&fit=crop" alt="Drone pilot training" className="w-full h-full object-cover" />
+              <img src={imgField1} alt="Drone pilot training" className="w-full h-full object-cover" />
             </motion.div>
           </div>
         </div>
@@ -243,17 +327,17 @@ export default function Training() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-10">
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="rounded-2xl border-2 border-primary overflow-hidden shadow-sm">
               <div className="relative h-40 overflow-hidden">
-                <img src="https://images.unsplash.com/photo-1601979031925-424e53b6caaa?w=600&h=300&fit=crop" alt="Small Class" className="w-full h-full object-cover" />
+                <img src={imgField1} alt="Small Class" className="w-full h-full object-cover" />
                 <div className="absolute inset-0 bg-[#111111]/75" />
                 <div className="absolute inset-0 p-5 flex flex-col justify-end">
-                  <span className="text-xs font-bold font-mono text-primary uppercase tracking-widest mb-1">Small Category</span>
+                  <span className="text-xs font-bold font-mono text-primary uppercase tracking-widest mb-1">Small</span>
                   <h3 className="font-display text-2xl text-white">Small Class — Rotorcraft</h3>
                   <p className="text-white/40 text-xs mt-1">VLOS · Class: Small · Category: Rotorcraft</p>
                 </div>
               </div>
               <div className="p-6 bg-[#F5F5F5]">
                 <div className="flex items-end gap-1 mb-1">
-                  <span className="font-display text-4xl text-foreground">₹25,000</span>
+                  <span className="font-display text-4xl text-foreground">₹20,000</span>
                   <span className="text-sm text-muted-foreground mb-1">+ GST / candidate</span>
                 </div>
                 <p className="text-xs text-muted-foreground mb-5">Fooding & accommodation extra</p>
@@ -263,7 +347,7 @@ export default function Training() {
 
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="rounded-2xl border border-border overflow-hidden shadow-sm">
               <div className="relative h-40 overflow-hidden">
-                <img src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=600&h=300&fit=crop" alt="Multirotor" className="w-full h-full object-cover" />
+                <img src={imgGroup1} alt="Multirotor" className="w-full h-full object-cover" />
                 <div className="absolute inset-0 bg-[#111111]/75" />
                 <div className="absolute inset-0 p-5 flex flex-col justify-end">
                   <span className="text-xs font-bold font-mono text-white/40 uppercase tracking-widest mb-1">Advanced</span>
@@ -273,7 +357,7 @@ export default function Training() {
               </div>
               <div className="p-6 bg-[#F5F5F5]">
                 <div className="flex items-end gap-1 mb-1">
-                  <span className="font-display text-4xl text-foreground">₹35,000</span>
+                  <span className="font-display text-4xl text-foreground">₹25,000</span>
                   <span className="text-sm text-muted-foreground mb-1">+ GST / candidate</span>
                 </div>
                 <p className="text-xs text-muted-foreground mb-5">Fooding & accommodation extra</p>
@@ -284,10 +368,10 @@ export default function Training() {
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
             {[
-              { icon: <Clock className="w-4 h-4 text-primary" />, label: "Duration", value: "5 Days Total" },
-              { icon: <MapPin className="w-4 h-4 text-primary" />, label: "Location", value: "Indore City, SAPL" },
-              { icon: <BadgeCheck className="w-4 h-4 text-primary" />, label: "RPC Validity", value: "10 Years" },
-              { icon: <Calendar className="w-4 h-4 text-primary" />, label: "Eligibility", value: "18–65 yrs, 10th Pass" },
+              { icon: <Clock className="w-4 h-4 text-primary" />, label: "Duration", value: "5-7 Days" },
+              { icon: <MapPin className="w-4 h-4 text-primary" />, label: "Location", value: "Indore, M.P." },
+              { icon: <BadgeCheck className="w-4 h-4 text-primary" />, label: "RPC Validity", value: "Upto 10 Years" },
+              { icon: <Calendar className="w-4 h-4 text-primary" />, label: "Eligibility", value: "18-65 yrs, 10th/ITI equivalent" },
             ].map((f, i) => (
               <div key={i} className="bg-[#F5F5F5] border border-border rounded-xl p-4 flex gap-3 items-start">
                 <div className="mt-0.5 shrink-0">{f.icon}</div>
@@ -308,7 +392,7 @@ export default function Training() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="bg-white border border-border rounded-2xl overflow-hidden">
               <div className="relative h-44 overflow-hidden">
-                <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&h=300&fit=crop" alt="Theory Classes" className="w-full h-full object-cover" />
+                <img src={imgSimulator} alt="Theory Classes" className="w-full h-full object-cover" />
                 <div className="absolute inset-0 bg-[#111111]/60" />
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="text-center">
@@ -330,7 +414,7 @@ export default function Training() {
             </motion.div>
             <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="bg-white border border-border rounded-2xl overflow-hidden">
               <div className="relative h-44 overflow-hidden">
-                <img src="https://images.unsplash.com/photo-1473968512647-3e447244af8f?w=600&h=300&fit=crop" alt="Practical Flying" className="w-full h-full object-cover" />
+                <img src={imgField2} alt="Practical Flying" className="w-full h-full object-cover" />
                 <div className="absolute inset-0 bg-[#111111]/60" />
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="text-center">
@@ -397,7 +481,7 @@ export default function Training() {
         <div className="container mx-auto px-4 md:px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="relative">
-              <img src="https://images.unsplash.com/photo-1601979031925-424e53b6caaa?w=700&h=500&fit=crop" alt="Corporate Training" className="w-full h-72 object-cover rounded-3xl shadow-xl" />
+              <img src={imgGroup2} alt="Corporate Training" className="w-full h-72 object-cover rounded-3xl shadow-xl" />
               <div className="absolute -bottom-4 -right-4 bg-primary text-white rounded-2xl p-5 shadow-xl">
                 <div className="font-display text-3xl font-black">100+</div>
                 <div className="text-sm font-semibold opacity-90">Corporate Batches</div>
@@ -427,7 +511,7 @@ export default function Training() {
               <div className="space-y-4">
                 {[
                   { icon: <User className="w-4 h-4 text-primary" />, label: "Age", value: "18 to 65 years" },
-                  { icon: <FileText className="w-4 h-4 text-primary" />, label: "Education", value: "10th Pass (minimum)" },
+                  { icon: <FileText className="w-4 h-4 text-primary" />, label: "Education", value: "10th Pass or ITI equivalent" },
                   { icon: <BadgeCheck className="w-4 h-4 text-primary" />, label: "Medical", value: "Fitness certificate from MBBS Doctor" },
                   { icon: <IndianRupee className="w-4 h-4 text-primary" />, label: "Payment", value: "Full fees before registration date" },
                 ].map((e, i) => (
@@ -457,6 +541,36 @@ export default function Training() {
                 </p>
               </div>
             </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Training Gallery Section ──────────────── */}
+      <section className="py-20 bg-[#F5F5F5] border-b border-border">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="section-label">RPTO IN ACTION</div>
+          <h2 className="font-display text-3xl md:text-4xl text-foreground mb-8">Training Gallery</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            <div className="relative overflow-hidden rounded-2xl aspect-[4/3] group shadow-sm border border-border">
+              <img src={imgField1} alt="Field training session" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+              <div className="absolute bottom-4 left-4 bg-black/70 backdrop-blur-sm text-white text-xs px-3 py-1.5 rounded-lg">Flight Field Training</div>
+            </div>
+            <div className="relative overflow-hidden rounded-2xl aspect-[4/3] group shadow-sm border border-border">
+              <img src={imgSimulator} alt="Simulator training room" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+              <div className="absolute bottom-4 left-4 bg-black/70 backdrop-blur-sm text-white text-xs px-3 py-1.5 rounded-lg">Drone Simulator Lab</div>
+            </div>
+            <div className="relative overflow-hidden rounded-2xl aspect-[4/3] group shadow-sm border border-border">
+              <img src={imgField2} alt="Practical training session" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+              <div className="absolute bottom-4 left-4 bg-black/70 backdrop-blur-sm text-white text-xs px-3 py-1.5 rounded-lg">Practical Flight Controls</div>
+            </div>
+            <div className="relative overflow-hidden rounded-2xl aspect-[4/3] group shadow-sm border border-border lg:col-span-2">
+              <img src={imgGroup1} alt="Training batch group" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+              <div className="absolute bottom-4 left-4 bg-black/70 backdrop-blur-sm text-white text-xs px-3 py-1.5 rounded-lg">Training Batch Group</div>
+            </div>
+            <div className="relative overflow-hidden rounded-2xl aspect-[4/3] group shadow-sm border border-border">
+              <img src={imgGroup2} alt="Instructors and pilots group" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+              <div className="absolute bottom-4 left-4 bg-black/70 backdrop-blur-sm text-white text-xs px-3 py-1.5 rounded-lg">RPTO Certified Instructors</div>
+            </div>
           </div>
         </div>
       </section>

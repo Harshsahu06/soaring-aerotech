@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
+import SEO from "@/components/SEO";
 import {
   Map,
   Tractor,
@@ -17,12 +18,23 @@ import {
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 
+// Local Project Asset Imports
+import imgHighway from "@/assets/highway-project.jpg";
+import imgSolar from "@/assets/solar-project.jpg";
+import imgAgriculture from "@/assets/agriculture-project.jpg";
+import imgSurveillance from "@/assets/surveillance-project.jpg";
+import imgDroneFieldDemo from "@/assets/drone-field-demo.jpg";
+import imgIndustryConstruction from "@/assets/industry-construction.jpg";
+import imgDroneSolutions from "@/assets/drone-solutions.jpg";
+import imgSkilledWorkforce from "@/assets/skilled-workforce.jpg";
+import imgIndustrySurvey from "@/assets/industry-survey-construction.jpg";
+
 const services = [
   {
     icon: <Map className="w-7 h-7" />,
     title: "Aerial Survey & Mapping",
     bullets: ["Centimetre-accurate data", "Orthomosaics & 3D models", "GIS-ready outputs"],
-    img: "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=600&h=400&fit=crop",
+    img: imgHighway,
     id: "survey",
     stat: "±2cm accuracy",
   },
@@ -30,7 +42,7 @@ const services = [
     icon: <Sun className="w-7 h-7" />,
     title: "Solar Plant Inspection",
     bullets: ["Thermal hotspot detection", "GPS-tagged fault reports", "MW-scale in hours"],
-    img: "https://images.unsplash.com/photo-1509391366360-2e959784a276?w=600&h=400&fit=crop",
+    img: imgSolar,
     id: "solar",
     stat: "450+ faults found",
   },
@@ -38,7 +50,7 @@ const services = [
     icon: <Zap className="w-7 h-7" />,
     title: "Power Substation Inspection",
     bullets: ["Zero shutdown required", "Thermal anomaly detection", "Safe remote ops"],
-    img: "https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=600&h=400&fit=crop",
+    img: imgIndustrySurvey,
     id: "substation",
     stat: "No downtime",
   },
@@ -46,7 +58,7 @@ const services = [
     icon: <Tractor className="w-7 h-7" />,
     title: "Precision Agriculture",
     bullets: ["NDVI crop health maps", "Targeted precision spraying", "10,000+ acre scale"],
-    img: "https://images.unsplash.com/photo-1567359781514-3b964e2b04d6?w=600&h=400&fit=crop",
+    img: imgAgriculture,
     id: "agriculture",
     stat: "18% yield increase",
   },
@@ -54,7 +66,7 @@ const services = [
     icon: <Eye className="w-7 h-7" />,
     title: "AI Surveillance & Security",
     bullets: ["24/7 autonomous patrol", "Thermal night detection", "Live command feed"],
-    img: "https://images.unsplash.com/photo-1508614589041-895b88991e3e?w=600&h=400&fit=crop",
+    img: imgSurveillance,
     id: "surveillance",
     stat: "24/7 autonomous",
   },
@@ -62,7 +74,7 @@ const services = [
     icon: <AlertTriangle className="w-7 h-7" />,
     title: "Disaster Assessment",
     bullets: ["Rapid aerial recon", "Thermal survivor detection", "GPS damage mapping"],
-    img: "https://images.unsplash.com/photo-1473968512647-3e447244af8f?w=600&h=400&fit=crop",
+    img: imgDroneFieldDemo,
     id: "disaster",
     stat: "Rapid response",
   },
@@ -70,7 +82,7 @@ const services = [
     icon: <Factory className="w-7 h-7" />,
     title: "Infrastructure Inspection",
     bullets: ["Bridges, towers, chimneys", "No scaffolding needed", "Micro-crack detection"],
-    img: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=600&h=400&fit=crop",
+    img: imgIndustryConstruction,
     id: "infrastructure",
     stat: "5× faster",
   },
@@ -78,7 +90,7 @@ const services = [
     icon: <Settings className="w-7 h-7" />,
     title: "Custom Drone Solutions",
     bullets: ["Purpose-built hardware", "Custom payload engineering", "Concept to deployment"],
-    img: "https://images.unsplash.com/photo-1586861635167-e5223aadc9fe?w=600&h=400&fit=crop",
+    img: imgDroneSolutions,
     id: "custom",
     stat: "End-to-end",
   },
@@ -127,76 +139,110 @@ function ServiceSlider() {
   };
 
   return (
-    <div
-      className="relative"
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
-    >
-      <div className="overflow-hidden">
-        <motion.div
-          key={current}
-          initial={{ opacity: 0, x: 40 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.45, ease: "easeOut" }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"
-        >
-          {getVisible().map((idx) => {
-            const s = services[idx];
-            return (
-              <div
-                key={idx}
-                className="group relative overflow-hidden rounded-2xl cursor-pointer aspect-[3/4]"
+    <div>
+      {/* Mobile Horizontal Scroll View */}
+      <div className="sm:hidden flex overflow-x-auto snap-x snap-mandatory scrollbar-none gap-4 pb-4 -mx-4 px-4">
+        {services.map((s, idx) => (
+          <div
+            key={idx}
+            className="group relative overflow-hidden rounded-2xl cursor-pointer aspect-[3/4] shrink-0 w-[80vw] max-w-[320px] snap-center"
+          >
+            <img
+              src={s.img}
+              alt={s.title}
+              className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/92 via-black/35 to-black/10" />
+            <div className="absolute top-4 left-4">
+              <span className="bg-primary text-white text-[10px] font-bold uppercase tracking-wide px-2.5 py-1 rounded">
+                {s.stat}
+              </span>
+            </div>
+            <div className="absolute bottom-0 left-0 right-0 p-5">
+              <h3 className="font-display text-xl text-white leading-tight mb-4">{s.title}</h3>
+              <Link
+                href={`/contact?service=${s.id}`}
+                className="inline-flex items-center gap-1.5 text-white/65 text-sm hover:text-white transition-colors"
               >
-                <img
-                  src={s.img}
-                  alt={s.title}
-                  className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/92 via-black/35 to-black/10" />
-                <div className="absolute top-4 left-4">
-                  <span className="bg-primary text-white text-[10px] font-bold uppercase tracking-wide px-2.5 py-1 rounded">
-                    {s.stat}
-                  </span>
-                </div>
-                <div className="absolute bottom-0 left-0 right-0 p-5">
-                  <h3 className="font-display text-xl text-white leading-tight mb-4">{s.title}</h3>
-                  <Link
-                    href={`/contact?service=${s.id}`}
-                    className="inline-flex items-center gap-1.5 text-white/65 text-sm hover:text-white transition-colors"
-                  >
-                    Get Quote <ArrowRight className="w-3.5 h-3.5" />
-                  </Link>
-                </div>
-              </div>
-            );
-          })}
-        </motion.div>
+                Get Quote <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
+            </div>
+          </div>
+        ))}
       </div>
 
-      <div className="flex items-center justify-between mt-6">
-        <div className="flex gap-1.5">
-          {services.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => setCurrent(i)}
-              className={`h-1.5 rounded-full transition-all duration-300 ${i === current ? "w-6 bg-primary" : "w-1.5 bg-border hover:bg-foreground/20"
-                }`}
-            />
-          ))}
+      {/* Desktop Slider View */}
+      <div
+        className="hidden sm:block relative"
+        onMouseEnter={() => setPaused(true)}
+        onMouseLeave={() => setPaused(false)}
+      >
+        <div className="overflow-hidden">
+          <motion.div
+            key={current}
+            initial={{ opacity: 0, x: 40 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.45, ease: "easeOut" }}
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"
+          >
+            {getVisible().map((idx) => {
+              const s = services[idx];
+              return (
+                <div
+                  key={idx}
+                  className="group relative overflow-hidden rounded-2xl cursor-pointer aspect-[3/4]"
+                >
+                  <img
+                    src={s.img}
+                    alt={s.title}
+                    className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/92 via-black/35 to-black/10" />
+                  <div className="absolute top-4 left-4">
+                    <span className="bg-primary text-white text-[10px] font-bold uppercase tracking-wide px-2.5 py-1 rounded">
+                      {s.stat}
+                    </span>
+                  </div>
+                  <div className="absolute bottom-0 left-0 right-0 p-5">
+                    <h3 className="font-display text-xl text-white leading-tight mb-4">{s.title}</h3>
+                    <Link
+                      href={`/contact?service=${s.id}`}
+                      className="inline-flex items-center gap-1.5 text-white/65 text-sm hover:text-white transition-colors"
+                    >
+                      Get Quote <ArrowRight className="w-3.5 h-3.5" />
+                    </Link>
+                  </div>
+                </div>
+              );
+            })}
+          </motion.div>
         </div>
-        <div className="flex gap-2">
-          <button
-            onClick={() => go(-1)}
-            className="w-9 h-9 rounded-full border border-border flex items-center justify-center hover:border-primary hover:text-primary transition-colors"
-          >
-            <ChevronLeft className="w-4 h-4" />
-          </button>
-          <button
-            onClick={() => go(1)}
-            className="w-9 h-9 rounded-full border border-border flex items-center justify-center hover:border-primary hover:text-primary transition-colors"
-          >
-            <ChevronRightIcon className="w-4 h-4" />
-          </button>
+
+        <div className="flex items-center justify-between mt-6">
+          <div className="flex gap-1.5">
+            {services.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setCurrent(i)}
+                className={`h-1.5 rounded-full transition-all duration-300 ${i === current ? "w-6 bg-primary" : "w-1.5 bg-border hover:bg-foreground/20"
+                  }`}
+              />
+            ))}
+          </div>
+          <div className="flex gap-2">
+            <button
+              onClick={() => go(-1)}
+              className="w-9 h-9 rounded-full border border-border flex items-center justify-center hover:border-primary hover:text-primary transition-colors"
+            >
+              <ChevronLeft className="w-4 h-4" />
+            </button>
+            <button
+              onClick={() => go(1)}
+              className="w-9 h-9 rounded-full border border-border flex items-center justify-center hover:border-primary hover:text-primary transition-colors"
+            >
+              <ChevronRightIcon className="w-4 h-4" />
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -206,6 +252,11 @@ function ServiceSlider() {
 export default function Services() {
   return (
     <main className="min-h-screen pt-20">
+      <SEO 
+        title="Industrial Drone Services & UAV Solutions"
+        description="Get centimetre-accurate aerial survey & mapping, solar plant inspections, AI surveillance patrol, agricultural drone missions, and power substation audits in India."
+        keywords="aerial mapping, solar thermal inspection, drone GIS survey, power line inspection, drone surveillance India, custom payload development"
+      />
       {/* ── Hero ─────────────────────────────────── */}
       <section className="bg-[#F5F5F5] border-b border-border py-14">
         <div className="container mx-auto px-4 md:px-6">
@@ -233,7 +284,7 @@ export default function Services() {
               className="relative overflow-hidden rounded-2xl aspect-[4/3] hidden lg:block"
             >
               <img
-                src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800&h=600&fit=crop"
+                src={imgHighway}
                 alt="Industrial drone services"
                 className="w-full h-full object-cover"
               />
@@ -275,7 +326,7 @@ export default function Services() {
                 {[
                   { val: "±2cm", label: "Survey accuracy" },
                   { val: "80%", label: "Time savings" },
-                  { val: "100+", label: "Missions completed" },
+                  { val: "1000+", label: "Missions completed" },
                   { val: "450+", label: "Faults detected" },
                 ].map((s, i) => (
                   <div key={i} className="bg-[#F5F5F5] rounded-xl p-4 border border-border">
@@ -287,7 +338,7 @@ export default function Services() {
             </div>
             <div className="relative">
               <img
-                src="https://images.unsplash.com/photo-1534120247760-c44c3e4a62f1?w=700&h=500&fit=crop"
+                src={imgSkilledWorkforce}
                 alt="Drone in operation"
                 className="w-full h-80 object-cover rounded-3xl shadow-xl"
               />

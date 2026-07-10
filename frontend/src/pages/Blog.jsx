@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Calendar, ArrowRight } from "lucide-react";
 import { Link } from "wouter";
+import SEO from "@/components/SEO";
 
 export default function Blog() {
   const posts = [
@@ -53,6 +54,11 @@ export default function Blog() {
 
   return (
     <main className="min-h-screen">
+      <SEO 
+        title="Drone Industry Insights & Blog"
+        description="Stay updated with the latest trends in the Indian drone industry. Read about DGCA regulations, drone pilot career guides, agricultural drone innovations, and pilot salaries."
+        keywords="drone guide India, DGCA drone rules, drone pilot salary, precision agriculture, drone tech trends 2025"
+      />
 
       {/* ── Hero ─────────────────────────────────── */}
       <section className="relative min-h-[55vh] flex items-center overflow-hidden bg-[#111111]">

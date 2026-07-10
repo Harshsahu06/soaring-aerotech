@@ -1,0 +1,135 @@
+import nodemailer from "nodemailer";
+
+// Create transporter using SMTP settings from environment variables
+// Falls back to logging if variables are missing
+const getTransporter = () => {
+  const host = process.env.SMTP_HOST;
+  const port = process.env.SMTP_PORT || 587;
+  const user = process.env.SMTP_USER;
+  const pass = process.env.SMTP_PASS;
+
+  if (!user || !pass) {
+    console.warn("⚠️ SMTP credentials (SMTP_USER and SMTP_PASS) not configured in .env. Form submission emails will be logged instead of sent.");
+    return null;
+  }
+
+  return nodemailer.createTransport({
+    host: host || "smtp.gmail.com", // Default fallback host
+    port: parseInt(port),
+    secure: parseInt(port) === 465, // true for port 465, false for 587
+    auth: {
+      user: user,
+      pass: pass,
+    },
+  });
+};
+
+export async function sendSubmissionEmail(submission) {
+  const { type, name, phone, email, subject, program, message } = submission;
+
+  const targetEmail = "info@soaringaerotech.com";
+  const transporter = getTransporter();
+
+  // Create clean email Subject
+  const mailSubject = `New Soaring Aerotech Submission: ${type.toUpperCase()} - ${name}`;
+  
+  // Build clean HTML content
+  let detailsHtml = `
+    <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e2e8f0; rounded-lg: 8px;">
+      <h2 style="color: #ef4444; border-bottom: 2px solid #ef4444; padding-bottom: 8px; margin-top: 0;">New Web Form Submission</h2>
+      <table style="width: 100%; border-collapse: collapse; margin-top: 15px;">
+        <tr>
+          <td style="padding: 8px 0; font-weight: bold; width: 150px; color: #4a5568;">Form Type:</td>
+          <td style="padding: 8px 0; color: #1a202c; text-transform: uppercase; font-weight: 600;">${type}</td>
+        </tr>
+        <tr>
+          <td style="padding: 8px 0; font-weight: bold; color: #4a5568;">Name:</td>
+          <td style="padding: 8px 0; color: #1a202c;">${name}</td>
+        </tr>
+        <tr>
+          <td style="padding: 8px 0; font-weight: bold; color: #4a5568;">Phone:</td>
+          <td style="padding: 8px 0; color: #1a202c;">
+            <a href="tel:${phone}" style="color: #ef4444; text-decoration: none;">${phone}</a>
+          </td>
+        </tr>
+  `;
+
+  if (email) {
+    detailsHtml += `
+      <tr>
+        <td style="padding: 8px 0; font-weight: bold; color: #4a5568;">Email:</td>
+        <td style="padding: 8px 0; color: #1a202c;">
+          <a href="mailto:${email}" style="color: #ef4444; text-decoration: none;">${email}</a>
+        </td>
+      </tr>
+    `;
+  }
+
+  if (subject) {
+    detailsHtml += `
+      <tr>
+        <td style="padding: 8px 0; font-weight: bold; color: #4a5568;">Inquiry Type:</td>
+        <td style="padding: 8px 0; color: #1a202c;">${subject}</td>
+      </tr>
+    `;
+  }
+
+  if (program) {
+    detailsHtml += `
+      <tr>
+        <td style="padding: 8px 0; font-weight: bold; color: #4a5568;">Requested Program:</td>
+        <td style="padding: 8px 0; color: #1a202c;">${program}</td>
+      </tr>
+    `;
+  }
+
+  detailsHtml += `
+      </table>
+  `;
+
+  if (message) {
+    detailsHtml += `
+      <div style="margin-top: 20px; padding: 15px; bg-color: #f7fafc; border-left: 4px solid #cbd5e0; background-color: #f8fafc; border-radius: 4px;">
+        <h4 style="margin: 0 0 8px 0; color: #4a5568;">User Message:</h4>
+        <p style="margin: 0; color: #2d3748; line-height: 1.5; white-space: pre-wrap;">${message}</p>
+      </div>
+    `;
+  }
+
+  detailsHtml += `
+      <div style="margin-top: 30px; border-top: 1px solid #e2e8f0; padding-top: 15px; font-size: 11px; color: #a0aec0; text-align: center;">
+        This email was automatically generated from the Soaring Aerotech website form.
+      </div>
+    </div>
+  `;
+
+  const mailOptions = {
+    from: `"Soaring Aerotech Web" <${process.env.SMTP_USER || "no-reply@soaringaerotech.com"}>`,
+    to: targetEmail,
+    subject: mailSubject,
+    html: detailsHtml,
+  };
+
+  if (email) {
+    mailOptions.replyTo = email;
+  }
+
+  if (!transporter) {
+    console.log("\n-----------------------------------------");
+    console.log("MOCK EMAIL GENERATED (SMTP NOT CONFIGURED)");
+    console.log("TO:", targetEmail);
+    console.log("Subject:", mailSubject);
+    console.log("Content:", detailsHtml.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim());
+    console.log("-----------------------------------------\n");
+    return { success: true, mocked: true };
+  }
+
+  try {
+    const info = await transporter.sendMail(mailOptions);
+    console.log(`✉️ Email successfully sent to ${targetEmail}: ${info.messageId}`);
+    return { success: true, messageId: info.messageId };
+  } catch (error) {
+    console.error("❌ Error sending submission email:", error);
+    return { success: false, error };
+  }
+}

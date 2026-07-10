@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
+import SEO from "@/components/SEO";
 import { MapPin, Phone, Mail, Send, MessageCircle, CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -36,6 +37,11 @@ export default function Contact() {
 
   return (
     <main className="min-h-screen">
+      <SEO 
+        title="Contact Us"
+        description="Contact Soaring Aerotech Pvt. Ltd. in Indore, Madhya Pradesh. Enquire about our drone courses, corporate training batches, B2B services, or custom UAV designs."
+        keywords="contact Soaring Aerotech, drone school contact, Indore drone pilot training phone number, drone quote India"
+      />
 
       {/* ── Hero ─────────────────────────────────── */}
       <section className="relative min-h-[55vh] flex items-center overflow-hidden bg-[#111111]">
@@ -76,20 +82,25 @@ export default function Contact() {
                       <p className="text-muted-foreground text-sm leading-relaxed">AIC-Prestige Inspire Foundation<br />Prestige Vihar, Sector-D, Vijay Nagar, Scheme No 74C<br />Indore, Madhya Pradesh 452010</p>
                     </div>
                   </div>
-                  <div className="flex items-start gap-4 p-6 rounded-2xl bg-[#F5F5F5] border border-border hover:border-primary/20 transition-colors">
+                   <div className="flex items-start gap-4 p-6 rounded-2xl bg-[#F5F5F5] border border-border hover:border-primary/20 transition-colors">
                     <div className="p-3 rounded-full bg-primary/10 text-primary mt-0.5 shrink-0"><Phone className="w-5 h-5" /></div>
                     <div>
                       <h4 className="font-bold text-foreground mb-1">Phone</h4>
-                      <p className="text-muted-foreground text-sm">+91 78699 18736</p>
-                      <p className="text-muted-foreground text-sm">+91 98765 43210</p>
+                      <p className="text-muted-foreground text-sm">
+                        <a href="tel:+917869918736" className="hover:text-primary transition-colors">+91 78699 18736</a>
+                      </p>
                     </div>
                   </div>
                   <div className="flex items-start gap-4 p-6 rounded-2xl bg-[#F5F5F5] border border-border hover:border-primary/20 transition-colors">
                     <div className="p-3 rounded-full bg-primary/10 text-primary mt-0.5 shrink-0"><Mail className="w-5 h-5" /></div>
                     <div>
                       <h4 className="font-bold text-foreground mb-1">Email</h4>
-                      <p className="text-muted-foreground text-sm">hello@soaringaerotech.com</p>
-                      <p className="text-muted-foreground text-sm">training@soaringaerotech.com</p>
+                      <p className="text-muted-foreground text-sm">
+                        <a href="mailto:info@soaringaerotech.com" className="hover:text-primary transition-colors">info@soaringaerotech.com</a>
+                      </p>
+                      <p className="text-muted-foreground text-sm">
+                        <a href="mailto:business@soaringaerotech.com" className="hover:text-primary transition-colors">business@soaringaerotech.com</a>
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -191,7 +202,7 @@ export default function Contact() {
                   <Phone className="w-4 h-4 mr-2" /> Call Now
                 </Button>
               </a>
-              <a href="mailto:hello@soaringaerotech.com">
+              <a href="mailto:info@soaringaerotech.com">
                 <Button className="rounded-full px-6 h-12 font-semibold">
                   <Mail className="w-4 h-4 mr-2" /> Email Us
                 </Button>
