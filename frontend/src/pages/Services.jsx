@@ -28,6 +28,7 @@ import imgIndustryConstruction from "@/assets/industry-construction.jpg";
 import imgDroneSolutions from "@/assets/drone-solutions.jpg";
 import imgSkilledWorkforce from "@/assets/skilled-workforce.jpg";
 import imgIndustrySurvey from "@/assets/industry-survey-construction.jpg";
+import imgMpebInspection from "@/assets/mpeb-inspection.jpg";
 
 const services = [
   {
@@ -50,7 +51,7 @@ const services = [
     icon: <Zap className="w-7 h-7" />,
     title: "Power Substation Inspection",
     bullets: ["Zero shutdown required", "Thermal anomaly detection", "Safe remote ops"],
-    img: imgIndustrySurvey,
+    img: imgMpebInspection,
     id: "substation",
     stat: "No downtime",
   },

@@ -61,8 +61,11 @@ import imgIndustrySurvey from "@/assets/industry-survey-construction.jpg";
 import imgInnovationLab from "@/assets/innovation-lab.jpg";
 import imgIndustryConstruction from "@/assets/industry-construction.jpg";
 import imgIndustryGovt from "@/assets/industry-govt.jpg";
+import imgAboutTrainPillar from "@/assets/about-train-pillar.jpg";
+import imgAboutInnovatePillar from "@/assets/about-innovate-pillar.jpg";
 import imgIndustryEducation from "@/assets/industry-education.jpg";
 import imgIndustryLogistics from "@/assets/industry-logistics.jpg";
+import imgMpebInspection from "@/assets/mpeb-inspection.jpg";
 
 
 const galleryRow1 = [
@@ -203,7 +206,7 @@ const pillars = [
       "RPC Certification",
       "Corporate Batches",
     ],
-    img: imgStudentTraining,
+    img: imgAboutTrainPillar,
     link: "/training",
   },
   {
@@ -231,7 +234,7 @@ const pillars = [
       "Tethered Drones",
       "Quantum Research",
     ],
-    img: imgRdInnovation,
+    img: imgAboutInnovatePillar,
     link: "/innovation-lab",
   },
   {
@@ -350,7 +353,7 @@ const projects = [
     cat: "MPEB · INSPECTION",
     title: "MPEB Power Grid Inspection",
     result: "Fault detection without line shutdown",
-    img: imgSolar,
+    img: imgMpebInspection,
   },
   {
     cat: "GOVT. INITIATIVE",

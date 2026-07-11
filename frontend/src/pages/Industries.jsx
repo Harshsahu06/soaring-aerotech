@@ -11,6 +11,7 @@ import imgIndustryConstruction from "@/assets/industry-construction.jpg";
 import imgIndustryGovt from "@/assets/industry-govt.jpg";
 import imgIndustryEducation from "@/assets/industry-education.jpg";
 import imgIndustryLogistics from "@/assets/industry-logistics.jpg";
+import imgMpebInspection from "@/assets/mpeb-inspection.jpg";
 
 export default function Industries() {
   const [active, setActive] = useState(0);
@@ -95,7 +96,7 @@ export default function Industries() {
     {
       name: "Power & Utilities",
       icon: <Zap className="w-7 h-7" />,
-      img: "https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=600&h=400&fit=crop",
+      img: imgMpebInspection,
       desc: "Inspection of high-voltage transmission lines, substations, and wind turbines in difficult terrain — faster and safer than traditional climbing crews.",
       services: ["Powerline Audit", "Substation Inspection", "Wind Turbine Survey"],
     },

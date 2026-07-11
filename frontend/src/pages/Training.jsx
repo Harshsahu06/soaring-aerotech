@@ -271,7 +271,7 @@ export default function Training() {
                 </li>
                 <li className="flex items-center gap-2.5">
                   <CheckCircle className="w-4 h-4 text-primary shrink-0" />
-                  <span className="font-semibold text-foreground">India's first DGCA-approved RPTO.</span>
+                  <span className="font-semibold text-foreground">Indore's first DGCA-approved RPTO.</span>
                 </li>
               </ul>
 

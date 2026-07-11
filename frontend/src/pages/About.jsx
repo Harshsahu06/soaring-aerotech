@@ -12,6 +12,9 @@ import photoLalit from "@/assets/lalit.png";
 import photoAditya from "@/assets/aditya.png";
 import photoAbhishek from "@/assets/abhishek.png";
 import photoVaibhav from "@/assets/team-vaibhav.png";
+import photoAlisha from "@/assets/team-alisha.jpg";
+import photoHarsh from "@/assets/team-harsh.jpeg";
+import photoDevendra from "@/assets/team-devendra.jpg";
 import imgStudentTraining from "@/assets/student-training.jpg";
 import imgDroneSolutions from "@/assets/drone-solutions.jpg";
 import imgRdInnovation from "@/assets/rd-innovation.jpg";
@@ -19,12 +22,16 @@ import imgTechAdoption from "@/assets/tech-adoption.jpg";
 import imgExhibitionBooth from "@/assets/exhibition-booth.jpg";
 import imgDroneFieldDemo from "@/assets/drone-field-demo.jpg";
 import imgAboutHeroTeam from "@/assets/about-hero-team.jpg";
+import imgAboutTrainPillar from "@/assets/about-train-pillar.jpg";
+import imgAboutInnovatePillar from "@/assets/about-innovate-pillar.jpg";
+import imgPrestigeLogo from "@/assets/prestige-logo.png";
+import imgPrestigeInspiration from "@/assets/prestige-inspiration.jpg";
 
 const pillars = [
   {
     n: "01", tag: "TRAIN", icon: <GraduationCap className="w-6 h-6" />, title: "RPTO Training",
     items: ["DGCA RPTO", "8 Programs", "RPC Certification", "Corporate Training"],
-    img: imgStudentTraining,
+    img: imgAboutTrainPillar,
     desc: "India's most comprehensive DGCA-approved pilot training ecosystem, producing certified drone operators for every sector.",
     link: "/training"
   },
@@ -38,7 +45,7 @@ const pillars = [
   {
     n: "03", tag: "INNOVATE", icon: <Lightbulb className="w-6 h-6" />, title: "R&D",
     items: ["Disaster UAVs", "Tethered Drones", "AI/ML Systems", "Payload Dev"],
-    img: imgRdInnovation,
+    img: imgAboutInnovatePillar,
     desc: "Active research into disaster-response UAVs, AI/ML drone systems, and advanced payload engineering for next-gen applications.",
     link: "/innovation-lab"
   },
@@ -88,7 +95,7 @@ const directors = [
     name: "Mr. Himanshu Jain",
     role: "Director",
     img: photoHimanshu,
-    quote: "We are not just a training institute. We are building a complete drone innovation ecosystem — from R&D to manufacturing to defence applications.",
+    quote: "We are building a complete drone innovation ecosystem — from R&D to manufacturing for civil and defence applications.",
   },
   {
     name: "Dr. Manojkumar Deshpande",
@@ -101,7 +108,7 @@ const directors = [
 const teamMembers = [
   {
     name: "Mr. Lalit Nagapurkar",
-    role: "Drone Instructor",
+    role: "R&D Manager & Drone Instructor",
     img: photoLalit,
   },
   {
@@ -116,10 +123,27 @@ const teamMembers = [
   },
   {
     name: "Mr. Abhishek Chourasiya",
-    role: "Remote Pilot",
+    role: "R&D Engineeer & Remote Pilot",
     img: photoAbhishek,
   },
+];
 
+const softwareTeam = [
+  {
+    name: "Ms. Alisha Batham",
+    role: "Software Engineer",
+    img: photoAlisha,
+  },
+  {
+    name: "Mr. Harsh Sahu",
+    role: "Software Engineer",
+    img: photoHarsh,
+  },
+  {
+    name: "Mr. Devendra Singh Sengar",
+    role: "Software Engineer",
+    img: photoDevendra,
+  },
 ];
 
 export default function About() {
@@ -187,7 +211,42 @@ export default function About() {
         </div>
       </section>
 
-      {/* ── 4 Pillars ────────────────────────────── */}
+      {/* ── Our Inspiration ──────────────────────── */}
+      <section className="py-20 bg-slate-50 border-b border-border">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <div className="lg:col-span-7">
+              <div className="section-label">OUR INSPIRATION</div>
+              <h2 className="font-display text-3xl md:text-4xl text-foreground mb-6">
+                Powered by the Legacy of <br /><span className="text-primary">Prestige Group</span>
+              </h2>
+              <div className="flex items-center gap-6 mb-6">
+                <div className="bg-white border border-border rounded-xl p-4 w-40 flex items-center justify-center shrink-0">
+                  <img src={imgPrestigeLogo} alt="Prestige Group Logo" className="max-h-12 w-auto object-contain" />
+                </div>
+                <div className="text-muted-foreground text-xs font-mono uppercase tracking-wider leading-relaxed">
+                  Nurturing Excellence<br />& Innovation
+                </div>
+              </div>
+              <p className="text-muted-foreground leading-relaxed mb-4">
+                Soaring Aerotech proudly operates under the Prestige Group, drawing inspiration from its long-standing commitment to excellence, innovation, and transformative education. The Group's vision of nurturing future-ready talent and fostering technological advancement serves as the foundation of our journey.
+              </p>
+              <p className="text-muted-foreground leading-relaxed">
+                With this strong legacy behind us, we continue to advance drone technology, aerospace innovation, industry-driven training, and research that creates meaningful impact across industries.
+              </p>
+            </div>
+            <div className="lg:col-span-5 relative">
+              <div className="aspect-[4/3] rounded-3xl overflow-hidden shadow-xl border border-border bg-white">
+                <img
+                  src={imgPrestigeInspiration}
+                  alt="Prestige Group Meeting and Inspiration"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
       <section className="py-20 bg-white border-b border-border">
         <div className="container mx-auto px-4 md:px-6">
           <div className="flex items-end justify-between mb-10">
@@ -280,6 +339,40 @@ export default function About() {
             </h3>
             <div className="flex sm:grid overflow-x-auto sm:overflow-x-visible snap-x snap-mandatory scrollbar-none -mx-4 px-4 sm:mx-0 sm:px-0 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {teamMembers.map((m, i) => (
+                <div
+                  key={i}
+                  className="group bg-white rounded-2xl overflow-hidden border border-border shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1 shrink-0 w-[75vw] max-w-[300px] sm:w-auto sm:max-w-none snap-center"
+                >
+                  <div className="relative h-64 overflow-hidden bg-slate-100">
+                    <img
+                      src={m.img}
+                      alt={m.name}
+                      className="absolute inset-0 w-full h-full object-cover object-top group-hover:scale-105 transition-all duration-500"
+                    />
+                  </div>
+                  <div className="p-6">
+                    <div className="font-display font-bold text-foreground text-lg leading-tight">
+                      {m.name}
+                    </div>
+                    <div className="text-xs text-primary font-mono tracking-wide mt-1 uppercase">
+                      {m.role}
+                    </div>
+                    <div className="text-xs text-muted-foreground mt-1 font-medium">
+                      Soaring Aerotech Pvt. Ltd.
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Software Department Grid */}
+          <div className="max-w-5xl mx-auto mt-16">
+            <h3 className="text-xs font-mono font-bold tracking-widest text-primary uppercase mb-6 text-center">
+              Software Department
+            </h3>
+            <div className="flex sm:grid overflow-x-auto sm:overflow-x-visible snap-x snap-mandatory scrollbar-none -mx-4 px-4 sm:mx-0 sm:px-0 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-center">
+              {softwareTeam.map((m, i) => (
                 <div
                   key={i}
                   className="group bg-white rounded-2xl overflow-hidden border border-border shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1 shrink-0 w-[75vw] max-w-[300px] sm:w-auto sm:max-w-none snap-center"
