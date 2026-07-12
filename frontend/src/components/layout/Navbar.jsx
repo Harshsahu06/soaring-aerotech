@@ -138,10 +138,10 @@ export function Navbar() {
       {/* Mobile menu */}
       {mobileMenuOpen && (
         <div className="lg:hidden absolute top-full left-0 right-0 bg-white border-b border-border shadow-xl animate-slide-in">
-          <div className="container mx-auto px-4 py-5 flex flex-col gap-1.5">
+          <div className="container mx-auto px-4 py-3 flex flex-col gap-0.5">
             <Link
               href="/"
-              className={`text-base font-medium px-4 py-3 rounded-xl transition-colors ${
+              className={`text-sm font-medium px-3 py-2.5 rounded-xl transition-colors ${
                 location === "/"
                   ? "text-primary bg-primary/5 font-semibold"
                   : "text-foreground hover:bg-muted"
@@ -156,7 +156,7 @@ export function Navbar() {
                 <Link
                   key={link.name}
                   href={link.href}
-                  className={`text-base font-medium px-4 py-3 rounded-xl transition-colors ${
+                  className={`text-sm font-medium px-3 py-2.5 rounded-xl transition-colors ${
                     isActive
                       ? "text-primary bg-primary/5 font-semibold"
                       : "text-foreground hover:bg-muted"
@@ -169,7 +169,7 @@ export function Navbar() {
             })}
             <Link
               href="/contact"
-              className={`text-base font-medium px-4 py-3 rounded-xl transition-colors ${
+              className={`text-sm font-medium px-3 py-2.5 rounded-xl transition-colors ${
                 location === "/contact"
                   ? "text-primary bg-primary/5 font-semibold"
                   : "text-foreground hover:bg-muted"
@@ -177,13 +177,13 @@ export function Navbar() {
             >
               Contact
             </Link>
-            <div className="mt-3 pt-4 border-t border-border">
+            <div className="mt-2 pt-3 border-t border-border">
               <Link
                 href="/contact"
-                className="flex items-center justify-center gap-2 w-full bg-primary hover:bg-primary/95 text-white font-semibold py-3.5 rounded-xl text-sm transition-all duration-300"
+                className="flex items-center justify-center gap-2 w-full bg-primary hover:bg-primary/95 text-white font-semibold py-2.5 rounded-xl text-xs uppercase tracking-wider transition-all duration-300"
                 data-testid="btn-mobile-enroll"
               >
-                <Phone className="w-4 h-4" /> Get in touch
+                <Phone className="w-3.5 h-3.5" /> Get in touch
               </Link>
             </div>
           </div>

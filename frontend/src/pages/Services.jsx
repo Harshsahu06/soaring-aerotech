@@ -252,37 +252,30 @@ function ServiceSlider() {
 
 export default function Services() {
   return (
-    <main className="min-h-screen pt-20">
-      <SEO 
+    <main className="min-h-screen pt-16 sm:pt-20">
+      <SEO
         title="Industrial Drone Services & UAV Solutions"
         description="Get centimetre-accurate aerial survey & mapping, solar plant inspections, AI surveillance patrol, agricultural drone missions, and power substation audits in India."
         keywords="aerial mapping, solar thermal inspection, drone GIS survey, power line inspection, drone surveillance India, custom payload development"
       />
       {/* ── Hero ─────────────────────────────────── */}
-      <section className="bg-[#F5F5F5] border-b border-border py-14">
+      <section className="bg-[#F5F5F5] border-b border-border py-8 sm:py-14">
         <div className="container mx-auto px-4 md:px-6">
           <div className="grid lg:grid-cols-2 gap-10 items-center">
             <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}>
-              <div className="section-label">B2B DRONE SERVICES · INDUSTRIAL SOLUTIONS</div>
-              <h1 className="font-display text-4xl md:text-5xl text-foreground leading-tight mb-4">
+              <div className="section-label">INDUSTRIAL SOLUTIONS</div>
+              <h1 className="font-display text-3xl sm:text-4xl md:text-5xl text-foreground leading-tight mb-4">
                 Industrial<br /><span className="text-primary">Drone Services</span>
               </h1>
               <p className="text-muted-foreground text-base max-w-lg mb-6">
                 B2B solutions for government, infrastructure, energy, agriculture, and defence — deployed with precision.
               </p>
-              <div className="flex flex-wrap gap-2">
-                {["Survey & Mapping", "Solar Inspection", "AI Surveillance", "Precision Agriculture", "Infrastructure Audit"].map((t, i) => (
-                  <span key={i} className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white border border-border text-foreground/60 text-xs font-medium">
-                    <CheckCircle className="w-3 h-3 text-primary" /> {t}
-                  </span>
-                ))}
-              </div>
             </motion.div>
             <motion.div
               initial={{ opacity: 0, scale: 0.97 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.1 }}
-              className="relative overflow-hidden rounded-2xl aspect-[4/3] hidden lg:block"
+              className="relative overflow-hidden rounded-2xl aspect-[4/3] mt-8 lg:mt-0 block"
             >
               <img
                 src={imgHighway}
@@ -300,7 +293,7 @@ export default function Services() {
           <div className="flex items-end justify-between mb-10">
             <div>
               <div className="section-label">OUR SERVICES</div>
-              <h2 className="font-display text-3xl md:text-4xl text-foreground">Specialized Solutions</h2>
+              <h2 className="font-display text-2xl sm:text-3xl md:text-4xl text-foreground">Specialized Solutions</h2>
             </div>
             <Link href="/contact" className="hidden md:inline-flex items-center gap-2 text-primary font-bold text-sm">
               Get a Quote <ArrowRight className="w-4 h-4" />
@@ -316,7 +309,7 @@ export default function Services() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
               <div className="section-label">WHY SOARING AEROTECH</div>
-              <h2 className="font-display text-3xl md:text-4xl text-foreground mb-5">
+              <h2 className="font-display text-2xl sm:text-3xl md:text-4xl text-foreground mb-5">
                 Precision You Can Measure
               </h2>
               <p className="text-muted-foreground mb-6 leading-relaxed">
@@ -350,7 +343,7 @@ export default function Services() {
       </section>
 
       {/* ── Client sectors ───────────────────────── */}
-      <section className="py-16 bg-[#F5F5F5] border-y border-border">
+      <section className="py-10 sm:py-16 bg-[#F5F5F5] border-y border-border">
         <div className="container mx-auto px-4 md:px-6">
           <div className="section-label mb-3">CLIENT SECTORS</div>
           <h2 className="font-display text-2xl md:text-3xl text-foreground mb-8">Who We Serve</h2>
@@ -372,7 +365,7 @@ export default function Services() {
       </section>
 
       {/* ── CTA ──────────────────────────────────── */}
-      <section className="relative py-14 overflow-hidden">
+      <section className="relative py-10 sm:py-14 overflow-hidden">
         <div className="absolute inset-0">
           <img
             src="https://images.unsplash.com/photo-1508614589041-895b88991e3e?w=1600&h=500&fit=crop"
@@ -382,7 +375,7 @@ export default function Services() {
           <div className="absolute inset-0 bg-black/65" />
         </div>
         <div className="container mx-auto px-4 md:px-6 relative z-10 text-center">
-          <h2 className="font-display text-3xl md:text-4xl text-white mb-3">Need a Custom Solution?</h2>
+          <h2 className="font-display text-2xl sm:text-3xl md:text-4xl text-white mb-3">Need a Custom Solution?</h2>
           <p className="text-white/50 mb-6 max-w-md mx-auto text-sm">
             Our manufacturing capability means we can build whatever you need.
           </p>

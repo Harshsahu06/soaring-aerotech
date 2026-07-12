@@ -102,7 +102,7 @@ function CourseSlider() {
         {programs.map((p, idx) => (
           <div
             key={idx}
-            className="group relative overflow-hidden rounded-2xl cursor-pointer aspect-[3/4] shrink-0 w-[80vw] max-w-[320px] snap-center"
+            className="group relative overflow-hidden rounded-2xl cursor-pointer aspect-[3/4] shrink-0 w-[60vw] max-w-[220px] snap-center"
             onClick={() => document.getElementById("enroll")?.scrollIntoView({ behavior: "smooth" })}
           >
             <img
@@ -230,7 +230,7 @@ export default function Training() {
       const data = await res.json();
       if (data.success) {
         setEnrollStatus("success");
-        setEnrollForm({ name: "", phone: "", email: "", program: "DGCA RPC — Small Class (₹25,000)", message: "" });
+        setEnrollForm({ name: "", phone: "", email: "", program: "DGCA RPC — Small Class (₹20,000)", message: "" });
       } else {
         setEnrollStatus("error");
       }
@@ -240,7 +240,7 @@ export default function Training() {
   };
 
   return (
-    <main className="min-h-screen pt-20">
+    <main className="min-h-screen pt-16 sm:pt-20">
       <SEO
         title="DGCA Drone Training & Certification"
         description="Become a certified drone pilot in India. Join Soaring Aerotech's DGCA-approved RPTO in Indore. 5-day professional pilot training, RPC valid upto 10 years, and advanced skill courses."
@@ -248,12 +248,12 @@ export default function Training() {
       />
 
       {/* ── Hero ─────────────────────────────────── */}
-      <section className="bg-[#F5F5F5] border-b border-border py-14">
+      <section className="bg-[#F5F5F5] border-b border-border py-8 sm:py-14">
         <div className="container mx-auto px-4 md:px-6">
           <div className="grid lg:grid-cols-2 gap-10 items-center">
             <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}>
               <div className="section-label">DGCA APPROVED RPTO · INDORE, MP</div>
-              <h1 className="font-display text-4xl md:text-5xl text-foreground leading-tight mb-4">
+              <h1 className="font-display text-3xl sm:text-4xl md:text-5xl text-foreground leading-tight mb-4">
                 DGCA Drone Training<br /><span className="text-primary">Get Certified.</span>
               </h1>
               <ul className="space-y-2.5 mb-6 max-w-lg text-muted-foreground text-base">
@@ -288,15 +288,22 @@ export default function Training() {
                 </div>
               </div>
 
-              <div className="flex flex-wrap gap-3 mb-6">
-                <Button size="lg" className="rounded-full h-12 px-7 font-bold" onClick={() => document.getElementById("enroll")?.scrollIntoView({ behavior: "smooth" })}>
+              <div className="flex flex-col sm:flex-row sm:items-stretch gap-3 mb-6 max-w-lg">
+                <Button size="lg" className="rounded-full h-12 sm:h-auto px-7 font-bold w-full sm:w-auto flex-1" onClick={() => document.getElementById("enroll")?.scrollIntoView({ behavior: "smooth" })}>
                   Apply Now <ChevronRight className="w-4 h-4 ml-1" />
                 </Button>
-                <a href="tel:+917869918736">
-                  <Button size="lg" variant="outline" className="rounded-full h-12 px-7 font-semibold border-border text-foreground hover:bg-white">
-                    <Phone className="w-4 h-4 mr-2" /> +91 78699 18736
-                  </Button>
-                </a>
+                <div className="grid grid-cols-2 gap-2 w-full sm:w-auto sm:flex sm:flex-col sm:gap-2">
+                  <a href="tel:+917869955418" className="w-full">
+                    <Button size="sm" variant="outline" className="rounded-full h-10 px-4 text-xs font-semibold border-border text-foreground hover:bg-white w-full flex items-center justify-center">
+                      <Phone className="w-3.5 h-3.5 mr-2 shrink-0" /> +91 78699 55418
+                    </Button>
+                  </a>
+                  <a href="tel:+917869918736" className="w-full">
+                    <Button size="sm" variant="outline" className="rounded-full h-10 px-4 text-xs font-semibold border-border text-foreground hover:bg-white w-full flex items-center justify-center">
+                      <Phone className="w-3.5 h-3.5 mr-2 shrink-0" /> +91 78699 18736
+                    </Button>
+                  </a>
+                </div>
               </div>
               <div className="flex gap-6">
                 {[{ v: "Upto 10 Yrs", l: "RPC Validity" }, { v: "5-7 Days", l: "Duration" }].map((s, i) => (
@@ -311,7 +318,7 @@ export default function Training() {
               initial={{ opacity: 0, scale: 0.97 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.1 }}
-              className="relative overflow-hidden rounded-2xl aspect-[4/3] hidden lg:block"
+              className="relative overflow-hidden rounded-2xl aspect-[4/3] mt-8 lg:mt-0 block"
             >
               <img src={imgField1} alt="Drone pilot training" className="w-full h-full object-cover" />
             </motion.div>
@@ -320,10 +327,10 @@ export default function Training() {
       </section>
 
       {/* ── Pricing cards ────────────────────────── */}
-      <section className="py-20 bg-white border-b border-border">
+      <section className="py-10 sm:py-20 bg-white border-b border-border">
         <div className="container mx-auto px-4 md:px-6">
           <div className="section-label">DGCA CERTIFIED PROGRAM</div>
-          <h2 className="font-display text-3xl md:text-4xl text-foreground mb-8">Remote Pilot Certificate (RPC)</h2>
+          <h2 className="font-display text-2xl sm:text-3xl md:text-4xl text-foreground mb-8">Remote Pilot Certificate (RPC)</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-10">
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="rounded-2xl border-2 border-primary overflow-hidden shadow-sm">
               <div className="relative h-40 overflow-hidden">
@@ -386,7 +393,7 @@ export default function Training() {
       </section>
 
       {/* ── Course structure ─────────────────────── */}
-      <section className="py-20 bg-[#F5F5F5] border-b border-border">
+      <section className="py-10 sm:py-20 bg-[#F5F5F5] border-b border-border">
         <div className="container mx-auto px-4 md:px-6">
           <div className="section-label mb-8">COURSE STRUCTURE</div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
@@ -463,7 +470,7 @@ export default function Training() {
           <div className="flex items-end justify-between mb-10">
             <div>
               <div className="section-label">MORE PROGRAMS</div>
-              <h2 className="font-display text-3xl md:text-4xl text-foreground">Skill Development Courses</h2>
+              <h2 className="font-display text-2xl sm:text-3xl md:text-4xl text-foreground">Skill Development Courses</h2>
             </div>
             <button
               onClick={() => document.getElementById("enroll")?.scrollIntoView({ behavior: "smooth" })}
@@ -489,7 +496,7 @@ export default function Training() {
             </div>
             <div>
               <div className="section-label">CORPORATE & INSTITUTIONAL</div>
-              <h2 className="font-display text-3xl md:text-4xl text-foreground mb-4">Training for Organizations</h2>
+              <h2 className="font-display text-2xl sm:text-3xl md:text-4xl text-foreground mb-4">Training for Organizations</h2>
               <p className="text-muted-foreground mb-6 text-sm">Custom DGCA-aligned batch programs for government bodies, defence, police, and institutions — on-site or at our Indore facility.</p>
               <div className="flex flex-wrap gap-2 mb-8">
                 {["Government", "Army & Defence", "Police Forces", "Universities", "Smart Cities", "Corporates"].map((o, i) => (
@@ -503,7 +510,7 @@ export default function Training() {
       </section>
 
       {/* ── Eligibility & Docs ───────────────────── */}
-      <section className="py-20 bg-[#F5F5F5] border-b border-border">
+      <section className="py-10 sm:py-20 bg-[#F5F5F5] border-b border-border">
         <div className="container mx-auto px-4 md:px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
             <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="bg-white rounded-2xl border border-border p-7">
@@ -549,7 +556,7 @@ export default function Training() {
       <section className="py-20 bg-[#F5F5F5] border-b border-border">
         <div className="container mx-auto px-4 md:px-6">
           <div className="section-label">RPTO IN ACTION</div>
-          <h2 className="font-display text-3xl md:text-4xl text-foreground mb-8">Training Gallery</h2>
+          <h2 className="font-display text-2xl sm:text-3xl md:text-4xl text-foreground mb-8">Training Gallery</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             <div className="relative overflow-hidden rounded-2xl aspect-[4/3] group shadow-sm border border-border">
               <img src={imgField1} alt="Field training session" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
@@ -576,10 +583,10 @@ export default function Training() {
       </section>
 
       {/* ── Enroll form ──────────────────────────── */}
-      <section id="enroll" className="py-20 bg-white">
+      <section id="enroll" className="py-10 sm:py-20 bg-white">
         <div className="container mx-auto px-4 md:px-6">
           <div className="max-w-xl mx-auto">
-            <div className="bg-white rounded-2xl p-8 shadow-lg border-t-4 border-primary border border-border">
+            <div className="bg-white rounded-2xl p-5 sm:p-8 shadow-lg border-t-4 border-primary border border-border">
               <h2 className="font-display text-2xl text-foreground mb-1 text-center">Enrollment Enquiry</h2>
               <p className="text-xs text-muted-foreground text-center mb-7">Our training coordinator will contact you within 24 hours.</p>
 
@@ -594,7 +601,7 @@ export default function Training() {
                 </div>
               ) : (
                 <form className="space-y-4" onSubmit={handleEnrollSubmit}>
-                  <div className="grid grid-cols-2 gap-3">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div>
                       <label className="text-xs font-semibold text-foreground block mb-1.5">Full Name *</label>
                       <input name="name" type="text" required value={enrollForm.name} onChange={handleEnrollChange} className="w-full bg-[#F5F5F5] border border-border rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-primary" placeholder="Your name" />
@@ -611,8 +618,8 @@ export default function Training() {
                   <div>
                     <label className="text-xs font-semibold text-foreground block mb-1.5">Program</label>
                     <select name="program" value={enrollForm.program} onChange={handleEnrollChange} className="w-full bg-[#F5F5F5] border border-border rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-primary appearance-none">
-                      <option>DGCA RPC — Small Class (₹25,000)</option>
-                      <option>DGCA Multirotor (₹35,000)</option>
+                      <option>DGCA RPC — Small Class (₹20,000)</option>
+                      <option>DGCA Multirotor (₹25,000)</option>
                       <option>Mapping & Surveying</option>
                       <option>GIS & Geospatial</option>
                       <option>Thermal & Multispectral</option>

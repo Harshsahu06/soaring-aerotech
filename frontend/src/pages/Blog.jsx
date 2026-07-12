@@ -61,7 +61,7 @@ export default function Blog() {
       />
 
       {/* ── Hero ─────────────────────────────────── */}
-      <section className="relative min-h-[55vh] flex items-center overflow-hidden bg-[#111111]">
+      <section className="relative min-h-[40vh] sm:min-h-[55vh] flex items-center overflow-hidden bg-[#111111]">
         <div className="absolute inset-0">
           <img
             src="https://images.unsplash.com/photo-1508614589041-895b88991e3e?w=1600&h=900&fit=crop"
@@ -70,11 +70,11 @@ export default function Blog() {
           />
           <div className="absolute inset-0 bg-gradient-to-r from-[#111111] via-[#111111]/85 to-[#111111]/50" />
         </div>
-        <div className="container mx-auto px-4 md:px-6 relative z-10 py-24 text-center">
+        <div className="container mx-auto px-4 md:px-6 relative z-10 py-12 sm:py-24 text-center">
           <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary font-mono text-xs mb-6 uppercase tracking-widest">
             <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" /> Drone Industry · Insights
           </motion.div>
-          <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="font-display text-5xl md:text-7xl text-white mb-5 leading-tight">
+          <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="font-display text-3xl sm:text-5xl md:text-7xl text-white mb-5 leading-tight">
             Insights & <span className="text-primary">Resources</span>
           </motion.h1>
           <motion.p initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.18 }} className="text-white/50 text-lg max-w-xl mx-auto">
@@ -83,7 +83,7 @@ export default function Blog() {
         </div>
       </section>
 
-      <section className="py-24 bg-[#F5F5F5]">
+      <section className="py-10 sm:py-24 bg-[#F5F5F5]">
         <div className="container mx-auto px-4 md:px-6">
 
           {/* Featured post */}
@@ -100,9 +100,9 @@ export default function Blog() {
                 <span className="bg-primary text-white text-xs font-bold px-3 py-1.5 rounded-full">{featured.category}</span>
               </div>
             </div>
-            <div className="p-8 md:p-12 flex flex-col justify-center">
+            <div className="p-5 md:p-12 flex flex-col justify-center">
               <div className="text-xs font-mono text-primary uppercase tracking-widest mb-3">Featured Article</div>
-              <h2 className="font-display text-2xl md:text-3xl text-foreground mb-4 leading-tight group-hover:text-primary transition-colors">{featured.title}</h2>
+              <h2 className="font-display text-xl sm:text-2xl md:text-3xl text-foreground mb-4 leading-tight group-hover:text-primary transition-colors">{featured.title}</h2>
               <p className="text-muted-foreground text-sm leading-relaxed mb-6">{featured.excerpt}</p>
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-1.5 text-xs text-muted-foreground font-mono">

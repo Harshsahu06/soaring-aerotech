@@ -197,11 +197,11 @@ export default function Media() {
         keywords="drone startup news, Soaring Aerotech awards, Drone Didi Initiative training, drone technology adoption, aerospace startup India"
       />
       {/* ── Hero ─────────────────────────────────── */}
-      <section className="bg-[#F5F5F5] border-b border-border py-14">
+      <section className="bg-[#F5F5F5] border-b border-border py-8 sm:py-14">
         <div className="container mx-auto px-4 md:px-6">
           <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}>
             <div className="section-label">PRESS · AWARDS · GALLERY</div>
-            <h1 className="font-display text-4xl md:text-5xl text-foreground leading-tight mb-4">
+            <h1 className="font-display text-3xl sm:text-4xl md:text-5xl text-foreground leading-tight mb-4">
               Media & <span className="text-primary">Recognition</span>
             </h1>
             <p className="text-muted-foreground text-base max-w-xl">
@@ -212,11 +212,11 @@ export default function Media() {
       </section>
 
       {/* ── Achievements ─────────────────────────── */}
-      <section className="py-20 bg-white border-b border-border">
+      <section className="py-10 sm:py-20 bg-white border-b border-border">
         <div className="container mx-auto px-4 md:px-6">
-          <div className="mb-14">
+          <div className="mb-10">
             <div className="section-label">ACHIEVEMENTS</div>
-            <h2 className="font-display text-3xl md:text-4xl text-foreground">
+            <h2 className="font-display text-2xl sm:text-3xl md:text-4xl text-foreground">
               Our Journey & Impact
             </h2>
           </div>
@@ -264,11 +264,11 @@ export default function Media() {
       </section>
 
       {/* ── Media Mentions ────────────────────────── */}
-      <section className="py-20 bg-slate-50 border-b border-border">
+      <section className="py-10 sm:py-20 bg-slate-50 border-b border-border">
         <div className="container mx-auto px-4 md:px-6">
           <div className="mb-12">
             <div className="section-label">IN THE PRESS</div>
-            <h2 className="font-display text-3xl md:text-4xl text-foreground">Media Mentions</h2>
+            <h2 className="font-display text-2xl sm:text-3xl md:text-4xl text-foreground">Media Mentions</h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {mediaMentions.map((m, i) => (
@@ -313,11 +313,11 @@ export default function Media() {
       </section>
 
       {/* ── Awards & Recognition ─────────────────── */}
-      <section className="py-20 bg-white border-b border-border">
+      {/* <section className="py-10 sm:py-20 bg-white border-b border-border">
         <div className="container mx-auto px-4 md:px-6">
           <div className="mb-12">
             <div className="section-label">AWARDS</div>
-            <h2 className="font-display text-3xl md:text-4xl text-foreground">Awards & Recognition</h2>
+            <h2 className="font-display text-2xl sm:text-3xl md:text-4xl text-foreground">Awards & Recognition</h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {awards.map((a, i) => (
@@ -355,15 +355,15 @@ export default function Media() {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* ── Photo Gallery Slider ──────────────────── */}
-      <section className="py-20 bg-slate-50 border-t border-border">
+      <section className="py-10 sm:py-20 bg-slate-50 border-t border-border">
         <div className="container mx-auto px-4 md:px-6">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-10">
             <div>
               <div className="section-label">PHOTO GALLERY</div>
-              <h2 className="font-display text-3xl md:text-4xl text-foreground mt-2">
+              <h2 className="font-display text-2xl sm:text-3xl md:text-4xl text-foreground mt-2">
                 Soaring Aerotech in Action
               </h2>
             </div>

@@ -457,7 +457,7 @@ function IndustriesSection() {
           {/* Left: heading + numbered list */}
           <div>
             <div className="section-label">WHO WE SERVE</div>
-            <h2 className="font-display text-4xl md:text-5xl text-foreground mb-8">
+            <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-foreground mb-8">
               Industries We Power
             </h2>
             <div className="divide-y divide-border">
@@ -743,7 +743,7 @@ export default function Home() {
         keywords="drone pilot training, DGCA approved, UAV services, drone manufacturer, agricultural drone, power grid inspection, highway mapping, Central India drone training"
       />
       {/* ── Hero ─────────────────────────────────── */}
-      <section className="relative min-h-screen flex flex-col justify-center items-center pt-32 pb-24 overflow-hidden bg-[#030712] text-white">
+      <section className="relative min-h-[75vh] sm:min-h-screen flex flex-col justify-center items-center pt-24 pb-16 sm:pt-32 sm:pb-24 overflow-hidden bg-[#030712] text-white">
         {/* Background Video */}
         <video
           autoPlay
@@ -781,7 +781,7 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.1 }}
-            className="font-display text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black leading-[1.05] tracking-tight max-w-5xl mb-6 text-white"
+            className="font-display text-3xl sm:text-6xl md:text-7xl lg:text-8xl font-black leading-[1.05] tracking-tight max-w-5xl mb-6 text-white"
           >
             Building the Future of{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-rose-300 to-rose-500 drop-shadow-[0_0_35px_rgba(239,68,68,0.15)]">
@@ -794,33 +794,32 @@ export default function Home() {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-slate-400 text-sm sm:text-base md:text-lg max-w-3xl leading-relaxed mb-12 font-light"
+            className="text-slate-400 text-sm sm:text-base md:text-lg max-w-3xl leading-relaxed mb-6 sm:mb-12 font-light"
           >
             India's premier ecosystem for DGCA-approved drone pilot training,
             enterprise UAV manufacturing, and professional aerial mapping operations.
           </motion.p>
 
-          {/* Action Buttons */}
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="flex flex-wrap items-center justify-center gap-4 mb-20 relative z-20"
+            className="flex flex-row items-center justify-center gap-3 mb-8 sm:mb-20 relative z-20 w-full max-w-sm sm:max-w-none mx-auto"
           >
-            <Link href="/training">
+            <Link href="/training" className="flex-1 sm:w-auto sm:flex-initial">
               <Button
                 size="lg"
-                className="h-12 px-8 rounded-full text-xs font-semibold uppercase tracking-wider bg-primary text-white hover:bg-primary/95 hover:shadow-[0_0_30px_rgba(239,68,68,0.35)] transition-all duration-300 group"
+                className="w-full sm:w-auto h-11 sm:h-12 px-3 sm:px-8 rounded-full text-[10px] sm:text-xs font-semibold uppercase tracking-wider bg-primary text-white hover:bg-primary/95 hover:shadow-[0_0_30px_rgba(239,68,68,0.35)] transition-all duration-300 group flex items-center justify-center"
               >
                 Explore Programs{" "}
-                <ChevronRight className="w-4 h-4 ml-1 group-hover:translate-x-0.5 transition-transform" />
+                <ChevronRight className="w-3.5 h-3.5 ml-1 shrink-0 group-hover:translate-x-0.5 transition-transform" />
               </Button>
             </Link>
-            <Link href="/contact">
+            <Link href="/contact" className="flex-1 sm:w-auto sm:flex-initial">
               <Button
                 size="lg"
                 variant="outline"
-                className="h-12 px-8 rounded-full text-xs font-semibold uppercase tracking-wider border-white/10 text-white bg-white/5 hover:bg-white/10 transition-all duration-300"
+                className="w-full sm:w-auto h-11 sm:h-12 px-3 sm:px-8 rounded-full text-[10px] sm:text-xs font-semibold uppercase tracking-wider border-white/10 text-white bg-white/5 hover:bg-white/10 transition-all duration-300"
               >
                 Partner With Us
               </Button>
@@ -837,7 +836,7 @@ export default function Home() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.2 }}
-          className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 text-slate-500"
+          className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 text-slate-500 hidden sm:block"
         >
           <ArrowDown className="w-5 h-5 animate-bounce" />
         </motion.div>
@@ -884,15 +883,15 @@ export default function Home() {
             {stats.map((s, i) => (
               <div
                 key={i}
-                className="py-14 px-8 text-center group hover:bg-white/5 transition-colors"
+                className="py-8 px-2 sm:py-14 sm:px-8 text-center group hover:bg-white/5 transition-colors"
               >
-                <div className="font-display text-5xl md:text-6xl text-white mb-2 group-hover:text-primary transition-colors">
+                <div className="font-display text-3xl sm:text-5xl md:text-6xl text-white mb-2 group-hover:text-primary transition-colors">
                   <Counter target={s.target} suffix={s.suffix} />
                 </div>
-                <div className="text-white/60 text-sm font-bold uppercase tracking-widest">
+                <div className="text-white/60 text-[10px] sm:text-xs md:text-sm font-bold uppercase tracking-wider md:tracking-widest">
                   {s.label}
                 </div>
-                <div className="text-white/25 text-xs mt-1">{s.sub}</div>
+                <div className="text-white/25 text-[9px] sm:text-xs mt-1 leading-tight">{s.sub}</div>
               </div>
             ))}
           </div>
@@ -905,7 +904,7 @@ export default function Home() {
           <div className="flex items-end justify-between mb-12">
             <div>
               <div className="section-label">WHAT WE DO</div>
-              <h2 className="font-display text-4xl md:text-5xl text-foreground mb-2">
+              <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-foreground mb-2">
                 Four Pillars of Excellence
               </h2>
               <p className="text-muted-foreground text-sm max-w-lg">
@@ -958,7 +957,7 @@ export default function Home() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
               <div className="section-label">UAV MANUFACTURING</div>
-              <h2 className="font-display text-3xl md:text-4xl text-foreground mb-5">
+              <h2 className="font-display text-2xl sm:text-3xl md:text-4xl text-foreground mb-5">
                 50,000 sq ft. Indigenous. Defence-Grade.
               </h2>
               <p className="text-muted-foreground leading-relaxed mb-6">
@@ -1028,7 +1027,7 @@ export default function Home() {
               <img
                 src={imgInnovationLab}
                 alt="R&D Lab"
-                className="w-full h-80 object-cover rounded-3xl"
+                className="w-full h-56 sm:h-80 object-cover rounded-3xl"
               />
               <div className="absolute inset-0 rounded-3xl ring-1 ring-inset ring-white/10" />
             </div>
@@ -1039,7 +1038,7 @@ export default function Home() {
               >
                 INNOVATION LAB
               </div>
-              <h2 className="font-display text-3xl md:text-4xl text-white mb-5">
+              <h2 className="font-display text-2xl sm:text-3xl md:text-4xl text-white mb-5">
                 Research That Creates Technology
               </h2>
               <p className="text-white/50 leading-relaxed mb-6">
@@ -1100,7 +1099,7 @@ export default function Home() {
           <div className="flex items-end justify-between mb-12">
             <div>
               <div className="section-label">CASE STUDIES</div>
-              <h2 className="font-display text-3xl md:text-4xl text-foreground">
+              <h2 className="font-display text-2xl sm:text-3xl md:text-4xl text-foreground">
                 Real Missions. Real Impact.
               </h2>
             </div>
@@ -1148,13 +1147,13 @@ export default function Home() {
       </section>
 
       {/* ── Clients & Collaborations ─────────────── */}
-      <section className="py-20 bg-white border-b border-border">
-        <div className="container mx-auto px-4 md:px-6">
-          <div className="text-center mb-12">
+      <section className="py-12 sm:py-20 bg-white border-b border-border overflow-hidden">
+        <div className="container mx-auto px-4 md:px-6 mb-10">
+          <div className="text-center">
             <div className="section-label justify-center">
               CLIENTS & COLLABORATIONS
             </div>
-            <h2 className="font-display text-3xl md:text-4xl text-foreground mb-3">
+            <h2 className="font-display text-2xl sm:text-3xl md:text-4xl text-foreground mb-3">
               Trusted by Government, Defence & Academia
             </h2>
             <p className="text-muted-foreground text-sm max-w-md mx-auto">
@@ -1162,43 +1161,61 @@ export default function Home() {
               organisations fly with Soaring Aerotech.
             </p>
           </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
-            {partners.map((p, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 12 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.05 }}
-                className="group flex flex-col items-center justify-center gap-3 p-5 rounded-2xl border border-border bg-white hover:border-primary/30 hover:shadow-md transition-all cursor-default min-h-[175px]"
-              >
-                <div className="w-16 h-16 rounded-xl flex items-center justify-center shrink-0 transition-all duration-300 overflow-hidden">
-                  {p.logo ? (
-                    <img
-                      src={p.logo}
-                      alt={p.name}
-                      className="w-full h-full object-contain filter group-hover:scale-105 transition-transform duration-300"
-                    />
-                  ) : (
-                    <div className="w-12 h-12 rounded-xl bg-[#111111] flex items-center justify-center group-hover:bg-primary transition-colors duration-300">
-                      <span className="text-white font-display text-[9px] font-black tracking-tight text-center leading-tight px-1">
-                        {p.name}
-                      </span>
+        </div>
+
+        {/* Marquee Slider */}
+        <div className="relative w-full overflow-hidden">
+          {/* Side Fade Gradients */}
+          <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-r from-white via-white/80 to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-l from-white via-white/80 to-transparent z-10 pointer-events-none" />
+
+          <div
+            className="flex gap-4 w-max py-2"
+            style={{ animation: "partnersMarquee 28s linear infinite" }}
+          >
+            {[...Array(3)].map((_, copy) => (
+              <div key={copy} className="flex gap-4 shrink-0">
+                {partners.map((p, i) => (
+                  <div
+                    key={i}
+                    className="group flex flex-col items-center justify-center gap-3 p-5 rounded-2xl border border-border bg-white hover:border-primary/30 hover:shadow-md transition-all cursor-default w-40 sm:w-44 min-h-[160px] shrink-0"
+                  >
+                    <div className="w-14 h-14 rounded-xl flex items-center justify-center shrink-0 transition-all duration-300 overflow-hidden">
+                      {p.logo ? (
+                        <img
+                          src={p.logo}
+                          alt={p.name}
+                          className="w-full h-full object-contain filter group-hover:scale-105 transition-transform duration-300"
+                        />
+                      ) : (
+                        <div className="w-12 h-12 rounded-xl bg-[#111111] flex items-center justify-center group-hover:bg-primary transition-colors duration-300">
+                          <span className="text-white font-display text-[9px] font-black tracking-tight text-center leading-tight px-1">
+                            {p.name}
+                          </span>
+                        </div>
+                      )}
                     </div>
-                  )}
-                </div>
-                <div className="text-center flex flex-col justify-between flex-1">
-                  <div className="text-[10px] font-bold text-foreground/65 leading-snug">
-                    {p.full}
+                    <div className="text-center flex flex-col justify-between flex-1">
+                      <div className="text-[10px] font-bold text-foreground/65 leading-snug">
+                        {p.full}
+                      </div>
+                      <div className="text-[9px] font-mono text-primary/60 uppercase tracking-widest mt-1">
+                        {p.type}
+                      </div>
+                    </div>
                   </div>
-                  <div className="text-[9px] font-mono text-primary/60 uppercase tracking-widest mt-1">
-                    {p.type}
-                  </div>
-                </div>
-              </motion.div>
+                ))}
+              </div>
             ))}
           </div>
         </div>
+
+        <style>{`
+          @keyframes partnersMarquee {
+            0%   { transform: translateX(0); }
+            100% { transform: translateX(-33.33%); }
+          }
+        `}</style>
       </section>
 
       {/* ── Industries we serve ───────────────────── */}
@@ -1210,7 +1227,7 @@ export default function Home() {
           <div className="flex items-end justify-between">
             <div>
               <div className="section-label">GALLERY</div>
-              <h2 className="font-display text-4xl md:text-5xl text-foreground">
+              <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-foreground">
                 In Action
               </h2>
             </div>
@@ -1234,7 +1251,7 @@ export default function Home() {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 items-start">
             <div>
               <div className="section-label">LEADERSHIP</div>
-              <h2 className="font-display text-3xl md:text-4xl text-foreground mb-4">
+              <h2 className="font-display text-2xl sm:text-3xl md:text-4xl text-foreground mb-4">
                 The Visionaries Behind Soaring
               </h2>
               <p className="text-muted-foreground text-sm">
@@ -1280,7 +1297,7 @@ export default function Home() {
       <section className="py-20 bg-slate-50 border-b border-border">
         <div className="container mx-auto px-4 md:px-6">
           <div className="section-label mb-4">STUDENT SUCCESS</div>
-          <h2 className="font-display text-3xl md:text-4xl text-foreground mb-10">
+          <h2 className="font-display text-2xl sm:text-3xl md:text-4xl text-foreground mb-10">
             What Our Pilots Say
           </h2>
           <div className="flex md:grid overflow-x-auto md:overflow-x-visible snap-x snap-mandatory scrollbar-none -mx-4 px-4 md:mx-0 md:px-0 md:grid-cols-3 gap-5">
@@ -1314,7 +1331,7 @@ export default function Home() {
           <div className="flex items-end justify-between mb-12">
             <div>
               <div className="section-label">MEDIA & PRESS</div>
-              <h2 className="font-display text-3xl md:text-4xl text-foreground">
+              <h2 className="font-display text-2xl sm:text-3xl md:text-4xl text-foreground">
                 In the News
               </h2>
             </div>
@@ -1383,7 +1400,7 @@ export default function Home() {
       </section>
 
       {/* ── CTA ──────────────────────────────────── */}
-      <section className="relative py-24 overflow-hidden">
+      <section className="relative py-14 sm:py-24 overflow-hidden">
         <div className="absolute inset-0">
           <img
             src="https://images.unsplash.com/photo-1571701374025-3eb9abc53de2?w=1800&h=700&fit=crop"
@@ -1395,7 +1412,7 @@ export default function Home() {
         <div className="container mx-auto px-4 md:px-6 relative z-10">
           <div className="flex flex-col md:flex-row items-center justify-between gap-8">
             <div>
-              <h2 className="font-display text-4xl md:text-5xl text-white mb-3">
+              <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-white mb-3">
                 Ready to Join
                 <br />
                 <span className="text-primary">India's Drone</span>
@@ -1407,20 +1424,20 @@ export default function Home() {
                 manufacturing. All from Central India.
               </p>
             </div>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Link href="/training">
+            <div className="flex flex-row gap-3 w-full sm:w-auto max-w-sm">
+              <Link href="/training" className="flex-1 sm:w-auto sm:flex-initial">
                 <Button
                   size="lg"
-                  className="h-14 px-8 rounded-full text-base font-bold"
+                  className="w-full sm:w-auto h-12 sm:h-14 px-4 sm:px-8 rounded-full text-sm sm:text-base font-bold flex items-center justify-center"
                 >
                   Enroll Now
                 </Button>
               </Link>
-              <Link href="/contact">
+              <Link href="/contact" className="flex-1 sm:w-auto sm:flex-initial">
                 <Button
                   size="lg"
                   variant="outline"
-                  className="h-14 px-8 rounded-full text-base font-semibold border-white/20 text-white hover:bg-white/10"
+                  className="w-full sm:w-auto h-12 sm:h-14 px-4 sm:px-8 rounded-full text-sm sm:text-base font-semibold border-white/20 text-white hover:bg-white/10 flex items-center justify-center"
                 >
                   Talk to Expert
                 </Button>
@@ -1435,7 +1452,7 @@ export default function Home() {
               },
               {
                 icon: <Phone className="w-4 h-4 text-primary shrink-0" />,
-                text: "+91 78699 18736",
+                text: "+91 78699 55418 / +91 78699 18736",
               },
               {
                 icon: <ShieldCheck className="w-4 h-4 text-primary shrink-0" />,

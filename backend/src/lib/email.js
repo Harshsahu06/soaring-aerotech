@@ -31,8 +31,8 @@ export async function sendSubmissionEmail(submission) {
   const transporter = getTransporter();
 
   // Create clean email Subject
-  const mailSubject = `New Soaring Aerotech Submission: ${type.toUpperCase()} - ${name}`;
-  
+  const mailSubject = `New Web Form Submission: ${type.toUpperCase()} - ${name}`;
+
   // Build clean HTML content
   let detailsHtml = `
     <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e2e8f0; rounded-lg: 8px;">

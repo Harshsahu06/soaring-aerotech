@@ -44,7 +44,7 @@ export default function Contact() {
       />
 
       {/* ── Hero ─────────────────────────────────── */}
-      <section className="relative min-h-[55vh] flex items-center overflow-hidden bg-[#111111]">
+      <section className="relative min-h-[40vh] sm:min-h-[55vh] flex items-center overflow-hidden bg-[#111111]">
         <div className="absolute inset-0">
           <img
             src="https://images.unsplash.com/photo-1573152143286-0c422b4d2175?w=1600&h=900&fit=crop"
@@ -57,7 +57,7 @@ export default function Contact() {
           <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary font-mono text-xs mb-6 uppercase tracking-widest">
             <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" /> Indore, Madhya Pradesh · India
           </motion.div>
-          <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="font-display text-5xl md:text-7xl text-white mb-5 leading-tight">
+          <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="font-display text-3xl sm:text-5xl md:text-7xl text-white mb-5 leading-tight">
             Get in <span className="text-primary">Touch</span>
           </motion.h1>
           <motion.p initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.18 }} className="text-white/50 text-lg max-w-xl mx-auto">
@@ -66,7 +66,7 @@ export default function Contact() {
         </div>
       </section>
 
-      <section className="py-24 bg-white">
+      <section className="py-10 sm:py-24 bg-white">
         <div className="container mx-auto px-4 md:px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
 
@@ -86,7 +86,8 @@ export default function Contact() {
                     <div className="p-3 rounded-full bg-primary/10 text-primary mt-0.5 shrink-0"><Phone className="w-5 h-5" /></div>
                     <div>
                       <h4 className="font-bold text-foreground mb-1">Phone</h4>
-                      <p className="text-muted-foreground text-sm">
+                      <p className="text-muted-foreground text-sm flex flex-col gap-1">
+                        <a href="tel:+917869955418" className="hover:text-primary transition-colors">+91 78699 55418</a>
                         <a href="tel:+917869918736" className="hover:text-primary transition-colors">+91 78699 18736</a>
                       </p>
                     </div>
@@ -121,7 +122,7 @@ export default function Contact() {
             </motion.div>
 
             {/* Form */}
-            <motion.div initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="bg-white p-8 md:p-10 rounded-3xl border border-border shadow-lg">
+            <motion.div initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="bg-white p-5 md:p-10 rounded-2xl border border-border shadow-lg">
               <div className="section-label mb-6">SEND A MESSAGE</div>
 
               {status === "success" ? (
@@ -167,17 +168,16 @@ export default function Contact() {
                   {status === "error" && (
                     <p className="text-red-500 text-sm">Something went wrong. Please try again or call us directly.</p>
                   )}
-                  <Button type="submit" disabled={status === "loading"} className="w-full h-12 rounded-xl text-base font-bold gap-2">
-                    {status === "loading" ? "Sending..." : <><Send className="w-4 h-4" /> Send Message</>}
-                  </Button>
+                  <div className="flex flex-row gap-3 pt-2">
+                    <Button type="submit" disabled={status === "loading"} className="flex-1 h-12 rounded-xl text-xs sm:text-base font-bold gap-2 flex items-center justify-center">
+                      {status === "loading" ? "Sending..." : <><Send className="w-4 h-4 shrink-0" /> Send Message</>}
+                    </Button>
+                    <a href="https://wa.me/917869918736" target="_blank" rel="noopener noreferrer" className="flex-1 h-12 rounded-xl text-xs sm:text-base font-bold bg-[#25D366] hover:bg-[#1ebe57] text-white transition-colors gap-2 flex items-center justify-center">
+                      <MessageCircle className="w-4 h-4 shrink-0" /> WhatsApp
+                    </a>
+                  </div>
                 </form>
               )}
-
-              <div className="mt-6 pt-6 border-t border-border">
-                <a href="https://wa.me/917869918736" className="inline-flex items-center justify-center w-full h-12 rounded-xl text-base font-bold bg-[#25D366] hover:bg-[#1ebe57] text-white transition-colors gap-2">
-                  <MessageCircle className="w-5 h-5" /> Chat on WhatsApp
-                </a>
-              </div>
             </motion.div>
 
           </div>
@@ -185,7 +185,7 @@ export default function Contact() {
       </section>
 
       {/* ── Visual CTA strip ─────────────────────── */}
-      <section className="relative py-16 overflow-hidden">
+      <section className="relative py-10 sm:py-16 overflow-hidden">
         <div className="absolute inset-0">
           <img src="https://images.unsplash.com/photo-1508614589041-895b88991e3e?w=1600&h=500&fit=crop" alt="" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-black/60" />
@@ -197,9 +197,14 @@ export default function Contact() {
               <h3 className="font-display text-2xl text-white">We respond within <span className="text-primary">24 hours</span></h3>
             </div>
             <div className="flex flex-wrap gap-4">
+              <a href="tel:+917869955418">
+                <Button variant="outline" className="rounded-full px-5 h-12 text-sm font-semibold border-white/20 text-white hover:bg-white/10">
+                  <Phone className="w-4 h-4 mr-2" /> +91 78699 55418
+                </Button>
+              </a>
               <a href="tel:+917869918736">
-                <Button variant="outline" className="rounded-full px-6 h-12 font-semibold border-white/20 text-white hover:bg-white/10">
-                  <Phone className="w-4 h-4 mr-2" /> Call Now
+                <Button variant="outline" className="rounded-full px-5 h-12 text-sm font-semibold border-white/20 text-white hover:bg-white/10">
+                  <Phone className="w-4 h-4 mr-2" /> +91 78699 18736
                 </Button>
               </a>
               <a href="mailto:info@soaringaerotech.com">

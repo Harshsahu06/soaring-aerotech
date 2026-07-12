@@ -103,7 +103,7 @@ export default function Industries() {
   ];
 
   return (
-    <main className="min-h-screen pt-20">
+    <main className="min-h-screen pt-16 sm:pt-20">
       <SEO
         title="Industries We Serve"
         description="Soaring Aerotech provides drone services across 12 major sectors in India, including Agriculture, Solar Energy, Power Utilities, Construction, Smart Cities, and Defense."
@@ -111,11 +111,11 @@ export default function Industries() {
       />
 
       {/* ── Hero ─────────────────────────────────── */}
-      <section className="bg-[#F5F5F5] border-b border-border py-14">
+      <section className="bg-[#F5F5F5] border-b border-border py-8 sm:py-14">
         <div className="container mx-auto px-4 md:px-6">
           <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}>
             <div className="section-label">12 INDUSTRIES · PAN INDIA</div>
-            <h1 className="font-display text-4xl md:text-5xl text-foreground leading-tight mb-4">
+            <h1 className="font-display text-3xl sm:text-4xl md:text-5xl text-foreground leading-tight mb-4">
               Industries We <span className="text-primary">Serve</span>
             </h1>
             <p className="text-muted-foreground text-base max-w-2xl">
@@ -126,31 +126,52 @@ export default function Industries() {
       </section>
 
       {/* ── Industries interactive list ───────────── */}
-      <section className="py-20 bg-white">
+      <section className="py-10 sm:py-20 bg-white">
         <div className="container mx-auto px-4 md:px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
 
             {/* Left: numbered list */}
             <div>
               <div className="section-label">ALL INDUSTRIES</div>
-              <h2 className="font-display text-3xl md:text-4xl text-foreground mb-8">12 Sectors We Serve</h2>
+              <h2 className="font-display text-2xl sm:text-3xl md:text-4xl text-foreground mb-8">12 Sectors We Serve</h2>
               <div className="divide-y divide-border">
                 {industries.map((ind, i) => (
-                  <button key={i} onClick={() => setActive(i)}
-                    className={`w-full flex items-center justify-between py-4 text-left transition-colors ${active === i ? "text-foreground" : "text-foreground/35 hover:text-foreground/65"}`}
-                  >
-                    <div className="flex items-center gap-5">
-                      <span className={`text-xs font-mono tabular-nums ${active === i ? "text-primary" : "text-foreground/20"}`}>{String(i + 1).padStart(2, "0")}</span>
-                      <span className={`font-display text-lg leading-tight ${active === i ? "font-semibold" : "font-normal"}`}>{ind.name}</span>
-                    </div>
-                    <ArrowRight className={`w-4 h-4 shrink-0 transition-opacity ${active === i ? "text-primary opacity-100" : "opacity-0"}`} />
-                  </button>
+                  <div key={i} className="w-full">
+                    <button onClick={() => setActive(active === i ? -1 : i)}
+                      className={`w-full flex items-center justify-between py-4 text-left transition-colors ${active === i ? "text-foreground" : "text-foreground/35 hover:text-foreground/65"}`}
+                    >
+                      <div className="flex items-center gap-5">
+                        <span className={`text-xs font-mono tabular-nums ${active === i ? "text-primary" : "text-foreground/20"}`}>{String(i + 1).padStart(2, "0")}</span>
+                        <span className={`font-display text-lg leading-tight ${active === i ? "font-semibold" : "font-normal"}`}>{ind.name}</span>
+                      </div>
+                      <ArrowRight className={`w-4 h-4 shrink-0 transition-opacity ${active === i ? "text-primary opacity-100" : "opacity-0"}`} />
+                    </button>
+                    
+                    {/* Inline mobile details */}
+                    {active === i && (
+                      <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: "auto" }}
+                        className="block lg:hidden pb-5 pt-1 overflow-hidden"
+                      >
+                        <div className="relative overflow-hidden rounded-2xl aspect-[16/9] mb-3 border border-border">
+                          <img src={ind.img} alt={ind.name} className="w-full h-full object-cover" />
+                        </div>
+                        <p className="text-sm text-muted-foreground leading-relaxed mb-4">{ind.desc}</p>
+                        <div className="flex flex-wrap gap-1.5">
+                          {ind.services.map((s, j) => (
+                            <span key={j} className="px-3 py-1 rounded-full bg-primary/5 border border-primary/10 text-primary text-[10px] font-bold uppercase tracking-wider">{s}</span>
+                          ))}
+                        </div>
+                      </motion.div>
+                    )}
+                  </div>
                 ))}
               </div>
             </div>
 
-            {/* Right: active industry card */}
-            <div className="sticky top-24">
+            {/* Right: active industry card (Desktop only) */}
+            <div className="sticky top-24 hidden lg:block">
               <motion.div key={active} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.35 }}
                 className="relative overflow-hidden rounded-3xl aspect-[4/3]"
               >
@@ -159,13 +180,13 @@ export default function Industries() {
                 <div className="absolute top-5 left-5">
                   <span className="bg-primary text-white text-[10px] font-bold uppercase tracking-wide px-2.5 py-1 rounded">Industry</span>
                 </div>
-                <div className="absolute bottom-0 left-0 right-0 p-8">
+                <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-8">
 
                   <h3 className="font-display text-3xl text-white leading-tight mb-3">{industries[active].name}</h3>
                   <p className="text-white/55 text-sm leading-relaxed mb-5">{industries[active].desc}</p>
                   <div className="flex flex-wrap gap-2">
                     {industries[active].services.map((s, j) => (
-                      <span key={j} className="px-3 py-1 rounded-full bg-white/10 border border-white/15 text-white/75 text-xs">{s}</span>
+                      <span key={j} className="px-3 py-1 rounded-full bg-white/10 border border-white/15 text-white/75 text-[10px] sm:text-xs">{s}</span>
                     ))}
                   </div>
                 </div>
@@ -177,13 +198,13 @@ export default function Industries() {
       </section>
 
       {/* ── CTA ──────────────────────────────────── */}
-      <section className="relative py-14 overflow-hidden">
+      <section className="relative py-10 sm:py-14 overflow-hidden">
         <div className="absolute inset-0">
           <img src="https://images.unsplash.com/photo-1508614589041-895b88991e3e?w=1600&h=500&fit=crop" alt="" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-black/65" />
         </div>
         <div className="container mx-auto px-4 md:px-6 relative z-10 text-center">
-          <h2 className="font-display text-3xl md:text-4xl text-white mb-3">Your Industry Not Listed?</h2>
+          <h2 className="font-display text-2xl sm:text-3xl md:text-4xl text-white mb-3">Your Industry Not Listed?</h2>
           <p className="text-white/50 mb-6 max-w-lg mx-auto text-sm">
             Drone technology is sector-agnostic. Contact us to discuss how UAVs can solve your specific operational challenges.
           </p>

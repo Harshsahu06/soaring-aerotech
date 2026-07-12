@@ -30,13 +30,13 @@ export default function InnovationLab() {
       />
 
       {/* ── Hero ─────────────────────────────────── */}
-      <section className="py-24 bg-[#111111] relative overflow-hidden">
+      <section className="py-12 sm:py-24 bg-[#111111] relative overflow-hidden">
         <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "radial-gradient(circle at 2px 2px,rgba(255,255,255,.8) 1px,transparent 0)", backgroundSize: "28px 28px" }} />
         <div className="container mx-auto px-4 md:px-6 relative z-10 text-center">
           <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary font-mono text-xs mb-5 uppercase tracking-widest">
             <Lightbulb className="w-3.5 h-3.5" /> R&D · Manufacturing · Made in India
           </motion.div>
-          <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="font-display text-5xl md:text-7xl text-white mb-4">
+          <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="font-display text-3xl sm:text-5xl md:text-7xl text-white mb-4">
             Innovation Lab<br /><span className="text-primary">&amp; Manufacturing</span>
           </motion.h1>
           <motion.p initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.18 }} className="text-white/45 max-w-md mx-auto">
@@ -46,11 +46,11 @@ export default function InnovationLab() {
       </section>
 
       {/* ── R&D — hover reveal cards ──────────────── */}
-      <section className="py-24 bg-white">
+      <section className="py-10 sm:py-24 bg-white">
         <div className="container mx-auto px-4 md:px-6">
           <div className="mb-12">
             <div className="section-label">ACTIVE R&D</div>
-            <h2 className="font-display text-3xl md:text-4xl text-foreground">6 Research Projects</h2>
+            <h2 className="font-display text-2xl sm:text-3xl md:text-4xl text-foreground">6 Research Projects</h2>
             <p className="text-muted-foreground mt-2 text-sm">Hover each card to learn more</p>
           </div>
           <div className="flex sm:grid overflow-x-auto sm:overflow-x-visible snap-x snap-mandatory scrollbar-none -mx-4 px-4 sm:mx-0 sm:px-0 sm:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -83,12 +83,12 @@ export default function InnovationLab() {
       </section>
 
       {/* ── Manufacturing ────────────────────────── */}
-      <section className="py-24 bg-[#111111]">
+      <section className="py-10 sm:py-24 bg-[#111111]">
         <div className="container mx-auto px-4 md:px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
             <div>
               <div className="section-label" style={{ color: "rgba(255,255,255,0.3)" }}>UAV MANUFACTURING</div>
-              <h2 className="font-display text-4xl md:text-5xl text-white mb-4">50,000 Sq Ft.<br /><span className="text-primary">Made in India.</span></h2>
+              <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-white mb-4">50,000 Sq Ft.<br /><span className="text-primary">Made in India.</span></h2>
               <p className="text-white/45 text-sm leading-relaxed mb-8">
                 One of Central India's largest drone manufacturing setups — producing indigenous UAVs for commercial, government, and defence with national &amp; international collaborations.
               </p>
@@ -112,13 +112,13 @@ export default function InnovationLab() {
       </section>
 
       {/* ── CTA ──────────────────────────────────── */}
-      <section className="py-20 bg-white border-t border-border text-center">
+      <section className="py-10 sm:py-20 bg-white border-t border-border text-center">
         <div className="container mx-auto px-4 md:px-6">
-          <h2 className="font-display text-3xl md:text-4xl text-foreground mb-4">Collaborate With Us</h2>
+          <h2 className="font-display text-2xl sm:text-3xl md:text-4xl text-foreground mb-4">Collaborate With Us</h2>
           <p className="text-muted-foreground mb-8 max-w-md mx-auto text-sm">College, research institution, or defence agency? Let's build together.</p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/contact"><Button size="lg" className="rounded-full h-13 px-8 text-base font-bold">Discuss Collaboration</Button></Link>
-            <Link href="/training"><Button size="lg" variant="outline" className="rounded-full h-13 px-8 text-base font-semibold">View Training</Button></Link>
+          <div className="flex flex-row gap-3 justify-center w-full max-w-md mx-auto">
+            <Link href="/contact" className="flex-1"><Button size="lg" className="rounded-full h-11 sm:h-13 px-3 sm:px-8 text-xs sm:text-base font-bold w-full">Discuss Collaboration</Button></Link>
+            <Link href="/training" className="flex-1"><Button size="lg" variant="outline" className="rounded-full h-11 sm:h-13 px-3 sm:px-8 text-xs sm:text-base font-semibold w-full">View Training</Button></Link>
           </div>
         </div>
       </section>

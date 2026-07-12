@@ -12,7 +12,7 @@ import photoLalit from "@/assets/lalit.png";
 import photoAditya from "@/assets/aditya.png";
 import photoAbhishek from "@/assets/abhishek.png";
 import photoVaibhav from "@/assets/team-vaibhav.png";
-import photoAlisha from "@/assets/team-alisha.jpg";
+import photoAlisha from "@/assets/team-alisha.png";
 import photoHarsh from "@/assets/team-harsh.jpeg";
 import photoDevendra from "@/assets/team-devendra.jpg";
 import imgStudentTraining from "@/assets/student-training.jpg";
@@ -129,11 +129,7 @@ const teamMembers = [
 ];
 
 const softwareTeam = [
-  {
-    name: "Ms. Alisha Batham",
-    role: "Software Engineer",
-    img: photoAlisha,
-  },
+  
   {
     name: "Mr. Harsh Sahu",
     role: "Software Engineer",
@@ -144,11 +140,16 @@ const softwareTeam = [
     role: "Software Engineer",
     img: photoDevendra,
   },
+  {
+    name: "Ms. Alisha Batham",
+    role: "Software Engineer",
+    img: photoAlisha,
+  },
 ];
 
 export default function About() {
   return (
-    <main className="min-h-screen pt-20">
+    <main className="min-h-screen pt-16 sm:pt-20">
       <SEO
         title="About Us"
         description="Learn more about Soaring Aerotech Pvt. Ltd., Central India's complete drone ecosystem. From DGCA training to commercial UAV services and advanced defence manufacturing."
@@ -156,15 +157,15 @@ export default function About() {
       />
 
       {/* ── Hero ─────────────────────────────────── */}
-      <section className="bg-[#F5F5F5] border-b border-border py-14">
+      <section className="bg-[#F5F5F5] border-b border-border py-8 sm:py-14">
         <div className="container mx-auto px-4 md:px-6">
           <div className="grid lg:grid-cols-2 gap-10 items-center">
             <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}>
               <div className="section-label">OUR STORY</div>
-              <h1 className="font-display text-4xl md:text-5xl text-foreground leading-tight mb-4">
+              <h1 className="font-display text-3xl sm:text-4xl md:text-5xl text-foreground leading-tight mb-4">
                 Central India's Complete<br /><span className="text-primary">Drone Company.</span>
               </h1>
-              <p className="text-muted-foreground text-base max-w-lg mb-6">
+              <p className="text-muted-foreground text-sm sm:text-base max-w-lg mb-6">
                 Training the pilots. Flying the missions. Researching the future. Manufacturing the machines — all from Madhya Pradesh.
               </p>
               <div className="flex flex-wrap gap-2">
@@ -177,7 +178,7 @@ export default function About() {
               initial={{ opacity: 0, scale: 0.97 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.1 }}
-              className="relative overflow-hidden rounded-2xl aspect-[4/3] hidden lg:block"
+              className="relative overflow-hidden rounded-2xl aspect-[4/3] mt-8 lg:mt-0 block"
             >
               <img src={imgAboutHeroTeam} alt="Drone operations" className="w-full h-full object-cover" />
             </motion.div>
@@ -186,16 +187,16 @@ export default function About() {
       </section>
 
       {/* ── Story section ────────────────────────── */}
-      <section className="py-20 bg-white border-b border-border">
+      <section className="py-10 sm:py-20 bg-white border-b border-border">
         <div className="container mx-auto px-4 md:px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12 items-center">
             <div>
               <div className="section-label">OUR STORY</div>
-              <h2 className="font-display text-3xl md:text-4xl text-foreground mb-5">Born in Central India. Built for the World.</h2>
-              <p className="text-muted-foreground leading-relaxed mb-4">
+              <h2 className="font-display text-2xl sm:text-3xl md:text-4xl text-foreground mb-5">Born in Central India. Built for the World.</h2>
+              <p className="text-muted-foreground text-sm sm:text-base leading-relaxed mb-4">
                 Soaring Aerotech was founded with a single mission: build India's most complete drone ecosystem from the ground up. What started as a DGCA training organisation in Indore has grown into a full-cycle company encompassing pilot training, commercial drone services, active R&D, and indigenous UAV manufacturing.
               </p>
-              <p className="text-muted-foreground leading-relaxed mb-6">
+              <p className="text-muted-foreground text-sm sm:text-base leading-relaxed mb-6">
                 Operating from a 50,000 sq ft facility in Madhya Pradesh, we serve government bodies, defence organisations, agriculture firms, solar companies, and infrastructure builders — delivering precision aerial intelligence and purpose-built UAVs.
               </p>
 
@@ -204,7 +205,7 @@ export default function About() {
               <img
                 src={imgDroneFieldDemo}
                 alt="Drone operations"
-                className="w-full h-80 object-cover rounded-3xl shadow-xl"
+                className="w-full h-56 sm:h-80 object-cover rounded-3xl shadow-xl"
               />
             </div>
           </div>
@@ -212,31 +213,31 @@ export default function About() {
       </section>
 
       {/* ── Our Inspiration ──────────────────────── */}
-      <section className="py-20 bg-slate-50 border-b border-border">
+      <section className="py-10 sm:py-20 bg-slate-50 border-b border-border">
         <div className="container mx-auto px-4 md:px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
             <div className="lg:col-span-7">
               <div className="section-label">OUR INSPIRATION</div>
-              <h2 className="font-display text-3xl md:text-4xl text-foreground mb-6">
+              <h2 className="font-display text-2xl sm:text-3xl md:text-4xl text-foreground mb-6">
                 Powered by the Legacy of <br /><span className="text-primary">Prestige Group</span>
               </h2>
-              <div className="flex items-center gap-6 mb-6">
-                <div className="bg-white border border-border rounded-xl p-4 w-40 flex items-center justify-center shrink-0">
+              <div className="flex flex-row items-center gap-4 sm:gap-6 mb-6">
+                <div className="bg-white border border-border rounded-xl p-3 sm:p-4 w-32 sm:w-40 flex items-center justify-center shrink-0">
                   <img src={imgPrestigeLogo} alt="Prestige Group Logo" className="max-h-12 w-auto object-contain" />
                 </div>
                 <div className="text-muted-foreground text-xs font-mono uppercase tracking-wider leading-relaxed">
                   Nurturing Excellence<br />& Innovation
                 </div>
               </div>
-              <p className="text-muted-foreground leading-relaxed mb-4">
+              <p className="text-muted-foreground text-sm sm:text-base leading-relaxed mb-4">
                 Soaring Aerotech proudly operates under the Prestige Group, drawing inspiration from its long-standing commitment to excellence, innovation, and transformative education. The Group's vision of nurturing future-ready talent and fostering technological advancement serves as the foundation of our journey.
               </p>
-              <p className="text-muted-foreground leading-relaxed">
+              <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
                 With this strong legacy behind us, we continue to advance drone technology, aerospace innovation, industry-driven training, and research that creates meaningful impact across industries.
               </p>
             </div>
             <div className="lg:col-span-5 relative">
-              <div className="aspect-[4/3] rounded-3xl overflow-hidden shadow-xl border border-border bg-white">
+              <div className="aspect-[4/3] max-h-[300px] sm:max-h-none rounded-3xl overflow-hidden shadow-xl border border-border bg-white">
                 <img
                   src={imgPrestigeInspiration}
                   alt="Prestige Group Meeting and Inspiration"
@@ -252,7 +253,7 @@ export default function About() {
           <div className="flex items-end justify-between mb-10">
             <div>
               <div className="section-label">FOUR PILLARS</div>
-              <h2 className="font-display text-3xl md:text-4xl text-foreground">Everything We Do</h2>
+              <h2 className="font-display text-2xl sm:text-3xl md:text-4xl text-foreground">Everything We Do</h2>
             </div>
           </div>
           <div className="flex sm:grid overflow-x-auto sm:overflow-x-visible snap-x snap-mandatory scrollbar-none -mx-4 px-4 sm:mx-0 sm:px-0 sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -285,7 +286,7 @@ export default function About() {
           {/* Section Header */}
           <div className="text-center max-w-2xl mx-auto mb-16">
             <div className="section-label justify-center">PEOPLE BEHIND SOARING</div>
-            <h2 className="font-display text-4xl md:text-5xl text-foreground mb-4">
+            <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-foreground mb-4">
               Leadership & Expert Team
             </h2>
             <p className="text-muted-foreground text-sm">
@@ -341,23 +342,23 @@ export default function About() {
               {teamMembers.map((m, i) => (
                 <div
                   key={i}
-                  className="group bg-white rounded-2xl overflow-hidden border border-border shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1 shrink-0 w-[75vw] max-w-[300px] sm:w-auto sm:max-w-none snap-center"
+                  className="group bg-white rounded-2xl overflow-hidden border border-border shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1 shrink-0 w-[60vw] max-w-[220px] sm:w-auto sm:max-w-none snap-center"
                 >
-                  <div className="relative h-64 overflow-hidden bg-slate-100">
+                  <div className="relative h-44 sm:h-64 overflow-hidden bg-slate-100">
                     <img
                       src={m.img}
                       alt={m.name}
                       className="absolute inset-0 w-full h-full object-cover object-top group-hover:scale-105 transition-all duration-500"
                     />
                   </div>
-                  <div className="p-6">
-                    <div className="font-display font-bold text-foreground text-lg leading-tight">
+                  <div className="p-4 sm:p-6">
+                    <div className="font-display font-bold text-foreground text-sm sm:text-lg leading-tight">
                       {m.name}
                     </div>
-                    <div className="text-xs text-primary font-mono tracking-wide mt-1 uppercase">
+                    <div className="text-[10px] sm:text-xs text-primary font-mono tracking-wide mt-1 uppercase">
                       {m.role}
                     </div>
-                    <div className="text-xs text-muted-foreground mt-1 font-medium">
+                    <div className="text-[10px] sm:text-xs text-muted-foreground mt-1 font-medium">
                       Soaring Aerotech Pvt. Ltd.
                     </div>
                   </div>
@@ -371,27 +372,27 @@ export default function About() {
             <h3 className="text-xs font-mono font-bold tracking-widest text-primary uppercase mb-6 text-center">
               Software Department
             </h3>
-            <div className="flex sm:grid overflow-x-auto sm:overflow-x-visible snap-x snap-mandatory scrollbar-none -mx-4 px-4 sm:mx-0 sm:px-0 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-center">
+            <div className="flex sm:grid overflow-x-auto sm:overflow-x-visible snap-x snap-mandatory scrollbar-none -mx-4 px-4 sm:mx-0 sm:px-0 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:justify-center">
               {softwareTeam.map((m, i) => (
                 <div
                   key={i}
-                  className="group bg-white rounded-2xl overflow-hidden border border-border shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1 shrink-0 w-[75vw] max-w-[300px] sm:w-auto sm:max-w-none snap-center"
+                  className="group bg-white rounded-2xl overflow-hidden border border-border shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1 shrink-0 w-[60vw] max-w-[220px] sm:w-auto sm:max-w-none snap-center"
                 >
-                  <div className="relative h-64 overflow-hidden bg-slate-100">
+                  <div className="relative h-44 sm:h-64 overflow-hidden bg-slate-100">
                     <img
                       src={m.img}
                       alt={m.name}
                       className="absolute inset-0 w-full h-full object-cover object-top group-hover:scale-105 transition-all duration-500"
                     />
                   </div>
-                  <div className="p-6">
-                    <div className="font-display font-bold text-foreground text-lg leading-tight">
+                  <div className="p-4 sm:p-6">
+                    <div className="font-display font-bold text-foreground text-sm sm:text-lg leading-tight">
                       {m.name}
                     </div>
-                    <div className="text-xs text-primary font-mono tracking-wide mt-1 uppercase">
+                    <div className="text-[10px] sm:text-xs text-primary font-mono tracking-wide mt-1 uppercase">
                       {m.role}
                     </div>
-                    <div className="text-xs text-muted-foreground mt-1 font-medium">
+                    <div className="text-[10px] sm:text-xs text-muted-foreground mt-1 font-medium">
                       Soaring Aerotech Pvt. Ltd.
                     </div>
                   </div>
@@ -442,7 +443,7 @@ export default function About() {
           <div className="absolute inset-0 bg-black/65" />
         </div>
         <div className="container mx-auto px-4 md:px-6 relative z-10 text-center">
-          <h2 className="font-display text-3xl md:text-4xl text-white mb-3">Ready to be part of India's<br /><span className="text-primary">Drone Revolution?</span></h2>
+          <h2 className="font-display text-2xl sm:text-3xl md:text-4xl text-white mb-3">Ready to be part of India's<br /><span className="text-primary">Drone Revolution?</span></h2>
           <p className="text-white/50 mb-6 max-w-md mx-auto text-sm">Join 500+ certified pilots or bring your enterprise projects to us.</p>
           <div className="flex flex-wrap gap-4 justify-center">
             <Link href="/training"><Button size="lg" className="rounded-full px-8 h-12 font-bold">Get Certified</Button></Link>

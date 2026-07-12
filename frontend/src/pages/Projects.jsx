@@ -58,7 +58,7 @@ export default function Projects() {
   ];
 
   return (
-    <main className="min-h-screen pt-20">
+    <main className="min-h-screen pt-16 sm:pt-20">
       <SEO 
         title="Case Studies & Projects"
         description="Explore Soaring Aerotech's real-world UAV deployments and projects. Read about our highway mapping surveys, solar inspections, surveillance operations, and drone agriculture missions."
@@ -66,11 +66,11 @@ export default function Projects() {
       />
 
       {/* ── Hero ─────────────────────────────────── */}
-      <section className="bg-[#F5F5F5] border-b border-border py-14">
+      <section className="bg-[#F5F5F5] border-b border-border py-8 sm:py-14">
         <div className="container mx-auto px-4 md:px-6">
           <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}>
             <div className="section-label">REAL DEPLOYMENTS · MEASURABLE IMPACT</div>
-            <h1 className="font-display text-4xl md:text-5xl text-foreground leading-tight mb-4">
+            <h1 className="font-display text-3xl sm:text-4xl md:text-5xl text-foreground leading-tight mb-4">
               Mission <span className="text-primary">Archives</span>
             </h1>
             <p className="text-muted-foreground text-base max-w-2xl">
@@ -81,7 +81,7 @@ export default function Projects() {
       </section>
 
       {/* ── Projects ─────────────────────────────── */}
-      <section className="py-24 bg-[#F5F5F5]">
+      <section className="py-10 sm:py-24 bg-[#F5F5F5]">
         <div className="container mx-auto px-4 md:px-6">
           <div className="space-y-12">
             {projects.map((project, i) => (
@@ -91,9 +91,9 @@ export default function Projects() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.05 }}
-                className="grid grid-cols-1 lg:grid-cols-2 gap-0 items-stretch bg-white rounded-3xl overflow-hidden shadow-sm border border-border group hover:shadow-xl transition-shadow"
+                className="grid grid-cols-1 lg:grid-cols-2 gap-0 items-stretch bg-white rounded-2xl sm:rounded-3xl overflow-hidden shadow-sm border border-border group hover:shadow-xl transition-shadow"
               >
-                <div className={`relative min-h-[320px] overflow-hidden ${i % 2 !== 0 ? 'lg:order-2' : ''}`}>
+                <div className={`relative min-h-[220px] lg:min-h-[320px] overflow-hidden ${i % 2 !== 0 ? 'lg:order-2' : ''}`}>
                   <img src={project.img} alt={project.title} className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#111111]/60 to-transparent" />
                   <div className="absolute top-5 left-5">
@@ -111,7 +111,7 @@ export default function Projects() {
                   </div>
                 </div>
 
-                <div className="p-8 md:p-12 flex flex-col justify-center">
+                <div className="p-5 md:p-12 flex flex-col justify-center">
                   <h2 className="font-display text-2xl md:text-3xl text-foreground mb-7">{project.title}</h2>
                   <div className="space-y-5 mb-6">
                     <div>
@@ -134,13 +134,13 @@ export default function Projects() {
       </section>
 
       {/* ── CTA ──────────────────────────────────── */}
-      <section className="relative py-14 overflow-hidden">
+      <section className="relative py-10 sm:py-14 overflow-hidden">
         <div className="absolute inset-0">
           <img src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=1600&h=500&fit=crop" alt="" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-black/65" />
         </div>
         <div className="container mx-auto px-4 md:px-6 relative z-10 text-center">
-          <h2 className="font-display text-3xl md:text-4xl text-white mb-3">Have a Complex Project?</h2>
+          <h2 className="font-display text-2xl sm:text-3xl md:text-4xl text-white mb-3">Have a Complex Project?</h2>
           <p className="text-white/50 mb-6 max-w-lg mx-auto text-sm">
             Whether it's surveillance, mapping, inspection, or a custom UAV solution — contact our team to discuss your specific challenge.
           </p>
