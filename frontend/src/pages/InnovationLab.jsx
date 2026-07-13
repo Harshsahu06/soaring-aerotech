@@ -4,6 +4,7 @@ import SEO from "@/components/SEO";
 import { Lightbulb, Cpu, Brain, Zap, Anchor, Shield, Crosshair, Truck, Factory } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import imgManufacturing from "@/assets/uav-manufacturing.jpg";
+import imgInnovationLab from "@/assets/innovation-lab.jpg";
 
 const rdProjects = [
   { icon: <Zap className="w-6 h-6" />,     title: "Disaster Management UAV",   status: "ACTIVE R&D",   desc: "Flood/fire assessment, search & rescue coordination." },
@@ -52,33 +53,53 @@ export default function InnovationLab() {
           <div className="mb-12">
             <div className="section-label">ACTIVE R&D</div>
             <h2 className="font-display text-2xl sm:text-3xl md:text-4xl text-foreground">6 Research Projects</h2>
-            <p className="text-muted-foreground mt-2 text-sm">Hover each card to learn more</p>
+            <p className="text-muted-foreground mt-2 text-sm">Explore our active research streams below</p>
           </div>
-          <div className="flex sm:grid overflow-x-auto sm:overflow-x-visible snap-x snap-mandatory scrollbar-none -mx-4 px-4 sm:mx-0 sm:px-0 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {rdProjects.map((p, i) => (
-              <div key={i} className="reveal-card relative h-56 rounded-2xl overflow-hidden cursor-pointer border border-border shadow-sm shrink-0 w-[80vw] max-w-[320px] sm:w-auto sm:max-w-none snap-center">
-                {/* Base */}
-                <div className="absolute inset-0 bg-[#F5F5F5] flex flex-col justify-between p-6">
-                  <div className="flex items-start justify-between">
-                    <div className="w-11 h-11 rounded-xl bg-white border border-border flex items-center justify-center text-foreground/45">{p.icon}</div>
-                    <span className="text-xs font-bold font-mono text-muted-foreground bg-white border border-border px-2.5 py-1 rounded-full">{p.status}</span>
-                  </div>
-                  <div>
-                    <h3 className="font-display text-lg text-foreground leading-tight">{p.title}</h3>
-                    <p className="text-xs text-muted-foreground mt-1">{p.desc}</p>
-                  </div>
-                </div>
-                {/* Reveal — uniform dark navy */}
-                <div className="reveal-overlay absolute inset-0 bg-[#111111] flex flex-col justify-between p-6">
-                  <div>
-                    <span className="text-xs font-bold font-mono text-primary/60 uppercase tracking-widest">{p.status}</span>
-                    <h3 className="font-display text-xl text-white mt-2 mb-3">{p.title}</h3>
-                    <p className="text-sm text-white/55 leading-relaxed">{p.desc}</p>
-                  </div>
-                  <Link href="/contact" className="text-primary text-sm font-bold">Collaborate →</Link>
-                </div>
+          
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
+            {/* Left Column: Innovation Lab Facility Image */}
+            <div className="lg:col-span-1 rounded-2xl overflow-hidden border border-border shadow-sm relative group min-h-[320px] lg:min-h-0 flex flex-col justify-between">
+              <img 
+                src={imgInnovationLab} 
+                alt="Soaring Aerotech Innovation Lab" 
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 absolute inset-0"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent flex flex-col justify-end p-6 z-10">
+                <span className="text-primary font-mono text-[10px] uppercase tracking-widest font-bold mb-1">State-of-the-Art facility</span>
+                <h3 className="font-display text-xl text-white font-bold leading-tight">Advanced UAV R&D Lab</h3>
+                <p className="text-white/70 text-xs mt-2 leading-relaxed">
+                  Our advanced prototyping facility equipped with state-of-the-art simulation labs, telemetry analysis consoles, and hardware-in-the-loop testing suites.
+                </p>
               </div>
-            ))}
+            </div>
+
+            {/* Right Column: 6 Research Project Cards in 2 columns */}
+            <div className="lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-5">
+              {rdProjects.map((p, i) => (
+                <div key={i} className="reveal-card relative h-56 rounded-2xl overflow-hidden cursor-pointer border border-border shadow-sm">
+                  {/* Base */}
+                  <div className="absolute inset-0 bg-[#F5F5F5] flex flex-col justify-between p-6">
+                    <div className="flex items-start justify-between">
+                      <div className="w-11 h-11 rounded-xl bg-white border border-border flex items-center justify-center text-foreground/45">{p.icon}</div>
+                      <span className="text-xs font-bold font-mono text-muted-foreground bg-white border border-border px-2.5 py-1 rounded-full">{p.status}</span>
+                    </div>
+                    <div>
+                      <h3 className="font-display text-lg text-foreground leading-tight">{p.title}</h3>
+                      <p className="text-xs text-muted-foreground mt-1">{p.desc}</p>
+                    </div>
+                  </div>
+                  {/* Reveal — uniform dark navy */}
+                  <div className="reveal-overlay absolute inset-0 bg-[#111111] flex flex-col justify-between p-6">
+                    <div>
+                      <span className="text-xs font-bold font-mono text-primary/60 uppercase tracking-widest">{p.status}</span>
+                      <h3 className="font-display text-xl text-white mt-2 mb-3">{p.title}</h3>
+                      <p className="text-sm text-white/55 leading-relaxed">{p.desc}</p>
+                    </div>
+                    <Link href="/contact" className="text-primary text-sm font-bold">Collaborate →</Link>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
