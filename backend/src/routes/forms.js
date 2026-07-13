@@ -71,6 +71,7 @@ router.post("/submit", async (req, res) => {
       subject,
       program,
       message,
+      read: false,
     });
     console.log("✅ Form submission saved successfully to DB, ID:", doc._id);
 

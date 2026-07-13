@@ -13,7 +13,7 @@ const submissionSchema = new mongoose.Schema(
     subject: { type: String },
     program: { type: String },
     message: { type: String },
-    read: { type: Boolean, default: false },
+    read: { type: Boolean },
   },
   { timestamps: true }
 );
