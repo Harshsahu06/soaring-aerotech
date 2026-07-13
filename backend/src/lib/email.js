@@ -22,7 +22,7 @@ export const getTransporter = () => {
 export async function sendSubmissionEmail(submission) {
   const { type, name, phone, email, subject, program, message } = submission;
 
-  const targetEmail = "info@soaringaerotech.com";
+  const targetEmail = "info@soaringaerotech.com, harshsoaring@gmail.com";
   const transporter = getTransporter();
 
   // Create clean email Subject

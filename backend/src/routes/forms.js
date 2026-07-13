@@ -21,7 +21,7 @@ router.get("/test-email", async (req, res) => {
     // Send diagnostic email
     const info = await transporter.sendMail({
       from: `"Soaring Aerotech Diagnostics" <harshsoaring@gmail.com>`,
-      to: "info@soaringaerotech.com",
+      to: "info@soaringaerotech.com, harshsoaring@gmail.com",
       subject: "SMTP Connection Diagnostics Test",
       html: `
         <div style="font-family: sans-serif; padding: 20px; border: 1px solid #e2e8f0; border-radius: 8px;">
