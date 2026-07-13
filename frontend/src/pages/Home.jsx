@@ -470,7 +470,7 @@ function IndustriesSection() {
   return (
     <section className="py-12 sm:py-20 bg-white border-b border-border">
       <div className="container mx-auto px-4 md:px-6">
-        
+
         {/* Header */}
         <div className="text-center md:text-left mb-6 md:mb-12">
           <div className="section-label">WHO WE SERVE</div>
@@ -492,11 +492,10 @@ function IndustriesSection() {
                   className="flex-shrink-0 w-20 flex flex-col items-center snap-center cursor-pointer"
                 >
                   <div
-                    className={`w-14 h-14 rounded-full flex items-center justify-center border transition-all duration-300 relative ${
-                      isActive
+                    className={`w-14 h-14 rounded-full flex items-center justify-center border transition-all duration-300 relative ${isActive
                         ? "border-primary bg-primary/8 text-primary shadow-lg shadow-primary/15 scale-105"
                         : "border-border bg-slate-50 text-foreground/50"
-                    }`}
+                      }`}
                   >
                     {isActive && (
                       <span className="absolute -inset-1 rounded-full border border-primary/20 animate-ping pointer-events-none" />
@@ -506,9 +505,8 @@ function IndustriesSection() {
                     </div>
                   </div>
                   <span
-                    className={`text-center text-[10px] font-display font-semibold mt-2 leading-tight tracking-tight max-w-[75px] transition-colors duration-200 line-clamp-2 ${
-                      isActive ? "text-primary font-bold" : "text-muted-foreground"
-                    }`}
+                    className={`text-center text-[10px] font-display font-semibold mt-2 leading-tight tracking-tight max-w-[75px] transition-colors duration-200 line-clamp-2 ${isActive ? "text-primary font-bold" : "text-muted-foreground"
+                      }`}
                   >
                     {ind.label}
                   </span>
@@ -562,30 +560,26 @@ function IndustriesSection() {
                 <button
                   key={i}
                   onClick={() => setActive(i)}
-                  className={`w-full flex items-center justify-between py-4 text-left transition-colors ${
-                    active === i ? "text-foreground" : "text-foreground/35 hover:text-foreground/65"
-                  }`}
+                  className={`w-full flex items-center justify-between py-4 text-left transition-colors ${active === i ? "text-foreground" : "text-foreground/35 hover:text-foreground/65"
+                    }`}
                 >
                   <div className="flex items-center gap-5">
                     <span
-                      className={`text-xs font-mono tabular-nums ${
-                        active === i ? "text-primary" : "text-foreground/20"
-                      }`}
+                      className={`text-xs font-mono tabular-nums ${active === i ? "text-primary" : "text-foreground/20"
+                        }`}
                     >
                       {String(i + 1).padStart(2, "0")}
                     </span>
                     <span
-                      className={`font-display text-lg leading-tight ${
-                        active === i ? "font-semibold" : "font-normal"
-                      }`}
+                      className={`font-display text-lg leading-tight ${active === i ? "font-semibold" : "font-normal"
+                        }`}
                     >
                       {ind.label}
                     </span>
                   </div>
                   <ArrowRight
-                    className={`w-4 h-4 shrink-0 transition-opacity ${
-                      active === i ? "text-primary opacity-100" : "opacity-0"
-                    }`}
+                    className={`w-4 h-4 shrink-0 transition-opacity ${active === i ? "text-primary opacity-100" : "opacity-0"
+                      }`}
                   />
                 </button>
               ))}
@@ -599,7 +593,7 @@ function IndustriesSection() {
               </Link>
             </div>
           </div>
-          
+
           {/* Right: active image card */}
           <div className="sticky top-24">
             <motion.div
@@ -890,7 +884,7 @@ export default function Home() {
             transition={{ duration: 0.8, delay: 0.1 }}
             className="font-display text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black leading-[1.1] tracking-tight max-w-5xl mb-6 text-white"
           >
-            India's Drone Technology Company Driving{" "}
+            Driving{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-rose-300 to-rose-500 drop-shadow-[0_0_35px_rgba(239,68,68,0.15)]">
               Innovation, Training & Solutions
             </span>
