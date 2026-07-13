@@ -1,4 +1,4 @@
-import { Switch, Route, Router as WouterRouter } from "wouter";
+import { Switch, Route, Router as WouterRouter, useLocation } from "wouter";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -17,14 +17,19 @@ import Media from "@/pages/Media";
 import Blog from "@/pages/Blog";
 import InnovationLab from "@/pages/InnovationLab";
 import Contact from "@/pages/Contact";
+import Login from "@/pages/Login";
+import Admin from "@/pages/Admin";
 import NotFound from "@/pages/not-found";
 
 const queryClient = new QueryClient();
 
 function Router() {
+  const [location] = useLocation();
+  const isAdminOrLogin = location === "/login" || location === "/admin";
+
   return (
     <div className="min-h-screen flex flex-col">
-      <Navbar />
+      {!isAdminOrLogin && <Navbar />}
       <div className="flex-1">
         <Switch>
           <Route path="/" component={Home} />
@@ -37,10 +42,12 @@ function Router() {
           <Route path="/blog" component={Blog} />
           <Route path="/innovation-lab" component={InnovationLab} />
           <Route path="/contact" component={Contact} />
+          <Route path="/login" component={Login} />
+          <Route path="/admin" component={Admin} />
           <Route component={NotFound} />
         </Switch>
       </div>
-      <Footer />
+      {!isAdminOrLogin && <Footer />}
     </div>
   );
 }

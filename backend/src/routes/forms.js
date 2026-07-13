@@ -97,4 +97,39 @@ router.post("/submit", async (req, res) => {
   }
 });
 
+router.get("/submissions", async (req, res) => {
+  try {
+    await connectMongo();
+    const token = req.headers.authorization;
+    if (token !== "Bearer soaring-admin-token-12345") {
+      res.status(401).json({ success: false, error: "Unauthorized access" });
+      return;
+    }
+
+    const list = await Submission.find({}).sort({ createdAt: -1 });
+    res.json({ success: true, data: list });
+  } catch (err) {
+    console.error("❌ Failed to fetch submissions:", err);
+    res.status(500).json({ success: false, error: "Failed to fetch submissions" });
+  }
+});
+
+router.delete("/submissions/:id", async (req, res) => {
+  try {
+    await connectMongo();
+    const token = req.headers.authorization;
+    if (token !== "Bearer soaring-admin-token-12345") {
+      res.status(401).json({ success: false, error: "Unauthorized access" });
+      return;
+    }
+
+    const { id } = req.params;
+    await Submission.findByIdAndDelete(id);
+    res.json({ success: true, message: "Submission deleted successfully" });
+  } catch (err) {
+    console.error("❌ Failed to delete submission:", err);
+    res.status(500).json({ success: false, error: "Failed to delete submission" });
+  }
+});
+
 export default router;
