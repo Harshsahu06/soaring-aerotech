@@ -243,7 +243,7 @@ const pillars = [
       "Tethered Drones",
       "Quantum Research",
     ],
-    img: imgInnovationLab,
+    img: imgAboutInnovatePillar,
     link: "/innovation-lab",
   },
   {
