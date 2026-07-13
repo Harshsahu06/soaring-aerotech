@@ -888,11 +888,11 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.1 }}
-            className="font-display text-3xl sm:text-6xl md:text-7xl lg:text-8xl font-black leading-[1.05] tracking-tight max-w-5xl mb-6 text-white"
+            className="font-display text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black leading-[1.1] tracking-tight max-w-5xl mb-6 text-white"
           >
-            Building the Future of{" "}
+            India's Drone Technology Company Driving{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-rose-300 to-rose-500 drop-shadow-[0_0_35px_rgba(239,68,68,0.15)]">
-              Autonomous Flight.
+              Innovation, Training & Solutions
             </span>
           </motion.h1>
 
@@ -901,10 +901,9 @@ export default function Home() {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-slate-400 text-sm sm:text-base md:text-lg max-w-3xl leading-relaxed mb-6 sm:mb-12 font-light"
+            className="text-slate-400 text-xs sm:text-sm md:text-base max-w-3xl leading-relaxed mb-6 sm:mb-12 font-medium tracking-wide uppercase font-mono"
           >
-            India's premier ecosystem for DGCA-approved drone pilot training,
-            enterprise UAV manufacturing, and professional aerial mapping operations.
+            Research & Development • Manufacturing • DGCA Approved RPTO • Industry Drone Services
           </motion.p>
 
           <motion.div
@@ -913,22 +912,22 @@ export default function Home() {
             transition={{ duration: 0.8, delay: 0.3 }}
             className="flex flex-row items-center justify-center gap-3 mb-8 sm:mb-20 relative z-20 w-full max-w-sm sm:max-w-none mx-auto"
           >
-            <Link href="/training" className="flex-1 sm:w-auto sm:flex-initial">
+            <Link href="/services" className="flex-1 sm:w-auto sm:flex-initial">
               <Button
                 size="lg"
                 className="w-full sm:w-auto h-11 sm:h-12 px-3 sm:px-8 rounded-full text-[10px] sm:text-xs font-semibold uppercase tracking-wider bg-primary text-white hover:bg-primary/95 hover:shadow-[0_0_30px_rgba(239,68,68,0.35)] transition-all duration-300 group flex items-center justify-center"
               >
-                Explore Programs{" "}
+                Explore Services{" "}
                 <ChevronRight className="w-3.5 h-3.5 ml-1 shrink-0 group-hover:translate-x-0.5 transition-transform" />
               </Button>
             </Link>
-            <Link href="/contact" className="flex-1 sm:w-auto sm:flex-initial">
+            <Link href="/training" className="flex-1 sm:w-auto sm:flex-initial">
               <Button
                 size="lg"
                 variant="outline"
-                className="w-full sm:w-auto h-11 sm:h-12 px-3 sm:px-8 rounded-full text-[10px] sm:text-xs font-semibold uppercase tracking-wider border-white/10 text-white bg-white/5 hover:bg-white/10 transition-all duration-300"
+                className="w-full sm:w-auto h-11 sm:h-12 px-3 sm:px-8 rounded-full text-[10px] sm:text-xs font-semibold uppercase tracking-wider border-white/10 text-white bg-white/5 hover:bg-white/10 transition-all duration-300 flex items-center justify-center"
               >
-                Partner With Us
+                Apply for RPTO Training
               </Button>
             </Link>
           </motion.div>
