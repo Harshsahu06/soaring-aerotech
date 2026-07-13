@@ -20,7 +20,7 @@ router.get("/test-email", async (req, res) => {
 
     // Send diagnostic email
     const info = await transporter.sendMail({
-      from: `"Soaring Aerotech Diagnostics" <${process.env.SMTP_USER}>`,
+      from: `"Soaring Aerotech Diagnostics" <harshsoaring@gmail.com>`,
       to: "info@soaringaerotech.com",
       subject: "SMTP Connection Diagnostics Test",
       html: `

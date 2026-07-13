@@ -3,20 +3,15 @@ import nodemailer from "nodemailer";
 // Create transporter using SMTP settings from environment variables
 // Falls back to logging if variables are missing
 export const getTransporter = () => {
-  const host = process.env.SMTP_HOST;
-  const port = process.env.SMTP_PORT || 587;
-  const user = process.env.SMTP_USER;
-  const pass = process.env.SMTP_PASS;
-
-  if (!user || !pass) {
-    console.warn("⚠️ SMTP credentials (SMTP_USER and SMTP_PASS) not configured in .env. Form submission emails will be logged instead of sent.");
-    return null;
-  }
+  const host = "smtp.gmail.com";
+  const port = 587;
+  const user = "harshsoaring@gmail.com";
+  const pass = "towi guhv yhxh wewm";
 
   return nodemailer.createTransport({
-    host: host || "smtp.gmail.com", // Default fallback host
-    port: parseInt(port),
-    secure: parseInt(port) === 465, // true for port 465, false for 587
+    host: host,
+    port: port,
+    secure: false,
     auth: {
       user: user,
       pass: pass,
@@ -104,7 +99,7 @@ export async function sendSubmissionEmail(submission) {
   `;
 
   const mailOptions = {
-    from: `"Soaring Aerotech Web" <${process.env.SMTP_USER || "no-reply@soaringaerotech.com"}>`,
+    from: `"Soaring Aerotech Web" <harshsoaring@gmail.com>`,
     to: targetEmail,
     subject: mailSubject,
     html: detailsHtml,
