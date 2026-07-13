@@ -3,6 +3,7 @@ import { Link } from "wouter";
 import SEO from "@/components/SEO";
 import { Lightbulb, Cpu, Brain, Zap, Anchor, Shield, Crosshair, Truck, Factory } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import imgManufacturing from "@/assets/uav-manufacturing.jpg";
 
 const rdProjects = [
   { icon: <Zap className="w-6 h-6" />,     title: "Disaster Management UAV",   status: "ACTIVE R&D",   desc: "Flood/fire assessment, search & rescue coordination." },
@@ -96,6 +97,13 @@ export default function InnovationLab() {
                 {["50,000 sq ft Facility", "National Collaborations", "International Partnerships", "Made in India", "PLI Aligned"].map((b, i) => (
                   <span key={i} className="px-3 py-1.5 rounded-full border border-white/10 text-white/40 text-xs font-medium">{b}</span>
                 ))}
+              </div>
+              <div className="mt-8 relative overflow-hidden rounded-2xl aspect-[16/10] border border-white/10 group">
+                <img
+                  src={imgManufacturing}
+                  alt="UAV Manufacturing Facility"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                />
               </div>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">

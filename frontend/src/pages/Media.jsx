@@ -9,6 +9,7 @@ import imgWomenEmpowerment from "@/assets/women-empowerment.jpg";
 import imgSkilledWorkforce from "@/assets/skilled-workforce.jpg";
 import imgMediaCoverage from "@/assets/media-coverage.jpg";
 import imgTechAdoption from "@/assets/tech-adoption.jpg";
+import imgManufacturing from "@/assets/uav-manufacturing.jpg";
 import imgDroneSolutions from "@/assets/drone-solutions.jpg";
 import imgIndustryAcademia from "@/assets/industry-academia.jpg";
 import imgRdInnovation from "@/assets/rd-innovation.jpg";
@@ -148,6 +149,7 @@ export default function Media() {
   ];
 
   const galleryItems = [
+    { src: imgManufacturing, label: "Indigenous UAV Manufacturing & Payloads Assembly" },
     { src: imgNflTraining, label: "NFL Corporate Drone Training" },
     { src: imgDroneFieldDemo, label: "DGCA Flight Field Demonstration" },
     { src: imgDroneDidiGroup, label: "Drone Didi Group Training Session" },

@@ -2,7 +2,7 @@ import nodemailer from "nodemailer";
 
 // Create transporter using SMTP settings from environment variables
 // Falls back to logging if variables are missing
-const getTransporter = () => {
+export const getTransporter = () => {
   const host = process.env.SMTP_HOST;
   const port = process.env.SMTP_PORT || 587;
   const user = process.env.SMTP_USER;

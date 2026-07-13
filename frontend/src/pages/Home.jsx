@@ -3,6 +3,14 @@ import { motion, useInView } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
 import SEO from "@/components/SEO";
 import {
+  Tractor,
+  Shield,
+  Map,
+  Sun,
+  Building2,
+  HardHat,
+  Building,
+  Zap,
   ChevronRight,
   ArrowRight,
   ShieldCheck,
@@ -37,6 +45,7 @@ import imgDroneDidiGroup from "@/assets/drone-didi-group.jpg";
 import imgNewsTearGas from "@/assets/news-tear-gas.png";
 import imgNewsForestSecurity from "@/assets/news-forest-security.png";
 import videoDroneDescending from "@/assets/drone_descending.mp4";
+import imgManufacturing from "@/assets/uav-manufacturing.jpg";
 
 import imgSurveillance from "@/assets/surveillance-project.jpg";
 import imgHighway from "@/assets/highway-project.jpg";
@@ -248,7 +257,7 @@ const pillars = [
       "Logistics UAVs",
       "International Collabs",
     ],
-    img: imgTechAdoption,
+    img: imgManufacturing,
     link: "/about",
   },
 ];
@@ -417,70 +426,166 @@ const homeIndustries = [
   {
     label: "Agriculture & Farming",
     img: imgIndustryAgriculture,
+    icon: <Tractor className="w-7 h-7" />,
   },
   {
     label: "Defence & Security",
     img: imgIndustryDefence,
+    icon: <Shield className="w-7 h-7" />,
   },
   {
     label: "Survey & Mapping",
     img: imgIndustrySurvey,
+    icon: <Map className="w-7 h-7" />,
   },
   {
     label: "Solar & Energy",
     img: "https://images.unsplash.com/photo-1509391366360-2e959784a276?w=800&h=1000&fit=crop",
+    icon: <Sun className="w-7 h-7" />,
   },
   {
     label: "Infrastructure",
     img: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=800&h=1000&fit=crop",
+    icon: <Building2 className="w-7 h-7" />,
   },
   {
     label: "Construction",
     img: imgIndustryConstruction,
+    icon: <HardHat className="w-7 h-7" />,
   },
   {
     label: "Government & Smart Cities",
     img: imgIndustryGovt,
+    icon: <Building className="w-7 h-7" />,
   },
   {
     label: "Power & Utilities",
     img: "https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=800&h=1000&fit=crop",
+    icon: <Zap className="w-7 h-7" />,
   },
 ];
 
 function IndustriesSection() {
   const [active, setActive] = useState(0);
   return (
-    <section className="py-20 bg-white border-b border-border">
+    <section className="py-12 sm:py-20 bg-white border-b border-border">
       <div className="container mx-auto px-4 md:px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-          {/* Left: heading + numbered list */}
+        
+        {/* Header */}
+        <div className="text-center md:text-left mb-6 md:mb-12">
+          <div className="section-label">WHO WE SERVE</div>
+          <h2 className="font-display text-2xl sm:text-4xl md:text-5xl text-foreground">
+            Industries We Power
+          </h2>
+        </div>
+
+        {/* Mobile View: Compact circular selector and details */}
+        <div className="block md:hidden overflow-hidden">
+          {/* Horizontal scrollable row of circles */}
+          <div className="flex overflow-x-auto gap-5 pb-4 px-1 scrollbar-none snap-x snap-mandatory mb-4">
+            {homeIndustries.map((ind, i) => {
+              const isActive = active === i;
+              return (
+                <div
+                  key={i}
+                  onClick={() => setActive(i)}
+                  className="flex-shrink-0 w-20 flex flex-col items-center snap-center cursor-pointer"
+                >
+                  <div
+                    className={`w-14 h-14 rounded-full flex items-center justify-center border transition-all duration-300 relative ${
+                      isActive
+                        ? "border-primary bg-primary/8 text-primary shadow-lg shadow-primary/15 scale-105"
+                        : "border-border bg-slate-50 text-foreground/50"
+                    }`}
+                  >
+                    {isActive && (
+                      <span className="absolute -inset-1 rounded-full border border-primary/20 animate-ping pointer-events-none" />
+                    )}
+                    <div className="scale-90">
+                      {ind.icon}
+                    </div>
+                  </div>
+                  <span
+                    className={`text-center text-[10px] font-display font-semibold mt-2 leading-tight tracking-tight max-w-[75px] transition-colors duration-200 line-clamp-2 ${
+                      isActive ? "text-primary font-bold" : "text-muted-foreground"
+                    }`}
+                  >
+                    {ind.label}
+                  </span>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Compact Mobile Active Industry Card */}
+          <motion.div
+            key={active}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3 }}
+            className="bg-slate-50 border border-border rounded-2xl p-4 shadow-sm"
+          >
+            <div className="flex flex-row items-center gap-4">
+              <img
+                src={homeIndustries[active].img}
+                alt={homeIndustries[active].label}
+                className="w-16 h-16 rounded-xl object-cover border border-border shrink-0"
+              />
+              <div>
+                <h3 className="font-display text-base text-foreground font-bold leading-tight">
+                  {homeIndustries[active].label}
+                </h3>
+                <span className="text-[10px] text-primary/75 font-mono uppercase tracking-widest mt-1 block">
+                  Sector {String(active + 1).padStart(2, "0")}
+                </span>
+              </div>
+            </div>
+            <div className="mt-4 flex flex-col gap-3">
+              <p className="text-muted-foreground text-xs leading-relaxed">
+                Empowering the {homeIndustries[active].label} sector through advanced, mission-specific UAV hardware, high-resolution geospatial analytics, and professional training solutions.
+              </p>
+              <Link href="/industries" className="w-full">
+                <Button size="sm" className="w-full rounded-xl text-xs font-bold gap-2">
+                  Explore Sector <ArrowRight className="w-3.5 h-3.5" />
+                </Button>
+              </Link>
+            </div>
+          </motion.div>
+        </div>
+
+        {/* Desktop/Tablet View: Two-column layout (Numbered List + Image) */}
+        <div className="hidden md:grid md:grid-cols-2 gap-12 items-start">
+          {/* Left: numbered list */}
           <div>
-            <div className="section-label">WHO WE SERVE</div>
-            <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-foreground mb-8">
-              Industries We Power
-            </h2>
             <div className="divide-y divide-border">
               {homeIndustries.map((ind, i) => (
                 <button
                   key={i}
                   onClick={() => setActive(i)}
-                  className={`w-full flex items-center justify-between py-4 text-left transition-colors ${active === i ? "text-foreground" : "text-foreground/35 hover:text-foreground/65"}`}
+                  className={`w-full flex items-center justify-between py-4 text-left transition-colors ${
+                    active === i ? "text-foreground" : "text-foreground/35 hover:text-foreground/65"
+                  }`}
                 >
                   <div className="flex items-center gap-5">
                     <span
-                      className={`text-xs font-mono tabular-nums ${active === i ? "text-primary" : "text-foreground/20"}`}
+                      className={`text-xs font-mono tabular-nums ${
+                        active === i ? "text-primary" : "text-foreground/20"
+                      }`}
                     >
                       {String(i + 1).padStart(2, "0")}
                     </span>
                     <span
-                      className={`font-display text-lg leading-tight ${active === i ? "font-semibold" : "font-normal"}`}
+                      className={`font-display text-lg leading-tight ${
+                        active === i ? "font-semibold" : "font-normal"
+                      }`}
                     >
                       {ind.label}
                     </span>
                   </div>
                   <ArrowRight
-                    className={`w-4 h-4 shrink-0 transition-opacity ${active === i ? "text-primary opacity-100" : "opacity-0"}`}
+                    className={`w-4 h-4 shrink-0 transition-opacity ${
+                      active === i ? "text-primary opacity-100" : "opacity-0"
+                    }`}
                   />
                 </button>
               ))}
@@ -494,6 +599,7 @@ function IndustriesSection() {
               </Link>
             </div>
           </div>
+          
           {/* Right: active image card */}
           <div className="sticky top-24">
             <motion.div
@@ -525,6 +631,7 @@ function IndustriesSection() {
             </motion.div>
           </div>
         </div>
+
       </div>
     </section>
   );
@@ -994,10 +1101,10 @@ export default function Home() {
             </div>
             <div className="grid grid-cols-2 gap-3">
               {[
-                "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=500&h=380&fit=crop",
-                "https://images.unsplash.com/photo-1586861635167-e5223aadc9fe?w=500&h=380&fit=crop",
-                "https://images.unsplash.com/photo-1534120247760-c44c3e4a62f1?w=500&h=380&fit=crop",
-                "https://images.unsplash.com/photo-1508614589041-895b88991e3e?w=500&h=380&fit=crop",
+                imgManufacturing,
+                imgSimulationLab,
+                imgExhibitionBooth,
+                imgRdInnovation,
               ].map((img, i) => (
                 <motion.div
                   key={i}

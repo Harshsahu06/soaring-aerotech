@@ -19,6 +19,7 @@ import imgStudentTraining from "@/assets/student-training.jpg";
 import imgDroneSolutions from "@/assets/drone-solutions.jpg";
 import imgRdInnovation from "@/assets/rd-innovation.jpg";
 import imgTechAdoption from "@/assets/tech-adoption.jpg";
+import imgManufacturing from "@/assets/uav-manufacturing.jpg";
 import imgExhibitionBooth from "@/assets/exhibition-booth.jpg";
 import imgDroneFieldDemo from "@/assets/drone-field-demo.jpg";
 import imgAboutHeroTeam from "@/assets/about-hero-team.jpg";
@@ -52,7 +53,7 @@ const pillars = [
   {
     n: "04", tag: "BUILD", icon: <Factory className="w-6 h-6" />, title: "Manufacturing",
     items: ["50,000 sq ft", "Defence Drones", "Logistics UAVs", "Intl. Collabs"],
-    img: imgTechAdoption,
+    img: imgManufacturing,
     desc: "50,000 sq ft state-of-the-art facility producing indigenous UAVs for defence, logistics, and commercial applications.",
     link: "/innovation-lab"
   },
@@ -213,31 +214,35 @@ export default function About() {
       </section>
 
       {/* ── Our Inspiration ──────────────────────── */}
-      <section className="py-10 sm:py-20 bg-slate-50 border-b border-border">
+      <section className="py-8 sm:py-20 bg-slate-50 border-b border-border">
         <div className="container mx-auto px-4 md:px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 items-center">
+            
             <div className="lg:col-span-7">
               <div className="section-label">OUR INSPIRATION</div>
-              <h2 className="font-display text-2xl sm:text-3xl md:text-4xl text-foreground mb-6">
-                Powered by the Legacy of <br /><span className="text-primary">Prestige Group</span>
+              <h2 className="font-display text-xl sm:text-3xl md:text-4xl text-foreground mb-4 sm:mb-6">
+                Powered by the Legacy of <br className="hidden sm:inline" /><span className="text-primary">Prestige Group</span>
               </h2>
-              <div className="flex flex-row items-center gap-4 sm:gap-6 mb-6">
-                <div className="bg-white border border-border rounded-xl p-3 sm:p-4 w-32 sm:w-40 flex items-center justify-center shrink-0">
-                  <img src={imgPrestigeLogo} alt="Prestige Group Logo" className="max-h-12 w-auto object-contain" />
+              
+              <div className="flex items-center gap-3 sm:gap-6 mb-5">
+                <div className="bg-white border border-border rounded-xl p-2 sm:p-3 w-24 sm:w-36 flex items-center justify-center shrink-0">
+                  <img src={imgPrestigeLogo} alt="Prestige Group Logo" className="max-h-8 sm:max-h-12 w-auto object-contain" />
                 </div>
-                <div className="text-muted-foreground text-xs font-mono uppercase tracking-wider leading-relaxed">
+                <div className="text-muted-foreground text-[10px] sm:text-xs font-mono uppercase tracking-wider leading-snug">
                   Nurturing Excellence<br />& Innovation
                 </div>
               </div>
-              <p className="text-muted-foreground text-sm sm:text-base leading-relaxed mb-4">
+              
+              <p className="text-muted-foreground text-xs sm:text-sm md:text-base leading-relaxed mb-3 sm:mb-4">
                 Soaring Aerotech proudly operates under the Prestige Group, drawing inspiration from its long-standing commitment to excellence, innovation, and transformative education. The Group's vision of nurturing future-ready talent and fostering technological advancement serves as the foundation of our journey.
               </p>
-              <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
+              <p className="text-muted-foreground text-xs sm:text-sm md:text-base leading-relaxed">
                 With this strong legacy behind us, we continue to advance drone technology, aerospace innovation, industry-driven training, and research that creates meaningful impact across industries.
               </p>
             </div>
-            <div className="lg:col-span-5 relative">
-              <div className="aspect-[4/3] max-h-[300px] sm:max-h-none rounded-3xl overflow-hidden shadow-xl border border-border bg-white">
+
+            <div className="lg:col-span-5 w-full">
+              <div className="aspect-[16/10] lg:aspect-[4/3] rounded-2xl lg:rounded-3xl overflow-hidden shadow-md border border-border bg-white">
                 <img
                   src={imgPrestigeInspiration}
                   alt="Prestige Group Meeting and Inspiration"
@@ -245,6 +250,7 @@ export default function About() {
                 />
               </div>
             </div>
+
           </div>
         </div>
       </section>

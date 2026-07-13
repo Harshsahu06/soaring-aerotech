@@ -33,10 +33,13 @@ import imgGroup2 from "@/assets/training-group-2.jpg";
 // Local asset imports for skill development courses
 import imgHighway from "@/assets/highway-project.jpg";
 import imgDroneFieldDemo from "@/assets/drone-field-demo.jpg";
+
+const API_BASE = "https://soaring-aerotech-two.vercel.app";
 import imgSolar from "@/assets/solar-project.jpg";
 import imgSimulationLab from "@/assets/simulation-lab-project.jpg";
 import imgAgriculture from "@/assets/agriculture-project.jpg";
 import imgTechAdoption from "@/assets/tech-adoption.jpg";
+import imgManufacturing from "@/assets/uav-manufacturing.jpg";
 import imgExhibitionBooth from "@/assets/exhibition-booth.jpg";
 
 const programs = [
@@ -45,7 +48,7 @@ const programs = [
   { tag: "SKILL COURSE", title: "Thermal & Multispectral", icon: <Cpu className="w-7 h-7" />, duration: "3–4 Days", img: imgSolar, topics: ["Thermal Camera Ops", "NDVI / NDWI", "Solar Inspection", "Power Line Audit", "Crop Imaging", "Report Generation"] },
   { tag: "ADVANCED", title: "AI/ML for Drones", icon: <Brain className="w-7 h-7" />, duration: "5–7 Days", img: imgSimulationLab, topics: ["Computer Vision", "Object Detection", "Autonomous Flight", "Edge Computing", "Mission AI", "Surveillance AI"] },
   { tag: "SKILL COURSE", title: "Precision Agriculture", icon: <Tractor className="w-7 h-7" />, duration: "3–4 Days", img: imgAgriculture, topics: ["Crop Health Mapping", "Precision Spraying", "Irrigation Analysis", "Yield Estimation", "NDVI Reports", "Farm Ops"] },
-  { tag: "SKILL COURSE", title: "Assembly & Maintenance", icon: <Wrench className="w-7 h-7" />, duration: "3–5 Days", img: imgTechAdoption, topics: ["Frame Assembly", "Flight Controller", "ESC Calibration", "Battery Management", "Pre-flight Checks", "Field Repair"] },
+  { tag: "SKILL COURSE", title: "Assembly & Maintenance", icon: <Wrench className="w-7 h-7" />, duration: "3–5 Days", img: imgManufacturing, topics: ["Frame Assembly", "Flight Controller", "ESC Calibration", "Battery Management", "Pre-flight Checks", "Field Repair"] },
   { tag: "ENTREPRENEURSHIP", title: "Drone Entrepreneurship", icon: <TrendingUp className="w-7 h-7" />, duration: "2–3 Days", img: imgExhibitionBooth, topics: ["DGCA Compliance", "Business Models", "Client Acquisition", "Pricing", "Government Tenders", "Scaling"] },
 ];
 
@@ -222,7 +225,7 @@ export default function Training() {
     e.preventDefault();
     setEnrollStatus("loading");
     try {
-      const res = await fetch("/api/forms/submit", {
+      const res = await fetch(`${API_BASE}/api/forms/submit`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ type: "enrollment", ...enrollForm }),

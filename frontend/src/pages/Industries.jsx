@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { Link } from "wouter";
 import SEO from "@/components/SEO";
@@ -125,72 +125,132 @@ export default function Industries() {
         </div>
       </section>
 
-      {/* ── Industries interactive list ───────────── */}
+      {/* ── Industries interactive grid ────────────── */}
       <section className="py-10 sm:py-20 bg-white">
         <div className="container mx-auto px-4 md:px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
-
-            {/* Left: numbered list */}
-            <div>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
+            
+            {/* Left: grid of circles */}
+            <div className="lg:col-span-7 w-full overflow-hidden">
               <div className="section-label">ALL INDUSTRIES</div>
               <h2 className="font-display text-2xl sm:text-3xl md:text-4xl text-foreground mb-8">12 Sectors We Serve</h2>
-              <div className="divide-y divide-border">
-                {industries.map((ind, i) => (
-                  <div key={i} className="w-full">
-                    <button onClick={() => setActive(active === i ? -1 : i)}
-                      className={`w-full flex items-center justify-between py-4 text-left transition-colors ${active === i ? "text-foreground" : "text-foreground/35 hover:text-foreground/65"}`}
+              
+              <div className="flex overflow-x-auto md:grid md:grid-cols-4 lg:grid-cols-3 gap-x-6 md:gap-x-4 gap-y-8 pb-4 md:pb-0 scrollbar-none snap-x snap-mandatory">
+                {industries.map((ind, i) => {
+                  const isActive = active === i;
+                  return (
+                    <div
+                      key={i}
+                      onClick={() => setActive(i)}
+                      className="flex-shrink-0 w-20 md:w-auto flex flex-col items-center group cursor-pointer snap-center"
                     >
-                      <div className="flex items-center gap-5">
-                        <span className={`text-xs font-mono tabular-nums ${active === i ? "text-primary" : "text-foreground/20"}`}>{String(i + 1).padStart(2, "0")}</span>
-                        <span className={`font-display text-lg leading-tight ${active === i ? "font-semibold" : "font-normal"}`}>{ind.name}</span>
-                      </div>
-                      <ArrowRight className={`w-4 h-4 shrink-0 transition-opacity ${active === i ? "text-primary opacity-100" : "opacity-0"}`} />
-                    </button>
-                    
-                    {/* Inline mobile details */}
-                    {active === i && (
-                      <motion.div
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: "auto" }}
-                        className="block lg:hidden pb-5 pt-1 overflow-hidden"
+                      <div
+                        className={`w-14 h-14 sm:w-20 sm:h-20 rounded-full flex items-center justify-center border transition-all duration-300 relative ${
+                          isActive
+                            ? "border-primary bg-primary/8 text-primary shadow-lg shadow-primary/15 scale-105"
+                            : "border-border bg-slate-50 text-foreground/50 group-hover:border-foreground/30 group-hover:text-foreground group-hover:bg-slate-100 group-hover:scale-102"
+                        }`}
                       >
-                        <div className="relative overflow-hidden rounded-2xl aspect-[16/9] mb-3 border border-border">
-                          <img src={ind.img} alt={ind.name} className="w-full h-full object-cover" />
+                        {isActive && (
+                          <span className="absolute -inset-1 rounded-full border border-primary/20 animate-ping pointer-events-none" />
+                        )}
+                        <div className="transition-transform duration-500 group-hover:rotate-12 group-hover:scale-110">
+                          {ind.icon}
                         </div>
-                        <p className="text-sm text-muted-foreground leading-relaxed mb-4">{ind.desc}</p>
-                        <div className="flex flex-wrap gap-1.5">
-                          {ind.services.map((s, j) => (
-                            <span key={j} className="px-3 py-1 rounded-full bg-primary/5 border border-primary/10 text-primary text-[10px] font-bold uppercase tracking-wider">{s}</span>
-                          ))}
-                        </div>
-                      </motion.div>
-                    )}
-                  </div>
-                ))}
+                      </div>
+                      <span
+                        className={`text-center text-[10px] sm:text-xs font-display font-semibold mt-2 md:mt-3 leading-tight tracking-tight max-w-[75px] md:max-w-[110px] transition-colors duration-200 line-clamp-2 md:line-clamp-none ${
+                          isActive ? "text-primary font-bold" : "text-muted-foreground group-hover:text-foreground"
+                        }`}
+                      >
+                        {ind.name}
+                      </span>
+                    </div>
+                  );
+                })}
               </div>
             </div>
 
-            {/* Right: active industry card (Desktop only) */}
-            <div className="sticky top-24 hidden lg:block">
-              <motion.div key={active} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.35 }}
-                className="relative overflow-hidden rounded-3xl aspect-[4/3]"
-              >
-                <img src={industries[active].img} alt={industries[active].name} className="absolute inset-0 w-full h-full object-cover" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/92 via-black/30 to-black/10" />
-                <div className="absolute top-5 left-5">
-                  <span className="bg-primary text-white text-[10px] font-bold uppercase tracking-wide px-2.5 py-1 rounded">Industry</span>
-                </div>
-                <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-8">
+            {/* Right / Bottom: active industry card */}
+            <div className="lg:col-span-5 sticky top-24 w-full">
+              <AnimatePresence mode="wait">
+                {active !== -1 && (
+                  <motion.div
+                    key={active}
+                    initial={{ opacity: 0, y: 15 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -15 }}
+                    transition={{ duration: 0.3 }}
+                    className="bg-slate-50 border border-border rounded-3xl overflow-hidden shadow-md flex flex-col p-4 lg:p-0"
+                  >
+                    {/* Mobile layout (flex-row for title & thumbnail, compact spacing) */}
+                    <div className="flex flex-row items-center gap-4 lg:hidden">
+                      <img
+                        src={industries[active].img}
+                        alt={industries[active].name}
+                        className="w-16 h-16 rounded-xl object-cover border border-border shrink-0"
+                      />
+                      <div>
+                        <h3 className="font-display text-lg text-foreground font-bold">
+                          {industries[active].name}
+                        </h3>
+                        <div className="flex flex-wrap gap-1 mt-1">
+                          {industries[active].services.slice(0, 2).map((s, j) => (
+                            <span key={j} className="text-[9px] px-2 py-0.5 rounded bg-white border border-border text-foreground/60">
+                              {s}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
 
-                  <h3 className="font-display text-3xl text-white leading-tight mb-3">{industries[active].name}</h3>
-                  <p className="text-white/55 text-sm leading-relaxed mb-5">{industries[active].desc}</p>
-                  <div className="flex flex-wrap gap-2">
-                    {industries[active].services.map((s, j) => (
-                      <span key={j} className="px-3 py-1 rounded-full bg-white/10 border border-white/15 text-white/75 text-[10px] sm:text-xs">{s}</span>
-                    ))}
-                  </div>
-                </div>
-              </motion.div>
+                    {/* Desktop layout (large image, absolute title) */}
+                    <div className="hidden lg:block relative overflow-hidden aspect-[4/3] w-full rounded-t-3xl">
+                      <img
+                        src={industries[active].img}
+                        alt={industries[active].name}
+                        className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
+                      <div className="absolute bottom-4 left-4 right-4">
+                        <h3 className="font-display text-2xl text-white font-bold">
+                          {industries[active].name}
+                        </h3>
+                      </div>
+                    </div>
+
+                    {/* Description & Rest of Info */}
+                    <div className="mt-3 lg:mt-0 lg:p-6">
+                      <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed mb-4 lg:mb-6">
+                        {industries[active].desc}
+                      </p>
+                      
+                      {/* Desktop only full services list */}
+                      <div className="hidden lg:block mb-6">
+                        <div className="text-[10px] font-mono font-bold tracking-widest text-primary uppercase mb-3">
+                          Key Solutions & Services
+                        </div>
+                        <div className="flex flex-wrap gap-2">
+                          {industries[active].services.map((s, j) => (
+                            <span
+                              key={j}
+                              className="px-3.5 py-1.5 rounded-full bg-white border border-border text-foreground/75 text-xs font-medium shadow-sm hover:border-primary/30 transition-colors"
+                            >
+                              {s}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                      
+                      <Link href="/contact" className="w-full block">
+                        <Button className="w-full rounded-xl h-10 lg:h-12 text-xs lg:text-sm font-bold gap-2">
+                          Enquire for {industries[active].name} <ArrowRight className="w-4 h-4" />
+                        </Button>
+                      </Link>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
 
           </div>
