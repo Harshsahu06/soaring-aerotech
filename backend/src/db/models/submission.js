@@ -4,7 +4,7 @@ const submissionSchema = new mongoose.Schema(
   {
     type: {
       type: String,
-      enum: ["contact", "enrollment"],
+      enum: ["contact", "enrollment", "training"],
       required: true,
     },
     name: { type: String, required: true },
@@ -13,6 +13,7 @@ const submissionSchema = new mongoose.Schema(
     subject: { type: String },
     program: { type: String },
     message: { type: String },
+    read: { type: Boolean, default: false },
   },
   { timestamps: true }
 );

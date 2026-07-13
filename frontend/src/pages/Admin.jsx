@@ -3,7 +3,7 @@ import { useLocation } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
   LogOut, Trash2, Copy, Phone, Mail, Search, MessageCircle, Calendar, 
-  Filter, Check, RefreshCw, Clipboard, User, FileText, ArrowUpRight 
+  Check, RefreshCw, Clipboard, User, Bell, CheckCircle2 
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -15,7 +15,7 @@ export default function Admin() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [search, setSearch] = useState("");
-  const [activeTab, setActiveTab] = useState("all"); // all, contact, training
+  const [activeTab, setActiveTab] = useState("all"); // all, new, contact, training
   const [copiedId, setCopiedId] = useState(null);
   const [deletingId, setDeletingId] = useState(null);
   const [, setLocation] = useLocation();
@@ -69,7 +69,9 @@ export default function Admin() {
     let result = submissions;
 
     // Tab filter
-    if (activeTab !== "all") {
+    if (activeTab === "new") {
+      result = result.filter(sub => !sub.read);
+    } else if (activeTab !== "all") {
       result = result.filter(sub => sub.type === activeTab);
     }
 
@@ -94,6 +96,7 @@ export default function Admin() {
     const text = `
 Lead Details:
 -----------------------------
+Status: ${sub.read ? "READ" : "NEW/UNREAD"}
 Type: ${sub.type.toUpperCase()}
 Name: ${sub.name}
 Phone: ${sub.phone}
@@ -108,6 +111,27 @@ Message: ${sub.message || "N/A"}
     navigator.clipboard.writeText(text);
     setCopiedId(sub._id);
     setTimeout(() => setCopiedId(null), 2000);
+  };
+
+  // Update lead read/unread status
+  const handleMarkRead = async (id, readStatus = true) => {
+    const token = localStorage.getItem("soaring_admin_token");
+    try {
+      const res = await fetch(`${API_BASE}/api/forms/submissions/${id}/read`, {
+        method: "PUT",
+        headers: {
+          "Authorization": `Bearer ${token}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ read: readStatus })
+      });
+      const data = await res.json();
+      if (data.success) {
+        setSubmissions(prev => prev.map(sub => sub._id === id ? { ...sub, read: readStatus } : sub));
+      }
+    } catch (err) {
+      console.error("Failed to update status", err);
+    }
   };
 
   // Delete submission
@@ -136,6 +160,7 @@ Message: ${sub.message || "N/A"}
 
   // Count leads by category
   const countTotal = submissions.length;
+  const countNew = submissions.filter(s => !s.read).length;
   const countContact = submissions.filter(s => s.type === "contact").length;
   const countTraining = submissions.filter(s => s.type === "training").length;
 
@@ -177,18 +202,19 @@ Message: ${sub.message || "N/A"}
       <main className="flex-1 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8">
         
         {/* Stats Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
           {[
-            { label: "Total Leads", count: countTotal, color: "from-primary/25 to-primary/5", border: "border-primary/20", icon: <Clipboard className="w-5 h-5 text-primary" /> },
-            { label: "Contact Enquiries", count: countContact, color: "from-blue-500/20 to-blue-500/5", border: "border-blue-500/10", icon: <Mail className="w-5 h-5 text-blue-400" /> },
-            { label: "Training Enrolments", count: countTraining, color: "from-emerald-500/20 to-emerald-500/5", border: "border-emerald-500/10", icon: <User className="w-5 h-5 text-emerald-400" /> }
+            { label: "Total Leads", count: countTotal, color: "from-primary/20 to-primary/5", border: "border-primary/10", icon: <Clipboard className="w-5 h-5 text-primary" /> },
+            { label: "New Leads", count: countNew, color: "from-blue-500/20 to-blue-500/5", border: "border-blue-500/10", icon: <Bell className={`w-5 h-5 text-blue-400 ${countNew > 0 ? "animate-bounce" : ""}`} />, highlight: countNew > 0 },
+            { label: "Contact Us", count: countContact, color: "from-slate-500/10 to-slate-500/5", border: "border-white/5", icon: <Mail className="w-5 h-5 text-white/60" /> },
+            { label: "Training Programs", count: countTraining, color: "from-emerald-500/20 to-emerald-500/5", border: "border-emerald-500/10", icon: <User className="w-5 h-5 text-emerald-400" /> }
           ].map((stat, i) => (
-            <div key={i} className={`p-6 rounded-2xl bg-gradient-to-br ${stat.color} border ${stat.border} shadow-lg backdrop-blur-md flex items-center justify-between`}>
+            <div key={i} className={`p-5 rounded-2xl bg-gradient-to-br ${stat.color} border ${stat.border} shadow-lg backdrop-blur-md flex items-center justify-between transition-transform hover:scale-[1.01]`}>
               <div>
-                <p className="text-white/40 text-xs font-mono uppercase tracking-wider">{stat.label}</p>
-                <h3 className="text-3xl font-extrabold text-white mt-1">{stat.count}</h3>
+                <p className="text-white/40 text-[10px] sm:text-xs font-mono uppercase tracking-wider">{stat.label}</p>
+                <h3 className={`text-2xl sm:text-3xl font-extrabold mt-1 ${stat.highlight ? "text-blue-400" : "text-white"}`}>{stat.count}</h3>
               </div>
-              <div className="p-3.5 rounded-xl bg-white/5 border border-white/5">
+              <div className="p-2.5 rounded-xl bg-white/5 border border-white/5 shrink-0 ml-2">
                 {stat.icon}
               </div>
             </div>
@@ -198,16 +224,23 @@ Message: ${sub.message || "N/A"}
         {/* Filter Toolbar */}
         <div className="flex flex-col md:flex-row gap-4 justify-between items-center mb-6 bg-[#0f0f13] border border-white/5 p-4 rounded-2xl backdrop-blur-md">
           {/* Tabs */}
-          <div className="flex gap-1.5 bg-white/5 p-1 rounded-xl w-full md:w-auto">
+          <div className="flex gap-1 bg-white/5 p-1 rounded-xl w-full md:w-auto overflow-x-auto">
             {[
-              { id: "all", label: "All Leads" },
+              { id: "all", label: "All" },
+              { id: "new", label: `Unread (${countNew})` },
               { id: "contact", label: "Contact Us" },
               { id: "training", label: "Training" }
             ].map(tab => (
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all w-full md:w-auto ${activeTab === tab.id ? "bg-primary text-white shadow-md" : "text-white/60 hover:text-white"}`}
+                className={`px-3.5 py-2 rounded-lg text-xs font-bold transition-all whitespace-nowrap w-full md:w-auto ${
+                  activeTab === tab.id 
+                    ? tab.id === "new" 
+                      ? "bg-blue-600 text-white shadow-md"
+                      : "bg-primary text-white shadow-md" 
+                    : "text-white/60 hover:text-white"
+                }`}
               >
                 {tab.label}
               </button>
@@ -254,18 +287,30 @@ Message: ${sub.message || "N/A"}
                   initial={{ opacity: 0, scale: 0.98 }}
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.98 }}
-                  className="bg-[#0f0f13] border border-white/5 rounded-2xl p-5 hover:border-white/10 transition-colors shadow-lg flex flex-col justify-between"
+                  className={`bg-[#0f0f13] border rounded-2xl p-5 hover:border-white/15 transition-all shadow-lg flex flex-col justify-between relative overflow-hidden ${
+                    !sub.read 
+                      ? "border-l-4 border-l-blue-500 border-white/10 ring-1 ring-blue-500/20" 
+                      : "border-white/5"
+                  }`}
                 >
                   <div>
                     {/* Header */}
                     <div className="flex items-center justify-between mb-3.5">
-                      <span className={`px-2.5 py-0.5 rounded-full font-mono text-[9px] uppercase tracking-widest font-bold ${
-                        sub.type === "training" 
-                          ? "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20" 
-                          : "bg-blue-500/10 text-blue-400 border border-blue-500/20"
-                      }`}>
-                        {sub.type}
-                      </span>
+                      <div className="flex items-center gap-2">
+                        <span className={`px-2.5 py-0.5 rounded-full font-mono text-[9px] uppercase tracking-widest font-bold ${
+                          sub.type === "training" 
+                            ? "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20" 
+                            : "bg-slate-500/10 text-white/80 border border-white/10"
+                        }`}>
+                          {sub.type === "training" ? "Training" : "Contact Query"}
+                        </span>
+                        {!sub.read && (
+                          <span className="px-2 py-0.5 rounded-full text-[9px] bg-blue-500/20 text-blue-300 border border-blue-400/30 animate-pulse font-bold tracking-wider">
+                            NEW
+                          </span>
+                        )}
+                      </div>
+                      
                       <span className="text-white/30 text-xs flex items-center gap-1 font-mono">
                         <Calendar className="w-3.5 h-3.5" />
                         {new Date(sub.createdAt).toLocaleDateString("en-IN", { 
@@ -275,17 +320,31 @@ Message: ${sub.message || "N/A"}
                     </div>
 
                     {/* Lead Bio info */}
-                    <h4 className="text-base font-bold text-white mb-2">{sub.name}</h4>
+                    <h4 className="text-base font-bold text-white mb-2 flex items-center gap-2">
+                      {sub.name}
+                    </h4>
                     
                     <div className="space-y-1.5 text-xs text-white/60 mb-4 font-mono">
                       <p className="flex items-center gap-2">
                         <span className="text-white/20">Phone:</span>
-                        <a href={`tel:${sub.phone}`} className="hover:text-primary transition-colors text-white/80">{sub.phone}</a>
+                        <a 
+                          href={`tel:${sub.phone}`} 
+                          onClick={() => handleMarkRead(sub._id, true)}
+                          className="hover:text-primary transition-colors text-white/80"
+                        >
+                          {sub.phone}
+                        </a>
                       </p>
                       <p className="flex items-center gap-2">
                         <span className="text-white/20">Email:</span>
                         {sub.email ? (
-                          <a href={`mailto:${sub.email}`} className="hover:text-primary transition-colors text-white/80">{sub.email}</a>
+                          <a 
+                            href={`mailto:${sub.email}`} 
+                            onClick={() => handleMarkRead(sub._id, true)}
+                            className="hover:text-primary transition-colors text-white/80"
+                          >
+                            {sub.email}
+                          </a>
                         ) : (
                           <span className="text-white/30">N/A</span>
                         )}
@@ -293,7 +352,9 @@ Message: ${sub.message || "N/A"}
                       {sub.program && (
                         <p className="flex items-start gap-2">
                           <span className="text-white/20 shrink-0">Course:</span>
-                          <span className="text-emerald-400 font-bold font-sans bg-emerald-500/5 px-2 py-0.5 rounded border border-emerald-500/10 inline-block">{sub.program}</span>
+                          <span className="text-emerald-400 font-bold font-sans bg-emerald-500/5 px-2 py-0.5 rounded border border-emerald-500/10 inline-block">
+                            {sub.program}
+                          </span>
                         </p>
                       )}
                       {sub.subject && (
@@ -320,6 +381,7 @@ Message: ${sub.message || "N/A"}
                         href={`https://wa.me/91${sub.phone.replace(/[^0-9]/g, "")}`}
                         target="_blank"
                         rel="noopener noreferrer"
+                        onClick={() => handleMarkRead(sub._id, true)}
                         className="p-2 text-emerald-400 hover:text-white rounded-lg bg-emerald-500/5 border border-emerald-500/10 hover:bg-emerald-500/10 transition-colors flex items-center justify-center"
                         title="Chat on WhatsApp"
                       >
@@ -327,6 +389,7 @@ Message: ${sub.message || "N/A"}
                       </a>
                       <a 
                         href={`tel:${sub.phone}`}
+                        onClick={() => handleMarkRead(sub._id, true)}
                         className="p-2 text-blue-400 hover:text-white rounded-lg bg-blue-500/5 border border-blue-500/10 hover:bg-blue-500/10 transition-colors flex items-center justify-center"
                         title="Direct Call"
                       >
@@ -334,18 +397,36 @@ Message: ${sub.message || "N/A"}
                       </a>
                     </div>
 
-                    {/* Copy/Delete utility */}
+                    {/* Copy/Delete/Read utility */}
                     <div className="flex gap-1.5 items-center">
+                      {!sub.read ? (
+                        <button
+                          onClick={() => handleMarkRead(sub._id, true)}
+                          className="p-2 text-blue-400 hover:text-white rounded-lg bg-blue-500/5 border border-blue-500/10 hover:bg-blue-500/10 transition-colors flex items-center justify-center"
+                          title="Mark as Read"
+                        >
+                          <Check className="w-4 h-4" />
+                        </button>
+                      ) : (
+                        <button
+                          onClick={() => handleMarkRead(sub._id, false)}
+                          className="p-2 text-white/30 hover:text-white/60 rounded-lg transition-colors flex items-center justify-center"
+                          title="Mark as Unread"
+                        >
+                          <CheckCircle2 className="w-4 h-4" />
+                        </button>
+                      )}
+
                       <button
                         onClick={() => handleCopyDetails(sub)}
-                        className={`p-2 rounded-lg transition-colors border flex items-center gap-1.5 text-xs ${
+                        className={`px-2.5 py-2 rounded-lg transition-all border flex items-center gap-1 text-xs font-semibold ${
                           copiedId === sub._id 
                             ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/20" 
                             : "bg-white/5 text-white/50 border-white/5 hover:text-white hover:bg-white/10"
                         }`}
                         title="Copy Details"
                       >
-                        {copiedId === sub._id ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
+                        <Copy className="w-3 h-3" />
                         {copiedId === sub._id ? "Copied" : "Copy"}
                       </button>
 
