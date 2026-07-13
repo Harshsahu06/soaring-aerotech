@@ -46,7 +46,7 @@ export default function Contact() {
       />
 
       {/* ── Hero ─────────────────────────────────── */}
-      <section className="relative min-h-[40vh] sm:min-h-[55vh] flex items-center overflow-hidden bg-[#111111]">
+      <section className="relative min-h-[25vh] sm:min-h-[45vh] flex items-center overflow-hidden bg-[#111111]">
         <div className="absolute inset-0">
           <img
             src="https://images.unsplash.com/photo-1573152143286-0c422b4d2175?w=1600&h=900&fit=crop"
@@ -55,35 +55,35 @@ export default function Contact() {
           />
           <div className="absolute inset-0 bg-gradient-to-r from-[#111111] via-[#111111]/85 to-[#111111]/50" />
         </div>
-        <div className="container mx-auto px-4 md:px-6 relative z-10 py-24 text-center">
-          <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary font-mono text-xs mb-6 uppercase tracking-widest">
+        <div className="container mx-auto px-4 md:px-6 relative z-10 py-10 sm:py-16 text-center">
+          <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} className="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full bg-primary/10 border border-primary/20 text-primary font-mono text-[10px] sm:text-xs mb-3 sm:mb-4 uppercase tracking-widest">
             <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" /> Indore, Madhya Pradesh · India
           </motion.div>
-          <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="font-display text-3xl sm:text-5xl md:text-7xl text-white mb-5 leading-tight">
+          <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="font-display text-2xl sm:text-5xl md:text-7xl text-white mb-3 leading-tight">
             Get in <span className="text-primary">Touch</span>
           </motion.h1>
-          <motion.p initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.18 }} className="text-white/50 text-lg max-w-xl mx-auto">
+          <motion.p initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.18 }} className="text-white/50 text-xs sm:text-lg max-w-xl mx-auto">
             Whether you want to enroll in a course, discuss an enterprise project, or explore academic partnerships — we're ready to talk.
           </motion.p>
         </div>
       </section>
 
-      <section className="py-10 sm:py-24 bg-white">
+      <section className="py-6 sm:py-24 bg-white">
         <div className="container mx-auto px-4 md:px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16">
 
             {/* Contact Info */}
-            <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="space-y-6">
+            <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="space-y-4 sm:space-y-6">
               <div>
-                <div className="section-label mb-6">CONTACT INFORMATION</div>
-                <div className="space-y-3 sm:space-y-4">
+                <div className="section-label mb-4 sm:mb-6">CONTACT INFORMATION</div>
+                <div className="space-y-2 sm:space-y-4">
                   <div className="flex items-start gap-3 sm:gap-4 p-4 sm:p-6 rounded-2xl bg-[#F5F5F5] border border-border hover:border-primary/20 transition-colors">
-                    <div className="p-2.5 sm:p-3 rounded-full bg-primary/10 text-primary mt-0.5 shrink-0">
-                      <MapPin className="w-4 h-4 sm:w-5 sm:h-5" />
+                    <div className="p-2 sm:p-3 rounded-full bg-primary/10 text-primary mt-0.5 shrink-0">
+                      <MapPin className="w-3.5 h-3.5 sm:w-5 sm:h-5" />
                     </div>
                     <div>
-                      <h4 className="font-bold text-sm sm:text-base text-foreground mb-0.5 sm:mb-1">Headquarters</h4>
-                      <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed">
+                      <h4 className="font-bold text-xs sm:text-base text-foreground mb-0.5 sm:mb-1">Headquarters</h4>
+                      <p className="text-muted-foreground text-[11px] sm:text-sm leading-relaxed">
                         AIC-Prestige Inspire Foundation<br />
                         Prestige Vihar, Sector-D, Vijay Nagar, Scheme No 74C<br />
                         Indore, Madhya Pradesh 452010
@@ -92,12 +92,12 @@ export default function Contact() {
                   </div>
                   
                   <div className="flex items-start gap-3 sm:gap-4 p-4 sm:p-6 rounded-2xl bg-[#F5F5F5] border border-border hover:border-primary/20 transition-colors">
-                    <div className="p-2.5 sm:p-3 rounded-full bg-primary/10 text-primary mt-0.5 shrink-0">
-                      <Phone className="w-4 h-4 sm:w-5 sm:h-5" />
+                    <div className="p-2 sm:p-3 rounded-full bg-primary/10 text-primary mt-0.5 shrink-0">
+                      <Phone className="w-3.5 h-3.5 sm:w-5 sm:h-5" />
                     </div>
                     <div>
-                      <h4 className="font-bold text-sm sm:text-base text-foreground mb-0.5 sm:mb-1">Phone</h4>
-                      <p className="text-muted-foreground text-xs sm:text-sm flex flex-col gap-0.5 sm:gap-1">
+                      <h4 className="font-bold text-xs sm:text-base text-foreground mb-0.5 sm:mb-1">Phone</h4>
+                      <p className="text-muted-foreground text-[11px] sm:text-sm flex flex-col gap-0.5 sm:gap-1">
                         <a href="tel:+917869955418" className="hover:text-primary transition-colors">+91 78699 55418</a>
                         <a href="tel:+917869918736" className="hover:text-primary transition-colors">+91 78699 18736</a>
                       </p>
@@ -105,32 +105,32 @@ export default function Contact() {
                   </div>
 
                   <div className="flex items-start gap-3 sm:gap-4 p-4 sm:p-6 rounded-2xl bg-[#F5F5F5] border border-border hover:border-primary/20 transition-colors">
-                    <div className="p-2.5 sm:p-3 rounded-full bg-primary/10 text-primary mt-0.5 shrink-0">
-                      <Mail className="w-4 h-4 sm:w-5 sm:h-5" />
+                    <div className="p-2 sm:p-3 rounded-full bg-primary/10 text-primary mt-0.5 shrink-0">
+                      <Mail className="w-3.5 h-3.5 sm:w-5 sm:h-5" />
                     </div>
                     <div>
-                      <h4 className="font-bold text-sm sm:text-base text-foreground mb-0.5 sm:mb-1">Email</h4>
-                      <p className="text-muted-foreground text-xs sm:text-sm">
+                      <h4 className="font-bold text-xs sm:text-base text-foreground mb-0.5 sm:mb-1">Email</h4>
+                      <p className="text-muted-foreground text-[11px] sm:text-sm">
                         <a href="mailto:info@soaringaerotech.com" className="hover:text-primary transition-colors">info@soaringaerotech.com</a>
                       </p>
-                      <p className="text-muted-foreground text-xs sm:text-sm">
+                      <p className="text-muted-foreground text-[11px] sm:text-sm">
                         <a href="mailto:business@soaringaerotech.com" className="hover:text-primary transition-colors">business@soaringaerotech.com</a>
                       </p>
                     </div>
                   </div>
                 </div>
               </div>
-              <div className="relative h-64 rounded-2xl overflow-hidden">
+              <div className="relative h-36 sm:h-48 md:h-64 rounded-2xl overflow-hidden">
                 <img
                   src="https://images.unsplash.com/photo-1449157291145-7efd050a4d0e?w=800&h=500&fit=crop"
                   alt="Indore, Madhya Pradesh"
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute inset-0 bg-[#111111]/50" />
-                <div className="absolute inset-0 flex flex-col items-center justify-center gap-2">
-                  <MapPin className="w-8 h-8 text-primary" />
-                  <p className="text-white font-bold">Indore, Madhya Pradesh</p>
-                  <p className="text-white/50 text-xs font-mono">AIC-PRESTIGE INSPIRE FOUNDATION</p>
+                <div className="absolute inset-0 flex flex-col items-center justify-center gap-1 sm:gap-2">
+                  <MapPin className="w-5 h-5 sm:w-8 sm:h-8 text-primary" />
+                  <p className="text-white text-xs sm:text-base font-bold">Indore, Madhya Pradesh</p>
+                  <p className="text-white/60 text-[9px] sm:text-xs font-mono">AIC-PRESTIGE INSPIRE FOUNDATION</p>
                 </div>
               </div>
             </motion.div>

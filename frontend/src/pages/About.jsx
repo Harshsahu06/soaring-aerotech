@@ -188,25 +188,24 @@ export default function About() {
       </section>
 
       {/* ── Story section ────────────────────────── */}
-      <section className="py-10 sm:py-20 bg-white border-b border-border">
+      <section className="py-8 sm:py-16 bg-white border-b border-border">
         <div className="container mx-auto px-4 md:px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12 items-center">
             <div>
               <div className="section-label">OUR STORY</div>
-              <h2 className="font-display text-2xl sm:text-3xl md:text-4xl text-foreground mb-5">Born in Central India. Built for the World.</h2>
-              <p className="text-muted-foreground text-sm sm:text-base leading-relaxed mb-4">
+              <h2 className="font-display text-xl sm:text-3xl md:text-4xl text-foreground mb-4">Born in Central India. Built for the World.</h2>
+              <p className="text-muted-foreground text-xs sm:text-sm md:text-base leading-relaxed mb-3">
                 Soaring Aerotech was founded with a single mission: build India's most complete drone ecosystem from the ground up. What started as a DGCA training organisation in Indore has grown into a full-cycle company encompassing pilot training, commercial drone services, active R&D, and indigenous UAV manufacturing.
               </p>
-              <p className="text-muted-foreground text-sm sm:text-base leading-relaxed mb-6">
+              <p className="text-muted-foreground text-xs sm:text-sm md:text-base leading-relaxed mb-4">
                 Operating from a 50,000 sq ft facility in Madhya Pradesh, we serve government bodies, defence organisations, agriculture firms, solar companies, and infrastructure builders — delivering precision aerial intelligence and purpose-built UAVs.
               </p>
-
             </div>
-            <div className="relative">
+            <div className="relative w-full">
               <img
                 src={imgDroneFieldDemo}
                 alt="Drone operations"
-                className="w-full h-56 sm:h-80 object-cover rounded-3xl shadow-xl"
+                className="w-full h-44 sm:h-64 object-cover rounded-2xl shadow-md"
               />
             </div>
           </div>
