@@ -70,7 +70,7 @@ export default function Admin() {
 
     // Tab filter
     if (activeTab === "new") {
-      result = result.filter(sub => !sub.read);
+      result = result.filter(sub => sub.read === false);
     } else if (activeTab !== "all") {
       result = result.filter(sub => sub.type === activeTab);
     }
@@ -160,7 +160,7 @@ Message: ${sub.message || "N/A"}
 
   // Count leads by category
   const countTotal = submissions.length;
-  const countNew = submissions.filter(s => !s.read).length;
+  const countNew = submissions.filter(s => s.read === false).length;
   const countContact = submissions.filter(s => s.type === "contact").length;
   const countTraining = submissions.filter(s => s.type === "training").length;
 
@@ -288,7 +288,7 @@ Message: ${sub.message || "N/A"}
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.98 }}
                   className={`bg-[#0f0f13] border rounded-2xl p-5 hover:border-white/15 transition-all shadow-lg flex flex-col justify-between relative overflow-hidden ${
-                    !sub.read 
+                    sub.read === false 
                       ? "border-l-4 border-l-blue-500 border-white/10 ring-1 ring-blue-500/20" 
                       : "border-white/5"
                   }`}
@@ -304,7 +304,7 @@ Message: ${sub.message || "N/A"}
                         }`}>
                           {sub.type === "training" ? "Training" : "Contact Query"}
                         </span>
-                        {!sub.read && (
+                        {sub.read === false && (
                           <span className="px-2 py-0.5 rounded-full text-[9px] bg-blue-500/20 text-blue-300 border border-blue-400/30 animate-pulse font-bold tracking-wider">
                             NEW
                           </span>
@@ -399,7 +399,7 @@ Message: ${sub.message || "N/A"}
 
                     {/* Copy/Delete/Read utility */}
                     <div className="flex gap-1.5 items-center">
-                      {!sub.read ? (
+                      {sub.read === false ? (
                         <button
                           onClick={() => handleMarkRead(sub._id, true)}
                           className="p-2 text-blue-400 hover:text-white rounded-lg bg-blue-500/5 border border-blue-500/10 hover:bg-blue-500/10 transition-colors flex items-center justify-center"
