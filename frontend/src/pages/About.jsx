@@ -24,7 +24,7 @@ import imgExhibitionBooth from "@/assets/exhibition-booth.jpg";
 import imgDroneFieldDemo from "@/assets/drone-field-demo.jpg";
 import imgAboutHeroTeam from "@/assets/about-hero-team.jpg";
 import imgAboutTrainPillar from "@/assets/about-train-pillar.jpg";
-import imgAboutInnovatePillar from "@/assets/about-innovate-pillar.jpg";
+import imgAboutInnovatePillar from "@/assets/rd-lab-drone.jpg";
 import imgPrestigeLogo from "@/assets/prestige-logo.png";
 import imgPrestigeInspiration from "@/assets/prestige-inspiration.jpg";
 
