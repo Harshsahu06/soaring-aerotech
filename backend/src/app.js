@@ -27,5 +27,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/api", router);
-
+app.get("/",(req,res)=>{
+  let response={
+    "status":"Success"
+  };
+  res.json(response);
+});
 export default app;
