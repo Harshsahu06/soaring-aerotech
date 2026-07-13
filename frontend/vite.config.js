@@ -35,7 +35,7 @@ export default defineConfig({
     },
     proxy: {
       "/api": {
-        target: "http://localhost:3001",
+        target: "https://soaring-aerotech-two.vercel.app",
         changeOrigin: true,
       },
     },
