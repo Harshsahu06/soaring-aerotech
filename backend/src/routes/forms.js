@@ -156,4 +156,33 @@ router.put("/submissions/:id/read", async (req, res) => {
   }
 });
 
+router.put("/submissions/:id/crm", async (req, res) => {
+  try {
+    await connectMongo();
+    const token = req.headers.authorization;
+    if (token !== "Bearer soaring-admin-token-12345") {
+      res.status(401).json({ success: false, error: "Unauthorized access" });
+      return;
+    }
+
+    const { id } = req.params;
+    const { status, notes, followUpDate, clientResponse } = req.body;
+
+    const doc = await Submission.findByIdAndUpdate(
+      id,
+      { 
+        status, 
+        notes, 
+        followUpDate: followUpDate ? new Date(followUpDate) : null, 
+        clientResponse 
+      },
+      { new: true }
+    );
+    res.json({ success: true, data: doc });
+  } catch (err) {
+    console.error("❌ Failed to update CRM info:", err);
+    res.status(500).json({ success: false, error: "Failed to update CRM info" });
+  }
+});
+
 export default router;

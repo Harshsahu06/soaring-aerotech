@@ -14,6 +14,14 @@ const submissionSchema = new mongoose.Schema(
     program: { type: String },
     message: { type: String },
     read: { type: Boolean },
+    status: { 
+      type: String, 
+      enum: ["new", "contacted", "callback", "closed", "junk"], 
+      default: "new" 
+    },
+    notes: { type: String, default: "" },
+    followUpDate: { type: Date },
+    clientResponse: { type: String, default: "" },
   },
   { timestamps: true }
 );
