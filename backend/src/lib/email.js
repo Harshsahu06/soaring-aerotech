@@ -120,6 +120,12 @@ export async function sendSubmissionEmail(submission) {
   }
 
   try {
+    console.log("📨 Sending email with options:", {
+      from: mailOptions.from,
+      to: mailOptions.to,
+      subject: mailOptions.subject,
+      replyTo: mailOptions.replyTo
+    });
     const info = await transporter.sendMail(mailOptions);
     console.log(`✉️ Email successfully sent to ${targetEmail}: ${info.messageId}`);
     return { success: true, messageId: info.messageId };

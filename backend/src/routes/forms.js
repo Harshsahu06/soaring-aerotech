@@ -55,8 +55,10 @@ router.post("/submit", async (req, res) => {
     await connectMongo();
 
     const { type, name, phone, email, subject, program, message } = req.body;
+    console.log("📝 Incoming form submission:", { type, name, phone, email, subject, program, message });
 
     if (!type || !name || !phone) {
+      console.warn("⚠️ Validation failed: type, name, or phone is missing.");
       res.status(400).json({ success: false, error: "name and phone are required" });
       return;
     }
@@ -70,8 +72,10 @@ router.post("/submit", async (req, res) => {
       program,
       message,
     });
+    console.log("✅ Form submission saved successfully to DB, ID:", doc._id);
 
     // Trigger email notification asynchronously
+    console.log("📧 Triggering email notification...");
     sendSubmissionEmail({
       type,
       name,
@@ -80,12 +84,15 @@ router.post("/submit", async (req, res) => {
       subject,
       program,
       message,
+    }).then((emailResult) => {
+      console.log("📧 Email notification response:", emailResult);
     }).catch((err) => {
-      console.error("Failed to send email notification:", err);
+      console.error("❌ Failed to send email notification:", err);
     });
 
     res.json({ success: true, id: doc._id });
   } catch (err) {
+    console.error("❌ Database error during form submission:", err);
     res.status(500).json({ success: false, error: "Failed to save submission" });
   }
 });
