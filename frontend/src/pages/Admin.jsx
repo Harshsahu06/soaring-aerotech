@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { 
   LogOut, Trash2, Copy, Phone, Mail, Search, MessageCircle, Calendar, 
   Check, RefreshCw, Clipboard, User, Bell, CheckCircle2,
-  FileText, MessageSquare, Clock, Save, X, PlusCircle, AlertCircle
+  FileText, Clock, Save, X, PlusCircle, Sun, Moon
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -17,6 +17,9 @@ export default function Admin() {
   const [error, setError] = useState("");
   const [search, setSearch] = useState("");
   
+  // Theme state
+  const [theme, setTheme] = useState(() => localStorage.getItem("soaring_admin_theme") || "dark");
+
   // Dual Filters
   const [activeTypeTab, setActiveTypeTab] = useState("all"); // all, contact, training
   const [activeStatusTab, setActiveStatusTab] = useState("all"); // all, unread, contacted, callback, closed, junk
@@ -76,6 +79,13 @@ export default function Admin() {
   const handleLogout = () => {
     localStorage.removeItem("soaring_admin_token");
     setLocation("/login");
+  };
+
+  // Toggle Theme
+  const toggleTheme = () => {
+    const nextTheme = theme === "dark" ? "light" : "dark";
+    setTheme(nextTheme);
+    localStorage.setItem("soaring_admin_theme", nextTheme);
   };
 
   // Filter submissions
@@ -178,7 +188,6 @@ Follow-Up: ${sub.followUpDate ? new Date(sub.followUpDate).toLocaleDateString() 
     if (!shouldUpdate) return;
 
     try {
-      // First update read status
       if (updates.read) {
         await fetch(`${API_BASE}/api/forms/submissions/${sub._id}/read`, {
           method: "PUT",
@@ -187,7 +196,6 @@ Follow-Up: ${sub.followUpDate ? new Date(sub.followUpDate).toLocaleDateString() 
         });
       }
 
-      // Then update status
       if (updates.status) {
         const res = await fetch(`${API_BASE}/api/forms/submissions/${sub._id}/crm`, {
           method: "PUT",
@@ -247,7 +255,7 @@ Follow-Up: ${sub.followUpDate ? new Date(sub.followUpDate).toLocaleDateString() 
           notes: editNotes,
           clientResponse: editClientResponse,
           followUpDate: editFollowUpDate ? new Date(editFollowUpDate).toISOString() : null,
-          read: true // Automatically mark read when managed
+          read: true
         } : sub));
         setCrmEditingId(null);
       } else {
@@ -313,33 +321,57 @@ Follow-Up: ${sub.followUpDate ? new Date(sub.followUpDate).toLocaleDateString() 
     );
   };
 
+  const isDark = theme === "dark";
+
   return (
-    <div className="min-h-screen bg-[#08080a] text-white flex flex-col">
+    <div className={`min-h-screen transition-colors duration-200 flex flex-col ${isDark ? "bg-[#08080a] text-white" : "bg-[#f8fafc] text-slate-900"}`}>
       {/* ── Header ──────────────────────────────── */}
-      <header className="border-b border-white/5 bg-[#0b0b0e]/95 backdrop-blur-md sticky top-0 z-40">
+      <header className={`border-b transition-colors duration-200 sticky top-0 z-40 backdrop-blur-md ${isDark ? "border-white/5 bg-[#0b0b0e]/95 text-white" : "border-slate-200 bg-white/95 text-slate-900"}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <span className="font-display font-extrabold text-lg sm:text-xl tracking-tight">
               Soaring <span className="text-primary">Aerotech</span>
             </span>
             <span className="h-4 w-[1px] bg-white/20 hidden sm:inline" />
-            <span className="text-white/40 font-mono text-[10px] sm:text-xs uppercase tracking-widest hidden sm:inline">
+            <span className={`font-mono text-[10px] sm:text-xs uppercase tracking-widest hidden sm:inline ${isDark ? "text-white/40" : "text-slate-400"}`}>
               CRM Portal & Dashboard
             </span>
           </div>
 
           <div className="flex items-center gap-3">
+            {/* Theme Toggle Button */}
+            <button
+              onClick={toggleTheme}
+              className={`p-2 rounded-lg border transition-colors ${
+                isDark 
+                  ? "text-white/60 hover:text-white bg-white/5 border-white/5 hover:bg-white/10" 
+                  : "text-slate-600 hover:text-slate-900 bg-slate-100 border-slate-200 hover:bg-slate-200"
+              }`}
+              title={isDark ? "Switch to Light Mode" : "Switch to Dark Mode"}
+            >
+              {isDark ? <Sun className="w-4 h-4 text-amber-400" /> : <Moon className="w-4 h-4 text-slate-700" />}
+            </button>
+
             <button 
               onClick={() => fetchSubmissions(localStorage.getItem("soaring_admin_token"))}
-              className="p-2 text-white/60 hover:text-white rounded-lg bg-white/5 border border-white/5 hover:bg-white/10 transition-colors"
+              className={`p-2 rounded-lg border transition-colors ${
+                isDark 
+                  ? "text-white/60 hover:text-white bg-white/5 border-white/5 hover:bg-white/10" 
+                  : "text-slate-600 hover:text-slate-900 bg-slate-100 border-slate-200 hover:bg-slate-200"
+              }`}
               title="Refresh CRM Logs"
             >
               <RefreshCw className={`w-4 h-4 ${loading ? "animate-spin" : ""}`} />
             </button>
+            
             <Button 
               onClick={handleLogout} 
               variant="outline" 
-              className="border-white/10 bg-transparent text-white/80 hover:text-white hover:bg-white/5 flex items-center gap-2 rounded-xl text-xs sm:text-sm font-semibold"
+              className={`border-white/10 bg-transparent flex items-center gap-2 rounded-xl text-xs sm:text-sm font-semibold ${
+                isDark 
+                  ? "border-white/10 text-white/80 hover:text-white hover:bg-white/5" 
+                  : "border-slate-200 text-slate-700 hover:text-slate-900 hover:bg-slate-100"
+              }`}
             >
               <LogOut className="w-4 h-4" /> Log Out
             </Button>
@@ -353,17 +385,38 @@ Follow-Up: ${sub.followUpDate ? new Date(sub.followUpDate).toLocaleDateString() 
         {/* Stats Grid */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
           {[
-            { label: "Total Leads", count: countTotal, color: "from-slate-500/10 to-slate-500/5", border: "border-white/5", icon: <Clipboard className="w-5 h-5 text-white/60" /> },
-            { label: "Unread Leads", count: countNew, color: "from-blue-500/20 to-blue-500/5", border: "border-blue-500/10", icon: <Bell className={`w-5 h-5 text-blue-400 ${countNew > 0 ? "animate-bounce" : ""}`} />, highlight: countNew > 0 },
-            { label: "Callbacks Pending", count: countCallbacks, color: "from-amber-500/20 to-amber-500/5", border: "border-amber-500/10", icon: <Clock className="w-5 h-5 text-amber-400" /> },
-            { label: "Deals Closed", count: countClosed, color: "from-emerald-500/20 to-emerald-500/5", border: "border-emerald-500/10", icon: <CheckCircle2 className="w-5 h-5 text-emerald-400" /> }
+            { 
+              label: "Total Leads", 
+              count: countTotal, 
+              color: isDark ? "from-slate-500/10 to-slate-500/5 border-white/5" : "from-slate-100 to-slate-50/50 border-slate-200/80", 
+              icon: <Clipboard className={`w-5 h-5 ${isDark ? "text-white/60" : "text-slate-500"}`} /> 
+            },
+            { 
+              label: "Unread Leads", 
+              count: countNew, 
+              color: isDark ? "from-blue-500/20 to-blue-500/5 border-blue-500/10" : "from-blue-500/10 to-blue-500/5 border-blue-200", 
+              icon: <Bell className={`w-5 h-5 text-blue-500 ${countNew > 0 ? "animate-bounce" : ""}`} />, 
+              highlight: countNew > 0 
+            },
+            { 
+              label: "Callbacks Pending", 
+              count: countCallbacks, 
+              color: isDark ? "from-amber-500/20 to-amber-500/5 border-amber-500/10" : "from-amber-500/10 to-amber-500/5 border-amber-200", 
+              icon: <Clock className="w-5 h-5 text-amber-550" /> 
+            },
+            { 
+              label: "Deals Closed", 
+              count: countClosed, 
+              color: isDark ? "from-emerald-500/20 to-emerald-500/5 border-emerald-500/10" : "from-emerald-500/10 to-emerald-500/5 border-emerald-200", 
+              icon: <CheckCircle2 className="w-5 h-5 text-emerald-550" /> 
+            }
           ].map((stat, i) => (
-            <div key={i} className={`p-5 rounded-2xl bg-gradient-to-br ${stat.color} border ${stat.border} shadow-lg backdrop-blur-md flex items-center justify-between transition-transform hover:scale-[1.01]`}>
+            <div key={i} className={`p-5 rounded-2xl bg-gradient-to-br border shadow-lg backdrop-blur-md flex items-center justify-between transition-transform hover:scale-[1.01] ${stat.color}`}>
               <div>
-                <p className="text-white/40 text-[10px] sm:text-xs font-mono uppercase tracking-wider">{stat.label}</p>
-                <h3 className={`text-2xl sm:text-3xl font-extrabold mt-1 ${stat.highlight ? "text-blue-400" : "text-white"}`}>{stat.count}</h3>
+                <p className={`text-[10px] sm:text-xs font-mono uppercase tracking-wider ${isDark ? "text-white/40" : "text-slate-500"}`}>{stat.label}</p>
+                <h3 className={`text-2xl sm:text-3xl font-extrabold mt-1 ${stat.highlight ? "text-blue-500" : isDark ? "text-white" : "text-slate-900"}`}>{stat.count}</h3>
               </div>
-              <div className="p-2.5 rounded-xl bg-white/5 border border-white/5 shrink-0 ml-2">
+              <div className={`p-2.5 rounded-xl border shrink-0 ml-2 ${isDark ? "bg-white/5 border-white/5" : "bg-slate-50 border-slate-100"}`}>
                 {stat.icon}
               </div>
             </div>
@@ -371,22 +424,26 @@ Follow-Up: ${sub.followUpDate ? new Date(sub.followUpDate).toLocaleDateString() 
         </div>
 
         {/* Dual Filter Toolbar */}
-        <div className="bg-[#0f0f13] border border-white/5 p-4 rounded-2xl backdrop-blur-md mb-6 space-y-4">
+        <div className={`border p-4 rounded-2xl backdrop-blur-md mb-6 space-y-4 ${isDark ? "bg-[#0f0f13] border-white/5" : "bg-white border-slate-200 shadow-sm"}`}>
           <div className="flex flex-col md:flex-row gap-4 justify-between items-stretch md:items-center">
             {/* Search */}
             <div className="relative w-full md:max-w-md">
-              <Search className="absolute inset-y-0 left-3 my-auto w-4.5 h-4.5 text-white/30" />
+              <Search className={`absolute inset-y-0 left-3 my-auto w-4.5 h-4.5 ${isDark ? "text-white/30" : "text-slate-400"}`} />
               <input
                 type="text"
                 placeholder="Search leads, phone numbers, courses or CRM notes..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-white placeholder-white/30 text-sm focus:border-primary/50 focus:outline-none transition-colors"
+                className={`w-full pl-10 pr-4 py-2.5 rounded-xl text-sm focus:outline-none transition-colors border ${
+                  isDark 
+                    ? "bg-white/5 border-white/10 text-white placeholder-white/30 focus:border-primary/50" 
+                    : "bg-slate-50 border-slate-200 text-slate-900 placeholder-slate-450 focus:border-primary/50"
+                }`}
               />
             </div>
 
             {/* Type Filter */}
-            <div className="flex gap-1.5 bg-white/5 p-1 rounded-xl overflow-x-auto self-start md:self-auto">
+            <div className={`flex gap-1.5 p-1 rounded-xl overflow-x-auto self-start md:self-auto ${isDark ? "bg-white/5" : "bg-slate-100"}`}>
               {[
                 { id: "all", label: "All Forms" },
                 { id: "contact", label: "Contact Us" },
@@ -398,7 +455,9 @@ Follow-Up: ${sub.followUpDate ? new Date(sub.followUpDate).toLocaleDateString() 
                   className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all whitespace-nowrap ${
                     activeTypeTab === tab.id 
                       ? "bg-primary text-white shadow-md" 
-                      : "text-white/60 hover:text-white"
+                      : isDark 
+                        ? "text-white/60 hover:text-white" 
+                        : "text-slate-600 hover:text-slate-900"
                   }`}
                 >
                   {tab.label}
@@ -408,23 +467,25 @@ Follow-Up: ${sub.followUpDate ? new Date(sub.followUpDate).toLocaleDateString() 
           </div>
 
           {/* CRM Status Filter tabs */}
-          <div className="border-t border-white/5 pt-3">
-            <span className="text-[10px] font-mono uppercase tracking-widest text-white/40 block mb-2">Filter by Status</span>
+          <div className={`border-t pt-3 ${isDark ? "border-white/5" : "border-slate-100"}`}>
+            <span className={`text-[10px] font-mono uppercase tracking-widest block mb-2 ${isDark ? "text-white/40" : "text-slate-500"}`}>Filter by Status</span>
             <div className="flex gap-1.5 overflow-x-auto pb-1">
               {[
-                { id: "all", label: "All Statuses", style: "border-white/10 text-white/60 hover:text-white" },
-                { id: "unread", label: `Unread (${countNew})`, style: "border-blue-500/20 text-blue-400 bg-blue-500/5 hover:bg-blue-500/10" },
-                { id: "contacted", label: "Contacted", style: "border-purple-500/20 text-purple-400 bg-purple-500/5 hover:bg-purple-500/10" },
-                { id: "callback", label: `Callbacks (${countCallbacks})`, style: "border-amber-500/20 text-amber-400 bg-amber-500/5 hover:bg-amber-500/10" },
-                { id: "closed", label: `Closed (${countClosed})`, style: "border-emerald-500/20 text-emerald-400 bg-emerald-500/5 hover:bg-emerald-500/10" },
-                { id: "junk", label: "Spam / Junk", style: "border-red-500/20 text-red-400 bg-red-500/5 hover:bg-red-500/10" }
+                { id: "all", label: "All Statuses", style: isDark ? "border-white/10 text-white/60 hover:text-white" : "border-slate-200 text-slate-600 hover:text-slate-900" },
+                { id: "unread", label: `Unread (${countNew})`, style: isDark ? "border-blue-500/20 text-blue-400 bg-blue-500/5 hover:bg-blue-500/10" : "border-blue-200 text-blue-600 bg-blue-50/50 hover:bg-blue-100" },
+                { id: "contacted", label: "Contacted", style: isDark ? "border-purple-500/20 text-purple-400 bg-purple-500/5" : "border-purple-200 text-purple-600 bg-purple-50/50" },
+                { id: "callback", label: `Callbacks (${countCallbacks})`, style: isDark ? "border-amber-500/20 text-amber-400 bg-amber-500/5" : "border-amber-200 text-amber-600 bg-amber-50/50" },
+                { id: "closed", label: `Closed (${countClosed})`, style: isDark ? "border-emerald-500/20 text-emerald-400 bg-emerald-500/5" : "border-emerald-200 text-emerald-600 bg-emerald-50/50" },
+                { id: "junk", label: "Spam / Junk", style: isDark ? "border-red-500/20 text-red-400 bg-red-500/5" : "border-red-200 text-red-600 bg-red-50/50" }
               ].map(tab => (
                 <button
                   key={tab.id}
                   onClick={() => setActiveStatusTab(tab.id)}
                   className={`px-3 py-1.5 rounded-lg text-xs border font-bold transition-all whitespace-nowrap ${
                     activeStatusTab === tab.id 
-                      ? "bg-white text-[#08080a] border-white shadow-md" 
+                      ? isDark
+                        ? "bg-white text-[#08080a] border-white shadow-md" 
+                        : "bg-slate-900 text-white border-slate-900 shadow-md"
                       : tab.style
                   }`}
                 >
@@ -439,7 +500,7 @@ Follow-Up: ${sub.followUpDate ? new Date(sub.followUpDate).toLocaleDateString() 
         {loading ? (
           <div className="flex flex-col items-center justify-center py-20 gap-3">
             <RefreshCw className="w-8 h-8 text-primary animate-spin" />
-            <p className="text-white/40 text-xs font-mono uppercase tracking-widest">Loading CRM workspace...</p>
+            <p className={`text-xs font-mono uppercase tracking-widest ${isDark ? "text-white/40" : "text-slate-400"}`}>Loading CRM workspace...</p>
           </div>
         ) : error ? (
           <div className="text-center py-20 max-w-md mx-auto">
@@ -449,8 +510,8 @@ Follow-Up: ${sub.followUpDate ? new Date(sub.followUpDate).toLocaleDateString() 
             </Button>
           </div>
         ) : filteredSubmissions.length === 0 ? (
-          <div className="text-center py-24 border border-dashed border-white/10 rounded-3xl bg-[#0f0f13]/30">
-            <p className="text-white/30 text-sm">No leads match your current CRM filter criteria.</p>
+          <div className={`text-center py-24 border border-dashed rounded-3xl ${isDark ? "border-white/10 bg-[#0f0f13]/30" : "border-slate-200 bg-slate-50/50"}`}>
+            <p className={`text-sm ${isDark ? "text-white/30" : "text-slate-450"}`}>No leads match your current CRM filter criteria.</p>
           </div>
         ) : (
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
@@ -462,14 +523,18 @@ Follow-Up: ${sub.followUpDate ? new Date(sub.followUpDate).toLocaleDateString() 
                   initial={{ opacity: 0, scale: 0.98 }}
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.98 }}
-                  className={`bg-[#0f0f13] border rounded-2xl p-5 hover:border-white/15 transition-all shadow-lg flex flex-col justify-between relative overflow-hidden ${
+                  className={`border rounded-2xl p-5 transition-all shadow-lg flex flex-col justify-between relative overflow-hidden ${
+                    isDark ? "bg-[#0f0f13]" : "bg-white border-slate-200/80 shadow-sm"
+                  } ${
                     sub.read === false 
-                      ? "border-l-4 border-l-blue-500 border-white/10 ring-1 ring-blue-500/20" 
+                      ? "border-l-4 border-l-blue-500 ring-1 ring-blue-500/20" 
                       : sub.status === "callback"
-                      ? "border-l-4 border-l-amber-500 border-white/5"
+                      ? "border-l-4 border-l-amber-500"
                       : sub.status === "closed"
-                      ? "border-l-4 border-l-emerald-500 border-white/5"
-                      : "border-white/5"
+                      ? "border-l-4 border-l-emerald-500"
+                      : isDark 
+                        ? "border-white/5" 
+                        : "border-slate-200/60"
                   }`}
                 >
                   <div>
@@ -478,20 +543,22 @@ Follow-Up: ${sub.followUpDate ? new Date(sub.followUpDate).toLocaleDateString() 
                       <div className="flex items-center gap-2 flex-wrap">
                         <span className={`px-2 py-0.5 rounded-full font-mono text-[9px] uppercase tracking-widest font-bold ${
                           sub.type === "training" 
-                            ? "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20" 
-                            : "bg-slate-500/10 text-white/80 border border-white/10"
+                            ? "bg-emerald-550/10 text-emerald-500 border border-emerald-500/20" 
+                            : isDark 
+                              ? "bg-slate-550/10 text-white/80 border border-white/10" 
+                              : "bg-slate-100 text-slate-700 border border-slate-200/60"
                         }`}>
                           {sub.type === "training" ? "Training" : "Contact Query"}
                         </span>
                         {getStatusBadge(sub.status)}
                         {sub.read === false && (
-                          <span className="px-2 py-0.5 rounded-full text-[9px] bg-blue-500/20 text-blue-300 border border-blue-400/30 animate-pulse font-bold tracking-wider">
+                          <span className="px-2 py-0.5 rounded-full text-[9px] bg-blue-500/20 text-blue-600 border border-blue-400/30 animate-pulse font-bold tracking-wider">
                             NEW
                           </span>
                         )}
                       </div>
                       
-                      <span className="text-white/30 text-xs flex items-center gap-1 font-mono shrink-0">
+                      <span className={`text-xs flex items-center gap-1 font-mono shrink-0 ${isDark ? "text-white/30" : "text-slate-400"}`}>
                         <Calendar className="w-3.5 h-3.5" />
                         {new Date(sub.createdAt).toLocaleDateString("en-IN", { 
                           day: "numeric", month: "short", year: "numeric"
@@ -500,76 +567,80 @@ Follow-Up: ${sub.followUpDate ? new Date(sub.followUpDate).toLocaleDateString() 
                     </div>
 
                     {/* Client Core Profile */}
-                    <h4 className="text-lg font-bold text-white mb-2">{sub.name}</h4>
+                    <h4 className={`text-lg font-bold mb-2 ${isDark ? "text-white" : "text-slate-800"}`}>{sub.name}</h4>
                     
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-1.5 text-xs text-white/60 mb-4 font-mono">
+                    <div className={`grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-1.5 text-xs mb-4 font-mono ${isDark ? "text-white/60" : "text-slate-500"}`}>
                       <p className="flex items-center gap-2">
-                        <span className="text-white/20">Phone:</span>
+                        <span className={isDark ? "text-white/20" : "text-slate-350"}>Phone:</span>
                         <a 
                           href={`tel:${sub.phone}`} 
                           onClick={() => handleAutoContact(sub)}
-                          className="hover:text-primary transition-colors text-white/80"
+                          className="hover:text-primary transition-colors font-bold text-primary-600"
                         >
                           {sub.phone}
                         </a>
                       </p>
                       <p className="flex items-center gap-2">
-                        <span className="text-white/20">Email:</span>
+                        <span className={isDark ? "text-white/20" : "text-slate-350"}>Email:</span>
                         {sub.email ? (
                           <a 
                             href={`mailto:${sub.email}`} 
                             onClick={() => handleAutoContact(sub)}
-                            className="hover:text-primary transition-colors text-white/80"
+                            className="hover:text-primary transition-colors text-primary-600"
                           >
                             {sub.email}
                           </a>
                         ) : (
-                          <span className="text-white/30">N/A</span>
+                          <span className={isDark ? "text-white/30" : "text-slate-300"}>N/A</span>
                         )}
                       </p>
                       {sub.program && (
                         <p className="flex items-start gap-2 sm:col-span-2">
-                          <span className="text-white/20 shrink-0">Course:</span>
-                          <span className="text-emerald-400 font-bold font-sans bg-emerald-500/5 px-2 py-0.5 rounded border border-emerald-500/10 inline-block">
+                          <span className={isDark ? "text-white/20" : "text-slate-350"}>Course:</span>
+                          <span className="text-emerald-600 font-bold font-sans bg-emerald-500/5 px-2 py-0.5 rounded border border-emerald-500/20 inline-block">
                             {sub.program}
                           </span>
                         </p>
                       )}
                       {sub.subject && (
                         <p className="flex items-center gap-2 sm:col-span-2">
-                          <span className="text-white/20">Subject:</span>
-                          <span className="text-white/80 font-sans">{sub.subject}</span>
+                          <span className={isDark ? "text-white/20" : "text-slate-350"}>Subject:</span>
+                          <span className={`font-sans ${isDark ? "text-white/80" : "text-slate-700"}`}>{sub.subject}</span>
                         </p>
                       )}
                     </div>
 
                     {/* Client Message */}
                     {sub.message && (
-                      <div className="p-3 bg-white/5 border border-white/5 rounded-xl text-xs text-white/70 leading-relaxed mb-4 whitespace-pre-line">
-                        <span className="text-[10px] text-white/30 font-mono block mb-1 uppercase tracking-wider">Client Inquiry:</span>
+                      <div className={`p-3 border rounded-xl text-xs leading-relaxed mb-4 whitespace-pre-line ${
+                        isDark ? "bg-white/5 border-white/5 text-white/70" : "bg-slate-50 border-slate-100 text-slate-650"
+                      }`}>
+                        <span className={`text-[10px] font-mono block mb-1 uppercase tracking-wider ${isDark ? "text-white/30" : "text-slate-400"}`}>Client Inquiry:</span>
                         {sub.message}
                       </div>
                     )}
 
                     {/* CRM Logs Panel (Displays current logs) */}
                     {(sub.notes || sub.clientResponse || sub.followUpDate) && (
-                      <div className="mt-4 p-3.5 bg-blue-500/5 border border-blue-500/10 rounded-xl space-y-2 text-xs">
-                        <div className="flex items-center gap-1.5 text-[10px] font-mono uppercase tracking-widest text-blue-400 font-bold">
-                          <FileText className="w-3.5 h-3.5" />
+                      <div className={`mt-4 p-3.5 border rounded-xl space-y-2 text-xs ${
+                        isDark ? "bg-blue-500/5 border-blue-500/10 text-white" : "bg-blue-50/50 border-blue-100 text-slate-750"
+                      }`}>
+                        <div className="flex items-center gap-1.5 text-[10px] font-mono uppercase tracking-widest text-blue-600 font-bold">
+                          <FileText className="w-3.5 h-3.5 shrink-0" />
                           CRM Logs
                         </div>
                         {sub.clientResponse && (
-                          <p className="text-white/80">
-                            <span className="text-white/40">Client Response:</span> "{sub.clientResponse}"
+                          <p>
+                            <span className={isDark ? "text-white/40" : "text-slate-500"}>Client Response:</span> "{sub.clientResponse}"
                           </p>
                         )}
                         {sub.notes && (
-                          <p className="text-white/70 whitespace-pre-line">
-                            <span className="text-white/40">Internal Notes:</span> {sub.notes}
+                          <p className="whitespace-pre-line">
+                            <span className={isDark ? "text-white/40" : "text-slate-500"}>Internal Notes:</span> {sub.notes}
                           </p>
                         )}
                         {sub.followUpDate && (
-                          <div className="flex items-center gap-1.5 text-[11px] text-amber-400 font-mono mt-2 bg-amber-500/10 border border-amber-500/20 px-2.5 py-1 rounded-lg w-fit">
+                          <div className="flex items-center gap-1.5 text-[11px] text-amber-600 font-mono mt-2 bg-amber-500/10 border border-amber-500/20 px-2.5 py-1 rounded-lg w-fit">
                             <Clock className="w-3.5 h-3.5 shrink-0" />
                             Next Follow-Up: {new Date(sub.followUpDate).toLocaleDateString("en-IN", {
                               day: "numeric", month: "short", year: "numeric"
@@ -585,10 +656,12 @@ Follow-Up: ${sub.followUpDate ? new Date(sub.followUpDate).toLocaleDateString() 
                     <motion.div 
                       initial={{ opacity: 0, height: 0 }}
                       animate={{ opacity: 1, height: "auto" }}
-                      className="mt-4 p-4 border-t border-white/10 bg-[#16161c] rounded-2xl space-y-4 text-sm"
+                      className={`mt-4 p-4 border-t rounded-2xl space-y-4 text-sm ${
+                        isDark ? "border-white/10 bg-[#16161c]" : "border-slate-200 bg-slate-50"
+                      }`}
                     >
-                      <div className="flex justify-between items-center pb-2 border-b border-white/5">
-                        <span className="font-bold text-white text-xs font-mono uppercase tracking-wider">CRM Client Lead Manager</span>
+                      <div className={`flex justify-between items-center pb-2 border-b ${isDark ? "border-white/5" : "border-slate-250"}`}>
+                        <span className={`font-bold text-xs font-mono uppercase tracking-wider ${isDark ? "text-white" : "text-slate-700"}`}>CRM Client Lead Manager</span>
                         <button onClick={() => setCrmEditingId(null)} className="text-white/40 hover:text-white">
                           <X className="w-4 h-4" />
                         </button>
@@ -596,14 +669,14 @@ Follow-Up: ${sub.followUpDate ? new Date(sub.followUpDate).toLocaleDateString() 
 
                       {/* Status row select */}
                       <div className="space-y-1.5">
-                        <label className="text-[10px] font-mono uppercase tracking-wider text-white/40">Lead Status</label>
+                        <label className={`text-[10px] font-mono uppercase tracking-wider ${isDark ? "text-white/40" : "text-slate-500"}`}>Lead Status</label>
                         <div className="grid grid-cols-3 sm:grid-cols-5 gap-1.5">
                           {[
-                            { id: "new", label: "New", active: "bg-blue-600 border-blue-500 text-white", inactive: "hover:bg-blue-500/10 text-blue-400 border-blue-500/20" },
-                            { id: "contacted", label: "Contacted", active: "bg-purple-600 border-purple-500 text-white", inactive: "hover:bg-purple-500/10 text-purple-400 border-purple-500/20" },
-                            { id: "callback", label: "Callback", active: "bg-amber-600 border-amber-500 text-white", inactive: "hover:bg-amber-500/10 text-amber-400 border-amber-500/20" },
-                            { id: "closed", label: "Closed", active: "bg-emerald-600 border-emerald-500 text-white", inactive: "hover:bg-emerald-500/10 text-emerald-400 border-emerald-500/20" },
-                            { id: "junk", label: "Junk", active: "bg-red-600 border-red-500 text-white", inactive: "hover:bg-red-500/10 text-red-400 border-red-500/20" }
+                            { id: "new", label: "New", active: "bg-blue-600 border-blue-500 text-white", inactive: "hover:bg-blue-500/10 text-blue-550 border-blue-500/20 bg-blue-500/5" },
+                            { id: "contacted", label: "Contacted", active: "bg-purple-600 border-purple-500 text-white", inactive: "hover:bg-purple-500/10 text-purple-550 border-purple-500/20 bg-purple-500/5" },
+                            { id: "callback", label: "Callback", active: "bg-amber-600 border-amber-500 text-white", inactive: "hover:bg-amber-500/10 text-amber-550 border-amber-500/20 bg-amber-500/5" },
+                            { id: "closed", label: "Closed", active: "bg-emerald-600 border-emerald-500 text-white", inactive: "hover:bg-emerald-500/10 text-emerald-550 border-emerald-500/20 bg-emerald-500/5" },
+                            { id: "junk", label: "Junk", active: "bg-red-600 border-red-500 text-white", inactive: "hover:bg-red-500/10 text-red-550 border-red-500/20 bg-red-500/5" }
                           ].map(opt => (
                             <button
                               key={opt.id}
@@ -619,39 +692,51 @@ Follow-Up: ${sub.followUpDate ? new Date(sub.followUpDate).toLocaleDateString() 
 
                       {/* Client Response */}
                       <div className="space-y-1.5">
-                        <label className="text-[10px] font-mono uppercase tracking-wider text-white/40">Client Response / Feedback</label>
+                        <label className={`text-[10px] font-mono uppercase tracking-wider ${isDark ? "text-white/40" : "text-slate-500"}`}>Client Response / Feedback</label>
                         <input
                           type="text"
                           value={editClientResponse}
                           onChange={(e) => setEditClientResponse(e.target.value)}
                           placeholder="e.g. Interested in Drone Pilot training, wants pricing catalog."
-                          className="w-full px-3 py-2 text-xs rounded-xl bg-white/5 border border-white/10 text-white placeholder-white/20 focus:border-blue-500/50 focus:outline-none"
+                          className={`w-full px-3 py-2 text-xs rounded-xl focus:border-blue-500/50 focus:outline-none border ${
+                            isDark 
+                              ? "bg-white/5 border-white/10 text-white placeholder-white/20" 
+                              : "bg-white border-slate-200 text-slate-900 placeholder-slate-400"
+                          }`}
                         />
                       </div>
 
                       {/* Discussion Notes */}
                       <div className="space-y-1.5">
-                        <label className="text-[10px] font-mono uppercase tracking-wider text-white/40">Internal Notes / Discussion Log</label>
+                        <label className={`text-[10px] font-mono uppercase tracking-wider ${isDark ? "text-white/40" : "text-slate-500"}`}>Internal Notes / Discussion Log</label>
                         <textarea
                           rows={3}
                           value={editNotes}
                           onChange={(e) => setEditNotes(e.target.value)}
                           placeholder="Write key discussion details here. (e.g. Sent brochure on WhatsApp, discussed batch timings)"
-                          className="w-full px-3 py-2 text-xs rounded-xl bg-white/5 border border-white/10 text-white placeholder-white/20 focus:border-blue-500/50 focus:outline-none resize-none"
+                          className={`w-full px-3 py-2 text-xs rounded-xl focus:border-blue-500/50 focus:outline-none resize-none border ${
+                            isDark 
+                              ? "bg-white/5 border-white/10 text-white placeholder-white/20" 
+                              : "bg-white border-slate-200 text-slate-900 placeholder-slate-400"
+                          }`}
                         />
                       </div>
 
                       {/* Follow-up Date */}
                       <div className="space-y-1.5">
-                        <label className="text-[10px] font-mono uppercase tracking-wider text-white/40 flex items-center gap-1.5">
-                          <Calendar className="w-3.5 h-3.5 text-amber-400" />
+                        <label className={`text-[10px] font-mono uppercase tracking-wider flex items-center gap-1.5 ${isDark ? "text-white/40" : "text-slate-500"}`}>
+                          <Calendar className="w-3.5 h-3.5 text-amber-500" />
                           Next Follow-Up Reminder Date
                         </label>
                         <input
                           type="date"
                           value={editFollowUpDate}
                           onChange={(e) => setEditFollowUpDate(e.target.value)}
-                          className="w-full px-3 py-2 text-xs rounded-xl bg-white/5 border border-white/10 text-white focus:border-blue-500/50 focus:outline-none"
+                          className={`w-full px-3 py-2 text-xs rounded-xl focus:border-blue-500/50 focus:outline-none border ${
+                            isDark 
+                              ? "bg-white/5 border-white/10 text-white" 
+                              : "bg-white border-slate-200 text-slate-900"
+                          }`}
                         />
                       </div>
 
@@ -660,7 +745,11 @@ Follow-Up: ${sub.followUpDate ? new Date(sub.followUpDate).toLocaleDateString() 
                         <Button 
                           type="button" 
                           onClick={() => setCrmEditingId(null)}
-                          className="px-4 py-2 text-xs rounded-xl border border-white/10 bg-transparent text-white/80 hover:bg-white/5 hover:text-white"
+                          className={`px-4 py-2 text-xs rounded-xl border bg-transparent ${
+                            isDark 
+                              ? "border-white/10 text-white/80 hover:bg-white/5 hover:text-white" 
+                              : "border-slate-200 text-slate-650 hover:bg-slate-100"
+                          }`}
                         >
                           Cancel
                         </Button>
@@ -682,7 +771,7 @@ Follow-Up: ${sub.followUpDate ? new Date(sub.followUpDate).toLocaleDateString() 
                   )}
 
                   {/* Actions Panel */}
-                  <div className="pt-3.5 mt-4 border-t border-white/5 flex items-center justify-between gap-2">
+                  <div className={`pt-3.5 mt-4 border-t flex items-center justify-between gap-2 ${isDark ? "border-white/5" : "border-slate-100"}`}>
                     {/* Direct Call/WhatsApp integrations */}
                     <div className="flex gap-1.5">
                       <a 
@@ -690,7 +779,7 @@ Follow-Up: ${sub.followUpDate ? new Date(sub.followUpDate).toLocaleDateString() 
                         target="_blank"
                         rel="noopener noreferrer"
                         onClick={() => handleAutoContact(sub)}
-                        className="p-2 text-emerald-400 hover:text-white rounded-lg bg-emerald-500/5 border border-emerald-500/10 hover:bg-emerald-500/10 transition-colors flex items-center justify-center"
+                        className="p-2 text-emerald-500 hover:text-white rounded-lg bg-emerald-500/5 border border-emerald-500/10 hover:bg-emerald-500/10 transition-colors flex items-center justify-center"
                         title="Chat on WhatsApp"
                       >
                         <MessageCircle className="w-4 h-4" />
@@ -698,7 +787,7 @@ Follow-Up: ${sub.followUpDate ? new Date(sub.followUpDate).toLocaleDateString() 
                       <a 
                         href={`tel:${sub.phone}`}
                         onClick={() => handleAutoContact(sub)}
-                        className="p-2 text-blue-400 hover:text-white rounded-lg bg-blue-500/5 border border-blue-500/10 hover:bg-blue-500/10 transition-colors flex items-center justify-center"
+                        className="p-2 text-blue-500 hover:text-white rounded-lg bg-blue-500/5 border border-blue-500/10 hover:bg-blue-500/10 transition-colors flex items-center justify-center"
                         title="Direct Call"
                       >
                         <Phone className="w-4 h-4" />
@@ -710,7 +799,11 @@ Follow-Up: ${sub.followUpDate ? new Date(sub.followUpDate).toLocaleDateString() 
                       {crmEditingId !== sub._id && (
                         <button
                           onClick={() => startCrmEdit(sub)}
-                          className="px-2.5 py-2 text-xs font-semibold rounded-lg bg-white/5 border border-white/5 hover:bg-white/10 hover:text-white text-white/70 transition-all flex items-center gap-1.5"
+                          className={`px-2.5 py-2 text-xs font-semibold rounded-lg border transition-all flex items-center gap-1.5 ${
+                            isDark 
+                              ? "bg-white/5 border-white/5 hover:bg-white/10 text-white/70 hover:text-white" 
+                              : "bg-slate-100 border-slate-200/60 hover:bg-slate-200 text-slate-700"
+                          }`}
                           title="Manage Lead CRM Logs"
                         >
                           <PlusCircle className="w-3.5 h-3.5" />
@@ -721,7 +814,7 @@ Follow-Up: ${sub.followUpDate ? new Date(sub.followUpDate).toLocaleDateString() 
                       {sub.read === false ? (
                         <button
                           onClick={() => handleMarkRead(sub._id, true)}
-                          className="p-2 text-blue-400 hover:text-white rounded-lg bg-blue-500/5 border border-blue-500/10 hover:bg-blue-500/10 transition-colors flex items-center justify-center"
+                          className="p-2 text-blue-500 hover:text-white rounded-lg bg-blue-500/5 border border-blue-500/10 hover:bg-blue-500/10 transition-colors flex items-center justify-center"
                           title="Mark as Read"
                         >
                           <Check className="w-4 h-4" />
@@ -729,7 +822,7 @@ Follow-Up: ${sub.followUpDate ? new Date(sub.followUpDate).toLocaleDateString() 
                       ) : (
                         <button
                           onClick={() => handleMarkRead(sub._id, false)}
-                          className="p-2 text-white/30 hover:text-white/60 rounded-lg transition-colors flex items-center justify-center"
+                          className={`p-2 rounded-lg transition-colors flex items-center justify-center ${isDark ? "text-white/30 hover:text-white/60" : "text-slate-400 hover:text-slate-600"}`}
                           title="Mark as Unread"
                         >
                           <CheckCircle2 className="w-4 h-4" />
@@ -740,8 +833,10 @@ Follow-Up: ${sub.followUpDate ? new Date(sub.followUpDate).toLocaleDateString() 
                         onClick={() => handleCopyDetails(sub)}
                         className={`px-2.5 py-2 rounded-lg transition-all border flex items-center gap-1 text-xs font-semibold ${
                           copiedId === sub._id 
-                            ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/20" 
-                            : "bg-white/5 text-white/50 border-white/5 hover:text-white hover:bg-white/10"
+                            ? "bg-emerald-500/10 text-emerald-500 border-emerald-500/20" 
+                            : isDark 
+                              ? "bg-white/5 text-white/50 border-white/5 hover:text-white hover:bg-white/10" 
+                              : "bg-slate-50 text-slate-500 border-slate-200 hover:text-slate-750 hover:bg-slate-100"
                         }`}
                         title="Copy Details"
                       >
@@ -756,7 +851,7 @@ Follow-Up: ${sub.followUpDate ? new Date(sub.followUpDate).toLocaleDateString() 
                             handleDelete(sub._id);
                           }
                         }}
-                        className="p-2 text-red-400 hover:text-white rounded-lg bg-red-500/5 border border-red-500/10 hover:bg-red-500/10 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="p-2 text-red-500 hover:text-white rounded-lg bg-red-500/5 border border-red-500/10 hover:bg-red-500/10 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                         title="Delete Lead"
                       >
                         <Trash2 className="w-4 h-4" />
