@@ -6,7 +6,7 @@ import path from "path";
 const rawPort = process.env.PORT;
 const port = rawPort ? Number(rawPort) : 3000;
 
-const basePath = process.env.BASE_PATH ?? "/";
+const basePath = process.env.BASE_PATH ?? "https://soaring-aerotech-two.vercel.app";
 
 export default defineConfig({
   base: basePath,
