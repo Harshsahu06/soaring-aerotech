@@ -1145,17 +1145,13 @@ export default function Home() {
               >
                 INNOVATION LAB
               </div>
-              <h2 className="font-display text-2xl sm:text-3xl md:text-4xl text-white mb-5">
+              <h2 className="font-display text-xl sm:text-3xl md:text-4xl text-white mb-4">
                 Research That Creates Technology
               </h2>
-              <p className="text-white/50 leading-relaxed mb-6">
-                We don't just fly drones — we build the future of drone
-                technology. Our Innovation Lab runs active research in
-                disaster-response UAVs, AI/ML aerial systems, tethered drone
-                platforms, and quantum computing applications for autonomous
-                flight.
+              <p className="text-white/50 leading-relaxed text-xs sm:text-sm mb-6">
+                We build next-generation drone technology. Our Innovation Lab drives active research in disaster-response UAVs, AI/ML systems, and persistent platforms.
               </p>
-              <div className="space-y-3 mb-8">
+              <div className="space-y-2 mb-6">
                 {[
                   {
                     title: "Disaster Management UAVs",
@@ -1176,14 +1172,14 @@ export default function Home() {
                 ].map((item, i) => (
                   <div
                     key={i}
-                    className="flex items-start gap-4 p-4 rounded-xl border border-white/8 hover:border-primary/30 hover:bg-white/5 transition-all"
+                    className="flex items-start gap-3 p-3 rounded-xl border border-white/8 hover:border-primary/30 hover:bg-white/5 transition-all"
                   >
-                    <div className="w-2 h-2 rounded-full bg-primary mt-2 shrink-0" />
+                    <div className="w-1.5 h-1.5 rounded-full bg-primary mt-2 shrink-0" />
                     <div>
-                      <div className="text-white/80 text-sm font-bold">
+                      <div className="text-white/85 text-xs sm:text-sm font-bold">
                         {item.title}
                       </div>
-                      <div className="text-white/35 text-xs mt-0.5">
+                      <div className="text-white/40 text-[10px] sm:text-xs mt-0.5">
                         {item.desc}
                       </div>
                     </div>
