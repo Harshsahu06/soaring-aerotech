@@ -35,7 +35,7 @@ import imgHighway from "@/assets/nhai-project.png";
 import imgDroneFieldDemo from "@/assets/drone-field-demo.jpg";
 
 const API_BASE = "https://soaring-aerotech-two.vercel.app";
-import imgSolar from "@/assets/solar-project.jpg";
+import imgSolar from "@/assets/solar-project.png";
 import imgSimulationLab from "@/assets/simulation-lab-project.jpg";
 import imgAgriculture from "@/assets/agriculture-project.png";
 import imgTechAdoption from "@/assets/tech-adoption.jpg";

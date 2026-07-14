@@ -51,7 +51,7 @@ import imgSurveillance from "@/assets/surveillance-project.png";
 import imgHighway from "@/assets/nhai-project.png";
 import imgMprdcProject from "@/assets/mprdc-project.png";
 import imgAgriculture from "@/assets/agriculture-project.png";
-import imgSolar from "@/assets/solar-project.jpg";
+import imgSolar from "@/assets/solar-project.png";
 import imgSimulationLab from "@/assets/simulation-lab-project.jpg";
 import imgDidiInitiative from "@/assets/didi-initiative.jpg";
 import imgPilotAwareness from "@/assets/pilot-awareness.jpg";

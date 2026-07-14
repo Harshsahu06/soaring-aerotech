@@ -20,7 +20,7 @@ import { Link } from "wouter";
 
 // Local Project Asset Imports
 import imgHighway from "@/assets/nhai-project.png";
-import imgSolar from "@/assets/solar-project.jpg";
+import imgSolar from "@/assets/solar-project.png";
 import imgAgriculture from "@/assets/agriculture-project.png";
 import imgSurveillance from "@/assets/surveillance-project.png";
 import imgDroneFieldDemo from "@/assets/drone-field-demo.jpg";

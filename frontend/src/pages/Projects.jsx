@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import imgSurveillance from "@/assets/surveillance-project.png";
 import imgHighway from "@/assets/nhai-project.png";
 import imgAgriculture from "@/assets/agriculture-project.png";
-import imgSolar from "@/assets/solar-project.jpg";
+import imgSolar from "@/assets/solar-project.png";
 import imgSimulationLab from "@/assets/simulation-lab-project.jpg";
 
 export default function Projects() {

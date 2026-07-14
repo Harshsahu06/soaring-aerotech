@@ -12,6 +12,7 @@ import photoLalit from "@/assets/lalit.png";
 import photoAditya from "@/assets/aditya.png";
 import photoAbhishek from "@/assets/abhishek.png";
 import photoVaibhav from "@/assets/team-vaibhav.png";
+import photoAshish from "@/assets/ashish.png";
 import photoAlisha from "@/assets/team-alisha.png";
 import photoHarsh from "@/assets/team-harsh.jpeg";
 import photoDevendra from "@/assets/team-devendra.jpg";
@@ -125,8 +126,13 @@ const teamMembers = [
   },
   {
     name: "Mr. Abhishek Chourasiya",
-    role: "R&D Engineeer & Remote Pilot",
+    role: "R&D Engineer & Remote Pilot",
     img: photoAbhishek,
+  },
+  {
+    name: "Mr. Ashish Bamnawat",
+    role: "Training Co-coordinator & Remote Pilot",
+    img: photoAshish,
   },
 ];
 
@@ -357,11 +363,11 @@ export default function About() {
           </div>
 
           {/* Core Team Grid */}
-          <div className="max-w-5xl mx-auto">
+          <div className="max-w-6xl mx-auto">
             <h3 className="text-xs font-mono font-bold tracking-widest text-primary uppercase mb-6 text-center">
               Core Engineering & Training Team
             </h3>
-            <div className="flex sm:grid overflow-x-auto sm:overflow-x-visible snap-x snap-mandatory scrollbar-none -mx-4 px-4 sm:mx-0 sm:px-0 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="flex sm:grid overflow-x-auto sm:overflow-x-visible snap-x snap-mandatory scrollbar-none -mx-4 px-4 sm:mx-0 sm:px-0 sm:grid-cols-2 lg:grid-cols-5 gap-6">
               {teamMembers.map((m, i) => (
                 <div
                   key={i}
