@@ -4,9 +4,9 @@ import SEO from "@/components/SEO";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-import imgSurveillance from "@/assets/surveillance-project.jpg";
-import imgHighway from "@/assets/highway-project.jpg";
-import imgAgriculture from "@/assets/agriculture-project.jpg";
+import imgSurveillance from "@/assets/surveillance-project.png";
+import imgHighway from "@/assets/nhai-project.png";
+import imgAgriculture from "@/assets/agriculture-project.png";
 import imgSolar from "@/assets/solar-project.jpg";
 import imgSimulationLab from "@/assets/simulation-lab-project.jpg";
 
@@ -59,7 +59,7 @@ export default function Projects() {
 
   return (
     <main className="min-h-screen pt-16 sm:pt-20">
-      <SEO 
+      <SEO
         title="Case Studies & Projects"
         description="Explore Soaring Aerotech's real-world UAV deployments and projects. Read about our highway mapping surveys, solar inspections, surveillance operations, and drone agriculture missions."
         keywords="UAV case studies, drone projects, highway survey results, solar panel thermal scans, drone security deployments"

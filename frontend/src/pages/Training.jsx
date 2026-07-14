@@ -31,13 +31,13 @@ import imgGroup1 from "@/assets/training-group-1.jpg";
 import imgGroup2 from "@/assets/training-group-2.jpg";
 
 // Local asset imports for skill development courses
-import imgHighway from "@/assets/highway-project.jpg";
+import imgHighway from "@/assets/nhai-project.png";
 import imgDroneFieldDemo from "@/assets/drone-field-demo.jpg";
 
 const API_BASE = "https://soaring-aerotech-two.vercel.app";
 import imgSolar from "@/assets/solar-project.jpg";
 import imgSimulationLab from "@/assets/simulation-lab-project.jpg";
-import imgAgriculture from "@/assets/agriculture-project.jpg";
+import imgAgriculture from "@/assets/agriculture-project.png";
 import imgTechAdoption from "@/assets/tech-adoption.jpg";
 import imgManufacturing from "@/assets/uav-manufacturing.jpg";
 import imgExhibitionBooth from "@/assets/exhibition-booth.jpg";

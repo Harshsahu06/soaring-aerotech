@@ -334,4 +334,24 @@
   .bg-\[\#F5F5F5\] {
     background-color: hsl(var(--muted) / 0.45) !important;
   }
+
+  /* Infinite Marquee Slider styling */
+  @keyframes marquee {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-33.3333%);
+    }
+  }
+
+  .animate-marquee {
+    display: flex;
+    width: max-content;
+    animation: marquee 35s linear infinite;
+  }
+
+  .animate-marquee:hover {
+    animation-play-state: paused;
+  }
 }

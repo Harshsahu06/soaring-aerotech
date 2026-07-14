@@ -5,12 +5,12 @@ import SEO from "@/components/SEO";
 import { ArrowRight, Tractor, Map, Factory, Eye, Building2, HardHat, Sun, Building, GraduationCap, Shield, Truck, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import imgIndustryAgriculture from "@/assets/industry-agriculture.jpg";
-import imgIndustryDefence from "@/assets/industry-defence.jpg";
+import imgIndustryDefence from "@/assets/industry-defence.png";
 import imgIndustrySurvey from "@/assets/industry-survey-construction.jpg";
-import imgIndustryConstruction from "@/assets/industry-construction.jpg";
-import imgIndustryGovt from "@/assets/industry-govt.jpg";
+import imgIndustryConstruction from "@/assets/industry-construction.png";
+import imgIndustryGovt from "@/assets/industry-govt.png";
 import imgIndustryEducation from "@/assets/industry-education.jpg";
-import imgIndustryLogistics from "@/assets/industry-logistics.jpg";
+import imgIndustryLogistics from "@/assets/industry-logistics.png";
 import imgMpebInspection from "@/assets/mpeb-inspection.jpg";
 
 export default function Industries() {
@@ -129,12 +129,12 @@ export default function Industries() {
       <section className="py-10 sm:py-20 bg-white">
         <div className="container mx-auto px-4 md:px-6">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
-            
+
             {/* Left: grid of circles */}
             <div className="lg:col-span-7 w-full overflow-hidden">
               <div className="section-label">ALL INDUSTRIES</div>
               <h2 className="font-display text-2xl sm:text-3xl md:text-4xl text-foreground mb-8">12 Sectors We Serve</h2>
-              
+
               <div className="flex overflow-x-auto md:grid md:grid-cols-4 lg:grid-cols-3 gap-x-6 md:gap-x-4 gap-y-8 pb-4 md:pb-0 scrollbar-none snap-x snap-mandatory">
                 {industries.map((ind, i) => {
                   const isActive = active === i;
@@ -145,11 +145,10 @@ export default function Industries() {
                       className="flex-shrink-0 w-20 md:w-auto flex flex-col items-center group cursor-pointer snap-center"
                     >
                       <div
-                        className={`w-14 h-14 sm:w-20 sm:h-20 rounded-full flex items-center justify-center border transition-all duration-300 relative ${
-                          isActive
-                            ? "border-primary bg-primary/8 text-primary shadow-lg shadow-primary/15 scale-105"
-                            : "border-border bg-slate-50 text-foreground/50 group-hover:border-foreground/30 group-hover:text-foreground group-hover:bg-slate-100 group-hover:scale-102"
-                        }`}
+                        className={`w-14 h-14 sm:w-20 sm:h-20 rounded-full flex items-center justify-center border transition-all duration-300 relative ${isActive
+                          ? "border-primary bg-primary/8 text-primary shadow-lg shadow-primary/15 scale-105"
+                          : "border-border bg-slate-50 text-foreground/50 group-hover:border-foreground/30 group-hover:text-foreground group-hover:bg-slate-100 group-hover:scale-102"
+                          }`}
                       >
                         {isActive && (
                           <span className="absolute -inset-1 rounded-full border border-primary/20 animate-ping pointer-events-none" />
@@ -159,9 +158,8 @@ export default function Industries() {
                         </div>
                       </div>
                       <span
-                        className={`text-center text-[10px] sm:text-xs font-display font-semibold mt-2 md:mt-3 leading-tight tracking-tight max-w-[75px] md:max-w-[110px] transition-colors duration-200 line-clamp-2 md:line-clamp-none ${
-                          isActive ? "text-primary font-bold" : "text-muted-foreground group-hover:text-foreground"
-                        }`}
+                        className={`text-center text-[10px] sm:text-xs font-display font-semibold mt-2 md:mt-3 leading-tight tracking-tight max-w-[75px] md:max-w-[110px] transition-colors duration-200 line-clamp-2 md:line-clamp-none ${isActive ? "text-primary font-bold" : "text-muted-foreground group-hover:text-foreground"
+                          }`}
                       >
                         {ind.name}
                       </span>
@@ -224,7 +222,7 @@ export default function Industries() {
                       <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed mb-4 lg:mb-6">
                         {industries[active].desc}
                       </p>
-                      
+
                       {/* Desktop only full services list */}
                       <div className="hidden lg:block mb-6">
                         <div className="text-[10px] font-mono font-bold tracking-widest text-primary uppercase mb-3">
@@ -241,7 +239,7 @@ export default function Industries() {
                           ))}
                         </div>
                       </div>
-                      
+
                       <Link href="/contact" className="w-full block">
                         <Button className="w-full rounded-xl h-10 lg:h-12 text-xs lg:text-sm font-bold gap-2">
                           Enquire for {industries[active].name} <ArrowRight className="w-4 h-4" />

@@ -10,7 +10,7 @@ import imgSkilledWorkforce from "@/assets/skilled-workforce.jpg";
 import imgMediaCoverage from "@/assets/media-coverage.jpg";
 import imgTechAdoption from "@/assets/tech-adoption.jpg";
 import imgManufacturing from "@/assets/uav-manufacturing.jpg";
-import imgDroneSolutions from "@/assets/drone-solutions.jpg";
+import imgDroneSolutions from "@/assets/drone-services-pillar.png";
 import imgIndustryAcademia from "@/assets/industry-academia.jpg";
 import imgRdInnovation from "@/assets/rd-innovation.jpg";
 
@@ -25,8 +25,13 @@ import imgSimulationLab from "@/assets/simulation-lab-project.jpg";
 import imgSimulatorTraining2 from "@/assets/simulator-training-2.jpg";
 import imgPoliceTraining from "@/assets/police-training.jpg";
 import imgSolar from "@/assets/solar-project.jpg";
-import imgAgriculture from "@/assets/agriculture-project.jpg";
+import imgAgriculture from "@/assets/agriculture-project.png";
 import imgIndustrySurvey from "@/assets/industry-survey-construction.jpg";
+import imgNewsBetulDurga from "@/assets/news-betul-durga.jpg";
+import imgNewsChhatarpur from "@/assets/news-chhatarpur.jpg";
+import imgNewsSidhiLaxmi from "@/assets/news-sidhi-laxmi.jpg";
+import imgNewsJabalpurEmpowerment from "@/assets/news-jabalpur-empowerment.jpg";
+import imgNewsForestSecurityTraining from "@/assets/news-forest-security-training.jpg";
 
 const achievements = [
   {
@@ -77,12 +82,7 @@ const achievements = [
     img: imgIndustryAcademia,
     label: "Industry-Academia",
   },
-  {
-    caption:
-      "Contributing to the development of next-generation UAV technologies through research and practical implementation.",
-    img: imgRdInnovation,
-    label: "R&D Innovation",
-  },
+
   {
     caption:
       "Supporting government and industry initiatives through drone-based training and technology solutions.",
@@ -92,37 +92,14 @@ const achievements = [
 ];
 
 export default function Media() {
-  const mediaMentions = [
-    {
-      source: "Tech Crunch India",
-      type: "Article",
-      title:
-        "Soaring Aerotech pioneers automated thermal inspections for solar parks.",
-      date: "Nov 2024",
-      img: imgSolar,
-    },
-    {
-      source: "Aviation Week",
-      type: "Interview",
-      title:
-        "Interview with CEO on the future of DGCA certified drone training in India.",
-      date: "Oct 2024",
-      img: imgDroneFieldDemo,
-    },
-    {
-      source: "Startup India",
-      type: "Recognition",
-      title: "Recognized as Top 50 Aerospace Startups to watch in 2024.",
-      date: "Aug 2024",
-      img: imgTechAdoption,
-    },
-    {
-      source: "The Economic Times",
-      type: "Feature",
-      title: "How drones are transforming Indian agriculture yields.",
-      date: "Jul 2024",
-      img: imgAgriculture,
-    },
+  const [selectedImage, setSelectedImage] = useState(null);
+
+  const newsClippings = [
+    imgNewsForestSecurityTraining,
+    imgNewsBetulDurga,
+    imgNewsChhatarpur,
+    imgNewsSidhiLaxmi,
+    imgNewsJabalpurEmpowerment,
   ];
 
   const awards = [
@@ -193,7 +170,7 @@ export default function Media() {
 
   return (
     <main className="min-h-screen pt-20">
-      <SEO 
+      <SEO
         title="Media Coverage & Awards"
         description="Read the latest news and press coverage about Soaring Aerotech. Discover our achievements, awards, and our contributions to the Drone Didi Initiative."
         keywords="drone startup news, Soaring Aerotech awards, Drone Didi Initiative training, drone technology adoption, aerospace startup India"
@@ -266,49 +243,33 @@ export default function Media() {
       </section>
 
       {/* ── Media Mentions ────────────────────────── */}
-      <section className="py-10 sm:py-20 bg-slate-50 border-b border-border">
-        <div className="container mx-auto px-4 md:px-6">
-          <div className="mb-12">
-            <div className="section-label">IN THE PRESS</div>
-            <h2 className="font-display text-2xl sm:text-3xl md:text-4xl text-foreground">Media Mentions</h2>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {mediaMentions.map((m, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.08 }}
-                className="bg-white rounded-2xl overflow-hidden border border-border shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 flex flex-col"
+      <section className="py-10 sm:py-20 bg-slate-50 border-b border-border overflow-hidden">
+        <div className="container mx-auto px-4 md:px-6 mb-10">
+          <div className="section-label">IN THE PRESS</div>
+          <h2 className="font-display text-2xl sm:text-3xl md:text-4xl text-foreground mt-2">
+            Media Mentions
+          </h2>
+        </div>
+
+        {/* Marquee Wrapper */}
+        <div className="relative w-full overflow-hidden py-4 bg-white/40 backdrop-blur-sm border-y border-border">
+          {/* Subtle fade edges gradients */}
+          <div className="absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-slate-50 to-transparent z-10 pointer-events-none" />
+          <div className="absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-slate-50 to-transparent z-10 pointer-events-none" />
+
+          <div className="animate-marquee gap-6 px-4">
+            {[...newsClippings, ...newsClippings, ...newsClippings].map((img, index) => (
+              <div
+                key={index}
+                onClick={() => setSelectedImage(img)}
+                className="w-[260px] h-[360px] flex-shrink-0 bg-white rounded-2xl border border-border shadow-sm hover:shadow-md hover:scale-[1.03] transition-all duration-300 cursor-pointer p-4 flex items-center justify-center"
               >
-                <div className="relative h-44 overflow-hidden bg-slate-100">
-                  <img
-                    src={m.img}
-                    alt={m.source}
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute top-3 left-3">
-                    <span className="bg-primary/90 text-white text-[9px] font-mono tracking-wider uppercase px-2 py-0.5 rounded">
-                      {m.type}
-                    </span>
-                  </div>
-                </div>
-                <div className="p-5 flex-grow flex flex-col justify-between">
-                  <div>
-                    <div className="text-[10px] font-mono text-muted-foreground uppercase mb-2">
-                      {m.source} · {m.date}
-                    </div>
-                    <h3 className="font-display font-bold text-foreground text-sm leading-snug line-clamp-3">
-                      {m.title}
-                    </h3>
-                  </div>
-                  <div className="mt-4 pt-4 border-t border-border flex items-center justify-between text-xs text-primary font-bold">
-                    <span>Read Article</span>
-                    <ExternalLink className="w-3.5 h-3.5" />
-                  </div>
-                </div>
-              </motion.div>
+                <img
+                  src={img}
+                  alt="Newspaper Clipping"
+                  className="max-h-full max-w-full h-auto w-auto object-contain rounded-xl"
+                />
+              </div>
             ))}
           </div>
         </div>
@@ -385,7 +346,7 @@ export default function Media() {
             </div>
           </div>
 
-          <div 
+          <div
             className="relative overflow-hidden rounded-3xl border border-border/80 shadow-md bg-white"
             onMouseEnter={() => setPaused(true)}
             onMouseLeave={() => setPaused(false)}
@@ -408,7 +369,7 @@ export default function Media() {
                   />
                   {/* Subtle vignette/gradient overlay */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-black/10" />
-                  
+
                   {/* Slide text */}
                   <div className="absolute bottom-6 left-6 right-6 md:bottom-10 md:left-10 md:right-10 text-white">
                     <div className="text-[10px] md:text-xs font-mono font-bold tracking-widest text-primary uppercase mb-2">
@@ -440,6 +401,38 @@ export default function Media() {
 
         </div>
       </section>
+      {/* Lightbox Modal */}
+      <AnimatePresence>
+        {selectedImage && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setSelectedImage(null)}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 p-4 md:p-8 cursor-zoom-out"
+          >
+            <motion.div
+              initial={{ scale: 0.95 }}
+              animate={{ scale: 1 }}
+              exit={{ scale: 0.95 }}
+              className="relative max-w-4xl max-h-[85vh] overflow-hidden rounded-lg bg-white/5 border border-white/10"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <img
+                src={selectedImage}
+                alt="Selected Newspaper Clipping"
+                className="w-auto h-auto max-w-full max-h-[85vh] object-contain rounded-lg"
+              />
+              <button
+                onClick={() => setSelectedImage(null)}
+                className="absolute top-4 right-4 bg-black/60 hover:bg-black/85 text-white w-8 h-8 rounded-full flex items-center justify-center transition-colors font-bold text-sm"
+              >
+                ✕
+              </button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </main>
   );
 }

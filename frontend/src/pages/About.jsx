@@ -16,7 +16,7 @@ import photoAlisha from "@/assets/team-alisha.png";
 import photoHarsh from "@/assets/team-harsh.jpeg";
 import photoDevendra from "@/assets/team-devendra.jpg";
 import imgStudentTraining from "@/assets/student-training.jpg";
-import imgDroneSolutions from "@/assets/drone-solutions.jpg";
+import imgDroneSolutions from "@/assets/drone-services-pillar.png";
 import imgRdInnovation from "@/assets/rd-innovation.jpg";
 import imgTechAdoption from "@/assets/tech-adoption.jpg";
 import imgManufacturing from "@/assets/uav-manufacturing.jpg";
@@ -27,6 +27,7 @@ import imgAboutTrainPillar from "@/assets/about-train-pillar.jpg";
 import imgAboutInnovatePillar from "@/assets/rd-lab-drone.jpg";
 import imgPrestigeLogo from "@/assets/prestige-logo.png";
 import imgPrestigeInspiration from "@/assets/prestige-inspiration.jpg";
+import imgPrestigeLeaders from "@/assets/prestige-leaders.png";
 
 const pillars = [
   {
@@ -75,8 +76,8 @@ const creds = [
   {
     logo: (
       <div className="flex flex-col items-center justify-center text-primary">
-        <ShieldCheck className="w-12 h-12" />
-        <span className="text-[10px] font-mono font-bold tracking-wider mt-1 text-foreground/80">PVT. LTD.</span>
+        <ShieldCheck className="w-8 h-8 sm:w-12 sm:h-12" />
+        <span className="text-[9px] sm:text-[10px] font-mono font-bold tracking-wider mt-0.5 sm:mt-1 text-foreground/80">PVT. LTD.</span>
       </div>
     ),
     title: "Incorporated Pvt. Ltd.",
@@ -251,6 +252,23 @@ export default function About() {
             </div>
 
           </div>
+
+          {/* Full-width Prestige Leaders Grid */}
+          <div className="mt-8 pt-8 border-t border-border/60">
+            <div className="text-center mb-6">
+              <h3 className="font-display text-lg sm:text-xl md:text-2xl text-foreground font-semibold">
+                Prestige Group Leadership
+              </h3>
+            </div>
+            <div className="max-w-4xl mx-auto rounded-2xl lg:rounded-3xl overflow-hidden shadow-sm border border-border bg-white p-3 sm:p-6 hover:shadow-md transition-shadow">
+              <img
+                src={imgPrestigeLeaders}
+                alt="Prestige Group Leadership & Board of Directors"
+                className="w-full h-auto object-contain"
+              />
+            </div>
+          </div>
+
         </div>
       </section>
       <section className="py-20 bg-white border-b border-border">
@@ -300,11 +318,11 @@ export default function About() {
           </div>
 
           {/* Directors Grid */}
-          <div className="max-w-5xl mx-auto mb-16">
+          <div className="max-w-4xl mx-auto mb-16">
             <h3 className="text-xs font-mono font-bold tracking-widest text-primary uppercase mb-6 text-center">
               Board of Directors
             </h3>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6">
               {directors.map((d, i) => (
                 <motion.div
                   key={i}
@@ -312,24 +330,24 @@ export default function About() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.1 }}
-                  className="group bg-white rounded-2xl overflow-hidden border border-border shadow-sm hover:shadow-md transition-all duration-300 flex flex-col sm:flex-row hover:-translate-y-1"
+                  className="group bg-white rounded-2xl overflow-hidden border border-border shadow-sm hover:shadow-md transition-all duration-300 flex flex-row hover:-translate-y-1"
                 >
-                  <div className="w-full sm:w-44 h-56 sm:h-auto relative shrink-0 overflow-hidden bg-slate-100">
+                  <div className="w-24 xs:w-28 sm:w-36 md:w-40 relative shrink-0 overflow-hidden bg-slate-100">
                     <img
                       src={d.img}
                       alt={d.name}
                       className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-all duration-500"
                     />
                   </div>
-                  <div className="p-6 flex flex-col justify-center flex-1">
-                    <Award className="w-5 h-5 text-primary mb-3" />
-                    <blockquote className="text-sm text-foreground/75 italic mb-4 leading-relaxed">
+                  <div className="p-3.5 xs:p-4 sm:p-5 flex flex-col justify-center flex-1">
+                 
+                    <blockquote className="text-xs sm:text-sm text-foreground/75 italic mb-2 sm:mb-3 leading-relaxed">
                       "{d.quote}"
                     </blockquote>
-                    <div className="font-display font-bold text-foreground text-base leading-tight">
+                    <div className="font-display font-bold text-foreground text-sm sm:text-base leading-tight">
                       {d.name}
                     </div>
-                    <div className="text-xs text-primary font-mono tracking-wide mt-0.5">
+                    <div className="text-[9px] sm:text-xs text-primary font-mono tracking-wide mt-0.5 uppercase">
                       {d.role}, SOARING AEROTECH PVT. LTD.
                     </div>
                   </div>
@@ -422,18 +440,18 @@ export default function About() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.08 }}
-                className="p-6 rounded-2xl bg-white border border-border text-center hover:border-primary/30 hover:shadow-md transition-all flex flex-col items-center gap-4"
+                className="p-3 sm:p-6 rounded-2xl bg-white border border-border text-center hover:border-primary/30 hover:shadow-md transition-all flex flex-col items-center gap-2 sm:gap-4"
               >
-                <div className={`w-full h-24 rounded-xl ${c.bg} flex items-center justify-center overflow-hidden p-3 border border-border/50`}>
+                <div className={`w-full h-16 sm:h-24 rounded-xl ${c.bg} flex items-center justify-center overflow-hidden p-2 sm:p-3 border border-border/50`}>
                   {typeof c.logo === "string" ? (
-                    <img src={c.logo} alt={c.title} className="max-h-18 max-w-[90%] object-contain" />
+                    <img src={c.logo} alt={c.title} className="max-h-12 sm:max-h-18 max-w-[95%] sm:max-w-[90%] object-contain" />
                   ) : (
                     c.logo
                   )}
                 </div>
                 <div>
-                  <div className="font-bold text-sm text-foreground mb-1">{c.title}</div>
-                  <div className="text-xs text-muted-foreground leading-snug">{c.desc}</div>
+                  <div className="font-bold text-xs sm:text-sm text-foreground mb-1">{c.title}</div>
+                  <div className="text-[10px] sm:text-xs text-muted-foreground leading-snug">{c.desc}</div>
                 </div>
               </motion.div>
             ))}
@@ -444,7 +462,7 @@ export default function About() {
       {/* ── Visual CTA ───────────────────────────── */}
       <section className="relative py-14 overflow-hidden">
         <div className="absolute inset-0">
-          <img src="https://images.unsplash.com/photo-1534120247760-c44c3e4a62f1?w=1600&h=500&fit=crop" alt="" className="w-full h-full object-cover" />
+          <img src={imgDroneFieldDemo} alt="" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-black/65" />
         </div>
         <div className="container mx-auto px-4 md:px-6 relative z-10 text-center">

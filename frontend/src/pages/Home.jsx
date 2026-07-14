@@ -47,9 +47,10 @@ import imgNewsForestSecurity from "@/assets/news-forest-security.png";
 import videoDroneDescending from "@/assets/drone_descending.mp4";
 import imgManufacturing from "@/assets/uav-manufacturing.jpg";
 
-import imgSurveillance from "@/assets/surveillance-project.jpg";
-import imgHighway from "@/assets/highway-project.jpg";
-import imgAgriculture from "@/assets/agriculture-project.jpg";
+import imgSurveillance from "@/assets/surveillance-project.png";
+import imgHighway from "@/assets/nhai-project.png";
+import imgMprdcProject from "@/assets/mprdc-project.png";
+import imgAgriculture from "@/assets/agriculture-project.png";
 import imgSolar from "@/assets/solar-project.jpg";
 import imgSimulationLab from "@/assets/simulation-lab-project.jpg";
 import imgDidiInitiative from "@/assets/didi-initiative.jpg";
@@ -61,19 +62,19 @@ import imgStudentTraining from "@/assets/student-training.jpg";
 import imgSimulatorTraining2 from "@/assets/simulator-training-2.jpg";
 import imgFieldTraining3 from "@/assets/field-training-3.jpg";
 import imgPoliceTraining from "@/assets/police-training.jpg";
-import imgDroneSolutions from "@/assets/drone-solutions.jpg";
+import imgDroneSolutions from "@/assets/drone-services-pillar.png";
 import imgRdInnovation from "@/assets/rd-innovation.jpg";
 import imgTechAdoption from "@/assets/tech-adoption.jpg";
 import imgIndustryAgriculture from "@/assets/industry-agriculture.jpg";
-import imgIndustryDefence from "@/assets/industry-defence.jpg";
+import imgIndustryDefence from "@/assets/industry-defence.png";
 import imgIndustrySurvey from "@/assets/industry-survey-construction.jpg";
-import imgInnovationLab from "@/assets/rd-lab-laptop.jpg";
-import imgIndustryConstruction from "@/assets/industry-construction.jpg";
-import imgIndustryGovt from "@/assets/industry-govt.jpg";
+import imgInnovationLab from "@/assets/rd-innovation.jpg";
+import imgIndustryConstruction from "@/assets/industry-construction.png";
+import imgIndustryGovt from "@/assets/industry-govt.png";
 import imgAboutTrainPillar from "@/assets/about-train-pillar.jpg";
 import imgAboutInnovatePillar from "@/assets/rd-lab-drone.jpg";
 import imgIndustryEducation from "@/assets/industry-education.jpg";
-import imgIndustryLogistics from "@/assets/industry-logistics.jpg";
+import imgIndustryLogistics from "@/assets/industry-logistics.png";
 import imgMpebInspection from "@/assets/mpeb-inspection.jpg";
 
 
@@ -356,7 +357,7 @@ const projects = [
     cat: "MPRDC · ROAD SURVEY",
     title: "MPRDC State Highway Survey",
     result: "GIS-ready outputs delivered on schedule",
-    img: imgHighway,
+    img: imgMprdcProject,
   },
   {
     cat: "MPEB · INSPECTION",
@@ -460,7 +461,7 @@ const homeIndustries = [
   },
   {
     label: "Power & Utilities",
-    img: "https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=800&h=1000&fit=crop",
+    img: imgMpebInspection,
     icon: <Zap className="w-7 h-7" />,
   },
 ];
@@ -493,8 +494,8 @@ function IndustriesSection() {
                 >
                   <div
                     className={`w-14 h-14 rounded-full flex items-center justify-center border transition-all duration-300 relative ${isActive
-                        ? "border-primary bg-primary/8 text-primary shadow-lg shadow-primary/15 scale-105"
-                        : "border-border bg-slate-50 text-foreground/50"
+                      ? "border-primary bg-primary/8 text-primary shadow-lg shadow-primary/15 scale-105"
+                      : "border-border bg-slate-50 text-foreground/50"
                       }`}
                   >
                     {isActive && (
@@ -884,7 +885,7 @@ export default function Home() {
             transition={{ duration: 0.8, delay: 0.1 }}
             className="font-display text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black leading-[1.1] tracking-tight max-w-5xl mb-6 text-white"
           >
-            Driving{" "}
+            Driving Drone{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-rose-300 to-rose-500 drop-shadow-[0_0_35px_rgba(239,68,68,0.15)]">
               Innovation, Training & Solutions
             </span>
@@ -911,8 +912,8 @@ export default function Home() {
                 size="lg"
                 className="w-full sm:w-auto h-11 sm:h-12 px-3 sm:px-8 rounded-full text-[10px] sm:text-xs font-semibold uppercase tracking-wider bg-primary text-white hover:bg-primary/95 hover:shadow-[0_0_30px_rgba(239,68,68,0.35)] transition-all duration-300 group flex items-center justify-center"
               >
-                Explore Services{" "}
-                <ChevronRight className="w-3.5 h-3.5 ml-1 shrink-0 group-hover:translate-x-0.5 transition-transform" />
+                Explore Services{""}
+                <ChevronRight className="w-3.5 h-3.5 ml-0.5 shrink-0 group-hover:translate-x-0.5 transition-transform" />
               </Button>
             </Link>
             <Link href="/training" className="flex-1 sm:w-auto sm:flex-initial">
@@ -921,7 +922,7 @@ export default function Home() {
                 variant="outline"
                 className="w-full sm:w-auto h-11 sm:h-12 px-3 sm:px-8 rounded-full text-[10px] sm:text-xs font-semibold uppercase tracking-wider border-white/10 text-white bg-white/5 hover:bg-white/10 transition-all duration-300 flex items-center justify-center"
               >
-                Apply for RPTO Training
+                Apply for Training
               </Button>
             </Link>
           </motion.div>
@@ -1139,7 +1140,7 @@ export default function Home() {
                 INNOVATION LAB
               </div>
               <h2 className="font-display text-xl sm:text-3xl md:text-4xl text-white mb-4">
-                Research That Creates Technology
+                Building Next-Generation Drone Technologies
               </h2>
               <p className="text-white/50 leading-relaxed text-xs sm:text-sm mb-6">
                 We build next-generation drone technology. Our Innovation Lab drives active research in disaster-response UAVs, AI/ML systems, and persistent platforms.
