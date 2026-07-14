@@ -277,7 +277,7 @@ const stats = [
     label: "Missions Completed",
     sub: "Pan India Deployments",
   },
-  { target: 25, suffix: "+", label: "States Covered", sub: "National Footprint" },
+  { target: 20, suffix: "+", label: "States Covered", sub: "National Footprint" },
 ];
 
 const partners = [

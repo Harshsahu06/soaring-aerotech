@@ -120,9 +120,7 @@ function CourseSlider() {
               </span>
             </div>
             <div className="absolute bottom-0 left-0 right-0 p-5">
-              <div className="flex items-center gap-1.5 text-white/50 text-[10px] font-mono uppercase tracking-wider mb-2">
-                <Clock className="w-3 h-3" />{p.duration}
-              </div>
+
               <h3 className="font-display text-lg text-white leading-tight mb-3">{p.title}</h3>
               <div className="flex items-center gap-1.5 text-white/60 text-sm">
                 Learn more <ChevronRight className="w-3.5 h-3.5" />
@@ -166,9 +164,6 @@ function CourseSlider() {
                     </span>
                   </div>
                   <div className="absolute bottom-0 left-0 right-0 p-5">
-                    <div className="flex items-center gap-1.5 text-white/50 text-[10px] font-mono uppercase tracking-wider mb-2">
-                      <Clock className="w-3 h-3" />{p.duration}
-                    </div>
                     <h3 className="font-display text-lg text-white leading-tight mb-3">{p.title}</h3>
                     <div className="flex items-center gap-1.5 text-white/60 text-sm">
                       Learn more <ChevronRight className="w-3.5 h-3.5" />
