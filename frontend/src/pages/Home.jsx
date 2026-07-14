@@ -898,7 +898,7 @@ export default function Home() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-slate-400 text-xs sm:text-sm md:text-base max-w-3xl leading-relaxed mb-6 sm:mb-12 font-medium tracking-wide uppercase font-mono"
           >
-            Research & Development • Manufacturing • DGCA Approved RPTO • Industry Drone Services
+           Training - DGCA Approved • Research & Development • Manufacturing • Industry Drone Services
           </motion.p>
 
           <motion.div
