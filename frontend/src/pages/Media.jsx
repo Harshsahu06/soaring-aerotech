@@ -24,7 +24,7 @@ import imgExhibitionBooth from "@/assets/exhibition-booth.jpg";
 import imgSimulationLab from "@/assets/simulation-lab-project.jpg";
 import imgSimulatorTraining2 from "@/assets/simulator-training-2.jpg";
 import imgPoliceTraining from "@/assets/police-training.jpg";
-import imgSolar from "@/assets/solar-project.jpg";
+import imgSolar from "@/assets/solar-project.png";
 import imgAgriculture from "@/assets/agriculture-project.png";
 import imgIndustrySurvey from "@/assets/industry-survey-construction.jpg";
 import imgNewsBetulDurga from "@/assets/news-betul-durga.jpg";
