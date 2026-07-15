@@ -452,7 +452,7 @@ const homeIndustries = [
   },
   {
     label: "Solar & Energy",
-    img: "https://images.unsplash.com/photo-1509391366360-2e959784a276?w=800&h=1000&fit=crop",
+    img: imgSolarThermalInspection,
     icon: <Sun className="w-7 h-7" />,
   },
   {

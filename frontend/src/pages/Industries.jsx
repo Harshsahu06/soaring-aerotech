@@ -2,7 +2,13 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { Link } from "wouter";
 import SEO from "@/components/SEO";
-import { ArrowRight, Tractor, Map, Factory, Eye, Building2, HardHat, Sun, Building, GraduationCap, Shield, Truck, Zap } from "lucide-react";
+import { 
+  ArrowRight, Tractor, Map, Factory, Eye, Building2, HardHat, Sun, Building, 
+  GraduationCap, Shield, Truck, Zap, Mountain, Box, MapPin, Droplet, 
+  TrendingUp, Radio, Lock, Camera, Wind, CheckSquare, Calendar, Layers, 
+  Compass, Thermometer, AlertTriangle, Wrench, Landmark, Cpu, BookOpen, 
+  Target, Package, Activity 
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import imgIndustryAgriculture from "@/assets/industry-agriculture.jpg";
 import imgIndustryDefence from "@/assets/industry-defence.png";
@@ -16,96 +22,182 @@ import imgThermalInspection from "@/assets/thermal-inspection.jpg";
 import imgSolarThermalInspection from "@/assets/solar-thermal-inspection.jpg";
 
 export default function Industries() {
-  const [active, setActive] = useState(0);
+  const [selectedCategory, setSelectedCategory] = useState("all");
+
+  const categories = [
+    { id: "all", label: "All Sectors" },
+    { id: "survey_infra", label: "Infrastructure & Survey" },
+    { id: "security_defense", label: "Security & Defense" },
+    { id: "energy_industry", label: "Energy & Utilities" },
+    { id: "agri_logistics", label: "Agriculture & Logistics" },
+    { id: "education", label: "Education & R&D" },
+  ];
+
   const industries = [
     {
       name: "Agriculture",
-      icon: <Tractor className="w-7 h-7" />,
+      icon: <Tractor className="w-5 h-5" />,
       img: imgIndustryAgriculture,
+      slogan: "Precision farming & crop intelligence",
       desc: "Crop health monitoring using multispectral NDVI analysis, precision spraying, yield estimation, and irrigation planning for farms of any scale.",
-      services: ["Crop Health Mapping", "Precision Spraying", "Yield Estimation"],
+      services: [
+        { name: "Crop Health Mapping", icon: <TrendingUp className="w-6 h-6" /> },
+        { name: "Precision Spraying", icon: <Droplet className="w-6 h-6" /> },
+        { name: "Yield Estimation", icon: <Tractor className="w-6 h-6" /> }
+      ],
+      categories: ["agri_logistics"],
     },
     {
       name: "Survey & Mapping",
-      icon: <Map className="w-7 h-7" />,
+      icon: <Map className="w-5 h-5" />,
       img: imgIndustrySurvey,
-      desc: "High-accuracy topographic surveys, orthomosaic maps, 3D models, and volumetric analysis for land developers, NHAI, and infrastructure projects.",
-      services: ["Topographic Surveys", "3D Modeling", "Land Record Mapping"],
+      slogan: "High-precision aerial survey solutions",
+      desc: "Accurate topographic surveys, orthomosaic maps, 3D models, and volumetric analysis for land developers, NHAI, and infrastructure projects.",
+      services: [
+        { name: "Topographic Surveys", icon: <Mountain className="w-6 h-6" /> },
+        { name: "3D Modelling", icon: <Box className="w-6 h-6" /> },
+        { name: "Land Record Mapping", icon: <MapPin className="w-6 h-6" /> }
+      ],
+      categories: ["survey_infra"],
     },
     {
       name: "Infrastructure Inspection",
-      icon: <Building2 className="w-7 h-7" />,
+      icon: <Building2 className="w-5 h-5" />,
       img: imgThermalInspection,
+      slogan: "Non-disruptive structural inspection",
       desc: "Detailed visual and thermal inspection of bridges, highways, railways, and towers without disrupting daily operations or risking human life.",
-      services: ["Bridge Inspection", "Tower Audit", "Railway Inspection"],
+      services: [
+        { name: "Bridge Inspection", icon: <Layers className="w-6 h-6" /> },
+        { name: "Tower Audit", icon: <Radio className="w-6 h-6" /> },
+        { name: "Railway Inspection", icon: <Compass className="w-6 h-6" /> }
+      ],
+      categories: ["survey_infra"],
     },
     {
       name: "Surveillance & Security",
-      icon: <Eye className="w-7 h-7" />,
+      icon: <Eye className="w-5 h-5" />,
       img: "https://images.unsplash.com/photo-1508614589041-895b88991e3e?w=600&h=400&fit=crop",
+      slogan: "Real-time surveillance & security monitoring",
       desc: "Perimeter surveillance, crowd monitoring, border patrol support, and real-time security feeds for industrial facilities, events, and sensitive locations.",
-      services: ["Perimeter Patrol", "Industrial Security", "Event Monitoring"],
+      services: [
+        { name: "Perimeter Patrol", icon: <Eye className="w-6 h-6" /> },
+        { name: "Industrial Security", icon: <Lock className="w-6 h-6" /> },
+        { name: "Event Monitoring", icon: <Camera className="w-6 h-6" /> }
+      ],
+      categories: ["security_defense"],
     },
     {
       name: "Industrial Monitoring",
-      icon: <Factory className="w-7 h-7" />,
+      icon: <Factory className="w-5 h-5" />,
       img: "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=600&h=400&fit=crop",
+      slogan: "Compliance & asset safety tracking",
       desc: "Continuous monitoring of industrial plants, refineries, and manufacturing facilities for safety compliance, environmental monitoring, and asset tracking.",
-      services: ["Plant Monitoring", "Emissions Tracking", "Asset Inspection"],
+      services: [
+        { name: "Plant Monitoring", icon: <Factory className="w-6 h-6" /> },
+        { name: "Emissions Tracking", icon: <Wind className="w-6 h-6" /> },
+        { name: "Asset Inspection", icon: <CheckSquare className="w-6 h-6" /> }
+      ],
+      categories: ["energy_industry"],
     },
     {
       name: "Construction",
-      icon: <HardHat className="w-7 h-7" />,
+      icon: <HardHat className="w-5 h-5" />,
       img: imgIndustryConstruction,
+      slogan: "Stockpile & progress tracking solutions",
       desc: "Site mapping, weekly progress tracking, stockpile volumetrics, and BIM comparison for large-scale construction and real estate development projects.",
-      services: ["Progress Tracking", "Stockpile Analysis", "BIM Integration"],
+      services: [
+        { name: "Progress Tracking", icon: <Calendar className="w-6 h-6" /> },
+        { name: "Stockpile Analysis", icon: <Layers className="w-6 h-6" /> },
+        { name: "BIM Integration", icon: <Compass className="w-6 h-6" /> }
+      ],
+      categories: ["survey_infra"],
     },
     {
       name: "Solar Energy",
-      icon: <Sun className="w-7 h-7" />,
+      icon: <Sun className="w-5 h-5" />,
       img: imgSolarThermalInspection,
+      slogan: "Hotspot & diode fault mapping",
       desc: "Automated thermal drone inspections to identify hotspots, diode failures, and soiling across vast solar farms — inspecting MWs of panels in hours.",
-      services: ["Thermal Inspection", "Fault Detection", "Predictive Maintenance"],
+      services: [
+        { name: "Thermal Inspection", icon: <Thermometer className="w-6 h-6" /> },
+        { name: "Fault Detection", icon: <AlertTriangle className="w-6 h-6" /> },
+        { name: "Predictive Maintenance", icon: <Wrench className="w-6 h-6" /> }
+      ],
+      categories: ["energy_industry"],
     },
     {
       name: "Government & Smart Cities",
-      icon: <Building className="w-7 h-7" />,
+      icon: <Building className="w-5 h-5" />,
       img: imgIndustryGovt,
+      slogan: "Digitized land records & urban data",
       desc: "Land record digitization, urban planning data, disaster assessment, boundary surveys, and compliance monitoring for municipal and state authorities.",
-      services: ["Land Surveys", "Disaster Response", "Urban Planning"],
+      services: [
+        { name: "Land Surveys", icon: <Landmark className="w-6 h-6" /> },
+        { name: "Disaster Response", icon: <AlertTriangle className="w-6 h-6" /> },
+        { name: "Urban Planning", icon: <Building className="w-6 h-6" /> }
+      ],
+      categories: ["survey_infra"],
     },
     {
       name: "Education & Research",
-      icon: <GraduationCap className="w-7 h-7" />,
+      icon: <GraduationCap className="w-5 h-5" />,
       img: imgIndustryEducation,
+      slogan: "Academic partnerships & drone curricula",
       desc: "Academic partnerships providing institutions and universities with drone labs, DGCA training curricula, and hands-on aerospace engineering programs.",
-      services: ["Campus Drone Labs", "DGCA Curriculum", "Research Projects"],
+      services: [
+        { name: "Campus Drone Labs", icon: <Cpu className="w-6 h-6" /> },
+        { name: "DGCA Curriculum", icon: <BookOpen className="w-6 h-6" /> },
+        { name: "Research Projects", icon: <GraduationCap className="w-6 h-6" /> }
+      ],
+      categories: ["education"],
     },
     {
       name: "Defense & Security Forces",
-      icon: <Shield className="w-7 h-7" />,
+      icon: <Shield className="w-5 h-5" />,
       img: imgIndustryDefence,
+      slogan: "Tactical reconnaissance & defense systems",
       desc: "Surveillance and reconnaissance UAVs, FPV drones, specialized defense drone training for police and military, and custom defense payload development.",
-      services: ["Surveillance UAVs", "Defense Training", "Custom Payloads"],
+      services: [
+        { name: "Surveillance UAVs", icon: <Shield className="w-6 h-6" /> },
+        { name: "Defense Training", icon: <Target className="w-6 h-6" /> },
+        { name: "Custom Payloads", icon: <Package className="w-6 h-6" /> }
+      ],
+      categories: ["security_defense"],
     },
     {
       name: "Logistics & Delivery",
-      icon: <Truck className="w-7 h-7" />,
+      icon: <Truck className="w-5 h-5" />,
       img: imgIndustryLogistics,
+      slogan: "Cargo UAVs & last-mile delivery solutions",
       desc: "Proof-of-concept drone delivery systems, last-mile logistics studies, and cargo drone solutions for remote and inaccessible locations.",
-      services: ["Last-Mile Delivery", "Remote Logistics", "Cargo Drones"],
+      services: [
+        { name: "Last-Mile Delivery", icon: <Truck className="w-6 h-6" /> },
+        { name: "Remote Logistics", icon: <Map className="w-6 h-6" /> },
+        { name: "Cargo Drones", icon: <Package className="w-6 h-6" /> }
+      ],
+      categories: ["agri_logistics"],
     },
     {
       name: "Power & Utilities",
-      icon: <Zap className="w-7 h-7" />,
+      icon: <Zap className="w-5 h-5" />,
       img: imgMpebInspection,
+      slogan: "Transmission line & substation auditing",
       desc: "Inspection of high-voltage transmission lines, substations, and wind turbines in difficult terrain — faster and safer than traditional climbing crews.",
-      services: ["Powerline Audit", "Substation Inspection", "Wind Turbine Survey"],
+      services: [
+        { name: "Powerline Audit", icon: <Zap className="w-6 h-6" /> },
+        { name: "Substation Inspection", icon: <Activity className="w-6 h-6" /> },
+        { name: "Wind Turbine Survey", icon: <Wind className="w-6 h-6" /> }
+      ],
+      categories: ["energy_industry", "survey_infra"],
     },
   ];
 
+  const filteredIndustries = selectedCategory === "all"
+    ? industries
+    : industries.filter(ind => ind.categories.includes(selectedCategory));
+
   return (
-    <main className="min-h-screen pt-16 sm:pt-20">
+    <main className="min-h-screen pt-16 sm:pt-20 bg-slate-50/50">
       <SEO
         title="Industries We Serve"
         description="Soaring Aerotech provides drone services across 12 major sectors in India, including Agriculture, Solar Energy, Power Utilities, Construction, Smart Cities, and Defense."
@@ -113,163 +205,141 @@ export default function Industries() {
       />
 
       {/* ── Hero ─────────────────────────────────── */}
-      <section className="bg-[#F5F5F5] border-b border-border py-8 sm:py-14">
+      <section className="bg-white border-b border-border/80 py-10 sm:py-16">
         <div className="container mx-auto px-4 md:px-6">
-          <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}>
+          <motion.div 
+            initial={{ opacity: 0, y: 16 }} 
+            animate={{ opacity: 1, y: 0 }}
+            className="max-w-3xl"
+          >
             <div className="section-label">12 INDUSTRIES · PAN INDIA</div>
-            <h1 className="font-display text-3xl sm:text-4xl md:text-5xl text-foreground leading-tight mb-4">
+            <h1 className="font-display text-3xl sm:text-4xl md:text-5xl text-foreground leading-tight mb-4 font-bold">
               Industries We <span className="text-primary">Serve</span>
             </h1>
-            <p className="text-muted-foreground text-base max-w-2xl">
+            <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
               Soaring Aerotech delivers UAV intelligence and certified pilots across every major industry in India — from agriculture and defence to logistics and smart cities.
             </p>
           </motion.div>
         </div>
       </section>
 
-      {/* ── Industries interactive grid ────────────── */}
-      <section className="py-10 sm:py-20 bg-white">
+      {/* ── Filter & Cards Grid ────────────────────── */}
+      <section className="py-12 sm:py-20">
         <div className="container mx-auto px-4 md:px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
+          
+          {/* Category Filter Selector */}
+          <div className="mb-10 sm:mb-14">
+            <div className="flex overflow-x-auto gap-2 pb-4 scrollbar-none snap-x snap-mandatory -mx-4 px-4 sm:mx-0 sm:px-0 sm:flex-wrap sm:justify-start">
+              {categories.map((cat) => {
+                const isSelected = selectedCategory === cat.id;
+                return (
+                  <button
+                    key={cat.id}
+                    onClick={() => setSelectedCategory(cat.id)}
+                    className={`snap-center shrink-0 px-5 py-2.5 rounded-full text-xs font-semibold border transition-all duration-200 ${
+                      isSelected
+                        ? "bg-primary text-white border-primary shadow-sm shadow-primary/20"
+                        : "bg-white border-slate-200 text-muted-foreground hover:bg-slate-50 hover:text-foreground"
+                    }`}
+                  >
+                    {cat.label}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
 
-            {/* Left: grid of circles */}
-            <div className="lg:col-span-7 w-full overflow-hidden">
-              <div className="section-label">ALL INDUSTRIES</div>
-              <h2 className="font-display text-2xl sm:text-3xl md:text-4xl text-foreground mb-8">12 Sectors We Serve</h2>
-
-              <div className="flex overflow-x-auto md:grid md:grid-cols-4 lg:grid-cols-3 gap-x-6 md:gap-x-4 gap-y-8 pb-4 md:pb-0 scrollbar-none snap-x snap-mandatory">
-                {industries.map((ind, i) => {
-                  const isActive = active === i;
-                  return (
-                    <div
-                      key={i}
-                      onClick={() => setActive(i)}
-                      className="flex-shrink-0 w-20 md:w-auto flex flex-col items-center group cursor-pointer snap-center"
-                    >
-                      <div
-                        className={`w-14 h-14 sm:w-20 sm:h-20 rounded-full flex items-center justify-center border transition-all duration-300 relative ${isActive
-                          ? "border-primary bg-primary/8 text-primary shadow-lg shadow-primary/15 scale-105"
-                          : "border-border bg-slate-50 text-foreground/50 group-hover:border-foreground/30 group-hover:text-foreground group-hover:bg-slate-100 group-hover:scale-102"
-                          }`}
-                      >
-                        {isActive && (
-                          <span className="absolute -inset-1 rounded-full border border-primary/20 animate-ping pointer-events-none" />
-                        )}
-                        <div className="transition-transform duration-500 group-hover:rotate-12 group-hover:scale-110">
-                          {ind.icon}
-                        </div>
-                      </div>
-                      <span
-                        className={`text-center text-[10px] sm:text-xs font-display font-semibold mt-2 md:mt-3 leading-tight tracking-tight max-w-[75px] md:max-w-[110px] transition-colors duration-200 line-clamp-2 md:line-clamp-none ${isActive ? "text-primary font-bold" : "text-muted-foreground group-hover:text-foreground"
-                          }`}
-                      >
+          {/* Cards Grid */}
+          <motion.div 
+            layout 
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"
+          >
+            <AnimatePresence mode="popLayout">
+              {filteredIndustries.map((ind) => (
+                <motion.div
+                  layout
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  transition={{ duration: 0.25 }}
+                  key={ind.name}
+                  className="group bg-white rounded-[28px] border border-slate-200 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col overflow-hidden"
+                >
+                  {/* Card Image header */}
+                  <div className="relative h-44 sm:h-64 overflow-hidden shrink-0">
+                    <img
+                      src={ind.img}
+                      alt={ind.name}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent" />
+                    
+                    {/* Slogan & Title Overlay */}
+                    <div className="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-6">
+                      <span className="font-display text-xl sm:text-2xl text-white font-bold tracking-tight block">
                         {ind.name}
                       </span>
+                      <div className="w-8 h-0.5 sm:h-1 bg-primary mt-1.5 mb-1.5 sm:mt-2 sm:mb-2" />
+                      <p className="text-white/90 text-[10px] sm:text-sm font-medium">
+                        {ind.slogan}
+                      </p>
                     </div>
-                  );
-                })}
-              </div>
-            </div>
+                  </div>
 
-            {/* Right / Bottom: active industry card */}
-            <div className="lg:col-span-5 sticky top-24 w-full">
-              <AnimatePresence mode="wait">
-                {active !== -1 && (
-                  <motion.div
-                    key={active}
-                    initial={{ opacity: 0, y: 15 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -15 }}
-                    transition={{ duration: 0.3 }}
-                    className="bg-slate-50 border border-border rounded-3xl overflow-hidden shadow-md flex flex-col p-4 lg:p-0"
-                  >
-                    {/* Mobile layout (flex-row for title & thumbnail, compact spacing) */}
-                    <div className="flex flex-row items-center gap-4 lg:hidden">
-                      <img
-                        src={industries[active].img}
-                        alt={industries[active].name}
-                        className="w-16 h-16 rounded-xl object-cover border border-border shrink-0"
-                      />
-                      <div>
-                        <h3 className="font-display text-lg text-foreground font-bold">
-                          {industries[active].name}
-                        </h3>
-                        <div className="flex flex-wrap gap-1 mt-1">
-                          {industries[active].services.slice(0, 2).map((s, j) => (
-                            <span key={j} className="text-[9px] px-2 py-0.5 rounded bg-white border border-border text-foreground/60">
-                              {s}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Desktop layout (large image, absolute title) */}
-                    <div className="hidden lg:block relative overflow-hidden aspect-[4/3] w-full rounded-t-3xl">
-                      <img
-                        src={industries[active].img}
-                        alt={industries[active].name}
-                        className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
-                      <div className="absolute bottom-4 left-4 right-4">
-                        <h3 className="font-display text-2xl text-white font-bold">
-                          {industries[active].name}
-                        </h3>
-                      </div>
-                    </div>
-
-                    {/* Description & Rest of Info */}
-                    <div className="mt-3 lg:mt-0 lg:p-6">
-                      <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed mb-4 lg:mb-6">
-                        {industries[active].desc}
+                  {/* Card Body */}
+                  <div className="p-3.5 sm:p-6 flex-1 flex flex-col justify-between">
+                    <div>
+                      <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed mb-4 line-clamp-3 sm:line-clamp-none">
+                        {ind.desc}
                       </p>
 
-                      {/* Desktop only full services list */}
-                      <div className="hidden lg:block mb-6">
-                        <div className="text-[10px] font-mono font-bold tracking-widest text-primary uppercase mb-3">
-                          Key Solutions & Services
-                        </div>
-                        <div className="flex flex-wrap gap-2">
-                          {industries[active].services.map((s, j) => (
-                            <span
-                              key={j}
-                              className="px-3.5 py-1.5 rounded-full bg-white border border-border text-foreground/75 text-xs font-medium shadow-sm hover:border-primary/30 transition-colors"
-                            >
-                              {s}
+                      {/* 3-Column horizontal grid for services */}
+                      <div className="grid grid-cols-3 divide-x divide-slate-100 border-y border-slate-100 py-3 sm:py-6 mb-4 sm:mb-6">
+                        {ind.services.map((s, j) => (
+                          <div key={j} className="flex flex-col items-center text-center px-1">
+                            <div className="text-primary mb-1.5 sm:mb-2 flex justify-center items-center scale-90 sm:scale-100">
+                              {s.icon}
+                            </div>
+                            <span className="text-[8px] sm:text-[11px] font-medium text-foreground leading-tight">
+                              {s.name}
                             </span>
-                          ))}
-                        </div>
+                          </div>
+                        ))}
                       </div>
-
-                      <Link href="/contact" className="w-full block">
-                        <Button className="w-full rounded-xl h-10 lg:h-12 text-xs lg:text-sm font-bold gap-2">
-                          Enquire for {industries[active].name} <ArrowRight className="w-4 h-4" />
-                        </Button>
-                      </Link>
                     </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
 
-          </div>
+                    {/* Action Button */}
+                    <Link href={`/contact?subject=${encodeURIComponent("Enquiry for " + ind.name)}`} className="w-full block">
+                      <Button 
+                        className="w-full rounded-2xl h-10 sm:h-12 text-xs sm:text-sm font-bold gap-1.5 bg-primary hover:bg-primary/95 text-white transition-all duration-200 flex items-center justify-center border-none shadow-sm"
+                      >
+                        <span className="inline sm:hidden">Enquire Now</span>
+                        <span className="hidden sm:inline">Enquire for {ind.name}</span>
+                        <ArrowRight className="w-3.5 h-3.5 shrink-0 ml-0.5" />
+                      </Button>
+                    </Link>
+                  </div>
+                </motion.div>
+              ))}
+            </AnimatePresence>
+          </motion.div>
+
         </div>
       </section>
 
       {/* ── CTA ──────────────────────────────────── */}
-      <section className="relative py-10 sm:py-14 overflow-hidden">
+      <section className="relative py-14 sm:py-20 overflow-hidden border-t border-border">
         <div className="absolute inset-0">
           <img src="https://images.unsplash.com/photo-1508614589041-895b88991e3e?w=1600&h=500&fit=crop" alt="" className="w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-black/65" />
+          <div className="absolute inset-0 bg-black/70" />
         </div>
         <div className="container mx-auto px-4 md:px-6 relative z-10 text-center">
-          <h2 className="font-display text-2xl sm:text-3xl md:text-4xl text-white mb-3">Your Industry Not Listed?</h2>
-          <p className="text-white/50 mb-6 max-w-lg mx-auto text-sm">
+          <h2 className="font-display text-2xl sm:text-3xl md:text-4xl text-white mb-3 font-bold">Your Industry Not Listed?</h2>
+          <p className="text-white/60 mb-8 max-w-lg mx-auto text-xs sm:text-sm leading-relaxed">
             Drone technology is sector-agnostic. Contact us to discuss how UAVs can solve your specific operational challenges.
           </p>
           <Link href="/contact">
-            <Button size="lg" className="rounded-full h-12 px-8 text-base font-semibold">Discuss Your Use Case</Button>
+            <Button size="lg" className="rounded-full h-12 px-8 text-sm sm:text-base font-semibold shadow-lg shadow-primary/20">Discuss Your Use Case</Button>
           </Link>
         </div>
       </section>
