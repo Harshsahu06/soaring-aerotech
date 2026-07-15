@@ -8,7 +8,9 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-const API_BASE = "https://soaring-aerotech-two.vercel.app";
+const API_BASE = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1"
+  ? "http://localhost:3001"
+  : "https://soaring-aerotech-two.vercel.app";
 
 export default function Admin() {
   const [submissions, setSubmissions] = useState([]);
@@ -36,6 +38,168 @@ export default function Admin() {
   const [editFollowUpDate, setEditFollowUpDate] = useState("");
   const [editClientResponse, setEditClientResponse] = useState("");
   const [crmSavingId, setCrmSavingId] = useState(null);
+
+  // Lead Addition States
+  const [showAddModal, setShowAddModal] = useState(false);
+  const [addModalTab, setAddModalTab] = useState("single"); // single, bulk
+  const [bulkFormat, setBulkFormat] = useState("csv"); // csv, json
+  const [bulkInput, setBulkInput] = useState("");
+  const [bulkImportError, setBulkImportError] = useState("");
+  
+  // Single Lead Form
+  const [singleLead, setSingleLead] = useState({
+    type: "contact",
+    name: "",
+    phone: "",
+    email: "",
+    subject: "",
+    program: "",
+    message: "",
+    status: "new",
+    notes: "",
+    clientResponse: "",
+    followUpDate: ""
+  });
+  const [singleSaving, setSingleSaving] = useState(false);
+  const [bulkSaving, setBulkSaving] = useState(false);
+
+  const handleAddSingleLead = async (e) => {
+    e.preventDefault();
+    if (!singleLead.name || !singleLead.phone) {
+      alert("Name and Phone are required.");
+      return;
+    }
+    setSingleSaving(true);
+    const token = localStorage.getItem("soaring_admin_token");
+    try {
+      const res = await fetch(`${API_BASE}/api/forms/submissions/manual`, {
+        method: "POST",
+        headers: {
+          "Authorization": `Bearer ${token}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(singleLead)
+      });
+      const data = await res.json();
+      if (data.success) {
+        setSubmissions(prev => [data.data, ...prev]);
+        setShowAddModal(false);
+        // Reset state
+        setSingleLead({
+          type: "contact",
+          name: "",
+          phone: "",
+          email: "",
+          subject: "",
+          program: "",
+          message: "",
+          status: "new",
+          notes: "",
+          clientResponse: "",
+          followUpDate: ""
+        });
+      } else {
+        alert(data.error || "Failed to create lead.");
+      }
+    } catch (err) {
+      alert("Error saving manual lead.");
+    } finally {
+      setSingleSaving(false);
+    }
+  };
+
+  const handleAddBulkLeads = async () => {
+    setBulkImportError("");
+    let parsedLeads = [];
+    
+    if (bulkFormat === "json") {
+      try {
+        const parsed = JSON.parse(bulkInput);
+        if (!Array.isArray(parsed)) {
+          setBulkImportError("JSON input must be an array of objects.");
+          return;
+        }
+        parsedLeads = parsed;
+      } catch (err) {
+        setBulkImportError("Invalid JSON format. Please check syntax.");
+        return;
+      }
+    } else {
+      // CSV parser
+      try {
+        const lines = bulkInput.trim().split("\n");
+        if (lines.length < 2) {
+          setBulkImportError("CSV input must contain at least a header row and one data row.");
+          return;
+        }
+        const headers = lines[0].split(",").map(h => h.trim().toLowerCase());
+        
+        // Basic check for name and phone in headers
+        if (!headers.includes("name") || !headers.includes("phone")) {
+          setBulkImportError("CSV headers must include 'name' and 'phone'.");
+          return;
+        }
+        
+        for (let i = 1; i < lines.length; i++) {
+          const line = lines[i].trim();
+          if (!line) continue;
+          
+          const columns = line.split(",").map(c => c.trim());
+          const lead = {};
+          
+          headers.forEach((header, index) => {
+            const value = columns[index] || "";
+            if (header === "name") lead.name = value;
+            else if (header === "phone") lead.phone = value;
+            else if (header === "email") lead.email = value;
+            else if (header === "program") lead.program = value;
+            else if (header === "message") lead.message = value;
+            else if (header === "subject") lead.subject = value;
+            else if (header === "type") lead.type = value;
+            else if (header === "notes") lead.notes = value;
+            else if (header === "status") lead.status = value;
+          });
+          
+          if (lead.name && lead.phone) {
+            parsedLeads.push(lead);
+          }
+        }
+      } catch (err) {
+        setBulkImportError("Failed to parse CSV lines.");
+        return;
+      }
+    }
+    
+    if (parsedLeads.length === 0) {
+      setBulkImportError("No valid leads found (Name and Phone are mandatory for each row).");
+      return;
+    }
+    
+    setBulkSaving(true);
+    const token = localStorage.getItem("soaring_admin_token");
+    try {
+      const res = await fetch(`${API_BASE}/api/forms/submissions/bulk`, {
+        method: "POST",
+        headers: {
+          "Authorization": `Bearer ${token}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ leads: parsedLeads })
+      });
+      const data = await res.json();
+      if (data.success) {
+        setSubmissions(prev => [...data.data, ...prev]);
+        setShowAddModal(false);
+        setBulkInput("");
+      } else {
+        setBulkImportError(data.error || "Failed to import bulk leads.");
+      }
+    } catch (err) {
+      setBulkImportError("Network error during bulk import.");
+    } finally {
+      setBulkSaving(false);
+    }
+  };
 
   // Load and verify session
   useEffect(() => {
@@ -339,6 +503,14 @@ Follow-Up: ${sub.followUpDate ? new Date(sub.followUpDate).toLocaleDateString() 
           </div>
 
           <div className="flex items-center gap-3">
+            {/* Add Lead Button */}
+            <Button 
+              onClick={() => setShowAddModal(true)}
+              className="bg-primary hover:bg-primary/90 text-white flex items-center gap-1.5 rounded-xl text-xs sm:text-sm font-bold shrink-0"
+            >
+              <PlusCircle className="w-4 h-4" /> Add Lead
+            </Button>
+
             {/* Theme Toggle Button */}
             <button
               onClick={toggleTheme}
@@ -864,6 +1036,355 @@ Follow-Up: ${sub.followUpDate ? new Date(sub.followUpDate).toLocaleDateString() 
           </div>
         )}
       </main>
+
+      {/* ── Add Lead Modal ──────────────────────── */}
+      <AnimatePresence>
+        {showAddModal && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 10 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 10 }}
+              className={`w-full max-w-2xl rounded-2xl border shadow-2xl overflow-hidden flex flex-col max-h-[90vh] ${
+                isDark ? "bg-[#0f0f13] border-white/10 text-white" : "bg-white border-slate-200 text-slate-900"
+              }`}
+            >
+              {/* Modal Header */}
+              <div className={`p-5 border-b flex justify-between items-center ${isDark ? "border-white/5 bg-white/5" : "border-slate-100 bg-slate-50"}`}>
+                <div>
+                  <h3 className="font-display font-bold text-lg">Add New Lead(s)</h3>
+                  <p className={`text-xs ${isDark ? "text-white/40" : "text-slate-450"}`}>Manually add a single lead or batch import multiple leads</p>
+                </div>
+                <button 
+                  onClick={() => setShowAddModal(false)}
+                  className={`p-1.5 rounded-lg border transition-colors ${
+                    isDark ? "text-white/40 hover:text-white border-white/5 hover:bg-white/5" : "text-slate-400 hover:text-slate-600 border-slate-200 hover:bg-slate-100"
+                  }`}
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              </div>
+
+              {/* Modal Tabs */}
+              <div className={`p-4 border-b flex gap-2 ${isDark ? "border-white/5" : "border-slate-100"}`}>
+                <button
+                  type="button"
+                  onClick={() => setAddModalTab("single")}
+                  className={`px-4 py-2 rounded-xl text-xs font-bold transition-all ${
+                    addModalTab === "single"
+                      ? "bg-primary text-white shadow-md"
+                      : isDark
+                        ? "text-white/60 hover:text-white hover:bg-white/5"
+                        : "text-slate-600 hover:text-slate-900 hover:bg-slate-105"
+                  }`}
+                >
+                  Single Lead Form
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setAddModalTab("bulk")}
+                  className={`px-4 py-2 rounded-xl text-xs font-bold transition-all ${
+                    addModalTab === "bulk"
+                      ? "bg-primary text-white shadow-md"
+                      : isDark
+                        ? "text-white/60 hover:text-white hover:bg-white/5"
+                        : "text-slate-600 hover:text-slate-900 hover:bg-slate-105"
+                  }`}
+                >
+                  Bulk Import Leads
+                </button>
+              </div>
+
+              {/* Modal Content Scrollable Area */}
+              <div className="p-6 overflow-y-auto flex-1">
+                {addModalTab === "single" ? (
+                  <form onSubmit={handleAddSingleLead} className="space-y-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div>
+                        <label className={`text-xs font-semibold block mb-1.5 ${isDark ? "text-white/70" : "text-slate-600"}`}>Lead Source/Type *</label>
+                        <select
+                          value={singleLead.type}
+                          onChange={(e) => setSingleLead(prev => ({ ...prev, type: e.target.value }))}
+                          className={`w-full px-3 py-2 text-xs rounded-xl focus:border-blue-500/55 focus:outline-none border ${
+                            isDark ? "bg-white/5 border-white/10 text-white" : "bg-white border-slate-200 text-slate-900"
+                          }`}
+                        >
+                          <option value="contact" className="bg-[#0f0f13] text-white">Contact Form</option>
+                          <option value="training" className="bg-[#0f0f13] text-white">Training Form</option>
+                        </select>
+                      </div>
+
+                      <div>
+                        <label className={`text-xs font-semibold block mb-1.5 ${isDark ? "text-white/70" : "text-slate-600"}`}>Name *</label>
+                        <input
+                          type="text"
+                          required
+                          value={singleLead.name}
+                          onChange={(e) => setSingleLead(prev => ({ ...prev, name: e.target.value }))}
+                          placeholder="e.g. Rahul Sharma"
+                          className={`w-full px-3 py-2 text-xs rounded-xl focus:border-blue-500/50 focus:outline-none border ${
+                            isDark ? "bg-white/5 border-white/10 text-white placeholder-white/20" : "bg-white border-slate-200 text-slate-900 placeholder-slate-400"
+                          }`}
+                        />
+                      </div>
+
+                      <div>
+                        <label className={`text-xs font-semibold block mb-1.5 ${isDark ? "text-white/70" : "text-slate-600"}`}>Phone *</label>
+                        <input
+                          type="text"
+                          required
+                          value={singleLead.phone}
+                          onChange={(e) => setSingleLead(prev => ({ ...prev, phone: e.target.value }))}
+                          placeholder="e.g. +91 98765 43210"
+                          className={`w-full px-3 py-2 text-xs rounded-xl focus:border-blue-500/50 focus:outline-none border ${
+                            isDark ? "bg-white/5 border-white/10 text-white placeholder-white/20" : "bg-white border-slate-200 text-slate-900 placeholder-slate-400"
+                          }`}
+                        />
+                      </div>
+
+                      <div>
+                        <label className={`text-xs font-semibold block mb-1.5 ${isDark ? "text-white/70" : "text-slate-600"}`}>Email</label>
+                        <input
+                          type="email"
+                          value={singleLead.email}
+                          onChange={(e) => setSingleLead(prev => ({ ...prev, email: e.target.value }))}
+                          placeholder="e.g. rahul@example.com"
+                          className={`w-full px-3 py-2 text-xs rounded-xl focus:border-blue-500/50 focus:outline-none border ${
+                            isDark ? "bg-white/5 border-white/10 text-white placeholder-white/20" : "bg-white border-slate-200 text-slate-900 placeholder-slate-400"
+                          }`}
+                        />
+                      </div>
+
+                      {singleLead.type === "training" ? (
+                        <div>
+                          <label className={`text-xs font-semibold block mb-1.5 ${isDark ? "text-white/70" : "text-slate-600"}`}>Course Program</label>
+                          <select
+                            value={singleLead.program}
+                            onChange={(e) => setSingleLead(prev => ({ ...prev, program: e.target.value }))}
+                            className={`w-full px-3 py-2 text-xs rounded-xl focus:border-blue-500/50 focus:outline-none border ${
+                              isDark ? "bg-white/5 border-white/10 text-white" : "bg-white border-slate-200 text-slate-900"
+                            }`}
+                          >
+                            <option value="" className="bg-[#0f0f13] text-white">-- Select Program --</option>
+                            <option value="DGCA RPC — Small Class (₹20,000)" className="bg-[#0f0f13] text-white">DGCA RPC — Small Class (₹20,000)</option>
+                            <option value="DGCA Multirotor (₹25,000)" className="bg-[#0f0f13] text-white">DGCA Multirotor (₹25,000)</option>
+                            <option value="Mapping & Surveying" className="bg-[#0f0f13] text-white">Mapping & Surveying</option>
+                            <option value="GIS & Geospatial" className="bg-[#0f0f13] text-white">GIS & Geospatial</option>
+                            <option value="Thermal & Multispectral" className="bg-[#0f0f13] text-white">Thermal & Multispectral</option>
+                            <option value="AI/ML for Drones" className="bg-[#0f0f13] text-white">AI/ML for Drones</option>
+                            <option value="Precision Agriculture" className="bg-[#0f0f13] text-white">Precision Agriculture</option>
+                            <option value="Assembly & Maintenance" className="bg-[#0f0f13] text-white">Assembly & Maintenance</option>
+                            <option value="Drone Entrepreneurship" className="bg-[#0f0f13] text-white">Drone Entrepreneurship</option>
+                            <option value="Corporate Batch Enquiry" className="bg-[#0f0f13] text-white">Corporate Batch Enquiry</option>
+                          </select>
+                        </div>
+                      ) : (
+                        <div>
+                          <label className={`text-xs font-semibold block mb-1.5 ${isDark ? "text-white/70" : "text-slate-600"}`}>Subject</label>
+                          <input
+                            type="text"
+                            value={singleLead.subject}
+                            onChange={(e) => setSingleLead(prev => ({ ...prev, subject: e.target.value }))}
+                            placeholder="e.g. Partnership proposal"
+                            className={`w-full px-3 py-2 text-xs rounded-xl focus:border-blue-500/50 focus:outline-none border ${
+                              isDark ? "bg-white/5 border-white/10 text-white placeholder-white/20" : "bg-white border-slate-200 text-slate-900 placeholder-slate-400"
+                            }`}
+                          />
+                        </div>
+                      )}
+
+                      <div>
+                        <label className={`text-xs font-semibold block mb-1.5 ${isDark ? "text-white/70" : "text-slate-600"}`}>Lead Status</label>
+                        <select
+                          value={singleLead.status}
+                          onChange={(e) => setSingleLead(prev => ({ ...prev, status: e.target.value }))}
+                          className={`w-full px-3 py-2 text-xs rounded-xl focus:border-blue-500/50 focus:outline-none border ${
+                            isDark ? "bg-white/5 border-white/10 text-white" : "bg-white border-slate-200 text-slate-900"
+                          }`}
+                        >
+                          <option value="new" className="bg-[#0f0f13] text-white">New Lead</option>
+                          <option value="contacted" className="bg-[#0f0f13] text-white">Contacted</option>
+                          <option value="callback" className="bg-[#0f0f13] text-white">Callback Scheduled</option>
+                          <option value="closed" className="bg-[#0f0f13] text-white">Deal Closed</option>
+                          <option value="junk" className="bg-[#0f0f13] text-white">Spam / Junk</option>
+                        </select>
+                      </div>
+
+                      <div className="sm:col-span-2">
+                        <label className={`text-xs font-semibold block mb-1.5 ${isDark ? "text-white/70" : "text-slate-600"}`}>Inquiry Message</label>
+                        <textarea
+                          rows={2}
+                          value={singleLead.message}
+                          onChange={(e) => setSingleLead(prev => ({ ...prev, message: e.target.value }))}
+                          placeholder="What did they inquire about?"
+                          className={`w-full px-3 py-2 text-xs rounded-xl focus:border-blue-500/50 focus:outline-none resize-none border ${
+                            isDark ? "bg-white/5 border-white/10 text-white placeholder-white/20" : "bg-white border-slate-200 text-slate-900 placeholder-slate-400"
+                          }`}
+                        />
+                      </div>
+
+                      <div className="sm:col-span-2">
+                        <label className={`text-xs font-semibold block mb-1.5 ${isDark ? "text-white/70" : "text-slate-600"}`}>Client Response / Feedback</label>
+                        <input
+                          type="text"
+                          value={singleLead.clientResponse}
+                          onChange={(e) => setSingleLead(prev => ({ ...prev, clientResponse: e.target.value }))}
+                          placeholder="e.g. Wants to start pilot training next week"
+                          className={`w-full px-3 py-2 text-xs rounded-xl focus:border-blue-500/50 focus:outline-none border ${
+                            isDark ? "bg-white/5 border-white/10 text-white placeholder-white/20" : "bg-white border-slate-200 text-slate-900 placeholder-slate-400"
+                          }`}
+                        />
+                      </div>
+
+                      <div className="sm:col-span-2">
+                        <label className={`text-xs font-semibold block mb-1.5 ${isDark ? "text-white/70" : "text-slate-600"}`}>Internal Notes</label>
+                        <textarea
+                          rows={2}
+                          value={singleLead.notes}
+                          onChange={(e) => setSingleLead(prev => ({ ...prev, notes: e.target.value }))}
+                          placeholder="e.g. Sent syllabus details on WhatsApp"
+                          className={`w-full px-3 py-2 text-xs rounded-xl focus:border-blue-500/50 focus:outline-none resize-none border ${
+                            isDark ? "bg-white/5 border-white/10 text-white placeholder-white/20" : "bg-white border-slate-200 text-slate-900 placeholder-slate-400"
+                          }`}
+                        />
+                      </div>
+
+                      <div>
+                        <label className={`text-xs font-semibold block mb-1.5 flex items-center gap-1.5 ${isDark ? "text-white/70" : "text-slate-600"}`}>
+                          <Calendar className="w-3.5 h-3.5 text-amber-500" /> Next Follow-Up Date
+                        </label>
+                        <input
+                          type="date"
+                          value={singleLead.followUpDate}
+                          onChange={(e) => setSingleLead(prev => ({ ...prev, followUpDate: e.target.value }))}
+                          className={`w-full px-3 py-2 text-xs rounded-xl focus:border-blue-500/50 focus:outline-none border ${
+                            isDark ? "bg-white/5 border-white/10 text-white" : "bg-white border-slate-200 text-slate-900"
+                          }`}
+                        />
+                      </div>
+                    </div>
+
+                    <div className={`flex justify-end gap-2 pt-4 border-t ${isDark ? "border-white/5" : "border-slate-100"}`}>
+                      <Button 
+                        type="button" 
+                        onClick={() => setShowAddModal(false)}
+                        className={`px-4 py-2 text-xs rounded-xl border bg-transparent ${
+                          isDark ? "border-white/10 text-white/80 hover:bg-white/5 hover:text-white" : "border-slate-200 text-slate-650 hover:bg-slate-100"
+                        }`}
+                      >
+                        Cancel
+                      </Button>
+                      <Button 
+                        type="submit" 
+                        disabled={singleSaving}
+                        className="px-4 py-2 text-xs rounded-xl bg-blue-600 hover:bg-blue-500 text-white flex items-center gap-1.5 font-bold"
+                      >
+                        {singleSaving ? <RefreshCw className="w-3.5 h-3.5 animate-spin" /> : <Save className="w-3.5 h-3.5" />}
+                        Save Lead
+                      </Button>
+                    </div>
+                  </form>
+                ) : (
+                  <div className="space-y-4">
+                    {/* Format Selector */}
+                    <div className="flex gap-2">
+                      <button
+                        type="button"
+                        onClick={() => { setBulkFormat("csv"); setBulkImportError(""); }}
+                        className={`px-3 py-1.5 rounded-lg text-xs font-semibold border ${
+                          bulkFormat === "csv" 
+                            ? "bg-white text-slate-950 border-white shadow-md" 
+                            : isDark ? "border-white/10 text-white/60 hover:text-white bg-white/5" : "border-slate-200 text-slate-600 hover:text-slate-900 bg-slate-50"
+                        }`}
+                      >
+                        Pasted CSV Rows
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => { setBulkFormat("json"); setBulkImportError(""); }}
+                        className={`px-3 py-1.5 rounded-lg text-xs font-semibold border ${
+                          bulkFormat === "json" 
+                            ? "bg-white text-slate-950 border-white shadow-md" 
+                            : isDark ? "border-white/10 text-white/60 hover:text-white bg-white/5" : "border-slate-200 text-slate-600 hover:text-slate-900 bg-slate-50"
+                        }`}
+                      >
+                        JSON Array format
+                      </button>
+                    </div>
+
+                    <div className={`p-4 rounded-xl text-xs space-y-1.5 ${isDark ? "bg-white/5" : "bg-slate-50 border border-slate-200/50"}`}>
+                      <p className="font-semibold text-primary">Instructions & Format Example:</p>
+                      {bulkFormat === "csv" ? (
+                        <>
+                          <p className="text-muted-foreground">The first row must contain column headers. Minimum required fields: <strong>name, phone</strong>. Other fields supported: <code>email, program, message, notes, status, subject, type</code>.</p>
+                          <pre className={`p-2.5 rounded-lg font-mono text-[10px] overflow-x-auto ${isDark ? "bg-black/40 text-emerald-400" : "bg-slate-150 text-emerald-700"}`}>
+{`name,phone,email,program,message
+Aarav Gupta,9876543210,aarav@gmail.com,Mapping & Surveying,Wants custom corporate training.
+Riya Sen,7869918736,riya@yahoo.com,Precision Agriculture,Interested in spraying drone courses.`}
+                          </pre>
+                        </>
+                      ) : (
+                        <>
+                          <p className="text-muted-foreground">Paste a standard JSON array of lead objects. Required fields: <code>name</code> and <code>phone</code>.</p>
+                          <pre className={`p-2.5 rounded-lg font-mono text-[10px] overflow-x-auto ${isDark ? "bg-black/40 text-emerald-400" : "bg-slate-150 text-emerald-700"}`}>
+{`[
+  {
+    "name": "Amit Shah",
+    "phone": "9999988888",
+    "email": "amit@outlook.com",
+    "program": "AI/ML for Drones",
+    "message": "Enquiring about coding custom drone flight controllers."
+  }
+]`}
+                          </pre>
+                        </>
+                      )}
+                    </div>
+
+                    <div className="space-y-1.5">
+                      <label className={`text-xs font-semibold block ${isDark ? "text-white/70" : "text-slate-600"}`}>Paste Lead Data here *</label>
+                      <textarea
+                        rows={8}
+                        value={bulkInput}
+                        onChange={(e) => setBulkInput(e.target.value)}
+                        placeholder={bulkFormat === "csv" ? "name,phone,email...\nJohn,98765..." : "[\n  {\n    \"name\": \"John\"...\n  }\n]"}
+                        className={`w-full px-3 py-2.5 font-mono text-xs rounded-xl focus:border-blue-500/50 focus:outline-none resize-none border ${
+                          isDark ? "bg-white/5 border-white/10 text-white placeholder-white/20" : "bg-white border-slate-200 text-slate-900 placeholder-slate-400"
+                        }`}
+                      />
+                    </div>
+
+                    {bulkImportError && (
+                      <p className="text-red-400 text-xs font-mono">{bulkImportError}</p>
+                    )}
+
+                    <div className={`flex justify-end gap-2 pt-4 border-t ${isDark ? "border-white/5" : "border-slate-100"}`}>
+                      <Button 
+                        type="button" 
+                        onClick={() => setShowAddModal(false)}
+                        className={`px-4 py-2 text-xs rounded-xl border bg-transparent ${
+                          isDark ? "border-white/10 text-white/80 hover:bg-white/5 hover:text-white" : "border-slate-200 text-slate-655 hover:bg-slate-100"
+                        }`}
+                      >
+                        Cancel
+                      </Button>
+                      <Button 
+                        type="button" 
+                        disabled={bulkSaving || !bulkInput.trim()}
+                        onClick={handleAddBulkLeads}
+                        className="px-4 py-2 text-xs rounded-xl bg-blue-600 hover:bg-blue-550 text-white flex items-center gap-1.5 font-bold"
+                      >
+                        {bulkSaving ? <RefreshCw className="w-3.5 h-3.5 animate-spin" /> : <PlusCircle className="w-3.5 h-3.5" />}
+                        Import Bulk Leads
+                      </Button>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

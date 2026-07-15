@@ -21,6 +21,7 @@ import { Link } from "wouter";
 // Local Project Asset Imports
 import imgHighway from "@/assets/nhai-project.png";
 import imgSolar from "@/assets/solar-project.png";
+import imgSolarThermalInspection from "@/assets/solar-thermal-inspection.jpg";
 import imgAgriculture from "@/assets/agriculture-project.png";
 import imgSurveillance from "@/assets/surveillance-project.png";
 import imgDroneFieldDemo from "@/assets/drone-field-demo.jpg";
@@ -43,7 +44,7 @@ const services = [
     icon: <Sun className="w-7 h-7" />,
     title: "Solar Plant Inspection",
     bullets: ["Thermal hotspot detection", "GPS-tagged fault reports", "MW-scale in hours"],
-    img: imgSolar,
+    img: imgSolarThermalInspection,
     id: "solar",
     stat: "450+ faults found",
   },

@@ -26,7 +26,9 @@ export default function Login() {
     setErrorMsg("");
 
     try {
-      const apiBase = "https://soaring-aerotech-two.vercel.app";
+      const apiBase = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1"
+        ? "http://localhost:3001"
+        : "https://soaring-aerotech-two.vercel.app";
       const res = await fetch(`${apiBase}/api/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },

@@ -12,6 +12,8 @@ import imgIndustryGovt from "@/assets/industry-govt.png";
 import imgIndustryEducation from "@/assets/industry-education.jpg";
 import imgIndustryLogistics from "@/assets/industry-logistics.png";
 import imgMpebInspection from "@/assets/mpeb-inspection.jpg";
+import imgThermalInspection from "@/assets/thermal-inspection.jpg";
+import imgSolarThermalInspection from "@/assets/solar-thermal-inspection.jpg";
 
 export default function Industries() {
   const [active, setActive] = useState(0);
@@ -33,7 +35,7 @@ export default function Industries() {
     {
       name: "Infrastructure Inspection",
       icon: <Building2 className="w-7 h-7" />,
-      img: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=600&h=400&fit=crop",
+      img: imgThermalInspection,
       desc: "Detailed visual and thermal inspection of bridges, highways, railways, and towers without disrupting daily operations or risking human life.",
       services: ["Bridge Inspection", "Tower Audit", "Railway Inspection"],
     },
@@ -61,7 +63,7 @@ export default function Industries() {
     {
       name: "Solar Energy",
       icon: <Sun className="w-7 h-7" />,
-      img: "https://images.unsplash.com/photo-1509391366360-2e959784a276?w=600&h=400&fit=crop",
+      img: imgSolarThermalInspection,
       desc: "Automated thermal drone inspections to identify hotspots, diode failures, and soiling across vast solar farms — inspecting MWs of panels in hours.",
       services: ["Thermal Inspection", "Fault Detection", "Predictive Maintenance"],
     },

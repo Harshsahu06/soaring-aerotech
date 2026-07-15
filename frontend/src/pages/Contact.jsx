@@ -4,7 +4,9 @@ import SEO from "@/components/SEO";
 import { MapPin, Phone, Mail, Send, MessageCircle, CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-const API_BASE = "https://soaring-aerotech-two.vercel.app";
+const API_BASE = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1"
+  ? "http://localhost:3001"
+  : "https://soaring-aerotech-two.vercel.app";
 
 export default function Contact() {
   const [form, setForm] = useState({

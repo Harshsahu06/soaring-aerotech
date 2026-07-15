@@ -98,6 +98,82 @@ router.post("/submit", async (req, res) => {
   }
 });
 
+router.post("/submissions/manual", async (req, res) => {
+  try {
+    await connectMongo();
+    const token = req.headers.authorization;
+    if (token !== "Bearer soaring-admin-token-12345") {
+      res.status(401).json({ success: false, error: "Unauthorized access" });
+      return;
+    }
+
+    const { type, name, phone, email, subject, program, message, status, notes, clientResponse, followUpDate } = req.body;
+
+    if (!type || !name || !phone) {
+      res.status(400).json({ success: false, error: "type, name and phone are required" });
+      return;
+    }
+
+    const doc = await Submission.create({
+      type,
+      name,
+      phone,
+      email,
+      subject,
+      program,
+      message,
+      status: status || "new",
+      notes: notes || "",
+      clientResponse: clientResponse || "",
+      followUpDate: followUpDate ? new Date(followUpDate) : null,
+      read: true,
+    });
+
+    res.json({ success: true, data: doc });
+  } catch (err) {
+    console.error("❌ Failed to create manual submission:", err);
+    res.status(500).json({ success: false, error: "Failed to create manual lead" });
+  }
+});
+
+router.post("/submissions/bulk", async (req, res) => {
+  try {
+    await connectMongo();
+    const token = req.headers.authorization;
+    if (token !== "Bearer soaring-admin-token-12345") {
+      res.status(401).json({ success: false, error: "Unauthorized access" });
+      return;
+    }
+
+    const { leads } = req.body;
+    if (!Array.isArray(leads) || leads.length === 0) {
+      res.status(400).json({ success: false, error: "leads array is required and cannot be empty" });
+      return;
+    }
+
+    const formattedLeads = leads.map(lead => ({
+      type: lead.type || "contact",
+      name: lead.name || "Anonymous",
+      phone: lead.phone || "N/A",
+      email: lead.email || "",
+      subject: lead.subject || "",
+      program: lead.program || "",
+      message: lead.message || "",
+      status: lead.status || "new",
+      notes: lead.notes || "",
+      clientResponse: lead.clientResponse || "",
+      followUpDate: lead.followUpDate ? new Date(lead.followUpDate) : null,
+      read: true,
+    }));
+
+    const docs = await Submission.insertMany(formattedLeads);
+    res.json({ success: true, count: docs.length, data: docs });
+  } catch (err) {
+    console.error("❌ Failed to bulk insert submissions:", err);
+    res.status(500).json({ success: false, error: "Failed to bulk import leads" });
+  }
+});
+
 router.get("/submissions", async (req, res) => {
   try {
     await connectMongo();

@@ -34,8 +34,11 @@ import imgGroup2 from "@/assets/training-group-2.jpg";
 import imgHighway from "@/assets/nhai-project.png";
 import imgDroneFieldDemo from "@/assets/drone-field-demo.jpg";
 
-const API_BASE = "https://soaring-aerotech-two.vercel.app";
+const API_BASE = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1"
+  ? "http://localhost:3001"
+  : "https://soaring-aerotech-two.vercel.app";
 import imgSolar from "@/assets/solar-project.png";
+import imgThermalInspection from "@/assets/thermal-inspection.jpg";
 import imgSimulationLab from "@/assets/simulation-lab-project.jpg";
 import imgAgriculture from "@/assets/agriculture-project.png";
 import imgTechAdoption from "@/assets/tech-adoption.jpg";
@@ -45,7 +48,7 @@ import imgExhibitionBooth from "@/assets/exhibition-booth.jpg";
 const programs = [
   { tag: "SKILL COURSE", title: "Mapping & Surveying", icon: <Map className="w-7 h-7" />, duration: "3–5 Days", img: imgHighway, topics: ["Aerial Land Survey", "2D/3D Mapping", "RTK/PPK GNSS", "Pix4D / DroneDeploy", "Client Deliverables", "GIS Outputs"] },
   { tag: "SKILL COURSE", title: "GIS & Geospatial", icon: <Target className="w-7 h-7" />, duration: "3–5 Days", img: imgDroneFieldDemo, topics: ["GIS Fundamentals", "Land Record Mapping", "Urban Planning", "ArcGIS / QGIS", "Spatial Analysis", "Gov Applications"] },
-  { tag: "SKILL COURSE", title: "Thermal & Multispectral", icon: <Cpu className="w-7 h-7" />, duration: "3–4 Days", img: imgSolar, topics: ["Thermal Camera Ops", "NDVI / NDWI", "Solar Inspection", "Power Line Audit", "Crop Imaging", "Report Generation"] },
+  { tag: "SKILL COURSE", title: "Thermal & Multispectral", icon: <Cpu className="w-7 h-7" />, duration: "3–4 Days", img: imgThermalInspection, topics: ["Thermal Camera Ops", "NDVI / NDWI", "Solar Inspection", "Power Line Audit", "Crop Imaging", "Report Generation"] },
   { tag: "ADVANCED", title: "AI/ML for Drones", icon: <Brain className="w-7 h-7" />, duration: "5–7 Days", img: imgSimulationLab, topics: ["Computer Vision", "Object Detection", "Autonomous Flight", "Edge Computing", "Mission AI", "Surveillance AI"] },
   { tag: "SKILL COURSE", title: "Precision Agriculture", icon: <Tractor className="w-7 h-7" />, duration: "3–4 Days", img: imgAgriculture, topics: ["Crop Health Mapping", "Precision Spraying", "Irrigation Analysis", "Yield Estimation", "NDVI Reports", "Farm Ops"] },
   { tag: "SKILL COURSE", title: "Assembly & Maintenance", icon: <Wrench className="w-7 h-7" />, duration: "3–5 Days", img: imgManufacturing, topics: ["Frame Assembly", "Flight Controller", "ESC Calibration", "Battery Management", "Pre-flight Checks", "Field Repair"] },
@@ -286,18 +289,18 @@ export default function Training() {
                 </div>
               </div>
 
-              <div className="flex flex-col sm:flex-row sm:items-stretch gap-3 mb-6 max-w-lg">
-                <Button size="lg" className="rounded-full h-12 sm:h-auto px-7 font-bold w-full sm:w-auto flex-1" onClick={() => document.getElementById("enroll")?.scrollIntoView({ behavior: "smooth" })}>
+              <div className="flex flex-col sm:flex-row sm:items-center gap-3 mb-6 max-w-2xl">
+                <Button size="lg" className="rounded-full h-12 px-7 font-bold w-full sm:w-auto shrink-0" onClick={() => document.getElementById("enroll")?.scrollIntoView({ behavior: "smooth" })}>
                   Apply Now <ChevronRight className="w-4 h-4 ml-1" />
                 </Button>
-                <div className="grid grid-cols-2 gap-2 w-full sm:w-auto sm:flex sm:flex-col sm:gap-2">
-                  <a href="tel:+917869955418" className="w-full">
-                    <Button size="sm" variant="outline" className="rounded-full h-10 px-4 text-xs font-semibold border-border text-foreground hover:bg-white w-full flex items-center justify-center">
+                <div className="grid grid-cols-2 gap-2 w-full sm:w-auto sm:flex sm:flex-row sm:gap-3">
+                  <a href="tel:+917869955418" className="w-full sm:w-auto">
+                    <Button size="sm" variant="outline" className="rounded-full h-12 px-4 text-xs sm:text-sm font-semibold border-border text-foreground hover:bg-slate-50 w-full flex items-center justify-center whitespace-nowrap">
                       <Phone className="w-3.5 h-3.5 mr-2 shrink-0" /> +91 78699 55418
                     </Button>
                   </a>
-                  <a href="tel:+917869918736" className="w-full">
-                    <Button size="sm" variant="outline" className="rounded-full h-10 px-4 text-xs font-semibold border-border text-foreground hover:bg-white w-full flex items-center justify-center">
+                  <a href="tel:+917869918736" className="w-full sm:w-auto">
+                    <Button size="sm" variant="outline" className="rounded-full h-12 px-4 text-xs sm:text-sm font-semibold border-border text-foreground hover:bg-slate-50 w-full flex items-center justify-center whitespace-nowrap">
                       <Phone className="w-3.5 h-3.5 mr-2 shrink-0" /> +91 78699 18736
                     </Button>
                   </a>
@@ -488,7 +491,7 @@ export default function Training() {
             <div className="relative">
               <img src={imgGroup2} alt="Corporate Training" className="w-full h-72 object-cover rounded-3xl shadow-xl" />
               <div className="absolute -bottom-4 -right-4 bg-primary text-white rounded-2xl p-5 shadow-xl">
-                <div className="font-display text-3xl font-black">100+</div>
+                <div className="font-display text-3xl font-black">30+</div>
                 <div className="text-sm font-semibold opacity-90">Corporate Batches</div>
               </div>
             </div>

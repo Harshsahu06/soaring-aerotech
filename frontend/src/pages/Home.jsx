@@ -52,6 +52,7 @@ import imgHighway from "@/assets/nhai-project.png";
 import imgMprdcProject from "@/assets/mprdc-project.png";
 import imgAgriculture from "@/assets/agriculture-project.png";
 import imgSolar from "@/assets/solar-project.png";
+import imgSolarThermalInspection from "@/assets/solar-thermal-inspection.jpg";
 import imgSimulationLab from "@/assets/simulation-lab-project.jpg";
 import imgDidiInitiative from "@/assets/didi-initiative.jpg";
 import imgPilotAwareness from "@/assets/pilot-awareness.jpg";
@@ -119,7 +120,7 @@ const galleryRow2 = [
     label: "Drone Didi Program",
   },
   {
-    src: imgSolar,
+    src: imgSolarThermalInspection,
     label: "Solar Plant Inspection",
   },
   {

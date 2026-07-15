@@ -8,6 +8,7 @@ import imgSurveillance from "@/assets/surveillance-project.png";
 import imgHighway from "@/assets/nhai-project.png";
 import imgAgriculture from "@/assets/agriculture-project.png";
 import imgSolar from "@/assets/solar-project.png";
+import imgSolarThermalInspection from "@/assets/solar-thermal-inspection.jpg";
 import imgSimulationLab from "@/assets/simulation-lab-project.jpg";
 
 export default function Projects() {
@@ -36,7 +37,7 @@ export default function Projects() {
     {
       title: "Solar Plant Thermal Inspection",
       category: "Solar Inspection",
-      img: imgSolar,
+      img: imgSolarThermalInspection,
       challenge: "Manual inspection of a 200MW solar section was taking months, allowing faulty panels to continue generating energy losses without being identified or repaired.",
       solution: "Automated thermal drone mapping covered the entire installation in two days — identifying hotspots, string failures, diode faults, and soiling with precise GPS coordinates for repair teams.",
     },
