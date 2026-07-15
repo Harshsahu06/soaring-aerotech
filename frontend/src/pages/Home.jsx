@@ -66,6 +66,8 @@ import imgPoliceTraining from "@/assets/police-training.jpg";
 import imgDroneSolutions from "@/assets/drone-services-pillar.png";
 import imgRdInnovation from "@/assets/rd-innovation.jpg";
 import imgTechAdoption from "@/assets/tech-adoption.jpg";
+import imgCmVisit1 from "@/assets/cm-exhibition-visit-1.jpg";
+import imgCmVisit2 from "@/assets/cm-exhibition-visit-2.jpg";
 import imgIndustryAgriculture from "@/assets/industry-agriculture.jpg";
 import imgIndustryDefence from "@/assets/industry-defence.png";
 import imgIndustrySurvey from "@/assets/industry-survey-construction.jpg";
@@ -108,6 +110,10 @@ const galleryRow1 = [
     src: imgStudentTraining,
     label: "Student Training Session",
   },
+  {
+    src: imgCmVisit1,
+    label: "Hon'ble CM Dr. Mohan Yadav Inspecting UAV Tech",
+  },
 ];
 
 const galleryRow2 = [
@@ -142,6 +148,10 @@ const galleryRow2 = [
   {
     src: imgPoliceTraining,
     label: "Police & Security Training",
+  },
+  {
+    src: imgCmVisit2,
+    label: "Hon'ble CM Dr. Mohan Yadav at Soaring Aerotech Booth",
   },
 ];
 

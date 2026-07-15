@@ -32,6 +32,8 @@ import imgNewsChhatarpur from "@/assets/news-chhatarpur.jpg";
 import imgNewsSidhiLaxmi from "@/assets/news-sidhi-laxmi.jpg";
 import imgNewsJabalpurEmpowerment from "@/assets/news-jabalpur-empowerment.jpg";
 import imgNewsForestSecurityTraining from "@/assets/news-forest-security-training.jpg";
+import imgCmVisit1 from "@/assets/cm-exhibition-visit-1.jpg";
+import imgCmVisit2 from "@/assets/cm-exhibition-visit-2.jpg";
 
 const achievements = [
   {
@@ -136,7 +138,9 @@ export default function Media() {
     { src: imgSimulationLab, label: "R&D Simulation & Testing Lab" },
     { src: imgSimulatorTraining2, label: "Flight Simulator Training Class" },
     { src: imgPoliceTraining, label: "Security & FPV Tactical Training" },
-    { src: imgIndustrySurvey, label: "Industrial Survey & Mapping Operations" }
+    { src: imgIndustrySurvey, label: "Industrial Survey & Mapping Operations" },
+    { src: imgCmVisit1, label: "Hon'ble CM Dr. Mohan Yadav Inspecting UAV Technology" },
+    { src: imgCmVisit2, label: "Hon'ble CM Dr. Mohan Yadav at Soaring Aerotech Exhibition Booth" }
   ];
 
   const [current, setCurrent] = useState(0);
