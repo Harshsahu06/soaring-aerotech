@@ -266,7 +266,7 @@ export default function About() {
                 Prestige Group Leadership
               </h3>
             </div>
-            <div className="max-w-4xl mx-auto rounded-2xl lg:rounded-3xl overflow-hidden shadow-sm border border-border bg-white p-3 sm:p-6 hover:shadow-md transition-shadow">
+            <div className="max-w-2xl mx-auto rounded-2xl lg:rounded-3xl overflow-hidden shadow-sm border border-border bg-white p-3 sm:p-6 hover:shadow-md transition-shadow">
               <img
                 src={imgPrestigeLeaders}
                 alt="Prestige Group Leadership & Board of Directors"
